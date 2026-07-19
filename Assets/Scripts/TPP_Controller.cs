@@ -9,6 +9,7 @@ public class TPP_Controller : MonoBehaviour
     [SerializeField] private float moveSpeed = 5f;
     [SerializeField] private float rotationSpeed = 12f;
     [SerializeField] private float gravity = -9.81f;
+    [SerializeField] private float jumpHeight = 1.5f;
     [SerializeField] private float mouseSensitivity = 0.12f;
     [SerializeField] private float minPitch = -45f;
     [SerializeField] private float maxPitch = 70f;
@@ -100,8 +101,21 @@ public class TPP_Controller : MonoBehaviour
             transform.rotation = Quaternion.Slerp(transform.rotation, desiredRot, rotationSpeed * Time.deltaTime);
         }
 
-        if(charCont.isGrounded && verticalVelocity < 0f)
-            verticalVelocity = -2f;
+        //if(charCont.isGrounded && verticalVelocity < 0f)
+        //    verticalVelocity = -2f;
+
+        //verticalVelocity += gravity * Time.deltaTime;
+
+        if (charCont.isGrounded)
+        {
+            if (verticalVelocity < 0f)
+                verticalVelocity = -2f;
+
+            if(Keyboard.current.spaceKey.wasPressedThisFrame)
+            {
+                verticalVelocity = Mathf.Sqrt(jumpHeight * -2f * gravity);
+            }
+        }
 
         verticalVelocity += gravity * Time.deltaTime;
 
@@ -140,16 +154,24 @@ public class TPP_Controller : MonoBehaviour
         //    LockCursor();
         //}
 
-        if(Keyboard.current != null && Keyboard.current.escapeKey.wasPressedThisFrame)
-        {
-            SetCursorLocked(false);
-            return;
-        }
+        //if(Keyboard.current != null && Keyboard.current.escapeKey.wasPressedThisFrame)
+        //{
+        //    SetCursorLocked(false);
+        //    return;
+        //}
 
-        if(Mouse.current != null && Mouse.current.leftButton.wasPressedThisFrame && !cursorLocked)
-        {
-            SetCursorLocked(true);
+        //if(Mouse.current != null && Mouse.current.leftButton.wasPressedThisFrame && !cursorLocked)
+        //{
+        //    SetCursorLocked(true);
+        //    return;
+        //}
+
+        if (Keyboard.current == null)
             return;
+
+        if (Keyboard.current.escapeKey.wasPressedThisFrame)
+        {
+            SetCursorLocked(!cursorLocked);
         }
     }
 
