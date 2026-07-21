@@ -55,6 +55,9 @@ public class TPP_Controller : MonoBehaviour
     {
         HandleCursor();
 
+        if (DialogueUI.IsDialogueOpen)
+            return;
+
         if (cameraTarget == null || Keyboard.current == null)
             return;
 
