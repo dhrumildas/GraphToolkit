@@ -2,8 +2,10 @@ using UnityEngine;
 
 public class ConversationFacing : MonoBehaviour
 {
-    [SerializeField] private float rotationSpeed = 8f;
+    [SerializeField, Min(0f)]
+    private float rotationSpeed = 8f;
 
+    [SerializeField]
     private Transform target;
 
     public void BeginFacing(Transform newTarget)
@@ -21,10 +23,7 @@ public class ConversationFacing : MonoBehaviour
         if (target == null)
             return;
 
-        Vector3 direction =
-            target.position - transform.position;
-
-        // Rotate only horizontally.
+        Vector3 direction = target.position - transform.position;
         direction.y = 0f;
 
         if (direction.sqrMagnitude < 0.001f)

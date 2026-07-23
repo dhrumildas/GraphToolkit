@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -10,6 +11,15 @@ public class DialogueRunner : MonoBehaviour
 
     public static bool IsDialogueOpen =>
         Instance != null && Instance.isDialogueOpen;
+
+    public static bool BlocksWorldInteraction =>
+        Instance != null &&
+        (
+            Instance.isDialogueOpen ||
+            Time.frameCount <= Instance.blockWorldInteractionUntilFrame
+        );
+
+    private int blockWorldInteractionUntilFrame = -1;
 
     [Header("Dialogue UI")]
     [SerializeField] private GameObject dialoguePanel;
@@ -27,7 +37,7 @@ public class DialogueRunner : MonoBehaviour
 
     private bool isDialogueOpen;
     private int openedFrame;
-
+    private ConversationFacing activeFacing;
     private TPP_Controller playerController;
     //private CursorLockMode previousCursorLockMode;
     //private bool previousCursorVisible;
@@ -68,24 +78,20 @@ public class DialogueRunner : MonoBehaviour
             AdvanceDialogue();
     }
 
-    public void BeginDialogue(
-        RuntimeDialogueGraph dialogueGraph,
-        Transform conversationActor = null)
+    public void BeginDialogue(RuntimeDialogueGraph dialogueGraph,Transform conversationActor = null)
     {
+        if (isDialogueOpen)
+            return;
+
         if (dialogueGraph == null)
         {
-            Debug.LogError(
-                "DialogueRunner received no RuntimeDialogueGraph.",
-                this);
-
+            Debug.LogError("DialogueRunner received no RuntimeDialogueGraph.",this);
             return;
         }
 
         if (string.IsNullOrWhiteSpace(dialogueGraph.EntryNodeID))
         {
-            Debug.LogError(
-                $"Dialogue graph '{dialogueGraph.name}' has no entry node.",
-                dialogueGraph);
+            Debug.LogError($"Dialogue graph '{dialogueGraph.name}' has no entry node.", dialogueGraph);
 
             return;
         }
@@ -94,9 +100,7 @@ public class DialogueRunner : MonoBehaviour
 
         if (!nodeLookup.ContainsKey(dialogueGraph.EntryNodeID))
         {
-            Debug.LogError(
-                $"Dialogue graph '{dialogueGraph.name}' has an invalid entry node.",
-                dialogueGraph);
+            Debug.LogError($"Dialogue graph '{dialogueGraph.name}' has an invalid entry node.",dialogueGraph);
 
             return;
         }
@@ -107,14 +111,54 @@ public class DialogueRunner : MonoBehaviour
 
         //StoreAndUnlockCursor();
         UnlockCursorForDialogue();
-
+        BeginConversationFacing(conversationActor);
         ShowNode(dialogueGraph.EntryNodeID);
+    }
+
+    private void BeginConversationFacing(Transform conversationActor)
+    {
+        if (activeFacing != null)
+        {
+            activeFacing.StopFacing();
+            activeFacing = null;
+        }
+
+        if (conversationActor == null)
+            return;
+
+        activeFacing =
+            conversationActor.GetComponentInParent<ConversationFacing>();
+
+        TPP_Controller player =
+            FindAnyObjectByType<TPP_Controller>();
+
+        if (activeFacing == null)
+        {
+            Debug.LogWarning(
+                $"{conversationActor.name} has no ConversationFacing component.",
+                conversationActor);
+
+            return;
+        }
+
+        if (player == null)
+        {
+            Debug.LogWarning(
+                "No TPP_Controller was found for conversation facing.",
+                this);
+
+            return;
+        }
+
+        activeFacing.BeginFacing(player.transform);
     }
 
     public void EndDialogue()
     {
         if (!isDialogueOpen)
             return;
+
+        blockWorldInteractionUntilFrame = Time.frameCount + 1;
 
         isDialogueOpen = false;
         currentGraph = null;
@@ -124,6 +168,12 @@ public class DialogueRunner : MonoBehaviour
 
         if (dialoguePanel != null)
             dialoguePanel.SetActive(false);
+
+        if (activeFacing != null)
+        {
+            activeFacing.StopFacing();
+            activeFacing = null;
+        }
 
         //RestoreCursor();
         LockCursorForGameplay();
