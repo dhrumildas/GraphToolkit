@@ -10,7 +10,7 @@ public class PlayerInteractor : MonoBehaviour
 
     private void Update()
     {
-        if (DialogueUI.IsDialogueOpen)
+        if (DialogueRunner.IsDialogueOpen)
         {
             currentInteractable = null;
             return;
@@ -111,7 +111,7 @@ public class PlayerInteractor : MonoBehaviour
 
     private void OnGUI()
     {
-        if (DialogueUI.IsDialogueOpen)
+        if (DialogueRunner.IsDialogueOpen)
             return;
 
         if (currentInteractable == null ||

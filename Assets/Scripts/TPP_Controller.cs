@@ -44,7 +44,7 @@ public class TPP_Controller : MonoBehaviour
         SetCursorLocked(true);
     }
 
-    private void SetCursorLocked(bool v)
+    public void SetCursorLocked(bool v)
     {
         cursorLocked = v;
         Cursor.lockState = v ? CursorLockMode.Locked : CursorLockMode.None;
@@ -55,8 +55,10 @@ public class TPP_Controller : MonoBehaviour
     {
         HandleCursor();
 
-        if (DialogueUI.IsDialogueOpen)
+        if (DialogueRunner.IsDialogueOpen)
             return;
+
+        //HandleCursor();
 
         if (cameraTarget == null || Keyboard.current == null)
             return;
