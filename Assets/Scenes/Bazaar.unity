@@ -3044,6 +3044,53 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 06a4b847a5b72d5449feda6900ec36e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerInteractor
+--- !u!1 &873338197
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 873338199}
+  - component: {fileID: 873338198}
+  m_Layer: 0
+  m_Name: DialogueGraphLibrary
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &873338198
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 873338197}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09107f44b2a6daa4d8b53693e658b756, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DialogueGraphLibrary
+  dialogues:
+  - dialogueID: GuardIntroduction
+    dialogueGraph: {fileID: 3965311268370046156, guid: 31ba47b4c96ca994880838a27c2792be, type: 3}
+--- !u!4 &873338199
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 873338197}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 17.87556, y: 0.28151, z: 145.66797}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &886125344
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5991,6 +6038,7 @@ GameObject:
   - component: {fileID: 1474435339}
   - component: {fileID: 1474435343}
   - component: {fileID: 1474435342}
+  - component: {fileID: 1474435344}
   m_Layer: 0
   m_Name: Guard
   m_TagString: Untagged
@@ -6126,6 +6174,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ConversationFacing
   rotationSpeed: 8
   target: {fileID: 0}
+--- !u!114 &1474435344
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1474435337}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c3dc5c57b7b8f4540900ac5bee3e04fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FuzzyGraphEventInvoker
+  eventID: BazaarTalkToGuard
+  consequenceSource: {fileID: 1474435338}
 --- !u!1 &1492222186
 GameObject:
   m_ObjectHideFlags: 0
@@ -7871,15 +7933,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a9d35a923b7d56647a97ca2d667f4482, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InteractableObject
-  interactionPrompt: talk_to_guard
+  interactionPrompt: Talk
   interactOnce: 0
   objectToDisable: {fileID: 0}
   onInteract:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1474435342}
-        m_TargetAssemblyTypeName: DialogueStarter, Assembly-CSharp
-        m_MethodName: StartDialogue
+      - m_Target: {fileID: 1474435344}
+        m_TargetAssemblyTypeName: FuzzyGraphEventInvoker, Assembly-CSharp
+        m_MethodName: Raise
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -8550,3 +8612,4 @@ SceneRoots:
   - {fileID: 398142370}
   - {fileID: 901459932}
   - {fileID: 387907670}
+  - {fileID: 873338199}

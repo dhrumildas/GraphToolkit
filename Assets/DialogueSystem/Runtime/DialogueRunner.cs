@@ -4,6 +4,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
+using FuzzyGraph.Runtime;
 
 public class DialogueRunner : MonoBehaviour
 {
@@ -38,6 +39,7 @@ public class DialogueRunner : MonoBehaviour
     private bool isDialogueOpen;
     private int openedFrame;
     private ConversationFacing activeFacing;
+    private Transform currentConversationActor;
     private TPP_Controller playerController;
     //private CursorLockMode previousCursorLockMode;
     //private bool previousCursorVisible;
@@ -111,6 +113,7 @@ public class DialogueRunner : MonoBehaviour
 
         //StoreAndUnlockCursor();
         UnlockCursorForDialogue();
+        currentConversationActor = conversationActor;
         BeginConversationFacing(conversationActor);
         ShowNode(dialogueGraph.EntryNodeID);
     }
@@ -155,6 +158,8 @@ public class DialogueRunner : MonoBehaviour
 
     public void EndDialogue()
     {
+        currentConversationActor = null;
+
         if (!isDialogueOpen)
             return;
 
@@ -230,7 +235,8 @@ public class DialogueRunner : MonoBehaviour
             CreateChoiceButtons(currentNode.Choices);
     }
 
-    private void CreateChoiceButtons(List<ChoiceData> choices)
+    private void CreateChoiceButtons(
+    List<ChoiceData> choices)
     {
         if (choiceButtonPrefab == null ||
             choiceButtonContainer == null)
@@ -244,6 +250,9 @@ public class DialogueRunner : MonoBehaviour
 
         foreach (ChoiceData choice in choices)
         {
+            if (!IsChoiceAvailable(choice))
+                continue;
+
             Button button = Instantiate(
                 choiceButtonPrefab,
                 choiceButtonContainer);
@@ -252,18 +261,86 @@ public class DialogueRunner : MonoBehaviour
                 button.GetComponentInChildren<TMP_Text>();
 
             if (buttonText != null)
-                buttonText.SetText(choice.ChoiceText ?? string.Empty);
+            {
+                buttonText.SetText(
+                    choice.ChoiceText ?? string.Empty);
+            }
 
-            string destinationNodeID = choice.DestinationNodeID;
+            string destinationNodeID =
+                choice.DestinationNodeID;
+
+            string fuzzyEventID =
+                choice.FuzzyEventID;
 
             button.onClick.AddListener(() =>
             {
-                if (!string.IsNullOrWhiteSpace(destinationNodeID))
+                if (!string.IsNullOrWhiteSpace(
+                        fuzzyEventID))
+                {
+                    if (FuzzyGraphGameService.Instance == null)
+                    {
+                        Debug.LogError(
+                            "Dialogue choice attempted to " +
+                            "raise a FuzzyGraph event, but " +
+                            "no FuzzyGraphGameService exists.",
+                            this);
+
+                        return;
+                    }
+
+                    var result =
+                        FuzzyGraphGameService.Instance
+                            .RaiseEvent(
+                                fuzzyEventID,
+                                currentConversationActor);
+
+                    if (!result.hasMatch)
+                    {
+                        Debug.LogWarning(
+                            $"Dialogue choice event " +
+                            $"'{fuzzyEventID}' found no rule.",
+                            this);
+
+                        return;
+                    }
+                }
+
+                if (!string.IsNullOrWhiteSpace(
+                        destinationNodeID))
+                {
                     ShowNode(destinationNodeID);
+                }
                 else
+                {
                     EndDialogue();
+                }
             });
         }
+    }
+
+    private bool IsChoiceAvailable(
+    ChoiceData choice)
+    {
+        if (choice == null)
+            return false;
+
+        if (string.IsNullOrWhiteSpace(
+                choice.ReqBoolKey))
+        {
+            return true;
+        }
+
+        if (FuzzyGraphGameService.Instance == null)
+            return false;
+
+        bool found =
+            FuzzyGraphGameService.Instance.Context.TryGet(
+                choice.ReqBoolKey,
+                out FuzzyValue value);
+
+        return found &&
+               value.type == FuzzyValueType.Bool &&
+               value.boolVal;
     }
 
     private void BuildNodeLookup(RuntimeDialogueGraph dialogueGraph)

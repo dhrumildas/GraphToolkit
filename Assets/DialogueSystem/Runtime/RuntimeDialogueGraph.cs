@@ -21,5 +21,7 @@ public class RuntimeDialogueNode
 public class ChoiceData
 {
     public string ChoiceText;
+    public string FuzzyEventID;
+    public string ReqBoolKey;
     public string DestinationNodeID;
 }

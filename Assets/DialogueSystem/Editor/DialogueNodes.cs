@@ -56,6 +56,8 @@ public class ChoiceNode : Node
         for(int i = 0; i<portCount; i++)
         {
             context.AddInputPort<string>($"Choice Text {i}").Build();
+            context.AddInputPort<string>($"Fuzzy Event ID {i}").Build();
+            context.AddInputPort<string>($"Required Bool Key {i}").Build();
             context.AddOutputPort($"Choice {i}").Build();
         }
     }

@@ -59,6 +59,7 @@ MonoBehaviour:
         m_GraphVariableModels:
         - rid: 513772626333925446
         - rid: 513772626333925448
+        - rid: 513772636214132736
         m_GraphPortalModels: []
         m_SectionModels:
         - rid: 513772626333925440
@@ -270,6 +271,14 @@ MonoBehaviour:
             Hash: 3325f14648ed5492b4b4c7bc9aba2bd6
           m_Category: 2
           m_Index: 12
+        - m_Guid:
+            m_Value0: 11369674993446336800
+            m_Value1: 14888823064227889667
+          m_HashGuid:
+            serializedVersion: 2
+            Hash: 20b902dc2a33c99d0342f24ab1b99fce
+          m_Category: 1
+          m_Index: 2
         m_EntryPoint:
           rid: 513772626333925442
         m_Graph:
@@ -287,6 +296,7 @@ MonoBehaviour:
         m_Items:
         - rid: 513772626333925446
         - rid: 513772626333925448
+        - rid: 513772636214132736
         m_Title: 
     - rid: 513772626333925441
       type: {class: DialogueGraph, ns: , asm: Assembly-CSharp-Editor}
@@ -1014,7 +1024,7 @@ MonoBehaviour:
     - rid: 513772626333925486
       type: {class: 'Constant`1[[System.String, mscorlib]]', ns: Unity.GraphToolkit.Editor, asm: UnityEditor.GraphToolkitModule}
       data:
-        m_Value: I brought you something.
+        m_Value: Not Interested
     - rid: 513772626333925487
       type: {class: DialogueNode, ns: , asm: Assembly-CSharp-Editor}
       data: 
@@ -1215,3 +1225,30 @@ MonoBehaviour:
           m_PortDirection: 1
           m_PortOrientation: 0
           m_Title: in
+    - rid: 513772636214132736
+      type: {class: VariableDeclarationModel, ns: Unity.GraphToolkit.Editor, asm: UnityEditor.GraphToolkitModule}
+      data:
+        m_Guid:
+          m_Value0: 11369674993446336800
+          m_Value1: 14888823064227889667
+        m_HashGuid:
+          serializedVersion: 2
+          Hash: 20b902dc2a33c99d0342f24ab1b99fce
+        m_Version: 2
+        m_Name: Vendor
+        m_UniqueId: 
+        m_DataType:
+          m_Identification: System.String, System.Private.CoreLib, Version=4.0.0.0,
+            Culture=neutral, PublicKeyToken=b77a5c561934e089
+        m_IsExposed: 0
+        m_Scope: 0
+        m_ShowOnInspectorOnly: 0
+        m_Tooltip: 
+        m_InitializationValue:
+          rid: 513772636214132737
+        m_Modifiers: 0
+        m_VariableFlags: 0
+    - rid: 513772636214132737
+      type: {class: 'Constant`1[[System.String, mscorlib]]', ns: Unity.GraphToolkit.Editor, asm: UnityEditor.GraphToolkitModule}
+      data:
+        m_Value: Vendor

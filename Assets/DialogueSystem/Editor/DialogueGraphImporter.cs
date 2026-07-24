@@ -64,10 +64,13 @@ public class DialogueGraphImporter : ScriptedImporter
         {
             var index = outputPort.Name.Substring("Choice ".Length);
             var textPort = node.GetInputPortByName($"Choice Text {index}");
-
+            var fuzzyEventPort = node.GetInputPortByName($"Fuzzy Event ID {index}");
+            var reqBoolPort = node.GetInputPortByName($"Required Bool Key {index}");
             var choiceData = new ChoiceData
             {
                 ChoiceText = GetPortValue<string>(textPort),
+                FuzzyEventID = GetPortValue<string>(fuzzyEventPort),
+                ReqBoolKey = GetPortValue<string>(reqBoolPort),
                 DestinationNodeID = outputPort.FirstConnectedPort != null ? nodeIDMap[outputPort.FirstConnectedPort.GetNode()] : null,
             };
 

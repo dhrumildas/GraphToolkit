@@ -130,6 +130,56 @@ public class FuzzyGraphGameService : MonoBehaviour
                         break;
                     }
 
+                case ConsequenceType.FireEvent:
+                    {
+                        bool isFuzzyEventRequest =
+                            string.Equals(
+                                consequence.targetKey,
+                                "FuzzyEvent",
+                                StringComparison.OrdinalIgnoreCase);
+
+                        if (isFuzzyEventRequest)
+                        {
+                            RaiseEvent(
+                                consequence.payLoad,
+                                consequenceSource);
+
+                            break;
+                        }
+
+                        bool isDialogueGraphRequest =
+                            string.Equals(
+                                consequence.targetKey,
+                                "DialogueGraph",
+                                StringComparison.OrdinalIgnoreCase);
+
+                        if (isDialogueGraphRequest)
+                        {
+                            if (DialogueGraphLibrary.Instance == null)
+                            {
+                                Debug.LogError(
+                                    "FuzzyGraph requested a DialogueGraph, " +
+                                    "but no DialogueGraphLibrary exists.",
+                                    this);
+
+                                break;
+                            }
+
+                            DialogueGraphLibrary.Instance.StartDialogue(
+                                consequence.payLoad,
+                                consequenceSource);
+
+                            break;
+                        }
+
+                        Debug.Log(
+                            $"[FuzzyGraph] FireEvent: " +
+                            $"{consequence.targetKey} | " +
+                            $"{consequence.payLoad}");
+
+                        break;
+                    }
+
                 default:
                     {
                         Debug.Log(
