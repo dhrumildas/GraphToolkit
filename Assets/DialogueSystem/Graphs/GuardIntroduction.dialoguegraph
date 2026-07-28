@@ -566,6 +566,12 @@ MonoBehaviour:
           - Choice Text 0
           - Choice Text 1
           - Choice Text 2
+          - Fuzzy Event ID 0
+          - Required Bool Key 0
+          - Fuzzy Event ID 1
+          - Required Bool Key 1
+          - Fuzzy Event ID 2
+          - Required Bool Key 2
           m_ValueList:
           - rid: 513772626333925459
           - rid: 513772626333925460
@@ -573,6 +579,12 @@ MonoBehaviour:
           - rid: 513772626333925462
           - rid: 513772626333925463
           - rid: 513772626333925465
+          - rid: 513772651137466431
+          - rid: 513772651137466432
+          - rid: 513772651137466433
+          - rid: 513772651137466434
+          - rid: 513772651137466435
+          - rid: 513772651137466436
         m_InputPortInfos:
           expandedPortsById:
             m_KeyList: []
@@ -1252,3 +1264,27 @@ MonoBehaviour:
       type: {class: 'Constant`1[[System.String, mscorlib]]', ns: Unity.GraphToolkit.Editor, asm: UnityEditor.GraphToolkitModule}
       data:
         m_Value: Vendor
+    - rid: 513772651137466431
+      type: {class: 'Constant`1[[System.String, mscorlib]]', ns: Unity.GraphToolkit.Editor, asm: UnityEditor.GraphToolkitModule}
+      data:
+        m_Value: 
+    - rid: 513772651137466432
+      type: {class: 'Constant`1[[System.String, mscorlib]]', ns: Unity.GraphToolkit.Editor, asm: UnityEditor.GraphToolkitModule}
+      data:
+        m_Value: 
+    - rid: 513772651137466433
+      type: {class: 'Constant`1[[System.String, mscorlib]]', ns: Unity.GraphToolkit.Editor, asm: UnityEditor.GraphToolkitModule}
+      data:
+        m_Value: 
+    - rid: 513772651137466434
+      type: {class: 'Constant`1[[System.String, mscorlib]]', ns: Unity.GraphToolkit.Editor, asm: UnityEditor.GraphToolkitModule}
+      data:
+        m_Value: 
+    - rid: 513772651137466435
+      type: {class: 'Constant`1[[System.String, mscorlib]]', ns: Unity.GraphToolkit.Editor, asm: UnityEditor.GraphToolkitModule}
+      data:
+        m_Value: 
+    - rid: 513772651137466436
+      type: {class: 'Constant`1[[System.String, mscorlib]]', ns: Unity.GraphToolkit.Editor, asm: UnityEditor.GraphToolkitModule}
+      data:
+        m_Value: 
