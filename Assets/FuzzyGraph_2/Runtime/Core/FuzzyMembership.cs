@@ -56,7 +56,7 @@ namespace FuzzyGraph2.Runtime
             return FuzzyMath.Clamp(falling);
         }
 
-        private static void ValidateRangeBounds(float start, float fullStart, float fullEnd, float end)
+        internal static void ValidateRangeBounds(float start, float fullStart, float fullEnd, float end)
         {
             if (fullStart <= start)
             {
@@ -77,7 +77,7 @@ namespace FuzzyGraph2.Runtime
             }
         }
 
-        private static void ValidateIncreasingBounds(float start, float full)
+        internal static void ValidateIncreasingBounds(float start, float full)
         {
             if(full <= start)
             {
