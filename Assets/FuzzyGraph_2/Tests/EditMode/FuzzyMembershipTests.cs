@@ -179,5 +179,171 @@ namespace FuzzyGraph2.Tests.EditMode
                     full: 80f,
                     end: 20f));
         }
+
+        [Test]
+        public void Range_ValueBelowStart_ReturnsZero()
+        {
+            float result = FuzzyMembership.Range(
+                val: 0.10f,
+                start: 0.20f,
+                fullStart: 0.40f,
+                fullEnd: 0.70f,
+                end: 0.90f);
+
+            Assert.AreEqual(0f, result, Tolerance);
+        }
+
+        [Test]
+        public void Range_ValueAtStart_ReturnsZero()
+        {
+            float result = FuzzyMembership.Range(
+                val: 0.20f,
+                start: 0.20f,
+                fullStart: 0.40f,
+                fullEnd: 0.70f,
+                end: 0.90f);
+
+            Assert.AreEqual(0f, result, Tolerance);
+        }
+
+        [Test]
+        public void Range_ValueHalfwayThroughRise_ReturnsHalf()
+        {
+            float result = FuzzyMembership.Range(
+                val: 0.30f,
+                start: 0.20f,
+                fullStart: 0.40f,
+                fullEnd: 0.70f,
+                end: 0.90f);
+
+            Assert.AreEqual(0.5f, result, Tolerance);
+        }
+
+        [Test]
+        public void Range_ValueAtFullStart_ReturnsOne()
+        {
+            float result = FuzzyMembership.Range(
+                val: 0.40f,
+                start: 0.20f,
+                fullStart: 0.40f,
+                fullEnd: 0.70f,
+                end: 0.90f);
+
+            Assert.AreEqual(1f, result, Tolerance);
+        }
+
+        [Test]
+        public void Range_ValueInsidePreferredInterval_ReturnsOne()
+        {
+            float result = FuzzyMembership.Range(
+                val: 0.55f,
+                start: 0.20f,
+                fullStart: 0.40f,
+                fullEnd: 0.70f,
+                end: 0.90f);
+
+            Assert.AreEqual(1f, result, Tolerance);
+        }
+
+        [Test]
+        public void Range_ValueAtFullEnd_ReturnsOne()
+        {
+            float result = FuzzyMembership.Range(
+                val: 0.70f,
+                start: 0.20f,
+                fullStart: 0.40f,
+                fullEnd: 0.70f,
+                end: 0.90f);
+
+            Assert.AreEqual(1f, result, Tolerance);
+        }
+
+        [Test]
+        public void Range_ValueHalfwayThroughFall_ReturnsHalf()
+        {
+            float result = FuzzyMembership.Range(
+                val: 0.80f,
+                start: 0.20f,
+                fullStart: 0.40f,
+                fullEnd: 0.70f,
+                end: 0.90f);
+
+            Assert.AreEqual(0.5f, result, Tolerance);
+        }
+
+        [Test]
+        public void Range_ValueAtEnd_ReturnsZero()
+        {
+            float result = FuzzyMembership.Range(
+                val: 0.90f,
+                start: 0.20f,
+                fullStart: 0.40f,
+                fullEnd: 0.70f,
+                end: 0.90f);
+
+            Assert.AreEqual(0f, result, Tolerance);
+        }
+
+        [Test]
+        public void Range_ValueAboveEnd_ReturnsZero()
+        {
+            float result = FuzzyMembership.Range(
+                val: 1f,
+                start: 0.20f,
+                fullStart: 0.40f,
+                fullEnd: 0.70f,
+                end: 0.90f);
+
+            Assert.AreEqual(0f, result, Tolerance);
+        }
+
+        [Test]
+        public void Range_EqualFullBoundaries_CreatesTriangularPeak()
+        {
+            float result = FuzzyMembership.Range(
+                val: 0.50f,
+                start: 0.20f,
+                fullStart: 0.50f,
+                fullEnd: 0.50f,
+                end: 0.80f);
+
+            Assert.AreEqual(1f, result, Tolerance);
+        }
+
+        [Test]
+        public void Range_FullStartEqualsStart_ThrowsArgumentException()
+        {
+            Assert.Throws<ArgumentException>(() =>
+                FuzzyMembership.Range(
+                    val: 0.50f,
+                    start: 0.20f,
+                    fullStart: 0.20f,
+                    fullEnd: 0.70f,
+                    end: 0.90f));
+        }
+
+        [Test]
+        public void Range_FullEndBelowFullStart_ThrowsArgumentException()
+        {
+            Assert.Throws<ArgumentException>(() =>
+                FuzzyMembership.Range(
+                    val: 0.50f,
+                    start: 0.20f,
+                    fullStart: 0.60f,
+                    fullEnd: 0.40f,
+                    end: 0.90f));
+        }
+
+        [Test]
+        public void Range_EndEqualsFullEnd_ThrowsArgumentException()
+        {
+            Assert.Throws<ArgumentException>(() =>
+                FuzzyMembership.Range(
+                    val: 0.50f,
+                    start: 0.20f,
+                    fullStart: 0.40f,
+                    fullEnd: 0.90f,
+                    end: 0.90f));
+        }
     }
 }
