@@ -30,9 +30,9 @@ public class ColorChangeController : MonoBehaviour
     [SerializeField, Range(-1f, 1f)]
     private float fullyFacingGuard = 0.92f;
 
-    [Tooltip("Blush is completely hidden at this camera alignment.")]
-    [SerializeField, Range(-1f, 1f)]
-    private float fullyLookingAt = 0.90f;
+    //[Tooltip("Blush is completely hidden at this camera alignment.")]
+    //[SerializeField, Range(-1f, 1f)]
+    //private float fullyLookingAt = 0.90f;
 
     [Header("Runtime")]
     [SerializeField, Range(0f, 1f)]
