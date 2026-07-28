@@ -93,5 +93,91 @@ namespace FuzzyGraph2.Tests.EditMode
                     start: 80f,
                     full: 20f));
         }
+
+        [Test]
+        public void Low_ValueBelowFull_ReturnsOne()
+        {
+            float result = FuzzyMembership.Low(
+                val: 10f,
+                full: 20f,
+                end: 80f);
+
+            Assert.AreEqual(1f, result, Tolerance);
+        }
+
+        [Test]
+        public void Low_ValueAtFull_ReturnsOne()
+        {
+            float result = FuzzyMembership.Low(
+                val: 20f,
+                full: 20f,
+                end: 80f);
+
+            Assert.AreEqual(1f, result, Tolerance);
+        }
+
+        [Test]
+        public void Low_ValueHalfway_ReturnsHalf()
+        {
+            float result = FuzzyMembership.Low(
+                val: 50f,
+                full: 20f,
+                end: 80f);
+
+            Assert.AreEqual(0.5f, result, Tolerance);
+        }
+
+        [Test]
+        public void Low_ValueInsideTransition_ReturnsExpectedMembership()
+        {
+            float result = FuzzyMembership.Low(
+                val: 32f,
+                full: 20f,
+                end: 80f);
+
+            Assert.AreEqual(0.8f, result, Tolerance);
+        }
+
+        [Test]
+        public void Low_ValueAtEnd_ReturnsZero()
+        {
+            float result = FuzzyMembership.Low(
+                val: 80f,
+                full: 20f,
+                end: 80f);
+
+            Assert.AreEqual(0f, result, Tolerance);
+        }
+
+        [Test]
+        public void Low_ValueAboveEnd_ReturnsZero()
+        {
+            float result = FuzzyMembership.Low(
+                val: 100f,
+                full: 20f,
+                end: 80f);
+
+            Assert.AreEqual(0f, result, Tolerance);
+        }
+
+        [Test]
+        public void Low_EndEqualsFull_ThrowsArgumentException()
+        {
+            Assert.Throws<ArgumentException>(() =>
+                FuzzyMembership.Low(
+                    val: 50f,
+                    full: 50f,
+                    end: 50f));
+        }
+
+        [Test]
+        public void Low_EndBelowFull_ThrowsArgumentException()
+        {
+            Assert.Throws<ArgumentException>(() =>
+                FuzzyMembership.Low(
+                    val: 50f,
+                    full: 80f,
+                    end: 20f));
+        }
     }
 }

@@ -1,4 +1,5 @@
 using System;
+using Unity.VisualScripting.YamlDotNet.Core.Tokens;
 using UnityEngine;
 
 namespace FuzzyGraph2.Runtime
@@ -15,6 +16,21 @@ namespace FuzzyGraph2.Runtime
                 return 1f;
 
             float membership = (val - start) / (full - start);
+            return FuzzyMath.Clamp(membership);
+        }
+
+        public static float Low(float val, float full, float end)
+        {
+            ValidateIncreasingBounds(full, end);
+
+            if (val <= full)
+                return 1f;
+
+            if (val >= end)
+                return 0f;
+
+            float membership = (end - val) / (end - full);
+
             return FuzzyMath.Clamp(membership);
         }
 
