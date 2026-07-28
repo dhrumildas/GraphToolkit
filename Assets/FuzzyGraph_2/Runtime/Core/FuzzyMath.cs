@@ -1,6 +1,6 @@
 namespace FuzzyGraph2.Runtime
 {
-    public static class Math
+    public static class FuzzyMath
     {
         public static float Clamp(float val)
         {
