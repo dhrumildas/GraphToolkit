@@ -1,0 +1,7 @@
+namespace FuzzyGraph2.Runtime
+{
+    public interface IFuzzyValueSource
+    {
+        bool TryGetFloat(string variableId, out float value);
+    }
+}

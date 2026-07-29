@@ -1,7 +1,7 @@
 using System;
 using NUnit.Framework;
 using FuzzyGraph2.Runtime;
-
+using System.Collections.Generic;
 namespace FuzzyGraph2.Tests.EditMode
 {
     public class FuzzyIsStatementTests
@@ -155,6 +155,98 @@ namespace FuzzyGraph2.Tests.EditMode
                 new FuzzyIsStatement(
                     relationship,
                     suspicion.GetSet("Suspicious")));
+        }
+
+        private sealed class TestValueSource : IFuzzyValueSource
+        {
+            private readonly Dictionary<string, float> _values =
+                new Dictionary<string, float>();
+
+            public TestValueSource Set(string variableId, float value)
+            {
+                _values[variableId] = value;
+                return this;
+            }
+
+            public bool TryGetFloat(
+                string variableId,
+                out float value)
+            {
+                return _values.TryGetValue(variableId, out value);
+            }
+        }
+
+        [Test]
+        public void Statement_EvaluateFromSource_ReturnsExpectedMembership()
+        {
+            FuzzyVariableDefinition variable =
+                CreateRelationshipVariable();
+
+            FuzzyIsStatement statement =
+                new FuzzyIsStatement(
+                    variable,
+                    variable.GetSet("Friendly"));
+
+            TestValueSource source =
+                new TestValueSource()
+                    .Set("Guard.Relationship", 65f);
+
+            float result = statement.Evaluate(source);
+
+            Assert.AreEqual(0.5f, result, Tolerance);
+        }
+
+        [Test]
+        public void Statement_EvaluateFromSource_UsesStableVariableId()
+        {
+            FuzzyVariableDefinition variable =
+                CreateRelationshipVariable();
+
+            FuzzyIsStatement statement =
+                new FuzzyIsStatement(
+                    variable,
+                    variable.GetSet("Friendly"));
+
+            TestValueSource source =
+                new TestValueSource()
+                    .Set("Guard.Relationship", 80f);
+
+            float result = statement.Evaluate(source);
+
+            Assert.AreEqual(1f, result, Tolerance);
+        }
+
+        [Test]
+        public void Statement_MissingSourceValue_ThrowsKeyNotFoundException()
+        {
+            FuzzyVariableDefinition variable =
+                CreateRelationshipVariable();
+
+            FuzzyIsStatement statement =
+                new FuzzyIsStatement(
+                    variable,
+                    variable.GetSet("Friendly"));
+
+            TestValueSource source = new TestValueSource();
+
+            Assert.Throws<KeyNotFoundException>(() =>
+                statement.Evaluate(source));
+        }
+
+        [Test]
+        public void Statement_NullValueSource_ThrowsArgumentNullException()
+        {
+            FuzzyVariableDefinition variable =
+                CreateRelationshipVariable();
+
+            FuzzyIsStatement statement =
+                new FuzzyIsStatement(
+                    variable,
+                    variable.GetSet("Friendly"));
+
+            Assert.Throws<ArgumentNullException>(() =>
+                statement.Evaluate(
+                    source: null));
         }
     }
 }

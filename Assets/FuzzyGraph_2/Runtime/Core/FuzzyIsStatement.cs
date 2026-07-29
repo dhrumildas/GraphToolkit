@@ -1,5 +1,5 @@
 using System;
-
+using System.Collections.Generic;
 namespace FuzzyGraph2.Runtime
 {
     public sealed class FuzzyIsStatement
@@ -25,6 +25,19 @@ namespace FuzzyGraph2.Runtime
         public float Evaluate(float rawValue)
         {
             return Variable.Evaluate(Set, rawValue);
+        }
+
+        //overload
+        public float Evaluate(IFuzzyValueSource source)
+        {
+            if(source  == null)
+                throw new ArgumentNullException(nameof(source));
+
+            if(!source.TryGetFloat(Variable.Id, out float rawValue))
+            {
+                throw new KeyNotFoundException($"No numeric val found for fuzzy var {Variable.Id}");
+            }
+            return Evaluate(rawValue);
         }
 
         public override string ToString()
