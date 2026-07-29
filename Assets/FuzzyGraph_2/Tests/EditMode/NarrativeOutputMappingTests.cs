@@ -1,0 +1,146 @@
+using System;
+using NUnit.Framework;
+using FuzzyGraph2.Runtime;
+
+namespace FuzzyGraph2.Tests.EditMode
+{
+    public class NarrativeOutputMappingTests
+    {
+        private static NarrativeOutputMapping
+            CreateVendorMapping()
+        {
+            return new NarrativeOutputMapping(
+                new[]
+                {
+                    new NarrativeOutputMapping.Band(
+                        0f,
+                        "Vendor.ConcealsSecret"),
+
+                    new NarrativeOutputMapping.Band(
+                        40f,
+                        "Vendor.BecomesNervous"),
+
+                    new NarrativeOutputMapping.Band(
+                        70f,
+                        "Vendor.RevealsSecret")
+                });
+        }
+
+        [Test]
+        public void Map_VendorSugenoOutput_ReturnsRevealOutcome()
+        {
+            NarrativeOutputMapping mapping =
+                CreateVendorMapping();
+
+            string result = mapping.Map(71.28f);
+
+            Assert.AreEqual(
+                "Vendor.RevealsSecret",
+                result);
+        }
+
+        [TestCase(0f, "Vendor.ConcealsSecret")]
+        [TestCase(39.999f, "Vendor.ConcealsSecret")]
+        [TestCase(40f, "Vendor.BecomesNervous")]
+        [TestCase(69.999f, "Vendor.BecomesNervous")]
+        [TestCase(70f, "Vendor.RevealsSecret")]
+        public void Map_UsesInclusiveMinimumThresholds(
+            float output,
+            string expected)
+        {
+            NarrativeOutputMapping mapping =
+                CreateVendorMapping();
+
+            string result = mapping.Map(output);
+
+            Assert.AreEqual(expected, result);
+        }
+
+        [Test]
+        public void Constructor_SortsBandsByThreshold()
+        {
+            NarrativeOutputMapping mapping =
+                new NarrativeOutputMapping(
+                    new[]
+                    {
+                        new NarrativeOutputMapping.Band(
+                            70f,
+                            "High"),
+
+                        new NarrativeOutputMapping.Band(
+                            0f,
+                            "Low"),
+
+                        new NarrativeOutputMapping.Band(
+                            40f,
+                            "Medium")
+                    });
+
+            Assert.AreEqual(
+                "Low",
+                mapping.Map(20f));
+
+            Assert.AreEqual(
+                "Medium",
+                mapping.Map(50f));
+
+            Assert.AreEqual(
+                "High",
+                mapping.Map(80f));
+        }
+
+        [Test]
+        public void Constructor_DuplicateThreshold_ThrowsException()
+        {
+            Assert.Throws<ArgumentException>(() =>
+                new NarrativeOutputMapping(
+                    new[]
+                    {
+                        new NarrativeOutputMapping.Band(
+                            0f,
+                            "First"),
+
+                        new NarrativeOutputMapping.Band(
+                            0f,
+                            "Second")
+                    }));
+        }
+
+        [Test]
+        public void Map_OutputBelowFirstThreshold_ThrowsException()
+        {
+            NarrativeOutputMapping mapping =
+                new NarrativeOutputMapping(
+                    new[]
+                    {
+                        new NarrativeOutputMapping.Band(
+                            10f,
+                            "Available")
+                    });
+
+            Assert.Throws<InvalidOperationException>(() =>
+                mapping.Map(5f));
+        }
+
+        [TestCase(float.NaN)]
+        [TestCase(float.PositiveInfinity)]
+        public void Map_InvalidOutput_ThrowsException(
+            float invalidOutput)
+        {
+            NarrativeOutputMapping mapping =
+                CreateVendorMapping();
+
+            Assert.Throws<ArgumentException>(() =>
+                mapping.Map(invalidOutput));
+        }
+
+        [Test]
+        public void Band_InvalidOutcomeId_ThrowsException()
+        {
+            Assert.Throws<ArgumentException>(() =>
+                new NarrativeOutputMapping.Band(
+                    0f,
+                    "   "));
+        }
+    }
+}

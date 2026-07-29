@@ -1,7 +1,9 @@
 {
     "name": "FuzzyGraph2.Runtime",
     "rootNamespace": "FuzzyGraph2.Runtime",
-    "references": [],
+    "references": [
+        "FuzzyGraph.Runtime"
+    ],
     "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,
