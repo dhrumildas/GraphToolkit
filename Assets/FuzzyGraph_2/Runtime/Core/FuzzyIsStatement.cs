@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 namespace FuzzyGraph2.Runtime
 {
-    public sealed class FuzzyIsStatement
+    public sealed class FuzzyIsStatement : IFuzzyExpression
     {
         public FuzzyVariableDefinition Variable { get; }
         public FuzzySetDefinition Set { get; }
