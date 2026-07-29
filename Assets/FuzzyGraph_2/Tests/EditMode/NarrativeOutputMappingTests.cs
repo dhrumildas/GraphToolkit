@@ -1,7 +1,7 @@
 using System;
 using NUnit.Framework;
 using FuzzyGraph2.Runtime;
-
+using FuzzyGraph.Runtime;
 namespace FuzzyGraph2.Tests.EditMode
 {
     public class NarrativeOutputMappingTests
@@ -141,6 +141,151 @@ namespace FuzzyGraph2.Tests.EditMode
                 new NarrativeOutputMapping.Band(
                     0f,
                     "   "));
+        }
+
+        [Test]
+        public void MapBand_ReturnsVendorRevealEffects()
+        {
+            RuntimeConsequence dialogueConsequence =
+                new RuntimeConsequence
+                {
+                    consequenceType = ConsequenceType.FireEvent,
+                    targetKey = "DialogueGraph",
+                    payLoad = "VendorSecretRevealed"
+                };
+
+            RuntimeWriteBack pitRouteWriteBack =
+                new RuntimeWriteBack
+                {
+                    targetKey = "Player.FoundPitRoute",
+                    operation = WriteBackOperation.Set,
+                    val = FuzzyValue.FromBool(true)
+                };
+
+            NarrativeOutputMapping mapping =
+                new NarrativeOutputMapping(
+                    new[]
+                    {
+                new NarrativeOutputMapping.Band(
+                    minimumInclusive: 0f,
+                    outcomeId: "Vendor.ConcealsSecret"),
+
+                new NarrativeOutputMapping.Band(
+                    minimumInclusive: 40f,
+                    outcomeId: "Vendor.BecomesNervous"),
+
+                new NarrativeOutputMapping.Band(
+                    minimumInclusive: 70f,
+                    outcomeId: "Vendor.RevealsSecret",
+                    consequences: new[]
+                    {
+                        dialogueConsequence
+                    },
+                    writeBacks: new[]
+                    {
+                        pitRouteWriteBack
+                    })
+                    });
+
+            NarrativeOutputMapping.Band selectedBand =
+                mapping.MapBand(71.28f);
+
+            Assert.AreEqual(
+                "Vendor.RevealsSecret",
+                selectedBand.OutcomeId);
+
+            Assert.AreEqual(
+                1,
+                selectedBand.Consequences.Count);
+
+            Assert.AreEqual(
+                1,
+                selectedBand.WriteBacks.Count);
+
+            Assert.AreSame(
+                dialogueConsequence,
+                selectedBand.Consequences[0]);
+
+            Assert.AreSame(
+                pitRouteWriteBack,
+                selectedBand.WriteBacks[0]);
+        }
+
+        [Test]
+        public void SelectedBand_WriteBacksUseExistingProcessor()
+        {
+            RuntimeWriteBack pitRouteWriteBack =
+                new RuntimeWriteBack
+                {
+                    targetKey = "Player.FoundPitRoute",
+                    operation = WriteBackOperation.Set,
+                    val = FuzzyValue.FromBool(true)
+                };
+
+            NarrativeOutputMapping mapping =
+                new NarrativeOutputMapping(
+                    new[]
+                    {
+                new NarrativeOutputMapping.Band(
+                    minimumInclusive: 0f,
+                    outcomeId: "Vendor.ConcealsSecret"),
+
+                new NarrativeOutputMapping.Band(
+                    minimumInclusive: 70f,
+                    outcomeId: "Vendor.RevealsSecret",
+                    writeBacks: new[]
+                    {
+                        pitRouteWriteBack
+                    })
+                    });
+
+            NarrativeOutputMapping.Band selectedBand =
+                mapping.MapBand(71.28f);
+
+            PersistentContext context =
+                new PersistentContext();
+
+            int appliedCount =
+                WriteBackProcessor.ApplyAll(
+                    context,
+                    selectedBand.WriteBacks);
+
+            Assert.AreEqual(1, appliedCount);
+
+            bool found =
+                context.TryGet(
+                    "Player.FoundPitRoute",
+                    out FuzzyValue storedValue);
+
+            Assert.IsTrue(found);
+            Assert.AreEqual(FuzzyValueType.Bool, storedValue.type);
+            Assert.IsTrue(storedValue.boolVal);
+        }
+
+        [Test]
+        public void Band_NullConsequence_ThrowsException()
+        {
+            Assert.Throws<ArgumentException>(() =>
+                new NarrativeOutputMapping.Band(
+                    minimumInclusive: 0f,
+                    outcomeId: "Test",
+                    consequences: new RuntimeConsequence[]
+                    {
+                null
+                    }));
+        }
+
+        [Test]
+        public void Band_NullWriteBack_ThrowsException()
+        {
+            Assert.Throws<ArgumentException>(() =>
+                new NarrativeOutputMapping.Band(
+                    minimumInclusive: 0f,
+                    outcomeId: "Test",
+                    writeBacks: new RuntimeWriteBack[]
+                    {
+                null
+                    }));
         }
     }
 }

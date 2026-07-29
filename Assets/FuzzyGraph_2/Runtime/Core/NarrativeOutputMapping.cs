@@ -1,21 +1,31 @@
 using System;
 using System.Collections.Generic;
+using FuzzyGraph.Runtime;
 
 namespace FuzzyGraph2.Runtime
 {
-
     public sealed class NarrativeOutputMapping
     {
-
         public sealed class Band
         {
+            private readonly List<RuntimeConsequence> _consequences;
+            private readonly List<RuntimeWriteBack> _writeBacks;
+
             public float MinimumInclusive { get; }
 
             public string OutcomeId { get; }
 
+            public IReadOnlyList<RuntimeConsequence> Consequences =>
+                _consequences;
+
+            public IReadOnlyList<RuntimeWriteBack> WriteBacks =>
+                _writeBacks;
+
             public Band(
                 float minimumInclusive,
-                string outcomeId)
+                string outcomeId,
+                IEnumerable<RuntimeConsequence> consequences = null,
+                IEnumerable<RuntimeWriteBack> writeBacks = null)
             {
                 if (float.IsNaN(minimumInclusive) ||
                     float.IsInfinity(minimumInclusive))
@@ -34,6 +44,43 @@ namespace FuzzyGraph2.Runtime
 
                 MinimumInclusive = minimumInclusive;
                 OutcomeId = outcomeId.Trim();
+
+                _consequences = CopyAndValidate(
+                    consequences,
+                    nameof(consequences),
+                    "consequence");
+
+                _writeBacks = CopyAndValidate(
+                    writeBacks,
+                    nameof(writeBacks),
+                    "write-back");
+            }
+
+            private static List<T> CopyAndValidate<T>(
+                IEnumerable<T> values,
+                string parameterName,
+                string description)
+                where T : class
+            {
+                List<T> result = new List<T>();
+
+                if (values == null)
+                    return result;
+
+                foreach (T value in values)
+                {
+                    if (value == null)
+                    {
+                        throw new ArgumentException(
+                            $"A narrative-output band contains a null " +
+                            $"{description}.",
+                            parameterName);
+                    }
+
+                    result.Add(value);
+                }
+
+                return result;
             }
         }
 
@@ -89,8 +136,7 @@ namespace FuzzyGraph2.Runtime
                 }
             }
         }
-
-        public string Map(float output)
+        public Band MapBand(float output)
         {
             if (float.IsNaN(output) ||
                 float.IsInfinity(output))
@@ -116,7 +162,11 @@ namespace FuzzyGraph2.Runtime
                     $"No narrative-output band accepts value {output}.");
             }
 
-            return selectedBand.OutcomeId;
+            return selectedBand;
+        }
+        public string Map(float output)
+        {
+            return MapBand(output).OutcomeId;
         }
     }
 }
