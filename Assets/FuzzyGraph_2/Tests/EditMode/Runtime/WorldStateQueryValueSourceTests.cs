@@ -145,5 +145,46 @@ namespace FuzzyGraph2.Tests.EditMode
             Assert.Throws<ArgumentNullException>(() =>
                 new WorldStateQueryValueSource(null));
         }
+
+        [Test]
+        public void Source_ReadsBooleanValue()
+        {
+            WorldStateQuery query =
+                new WorldStateQuery();
+
+            query.Set(
+                "Guard.Charmed",
+                FuzzyValue.FromBool(true));
+
+            WorldStateQueryValueSource source =
+                new WorldStateQueryValueSource(query);
+
+            bool found = source.TryGetBool(
+                "Guard.Charmed",
+                out bool value);
+
+            Assert.IsTrue(found);
+            Assert.IsTrue(value);
+        }
+
+        [Test]
+        public void Source_NumericValueCannotBeReadAsBoolean()
+        {
+            WorldStateQuery query =
+                new WorldStateQuery();
+
+            query.Set(
+                "Guard.Suspicion",
+                FuzzyValue.FromFloat(75f));
+
+            WorldStateQueryValueSource source =
+                new WorldStateQueryValueSource(query);
+
+            bool found = source.TryGetBool(
+                "Guard.Suspicion",
+                out _);
+
+            Assert.IsFalse(found);
+        }
     }
 }

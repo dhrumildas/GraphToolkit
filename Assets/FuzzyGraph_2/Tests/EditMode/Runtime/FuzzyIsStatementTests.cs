@@ -272,17 +272,30 @@ namespace FuzzyGraph2.Tests.EditMode
 
         private sealed class TestValueSource : IFuzzyValueSource
         {
-            private readonly Dictionary<string, float> _values = new Dictionary<string, float>();
+            private readonly Dictionary<string, float> _floatValues = new Dictionary<string, float>();
+
+            private readonly Dictionary<string, bool> _boolValues = new Dictionary<string, bool>();
 
             public TestValueSource Set(string variableId, float value)
             {
-                _values[variableId] = value;
+                _floatValues[variableId] = value;
+                return this;
+            }
+
+            public TestValueSource SetBool(string variableId, bool value)
+            {
+                _boolValues[variableId] = value;
                 return this;
             }
 
             public bool TryGetFloat(string variableId, out float value)
             {
-                return _values.TryGetValue(variableId, out value);
+                return _floatValues.TryGetValue(variableId, out value);
+            }
+
+            public bool TryGetBool(string variableId, out bool value)
+            {
+                return _boolValues.TryGetValue(variableId, out value);
             }
         }
 
@@ -346,6 +359,166 @@ namespace FuzzyGraph2.Tests.EditMode
             );
 
             Assert.Throws<ArgumentNullException>(() => statement.Evaluate(source: null));
+        }
+
+        [Test]
+        public void BoolExpression_MatchingTrueValue_ReturnsOne()
+        {
+            IFuzzyExpression expression =
+                FuzzyExpression.BoolEquals(
+                    "Guard.Charmed",
+                    true);
+
+            TestValueSource source =
+                new TestValueSource()
+                    .SetBool("Guard.Charmed", true);
+
+            float result = expression.Evaluate(source);
+
+            Assert.AreEqual(1f, result, Tolerance);
+        }
+
+        [Test]
+        public void BoolExpression_NonMatchingTrueValue_ReturnsZero()
+        {
+            IFuzzyExpression expression =
+                FuzzyExpression.BoolEquals(
+                    "Guard.Charmed",
+                    true);
+
+            TestValueSource source =
+                new TestValueSource()
+                    .SetBool("Guard.Charmed", false);
+
+            float result = expression.Evaluate(source);
+
+            Assert.AreEqual(0f, result, Tolerance);
+        }
+
+        [Test]
+        public void BoolExpression_ExpectedFalse_ReturnsOne()
+        {
+            IFuzzyExpression expression =
+                FuzzyExpression.BoolEquals(
+                    "Player.FoundPitRoute",
+                    false);
+
+            TestValueSource source =
+                new TestValueSource()
+                    .SetBool(
+                        "Player.FoundPitRoute",
+                        false);
+
+            float result = expression.Evaluate(source);
+
+            Assert.AreEqual(1f, result, Tolerance);
+        }
+
+        [Test]
+        public void BoolExpression_CanCombineWithFuzzyMembership()
+        {
+            FuzzyVariableDefinition relationship =
+                CreateRelationshipVariable();
+
+            IFuzzyExpression friendly =
+                new FuzzyIsStatement(
+                    relationship,
+                    relationship.GetSet("Friendly"));
+
+            IFuzzyExpression charmed =
+                FuzzyExpression.BoolEquals(
+                    "Guard.Charmed",
+                    true);
+
+            IFuzzyExpression expression =
+                FuzzyExpression.And(
+                    friendly,
+                    charmed);
+
+            TestValueSource source =
+                new TestValueSource()
+                    .Set("Guard.Relationship", 68f)
+                    .SetBool("Guard.Charmed", true);
+
+            float result = expression.Evaluate(source);
+
+            // Friendly membership:
+            // (68 - 50) / (80 - 50) = 0.60
+            //
+            // Guard.Charmed IS true = 1.00
+            //
+            // Product AND:
+            // 0.60 × 1.00 = 0.60
+
+            Assert.AreEqual(0.6f, result, Tolerance);
+        }
+
+        [Test]
+        public void BoolExpression_FalseRequiredConditionMakesAndZero()
+        {
+            FuzzyVariableDefinition relationship =
+                CreateRelationshipVariable();
+
+            IFuzzyExpression friendly =
+                new FuzzyIsStatement(
+                    relationship,
+                    relationship.GetSet("Friendly"));
+
+            IFuzzyExpression charmed =
+                FuzzyExpression.BoolEquals(
+                    "Guard.Charmed",
+                    true);
+
+            IFuzzyExpression expression =
+                FuzzyExpression.And(
+                    friendly,
+                    charmed);
+
+            TestValueSource source =
+                new TestValueSource()
+                    .Set("Guard.Relationship", 68f)
+                    .SetBool("Guard.Charmed", false);
+
+            float result = expression.Evaluate(source);
+
+            Assert.AreEqual(0f, result, Tolerance);
+        }
+
+        [Test]
+        public void BoolExpression_MissingValue_ThrowsException()
+        {
+            IFuzzyExpression expression =
+                FuzzyExpression.BoolEquals(
+                    "Guard.Charmed",
+                    true);
+
+            TestValueSource source =
+                new TestValueSource();
+
+            Assert.Throws<KeyNotFoundException>(() =>
+                expression.Evaluate(source));
+        }
+
+        [Test]
+        public void BoolExpression_ToString_ReturnsReadableDescription()
+        {
+            IFuzzyExpression expression =
+                FuzzyExpression.BoolEquals(
+                    "Guard.Charmed",
+                    true);
+
+            Assert.AreEqual(
+                "Guard.Charmed IS TRUE",
+                expression.ToString());
+        }
+
+        [Test]
+        public void BoolExpression_InvalidVariableId_ThrowsException()
+        {
+            Assert.Throws<ArgumentException>(() =>
+                FuzzyExpression.BoolEquals(
+                    "   ",
+                    true));
         }
     }
 }

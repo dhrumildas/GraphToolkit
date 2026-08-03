@@ -25,11 +25,15 @@ namespace FuzzyGraph2.Tests.EditMode
 
         private sealed class EmptyValueSource : IFuzzyValueSource
         {
-            public bool TryGetFloat(
-                string variableId,
-                out float value)
+            public bool TryGetFloat(string variableId, out float value)
             {
                 value = 0f;
+                return false;
+            }
+
+            public bool TryGetBool(string variableId, out bool value)
+            {
+                value = false;
                 return false;
             }
         }
@@ -47,11 +51,15 @@ namespace FuzzyGraph2.Tests.EditMode
                 return this;
             }
 
-            public bool TryGetFloat(
-                string variableId,
-                out float value)
+            public bool TryGetFloat(string variableId,out float value)
             {
                 return _values.TryGetValue(variableId, out value);
+            }
+
+            public bool TryGetBool(string variableId, out bool value)
+            {
+                value = false;
+                return false;
             }
         }
 

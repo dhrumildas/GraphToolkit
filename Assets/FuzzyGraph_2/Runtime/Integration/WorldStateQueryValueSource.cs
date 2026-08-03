@@ -12,6 +12,23 @@ namespace FuzzyGraph2.Runtime
             _query = query ?? throw new ArgumentNullException(nameof(query));
         }
 
+        public bool TryGetBool(string variableId, out bool value)
+        {
+            value = false;
+
+            if(string.IsNullOrWhiteSpace(variableId))
+                return false;
+
+            if(!_query.TryGet(variableId, out FuzzyValue fuzzyValue))
+                return false;
+
+            if(fuzzyValue.type != FuzzyValueType.Bool)
+                return false;
+
+            value = fuzzyValue.boolVal;
+            return true;
+        }
+
         public bool TryGetFloat(string variableId, out float value)
         {
             value = 0f;
@@ -38,5 +55,7 @@ namespace FuzzyGraph2.Runtime
                     return false;
             }
         }
+
+
     }
 }

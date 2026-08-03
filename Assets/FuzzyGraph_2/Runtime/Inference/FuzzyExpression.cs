@@ -1,5 +1,5 @@
 using System;
-
+using System.Collections.Generic;
 namespace FuzzyGraph2.Runtime
 {
 
@@ -10,6 +10,14 @@ namespace FuzzyGraph2.Runtime
 
     public static class FuzzyExpression
     {
+        public static IFuzzyExpression BoolEquals(string varID, bool expectedVal)
+        {
+            if(string.IsNullOrWhiteSpace(varID))
+                throw new ArgumentException("Bool expression is required for varID.",nameof(varID));
+
+            return new BoolEqualsExpression(varID.Trim(), expectedVal);
+        }
+
         public static IFuzzyExpression And(
             params IFuzzyExpression[] expressions)
         {
@@ -164,6 +172,40 @@ namespace FuzzyGraph2.Runtime
             public override string ToString()
             {
                 return $"NOT ({_expression})";
+            }
+        }
+
+        private sealed class BoolEqualsExpression : IFuzzyExpression
+        {
+            private readonly string _variableId;
+            private readonly bool _expectedValue;
+
+            public BoolEqualsExpression(string variableId,bool expectedValue)
+            {
+                _variableId = variableId;
+                _expectedValue = expectedValue;
+            }
+
+            public float Evaluate(IFuzzyValueSource source)
+            {
+                if (source == null)
+                {
+                    throw new ArgumentNullException(nameof(source));
+                }
+
+                if (!source.TryGetBool(_variableId,out bool actualValue))
+                {
+                    throw new KeyNotFoundException($"No Boolean value was found for '{_variableId}'.");
+                }
+
+                return actualValue == _expectedValue ? 1f : 0f;
+            }
+
+            public override string ToString()
+            {
+                string expectedText = _expectedValue ? "TRUE" : "FALSE";
+
+                return $"{_variableId} IS {expectedText}";
             }
         }
 
