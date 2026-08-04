@@ -10,6 +10,34 @@ namespace FuzzyGraph2.Tests.EditMode
     {
         private RuntimeFuzzyGraph2 _graph;
 
+        private static CompiledFuzzyEvent CreateCompoundVendorEvent()
+        {
+            CompiledFuzzyEvent compiledEvent = CreateVendorEvent();
+
+            compiledEvent.expressions.Add(
+                new CompiledFuzzyExpression
+                {
+                    kind = CompiledExpressionKind.BoolEquals,
+                    variableId = "Guard.Charmed",
+                    expectedBool = true
+                }
+            );
+
+            CompiledFuzzyExpression andExpression = new CompiledFuzzyExpression
+            {
+                kind = CompiledExpressionKind.And
+            };
+
+            andExpression.childExpressionIndices.Add(0);
+            andExpression.childExpressionIndices.Add(1);
+
+            compiledEvent.expressions.Add(andExpression);
+
+            compiledEvent.rules[0].antecedentExpressionIndex = 2;
+
+            return compiledEvent;
+        }
+
         [SetUp]
         public void SetUp()
         {
@@ -157,7 +185,8 @@ namespace FuzzyGraph2.Tests.EditMode
 
             CompiledFuzzyEvent second = CreateVendorEvent();
 
-            Assert.Throws<ArgumentException>(() => _graph.SetCompiledEvents(new[] { first, second })
+            Assert.Throws<ArgumentException>(
+                () => _graph.SetCompiledEvents(new[] { first, second })
             );
         }
 
@@ -177,6 +206,14 @@ namespace FuzzyGraph2.Tests.EditMode
             string json = JsonUtility.ToJson(_graph);
 
             RuntimeFuzzyGraph2 restored = ScriptableObject.CreateInstance<RuntimeFuzzyGraph2>();
+
+            WorldStateQuery query = new WorldStateQuery();
+
+            query.Set("Player.DistanceToCarpet", FuzzyValue.FromFloat(0.7f));
+
+            SugenoNarrativeResult result = restored.Resolve("InspectBazaarCarpet", query);
+
+            Assert.AreEqual("Vendor.RevealsSecret", result.OutcomeId);
 
             try
             {
@@ -201,6 +238,103 @@ namespace FuzzyGraph2.Tests.EditMode
             {
                 UnityEngine.Object.DestroyImmediate(restored);
             }
+        }
+
+        [Test]
+        public void Resolve_CompiledVendorEvent_ReturnsExpectedOutcome()
+        {
+            _graph.SetCompiledEvents(new[] { CreateVendorEvent() });
+
+            WorldStateQuery query = new WorldStateQuery();
+
+            query.Set("Player.DistanceToCarpet", FuzzyValue.FromFloat(0.7f));
+
+            SugenoNarrativeResult result = _graph.Resolve("InspectBazaarCarpet", query);
+
+            Assert.IsFalse(result.UsedFallback);
+
+            // Near membership is 0.75, but with one active rule
+            // the weighted-average output remains its consequent: 90.
+            Assert.AreEqual(90f, result.Inference.Output, 0.0001f);
+
+            Assert.AreEqual("Vendor.RevealsSecret", result.OutcomeId);
+
+            Assert.AreEqual(1, result.Consequences.Count);
+            Assert.AreEqual(1, result.WriteBacks.Count);
+        }
+
+        [Test]
+        public void Resolve_MissingValue_UsesFallbackAndRecordsDiagnostic()
+        {
+            _graph.SetCompiledEvents(new[] { CreateVendorEvent() });
+
+            SugenoNarrativeResult result = _graph.Resolve(
+                "InspectBazaarCarpet",
+                new WorldStateQuery()
+            );
+
+            Assert.IsTrue(result.UsedFallback);
+
+            Assert.AreEqual("Vendor.DefaultResponse", result.OutcomeId);
+
+            Assert.AreEqual(1, result.Inference.Diagnostics.Count);
+
+            StringAssert.Contains(
+                "Player.DistanceToCarpet",
+                result.Inference.Diagnostics[0].Message
+            );
+        }
+
+        [Test]
+        public void Resolve_CompiledAndExpression_UsesBooleanAndFuzzyInputs()
+        {
+            _graph.SetCompiledEvents(new[] { CreateCompoundVendorEvent() });
+
+            WorldStateQuery matchingQuery = new WorldStateQuery();
+
+            matchingQuery.Set("Player.DistanceToCarpet", FuzzyValue.FromFloat(0.7f));
+
+            matchingQuery.Set("Guard.Charmed", FuzzyValue.FromBool(true));
+
+            SugenoNarrativeResult matchingResult = _graph.Resolve(
+                "InspectBazaarCarpet",
+                matchingQuery
+            );
+
+            Assert.IsFalse(matchingResult.UsedFallback);
+
+            Assert.AreEqual("Vendor.RevealsSecret", matchingResult.OutcomeId);
+
+            WorldStateQuery failingQuery = new WorldStateQuery();
+
+            failingQuery.Set("Player.DistanceToCarpet", FuzzyValue.FromFloat(0.7f));
+
+            failingQuery.Set("Guard.Charmed", FuzzyValue.FromBool(false));
+
+            SugenoNarrativeResult failingResult = _graph.Resolve(
+                "InspectBazaarCarpet",
+                failingQuery
+            );
+
+            Assert.IsTrue(failingResult.UsedFallback);
+
+            Assert.AreEqual("Vendor.DefaultResponse", failingResult.OutcomeId);
+        }
+
+        [Test]
+        public void Resolve_InvalidRuleExpressionIndex_ThrowsClearError()
+        {
+            CompiledFuzzyEvent compiledEvent = CreateVendorEvent();
+
+            compiledEvent.rules[0].antecedentExpressionIndex = 99;
+
+            _graph.SetCompiledEvents(new[] { compiledEvent });
+
+            InvalidOperationException exception = Assert.Throws<InvalidOperationException>(
+                () => _graph.Resolve("InspectBazaarCarpet", new WorldStateQuery())
+            );
+
+            StringAssert.Contains("expression index", exception.Message.ToLowerInvariant());
         }
     }
 }
