@@ -88,8 +88,11 @@ namespace FuzzyGraph2.Runtime
 
         public IReadOnlyList<Band> Bands => _bands;
 
-        public NarrativeOutputMapping(
-            IEnumerable<Band> bands)
+        public Band FallbackBand { get; }
+
+        public bool HasFallback => FallbackBand != null;
+
+        public NarrativeOutputMapping(IEnumerable<Band> bands,Band fallbackBand = null)
         {
             if (bands == null)
             {
@@ -135,6 +138,25 @@ namespace FuzzyGraph2.Runtime
                         nameof(bands));
                 }
             }
+
+            FallbackBand = fallbackBand;
+        }
+
+        /// <summary>
+        /// Returns the authored fallback outcome.
+        ///
+        /// The fallback band threshold is ignored because no
+        /// numeric Sugeno output exists in this situation.
+        /// </summary>
+        public Band GetFallbackBand()
+        {
+            if (FallbackBand == null)
+            {
+                throw new InvalidOperationException(
+                    "No authored fallback outcome was configured.");
+            }
+
+            return FallbackBand;
         }
         public Band MapBand(float output)
         {

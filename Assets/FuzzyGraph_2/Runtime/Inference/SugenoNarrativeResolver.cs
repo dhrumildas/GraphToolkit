@@ -8,6 +8,8 @@ namespace FuzzyGraph2.Runtime
     {
         public SugenoInferenceResult Inference { get; }
 
+        public bool UsedFallback { get; }
+
         public NarrativeOutputMapping.Band SelectedBand { get; }
 
         public string OutcomeId => SelectedBand.OutcomeId;
@@ -20,13 +22,16 @@ namespace FuzzyGraph2.Runtime
 
         internal SugenoNarrativeResult(
             SugenoInferenceResult inference,
-            NarrativeOutputMapping.Band selectedBand)
+            NarrativeOutputMapping.Band selectedBand,
+            bool usedFallback)
         {
             Inference = inference ??
                 throw new ArgumentNullException(nameof(inference));
 
             SelectedBand = selectedBand ??
                 throw new ArgumentNullException(nameof(selectedBand));
+            
+            UsedFallback = usedFallback;
         }
     }
     public static class SugenoNarrativeResolver
@@ -62,9 +67,13 @@ namespace FuzzyGraph2.Runtime
 
             if (!inference.HasOutput)
             {
-                throw new InvalidOperationException(
-                    "The Sugeno narrative event produced no output " +
-                    "because no rule had a positive firing strength.");
+                NarrativeOutputMapping.Band fallbackBand =
+                    outputMapping.GetFallbackBand();
+
+                return new SugenoNarrativeResult(
+                    inference,
+                    fallbackBand,
+                    usedFallback: true);
             }
 
             NarrativeOutputMapping.Band selectedBand =
@@ -72,7 +81,8 @@ namespace FuzzyGraph2.Runtime
 
             return new SugenoNarrativeResult(
                 inference,
-                selectedBand);
+                selectedBand,
+                usedFallback:false);
         }
     }
 }

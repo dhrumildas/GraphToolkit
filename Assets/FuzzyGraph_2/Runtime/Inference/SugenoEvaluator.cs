@@ -56,13 +56,32 @@ namespace FuzzyGraph2.Runtime
                 firingStrength * rule.Consequent;
         }
     }
+
+    public sealed class SugenoRuleDiagnostic
+    {
+        public SugenoRule Rule { get; }
+
+        public string Message { get; }
+
+        internal SugenoRuleDiagnostic(
+            SugenoRule rule,
+            string message)
+        {
+            Rule = rule ??
+                throw new ArgumentNullException(nameof(rule));
+
+            Message = string.IsNullOrWhiteSpace(message)
+                ? "The rule could not be evaluated."
+                : message;
+        }
+    }
+
     public sealed class SugenoInferenceResult
     {
         private readonly List<SugenoRuleActivation> _activations;
-
-        public IReadOnlyList<SugenoRuleActivation> Activations =>
-            _activations;
-
+        private readonly List<SugenoRuleDiagnostic> _diagnostics;
+        public IReadOnlyList<SugenoRuleActivation> Activations => _activations;
+        public IReadOnlyList<SugenoRuleDiagnostic> Diagnostics => _diagnostics;
         public float Numerator { get; }
 
         public float Denominator { get; }
@@ -73,12 +92,14 @@ namespace FuzzyGraph2.Runtime
 
         internal SugenoInferenceResult(
             List<SugenoRuleActivation> activations,
+            List<SugenoRuleDiagnostic> diagnostics,
             float numerator,
             float denominator)
         {
             _activations =
                 new List<SugenoRuleActivation>(activations);
-
+            _diagnostics =
+                new List<SugenoRuleDiagnostic>(diagnostics);
             Numerator = numerator;
             Denominator = denominator;
 
@@ -89,10 +110,10 @@ namespace FuzzyGraph2.Runtime
     }
     public static class SugenoEvaluator
     {
-        public static SugenoInferenceResult Evaluate(
-            IEnumerable<SugenoRule> rules,
-            IFuzzyValueSource source)
+        public static SugenoInferenceResult Evaluate(IEnumerable<SugenoRule> rules,IFuzzyValueSource source)
         {
+            List<SugenoRuleDiagnostic> diagnostics = new List<SugenoRuleDiagnostic>();
+
             if (rules == null)
             {
                 throw new ArgumentNullException(nameof(rules));
@@ -118,9 +139,23 @@ namespace FuzzyGraph2.Runtime
                         nameof(rules));
                 }
 
-                float firingStrength =
-                    FuzzyMath.Clamp(
-                        rule.Antecedent.Evaluate(source));
+                float firingStrength;
+
+                try
+                {
+                    firingStrength =
+                        FuzzyMath.Clamp(
+                            rule.Antecedent.Evaluate(source));
+                }
+                catch (KeyNotFoundException exception)
+                {
+                    diagnostics.Add(
+                        new SugenoRuleDiagnostic(
+                            rule,
+                            exception.Message));
+
+                    continue;
+                }
 
                 if (firingStrength <= 0f)
                     continue;
@@ -138,6 +173,7 @@ namespace FuzzyGraph2.Runtime
 
             return new SugenoInferenceResult(
                 activations,
+                diagnostics,
                 numerator,
                 denominator);
         }

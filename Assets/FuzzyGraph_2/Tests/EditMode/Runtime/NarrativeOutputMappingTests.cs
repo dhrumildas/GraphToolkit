@@ -287,5 +287,29 @@ namespace FuzzyGraph2.Tests.EditMode
                 null
                     }));
         }
+
+        [Test]
+        public void GetFallbackBand_ReturnsAuthoredFallback()
+        {
+            NarrativeOutputMapping.Band fallback =
+                new NarrativeOutputMapping.Band(
+                    minimumInclusive: 0f,
+                    outcomeId: "Vendor.DefaultResponse");
+
+            NarrativeOutputMapping mapping =
+                new NarrativeOutputMapping(
+                    bands: new[]
+                    {
+                new NarrativeOutputMapping.Band(
+                    0f,
+                    "Vendor.Normal")
+                    },
+                    fallbackBand: fallback);
+
+            Assert.IsTrue(mapping.HasFallback);
+            Assert.AreSame(
+                fallback,
+                mapping.GetFallbackBand());
+        }
     }
 }

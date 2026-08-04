@@ -1,6 +1,7 @@
-using NUnit.Framework;
 using FuzzyGraph.Runtime;
 using FuzzyGraph2.Runtime;
+using NUnit.Framework;
+using System;
 
 namespace FuzzyGraph2.Tests.EditMode
 {
@@ -199,6 +200,200 @@ namespace FuzzyGraph2.Tests.EditMode
                     out FuzzyValue storedValue));
 
             Assert.IsTrue(storedValue.boolVal);
+        }
+
+        private sealed class ConstantExpression : IFuzzyExpression
+        {
+            private readonly float _value;
+
+            public ConstantExpression(float value)
+            {
+                _value = value;
+            }
+
+            public float Evaluate(IFuzzyValueSource source)
+            {
+                return _value;
+            }
+        }
+
+        [Test]
+        public void Resolve_NoActiveRule_UsesAuthoredFallback()
+        {
+            SugenoRule inactiveRule =
+                new SugenoRule(
+                    id: "Inactive",
+                    antecedent: new ConstantExpression(0f),
+                    consequent: 90f);
+
+            NarrativeOutputMapping mapping =
+                new NarrativeOutputMapping(
+                    bands: new[]
+                    {
+                new NarrativeOutputMapping.Band(
+                    0f,
+                    "NormalOutcome")
+                    },
+                    fallbackBand:
+                        new NarrativeOutputMapping.Band(
+                            0f,
+                            "FallbackOutcome"));
+
+            SugenoNarrativeResult result =
+                SugenoNarrativeResolver.Resolve(
+                    new[] { inactiveRule },
+                    mapping,
+                    new WorldStateQuery());
+
+            Assert.IsTrue(result.UsedFallback);
+            Assert.IsFalse(result.Inference.HasOutput);
+
+            Assert.AreEqual(
+                "FallbackOutcome",
+                result.OutcomeId);
+        }
+
+        [Test]
+        public void Resolve_MissingValue_UsesFallbackAndRecordsDiagnostic()
+        {
+            SugenoRule missingValueRule =
+                new SugenoRule(
+                    id: "RequiresCharmed",
+                    antecedent:
+                        FuzzyExpression.BoolEquals(
+                            "Guard.Charmed",
+                            true),
+                    consequent: 90f);
+
+            NarrativeOutputMapping mapping =
+                new NarrativeOutputMapping(
+                    bands: new[]
+                    {
+                new NarrativeOutputMapping.Band(
+                    0f,
+                    "NormalOutcome")
+                    },
+                    fallbackBand:
+                        new NarrativeOutputMapping.Band(
+                            0f,
+                            "MissingStateFallback"));
+
+            SugenoNarrativeResult result =
+                SugenoNarrativeResolver.Resolve(
+                    new[] { missingValueRule },
+                    mapping,
+                    new WorldStateQuery());
+
+            Assert.IsTrue(result.UsedFallback);
+
+            Assert.AreEqual(
+                "MissingStateFallback",
+                result.OutcomeId);
+
+            Assert.AreEqual(
+                1,
+                result.Inference.Diagnostics.Count);
+
+            Assert.AreSame(
+                missingValueRule,
+                result.Inference.Diagnostics[0].Rule);
+
+            StringAssert.Contains(
+                "Guard.Charmed",
+                result.Inference.Diagnostics[0].Message);
+        }
+
+        [Test]
+        public void Resolve_MissingRuleValue_DoesNotBlockValidRule()
+        {
+            SugenoRule missingRule =
+                new SugenoRule(
+                    id: "MissingRule",
+                    antecedent:
+                        FuzzyExpression.BoolEquals(
+                            "Missing.Flag",
+                            true),
+                    consequent: 90f);
+
+            SugenoRule validRule =
+                new SugenoRule(
+                    id: "ValidRule",
+                    antecedent:
+                        new ConstantExpression(1f),
+                    consequent: 20f);
+
+            NarrativeOutputMapping mapping =
+                new NarrativeOutputMapping(
+                    bands: new[]
+                    {
+                new NarrativeOutputMapping.Band(
+                    0f,
+                    "LowOutcome"),
+
+                new NarrativeOutputMapping.Band(
+                    50f,
+                    "HighOutcome")
+                    },
+                    fallbackBand:
+                        new NarrativeOutputMapping.Band(
+                            0f,
+                            "FallbackOutcome"));
+
+            SugenoNarrativeResult result =
+                SugenoNarrativeResolver.Resolve(
+                    new[]
+                    {
+                missingRule,
+                validRule
+                    },
+                    mapping,
+                    new WorldStateQuery());
+
+            Assert.IsFalse(result.UsedFallback);
+            Assert.IsTrue(result.Inference.HasOutput);
+
+            Assert.AreEqual(
+                20f,
+                result.Inference.Output,
+                0.0001f);
+
+            Assert.AreEqual(
+                "LowOutcome",
+                result.OutcomeId);
+
+            Assert.AreEqual(
+                1,
+                result.Inference.Diagnostics.Count);
+        }
+
+        [Test]
+        public void Resolve_NoRuleAndNoFallback_ThrowsConfigurationError()
+        {
+            SugenoRule inactiveRule =
+                new SugenoRule(
+                    id: "Inactive",
+                    antecedent: new ConstantExpression(0f),
+                    consequent: 90f);
+
+            NarrativeOutputMapping mapping =
+                new NarrativeOutputMapping(
+                    new[]
+                    {
+                new NarrativeOutputMapping.Band(
+                    0f,
+                    "NormalOutcome")
+                    });
+
+            InvalidOperationException exception =
+                Assert.Throws<InvalidOperationException>(() =>
+                    SugenoNarrativeResolver.Resolve(
+                        new[] { inactiveRule },
+                        mapping,
+                        new WorldStateQuery()));
+
+            StringAssert.Contains(
+                "fallback",
+                exception.Message.ToLowerInvariant());
         }
     }
 }
