@@ -37,10 +37,13 @@ namespace FuzzyGraph2.Runtime
     {
         FuzzyIs,
         BoolEquals,
+        IdEquals,
+        NumberCompare,
         And,
         Or,
         Not
     }
+
 
     // compiled expression data
     [Serializable]
@@ -52,6 +55,12 @@ namespace FuzzyGraph2.Runtime
         public string variableId;
         public string setName;
         public bool expectedBool;
+        public string expectedId;
+
+        public NumberComparison numberComparison;
+        public float comparisonValue;
+        public float comparisonValue2;
+
 
         // used by and, or and not
         public List<int> childExpressionIndices = new List<int>();
@@ -408,6 +417,22 @@ namespace FuzzyGraph2.Runtime
                         compiledExpression.variableId,
                         compiledExpression.expectedBool
                     );
+                    break;
+
+                case CompiledExpressionKind.IdEquals:
+                    expression =
+                        FuzzyExpression.IdEquals(
+                            compiledExpression.variableId,
+                            compiledExpression.expectedId);
+                    break;
+
+                case CompiledExpressionKind.NumberCompare:
+                    expression =
+                        FuzzyExpression.NumberCompare(
+                            compiledExpression.variableId,
+                            compiledExpression.numberComparison,
+                            compiledExpression.comparisonValue,
+                            compiledExpression.comparisonValue2);
                     break;
 
                 case CompiledExpressionKind.And:

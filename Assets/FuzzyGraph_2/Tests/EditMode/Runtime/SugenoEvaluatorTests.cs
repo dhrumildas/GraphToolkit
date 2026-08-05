@@ -36,6 +36,12 @@ namespace FuzzyGraph2.Tests.EditMode
                 value = false;
                 return false;
             }
+
+            public bool TryGetString(string variableId, out string value)
+            {
+                value = null;
+                return false;
+            }
         }
 
         private sealed class DictionaryValueSource : IFuzzyValueSource
@@ -59,6 +65,12 @@ namespace FuzzyGraph2.Tests.EditMode
             public bool TryGetBool(string variableId, out bool value)
             {
                 value = false;
+                return false;
+            }
+
+            public bool TryGetString(string variableId, out string value)
+            {
+                value= null;
                 return false;
             }
         }

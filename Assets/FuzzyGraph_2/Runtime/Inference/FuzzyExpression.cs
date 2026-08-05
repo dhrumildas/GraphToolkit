@@ -8,6 +8,16 @@ namespace FuzzyGraph2.Runtime
         float Evaluate(IFuzzyValueSource source);
     }
 
+    public enum NumberComparison
+    {
+        LessThan,
+        LessThanOrEqual,
+        Equal,
+        GreaterThanOrEqual,
+        GreaterThan,
+        InclusiveRange
+    }
+
     public static class FuzzyExpression
     {
         public static IFuzzyExpression BoolEquals(string varID, bool expectedVal)
@@ -16,6 +26,49 @@ namespace FuzzyGraph2.Runtime
                 throw new ArgumentException("Bool expression is required for varID.",nameof(varID));
 
             return new BoolEqualsExpression(varID.Trim(), expectedVal);
+        }
+
+        public static IFuzzyExpression IdEquals(
+    string variableId,
+    string expectedId)
+        {
+            if (string.IsNullOrWhiteSpace(variableId))
+            {
+                throw new ArgumentException(
+                    "an id expression needs a variable id",
+                    nameof(variableId));
+            }
+
+            if (string.IsNullOrWhiteSpace(expectedId))
+            {
+                throw new ArgumentException(
+                    "an id expression needs an expected id",
+                    nameof(expectedId));
+            }
+
+            return new IdEqualsExpression(
+                variableId.Trim(),
+                expectedId.Trim());
+        }
+
+        public static IFuzzyExpression NumberCompare(
+            string variableId,
+            NumberComparison comparison,
+            float valueA,
+            float valueB = 0f)
+        {
+            if (string.IsNullOrWhiteSpace(variableId))
+            {
+                throw new ArgumentException(
+                    "a number expression needs a variable id",
+                    nameof(variableId));
+            }
+
+            return new NumberCompareExpression(
+                variableId.Trim(),
+                comparison,
+                valueA,
+                valueB);
         }
 
         public static IFuzzyExpression And(
@@ -208,6 +261,121 @@ namespace FuzzyGraph2.Runtime
                 return $"{_variableId} IS {expectedText}";
             }
         }
+
+        private sealed class IdEqualsExpression : IFuzzyExpression
+        {
+            private readonly string _variableId;
+            private readonly string _expectedId;
+
+            public IdEqualsExpression(string variableId, string expectedId)
+            {
+                _variableId = variableId;
+                _expectedId = expectedId;
+            }
+
+            public float Evaluate(IFuzzyValueSource source)
+            {
+                if (source == null)
+                    throw new ArgumentNullException(nameof(source));
+
+                if (!source.TryGetString(_variableId, out string actualId))
+                {
+                    throw new KeyNotFoundException($"no id value was found for '{_variableId}'");
+                }
+
+                return string.Equals(actualId, _expectedId, StringComparison.Ordinal) ? 1f : 0f;
+            }
+
+            public override string ToString()
+            {
+                return $"{_variableId} IS {_expectedId}";
+            }
+        }
+
+        private sealed class NumberCompareExpression : IFuzzyExpression
+        {
+            private readonly string _variableId;
+            private readonly NumberComparison _comparison;
+            private readonly float _valueA;
+            private readonly float _valueB;
+
+            public NumberCompareExpression(
+                string variableId,
+                NumberComparison comparison,
+                float valueA,
+                float valueB
+            )
+            {
+                _variableId = variableId;
+                _comparison = comparison;
+                _valueA = valueA;
+                _valueB = valueB;
+            }
+
+            public float Evaluate(IFuzzyValueSource source)
+            {
+                if (source == null)
+                    throw new ArgumentNullException(nameof(source));
+
+                if (!source.TryGetFloat(_variableId, out float actualValue))
+                {
+                    throw new KeyNotFoundException($"no number value was found for '{_variableId}'");
+                }
+
+                bool matched;
+
+                switch (_comparison)
+                {
+                    case NumberComparison.LessThan:
+                        matched = actualValue < _valueA;
+                        break;
+
+                    case NumberComparison.LessThanOrEqual:
+                        matched = actualValue <= _valueA;
+                        break;
+
+                    case NumberComparison.Equal:
+                        matched = Math.Abs(actualValue - _valueA) <= 0.0001f;
+                        break;
+
+                    case NumberComparison.GreaterThanOrEqual:
+                        matched = actualValue >= _valueA;
+                        break;
+
+                    case NumberComparison.GreaterThan:
+                        matched = actualValue > _valueA;
+                        break;
+
+                    case NumberComparison.InclusiveRange:
+                        {
+                            float lower = _valueA <= _valueB ? _valueA : _valueB;
+
+                            float upper = _valueA <= _valueB ? _valueB : _valueA;
+
+                            matched = actualValue >= lower && actualValue <= upper;
+                            break;
+                        }
+
+                    default:
+                        throw new InvalidOperationException(
+                            $"unsupported number comparison: {_comparison}"
+                        );
+                }
+
+                return matched ? 1f : 0f;
+            }
+
+            public override string ToString()
+            {
+                if (_comparison == NumberComparison.InclusiveRange)
+                {
+                    return $"{_variableId} IN " + $"[{_valueA}, {_valueB}]";
+                }
+
+                return $"{_variableId} {_comparison} {_valueA}";
+            }
+        }
+
 
         private static string JoinExpressions(
             string separator,

@@ -186,5 +186,27 @@ namespace FuzzyGraph2.Tests.EditMode
 
             Assert.IsFalse(found);
         }
+
+        [Test]
+        public void Source_ReadsStringId()
+        {
+            WorldStateQuery query =
+                new WorldStateQuery();
+
+            query.Set(
+                "Dialogue.LastGuardChoice",
+                FuzzyValue.FromString("lie"));
+
+            WorldStateQueryValueSource source =
+                new WorldStateQueryValueSource(query);
+
+            bool found =
+                source.TryGetString(
+                    "Dialogue.LastGuardChoice",
+                    out string value);
+
+            Assert.IsTrue(found);
+            Assert.AreEqual("lie", value);
+        }
     }
 }

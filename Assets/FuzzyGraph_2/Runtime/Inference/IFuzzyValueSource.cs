@@ -5,5 +5,7 @@ namespace FuzzyGraph2.Runtime
         bool TryGetFloat(string variableId, out float value);
 
         bool TryGetBool(string variableId, out bool value);
+
+        bool TryGetString(string variableId, out string value);
     }
 }

@@ -276,6 +276,8 @@ namespace FuzzyGraph2.Tests.EditMode
 
             private readonly Dictionary<string, bool> _boolValues = new Dictionary<string, bool>();
 
+            private readonly Dictionary<string, string> _stringValues = new Dictionary<string, string>();
+
             public TestValueSource Set(string variableId, float value)
             {
                 _floatValues[variableId] = value;
@@ -288,6 +290,12 @@ namespace FuzzyGraph2.Tests.EditMode
                 return this;
             }
 
+            public TestValueSource SetId(string variableId,string value)
+            {
+                _stringValues[variableId] = value;
+                return this;
+            }
+
             public bool TryGetFloat(string variableId, out float value)
             {
                 return _floatValues.TryGetValue(variableId, out value);
@@ -296,6 +304,11 @@ namespace FuzzyGraph2.Tests.EditMode
             public bool TryGetBool(string variableId, out bool value)
             {
                 return _boolValues.TryGetValue(variableId, out value);
+            }
+
+            public bool TryGetString(string variableId, out string value)
+            {
+                return _stringValues.TryGetValue(variableId,out value);
             }
         }
 
@@ -519,6 +532,89 @@ namespace FuzzyGraph2.Tests.EditMode
                 FuzzyExpression.BoolEquals(
                     "   ",
                     true));
+        }
+
+        [Test]
+        public void IdEquals_MatchingId_ReturnsOne()
+        {
+            IFuzzyExpression expression =
+                FuzzyExpression.IdEquals(
+                    "Dialogue.LastGuardChoice",
+                    "lie");
+
+            TestValueSource source =
+                new TestValueSource()
+                    .SetId(
+                        "Dialogue.LastGuardChoice",
+                        "lie");
+
+            Assert.AreEqual(
+                1f,
+                expression.Evaluate(source),
+                Tolerance);
+        }
+
+        [Test]
+        public void IdEquals_DifferentId_ReturnsZero()
+        {
+            IFuzzyExpression expression =
+                FuzzyExpression.IdEquals(
+                    "Dialogue.LastGuardChoice",
+                    "lie");
+
+            TestValueSource source =
+                new TestValueSource()
+                    .SetId(
+                        "Dialogue.LastGuardChoice",
+                        "truth");
+
+            Assert.AreEqual(
+                0f,
+                expression.Evaluate(source),
+                Tolerance);
+        }
+
+        [Test]
+        public void NumberCompare_LessThan_ReturnsOne()
+        {
+            IFuzzyExpression expression =
+                FuzzyExpression.NumberCompare(
+                    "Dialogue.ResponseSeconds",
+                    NumberComparison.LessThan,
+                    3f);
+
+            TestValueSource source =
+                new TestValueSource()
+                    .Set(
+                        "Dialogue.ResponseSeconds",
+                        2.5f);
+
+            Assert.AreEqual(
+                1f,
+                expression.Evaluate(source),
+                Tolerance);
+        }
+
+        [Test]
+        public void NumberCompare_InclusiveRange_ReturnsOne()
+        {
+            IFuzzyExpression expression =
+                FuzzyExpression.NumberCompare(
+                    "Dialogue.ResponseSeconds",
+                    NumberComparison.InclusiveRange,
+                    3f,
+                    7f);
+
+            TestValueSource source =
+                new TestValueSource()
+                    .Set(
+                        "Dialogue.ResponseSeconds",
+                        5f);
+
+            Assert.AreEqual(
+                1f,
+                expression.Evaluate(source),
+                Tolerance);
         }
     }
 }

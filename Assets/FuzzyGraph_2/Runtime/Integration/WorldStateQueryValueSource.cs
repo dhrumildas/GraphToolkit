@@ -56,6 +56,22 @@ namespace FuzzyGraph2.Runtime
             }
         }
 
+        public bool TryGetString(string variableId, out string value)
+        {
+            value = null;
+
+            if (string.IsNullOrWhiteSpace(variableId))
+                return false;
+
+            if (!_query.TryGet(variableId, out FuzzyValue fuzzyValue))
+                return false;
+
+            if (fuzzyValue.type != FuzzyValueType.String)
+                return false;
+
+            value = fuzzyValue.stringVal;
+            return true;
+        }
 
     }
 }
