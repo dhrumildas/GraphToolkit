@@ -9,6 +9,7 @@ namespace FuzzyGraph2.Editor
     {
         public const string EventIdOptionName = "eventId";
         public const string RulesPortName = "rules";
+        public const string ConsequencesPortName = "consequences";
 
         protected override void OnDefineOptions(
             IOptionDefinitionContext context)
@@ -27,6 +28,9 @@ namespace FuzzyGraph2.Editor
 
             // rules plug in here
             context.AddOutputPort(RulesPortName).WithDisplayName("Rules").Build();
+
+            // outcomes hang off the event here
+            context.AddOutputPort(ConsequencesPortName).WithDisplayName("Consequences").Build();
         }
     }
 }

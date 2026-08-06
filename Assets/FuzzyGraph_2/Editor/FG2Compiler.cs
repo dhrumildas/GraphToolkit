@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using FuzzyGraph2.Runtime;
+using FuzzyGraph.Runtime;
 using Unity.GraphToolkit.Editor;
 using UnityEngine;
 
@@ -167,6 +168,88 @@ namespace FuzzyGraph2.Editor
                             consequent = GetOptionValue(ruleNode, RuleNode.ConsequentOptionName, 0f)
                         }
                     );
+                }
+
+                List<ConsequenceNode> consequenceNodes = GetConnectedNodesFromOutput<ConsequenceNode>(eventNode,EventNode.ConsequencesPortName).ToList();
+
+
+                HashSet<string> outcomeIds = new HashSet<string>(StringComparer.Ordinal);
+
+
+                bool hasFallback = false;
+
+
+                foreach (ConsequenceNode consequenceNode in consequenceNodes)
+                {
+                    string outcomeId = GetRequiredText(
+                        consequenceNode,
+                        ConsequenceNode.OutcomeIdOptionName,
+                        "outcome id"
+                    );
+
+                    if (!outcomeIds.Add(outcomeId))
+                    {
+                        throw new InvalidOperationException(
+                            $"event '{eventId}' has duplicate outcome " + $"'{outcomeId}'"
+                        );
+                    }
+
+                    bool isFallback = GetOptionValue(consequenceNode, ConsequenceNode.FallbackOptionName, false);
+
+                    float minimum = GetOptionValue(consequenceNode, ConsequenceNode.MinimumOptionName, 0f);
+
+                    if (!isFallback && (minimum < 0f || minimum > 1f))
+                    {
+                        throw new InvalidOperationException($"outcome '{outcomeId}' minimum must be 0 to 1");
+                    }
+
+                    CompiledOutputBand compiledBand = new CompiledOutputBand
+                    {
+                        outcomeId = outcomeId,
+                        minimumInclusive = minimum
+                    };
+
+                    bool runAction = GetOptionValue(consequenceNode, ConsequenceNode.RunActionOptionName, true);
+
+                    if (runAction)
+                    {
+                        compiledBand.consequences.Add(
+                            new RuntimeConsequence
+                            {
+                                consequenceType = GetOptionValue(
+                                    consequenceNode,
+                                    ConsequenceNode.TypeOptionName,
+                                    ConsequenceType.FireEvent
+                                ),
+                                targetKey = GetOptionValue(
+                                    consequenceNode,
+                                    ConsequenceNode.TargetOptionName,
+                                    string.Empty
+                                )?.Trim(),
+                                payLoad = GetOptionValue(
+                                    consequenceNode,
+                                    ConsequenceNode.PayloadOptionName,
+                                    string.Empty
+                                )?.Trim()
+                            }
+                        );
+                    }
+
+                    if (isFallback)
+                    {
+                        if (hasFallback)
+                        {
+                            throw new InvalidOperationException($"event '{eventId}' has multiple fallbacks");
+                        }
+
+                        compiledEvent.fallbackBand = compiledBand;
+
+                        hasFallback = true;
+                    }
+                    else
+                    {
+                        compiledEvent.outputBands.Add(compiledBand);
+                    }
                 }
 
 
