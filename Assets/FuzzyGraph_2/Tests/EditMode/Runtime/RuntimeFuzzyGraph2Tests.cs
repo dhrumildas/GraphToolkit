@@ -202,37 +202,28 @@ namespace FuzzyGraph2.Tests.EditMode
         public void JsonRoundTrip_PreservesCompiledRecords()
         {
             _graph.SetCompiledEvents(new[] { CreateVendorEvent() });
-
             string json = JsonUtility.ToJson(_graph);
 
             RuntimeFuzzyGraph2 restored = ScriptableObject.CreateInstance<RuntimeFuzzyGraph2>();
 
-            WorldStateQuery query = new WorldStateQuery();
-
-            query.Set("Player.DistanceToCarpet", FuzzyValue.FromFloat(0.7f));
-
-            SugenoNarrativeResult result = restored.Resolve("InspectBazaarCarpet", query);
-
-            Assert.AreEqual("Vendor.RevealsSecret", result.OutcomeId);
-
             try
             {
+                // Restore the compiled event data before attempting resolution.
                 JsonUtility.FromJsonOverwrite(json, restored);
+
+                WorldStateQuery query = new WorldStateQuery();
+                query.Set("Player.DistanceToCarpet", FuzzyValue.FromFloat(0.7f));
+
+                SugenoNarrativeResult result = restored.Resolve("InspectBazaarCarpet", query);
+                Assert.AreEqual("Vendor.RevealsSecret", result.OutcomeId);
 
                 CompiledFuzzyEvent restoredEvent = restored.GetEvent("InspectBazaarCarpet");
 
                 Assert.AreEqual("Player.DistanceToCarpet", restoredEvent.variables[0].id);
-
                 Assert.AreEqual("Near", restoredEvent.variables[0].sets[0].name);
-
                 Assert.AreEqual(CompiledExpressionKind.FuzzyIs, restoredEvent.expressions[0].kind);
-
                 Assert.AreEqual(90f, restoredEvent.rules[0].consequent, 0.0001f);
-
-                Assert.AreEqual(
-                    "Player.FoundPitRoute",
-                    restoredEvent.outputBands[0].writeBacks[0].targetKey
-                );
+                Assert.AreEqual("Player.FoundPitRoute", restoredEvent.outputBands[0].writeBacks[0].targetKey);
             }
             finally
             {
