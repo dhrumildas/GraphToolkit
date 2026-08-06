@@ -35,11 +35,13 @@ MonoBehaviour:
         - rid: 2840202488477646976
         - rid: 2840202488477646994
         - rid: 2840202488477647004
+        - rid: 2840202515920715839
         m_GraphWireModels:
         - rid: 2840202488477646933
         - rid: 2840202488477646993
         - rid: 2840202488477647003
         - rid: 2840202488477647013
+        - rid: 2840202515920715848
         m_GraphStickyNoteModels: []
         m_GraphPlacematModels: []
         m_GraphVariableModels:
@@ -53,7 +55,7 @@ MonoBehaviour:
           serializedVersion: 2
           x: 406
           y: -196
-          width: 695
+          width: 1003
           height: 874
         m_GraphElementMetaData:
         - m_Guid:
@@ -144,6 +146,22 @@ MonoBehaviour:
             Hash: 699d7853f40edffc637053f9043730ad
           m_Category: 2
           m_Index: 3
+        - m_Guid:
+            m_Value0: 13057344195541919122
+            m_Value1: 16324756096879828698
+          m_HashGuid:
+            serializedVersion: 2
+            Hash: 92e548755d0135b5da1e6a872d2f8de2
+          m_Category: 0
+          m_Index: 5
+        - m_Guid:
+            m_Value0: 1683817975108635747
+            m_Value1: 3761388904654338652
+          m_HashGuid:
+            serializedVersion: 2
+            Hash: 638cc4f0861f5e175c7a04b447233334
+          m_Category: 2
+          m_Index: 4
         m_EntryPoint:
           rid: 2840202488477646926
         m_Graph:
@@ -641,7 +659,7 @@ MonoBehaviour:
           serializedVersion: 2
           Hash: bb4d29209988fc80bf1ab053e5dd14ec
         m_Version: 2
-        m_Position: {x: 895.7954, y: -107.25474}
+        m_Position: {x: 927.73376, y: -133.10962}
         m_Title: 
         m_Tooltip: 
         m_NodePreviewModel:
@@ -749,3 +767,128 @@ MonoBehaviour:
           m_PortDirection: 1
           m_PortOrientation: 0
           m_Title: Event
+    - rid: 2840202515920715839
+      type: {class: UserNodeModelImp, ns: Unity.GraphToolkit.Editor.Implementation, asm: UnityEditor.GraphToolkitModule}
+      data:
+        m_Guid:
+          m_Value0: 13057344195541919122
+          m_Value1: 16324756096879828698
+        m_HashGuid:
+          serializedVersion: 2
+          Hash: 92e548755d0135b5da1e6a872d2f8de2
+        m_Version: 2
+        m_Position: {x: 1203.0121, y: -120.14911}
+        m_Title: 
+        m_Tooltip: 
+        m_NodePreviewModel:
+          rid: -2
+        m_State: 0
+        m_InputConstantsById:
+          m_KeyList:
+          - __option_targetKey
+          - __option_operation
+          - __option_valueType
+          - __option_boolValue
+          - __option_intValue
+          - __option_floatValue
+          - __option_stringValue
+          m_ValueList:
+          - rid: 2840202515920715840
+          - rid: 2840202515920715841
+          - rid: 2840202515920715842
+          - rid: 2840202515920715843
+          - rid: 2840202515920715844
+          - rid: 2840202515920715845
+          - rid: 2840202515920715846
+        m_InputPortInfos:
+          expandedPortsById:
+            m_KeyList: []
+            m_ValueList: 
+        m_OutputPortInfos:
+          expandedPortsById:
+            m_KeyList: []
+            m_ValueList: 
+        m_Collapsed: 0
+        m_CurrentModeIndex: 0
+        m_ElementColor:
+          m_Color: {r: 0, g: 0, b: 0, a: 0}
+          m_HasUserColor: 0
+        m_Node:
+          rid: 2840202515920715847
+    - rid: 2840202515920715840
+      type: {class: 'Constant`1[[System.String, mscorlib]]', ns: Unity.GraphToolkit.Editor, asm: UnityEditor.GraphToolkitModule}
+      data:
+        m_Value: Player.FoundPitRoute
+    - rid: 2840202515920715841
+      type: {class: EnumConstant, ns: Unity.GraphToolkit.Editor, asm: UnityEditor.GraphToolkitModule}
+      data:
+        m_Value:
+          m_EnumType:
+            m_Identification: FuzzyGraph.Runtime.WriteBackOperation, FuzzyGraph.Runtime,
+              Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+          m_Value: 0
+        m_EnumType:
+          m_Identification: FuzzyGraph.Runtime.WriteBackOperation, FuzzyGraph.Runtime,
+            Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+    - rid: 2840202515920715842
+      type: {class: EnumConstant, ns: Unity.GraphToolkit.Editor, asm: UnityEditor.GraphToolkitModule}
+      data:
+        m_Value:
+          m_EnumType:
+            m_Identification: FuzzyGraph.Runtime.FuzzyValueType, FuzzyGraph.Runtime,
+              Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+          m_Value: 0
+        m_EnumType:
+          m_Identification: FuzzyGraph.Runtime.FuzzyValueType, FuzzyGraph.Runtime,
+            Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+    - rid: 2840202515920715843
+      type: {class: 'Constant`1[[System.Boolean, mscorlib]]', ns: Unity.GraphToolkit.Editor, asm: UnityEditor.GraphToolkitModule}
+      data:
+        m_Value: 1
+    - rid: 2840202515920715844
+      type: {class: 'Constant`1[[System.Int32, mscorlib]]', ns: Unity.GraphToolkit.Editor, asm: UnityEditor.GraphToolkitModule}
+      data:
+        m_Value: 1
+    - rid: 2840202515920715845
+      type: {class: 'Constant`1[[System.Single, mscorlib]]', ns: Unity.GraphToolkit.Editor, asm: UnityEditor.GraphToolkitModule}
+      data:
+        m_Value: 1
+    - rid: 2840202515920715846
+      type: {class: 'Constant`1[[System.String, mscorlib]]', ns: Unity.GraphToolkit.Editor, asm: UnityEditor.GraphToolkitModule}
+      data:
+        m_Value: none
+    - rid: 2840202515920715847
+      type: {class: WriteBackNode, ns: FuzzyGraph2.Editor, asm: FuzzyGraph2.Editor}
+      data: 
+    - rid: 2840202515920715848
+      type: {class: WireModel, ns: Unity.GraphToolkit.Editor, asm: UnityEditor.GraphToolkitModule}
+      data:
+        m_Guid:
+          m_Value0: 1683817975108635747
+          m_Value1: 3761388904654338652
+        m_HashGuid:
+          serializedVersion: 2
+          Hash: 638cc4f0861f5e175c7a04b447233334
+        m_Version: 2
+        m_FromPortReference:
+          m_NodeModelGuid:
+            m_Value0: 9294453922236812731
+            m_Value1: 17011465669506505407
+          m_NodeModelHashGuid:
+            serializedVersion: 2
+            Hash: bb4d29209988fc80bf1ab053e5dd14ec
+          m_UniqueId: writeBacks
+          m_PortDirection: 2
+          m_PortOrientation: 0
+          m_Title: Write-Backs
+        m_ToPortReference:
+          m_NodeModelGuid:
+            m_Value0: 13057344195541919122
+            m_Value1: 16324756096879828698
+          m_NodeModelHashGuid:
+            serializedVersion: 2
+            Hash: 92e548755d0135b5da1e6a872d2f8de2
+          m_UniqueId: consequence
+          m_PortDirection: 1
+          m_PortOrientation: 0
+          m_Title: Consequence
