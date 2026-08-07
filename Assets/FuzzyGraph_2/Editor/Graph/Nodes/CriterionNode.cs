@@ -12,7 +12,9 @@ namespace FuzzyGraph2.Editor
         NumberCompare,
         And,
         Or,
-        Not
+        Not,
+        Exists,
+        DoesNotExist
     }
 
     [Serializable]

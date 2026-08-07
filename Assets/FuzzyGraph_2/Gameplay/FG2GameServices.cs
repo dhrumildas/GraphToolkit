@@ -129,7 +129,9 @@ public sealed class FG2GameServices : MonoBehaviour
 
     private void DispatchFireEvent(RuntimeConsequence consequence, Transform consequenceSource)
     {
-        bool isFuzzyGraph2Event = string.Equals(consequence.targetKey, "FuzzyEvent", StringComparison.OrdinalIgnoreCase);
+        // 1. raise another fuzzygraph2 event
+        bool isFuzzyGraph2Event = string.Equals(
+            consequence.targetKey, "FuzzyEvent", StringComparison.OrdinalIgnoreCase);
 
         if (isFuzzyGraph2Event)
         {
@@ -137,13 +139,35 @@ public sealed class FG2GameServices : MonoBehaviour
             return;
         }
 
-        bool isDialogueGraph = string.Equals(consequence.targetKey, "DialogueGraph", StringComparison.OrdinalIgnoreCase);
+        // 2. send a non-dialogue signal to the current unity scene
+        bool isGameplaySignal = string.Equals(
+            consequence.targetKey, "GameplaySignal", StringComparison.OrdinalIgnoreCase);
+
+        if (isGameplaySignal)
+        {
+            if (SignalRouter.Instance == null)
+            {
+                Debug.LogError(
+                    "[FuzzyGraph2] A GameplaySignal was requested, " +
+                    "but no SignalRouter exists in the scene.", this);
+                return;
+            }
+
+            SignalRouter.Instance.TryDispatch(consequence.payLoad);
+            return;
+        }
+
+        // 3. start an authored dialoguegraph
+        bool isDialogueGraph = string.Equals(
+            consequence.targetKey, "DialogueGraph", StringComparison.OrdinalIgnoreCase);
 
         if (isDialogueGraph)
         {
             if (DialogueGraphLibrary.Instance == null)
             {
-                Debug.LogError("[FuzzyGraph2] A DialogueGraph was requested, but no DialogueGraphLibrary exists.", this);
+                Debug.LogError(
+                    "[FuzzyGraph2] A DialogueGraph was requested, " +
+                    "but no DialogueGraphLibrary exists.", this);
                 return;
             }
 
@@ -151,7 +175,10 @@ public sealed class FG2GameServices : MonoBehaviour
             return;
         }
 
-        Debug.Log($"[FuzzyGraph2] FireEvent | Target: {consequence.targetKey} | Payload: {consequence.payLoad}", this);
+        // unknown fireevent targets are still reported rather than silently ignored
+        Debug.LogWarning(
+            $"[FuzzyGraph2] Unknown FireEvent target '{consequence.targetKey}' | " +
+            $"Payload: {consequence.payLoad}", this);
     }
 
     private void LogResolution(string eventID, SugenoNarrativeResult result)

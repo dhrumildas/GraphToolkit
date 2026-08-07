@@ -39,7 +39,9 @@ namespace FuzzyGraph2.Runtime
         NumberCompare,
         And,
         Or,
-        Not
+        Not,
+        Exists,
+        DoesNotExist
     }
 
     // compiled expression data
@@ -316,6 +318,16 @@ namespace FuzzyGraph2.Runtime
                         compiledExpression.numberComparison,
                         compiledExpression.comparisonValue,
                         compiledExpression.comparisonValue2);
+                    break;
+
+                case CompiledExpressionKind.Exists:
+                    expression = FuzzyExpression.Exists(
+                        compiledExpression.variableId);
+                    break;
+
+                case CompiledExpressionKind.DoesNotExist:
+                    expression = FuzzyExpression.DoesNotExist(
+                        compiledExpression.variableId);
                     break;
 
                 case CompiledExpressionKind.And:

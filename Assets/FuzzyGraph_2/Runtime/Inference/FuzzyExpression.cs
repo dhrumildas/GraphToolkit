@@ -22,10 +22,34 @@ namespace FuzzyGraph2.Runtime
     {
         public static IFuzzyExpression BoolEquals(string varID, bool expectedVal)
         {
-            if(string.IsNullOrWhiteSpace(varID))
-                throw new ArgumentException("Bool expression is required for varID.",nameof(varID));
+            if (string.IsNullOrWhiteSpace(varID))
+                throw new ArgumentException("Bool expression is required for varID.", nameof(varID));
 
             return new BoolEqualsExpression(varID.Trim(), expectedVal);
+        }
+
+        public static IFuzzyExpression Exists(string variableId)
+        {
+            if (string.IsNullOrWhiteSpace(variableId))
+            {
+                throw new ArgumentException(
+                    "an existence expression needs a variable id",
+                    nameof(variableId));
+            }
+
+            return new ExistsExpression(variableId.Trim(), shouldExist: true);
+        }
+
+        public static IFuzzyExpression DoesNotExist(string variableId)
+        {
+            if (string.IsNullOrWhiteSpace(variableId))
+            {
+                throw new ArgumentException(
+                    "an existence expression needs a variable id",
+                    nameof(variableId));
+            }
+
+            return new ExistsExpression(variableId.Trim(), shouldExist: false);
         }
 
         public static IFuzzyExpression IdEquals(
@@ -228,12 +252,46 @@ namespace FuzzyGraph2.Runtime
             }
         }
 
+        private sealed class ExistsExpression : IFuzzyExpression
+        {
+            private readonly string _variableId;
+            private readonly bool _shouldExist;
+
+            public ExistsExpression(string variableId, bool shouldExist)
+            {
+                _variableId = variableId;
+                _shouldExist = shouldExist;
+            }
+
+            public float Evaluate(IFuzzyValueSource source)
+            {
+                if (source == null)
+                {
+                    throw new ArgumentNullException(nameof(source));
+                }
+
+                bool exists =
+                    source.TryGetBool(_variableId, out _) ||
+                    source.TryGetFloat(_variableId, out _) ||
+                    source.TryGetString(_variableId, out _);
+
+                return exists == _shouldExist ? 1f : 0f;
+            }
+
+            public override string ToString()
+            {
+                return _shouldExist
+                    ? $"{_variableId} EXISTS"
+                    : $"{_variableId} DOES NOT EXIST";
+            }
+        }
+
         private sealed class BoolEqualsExpression : IFuzzyExpression
         {
             private readonly string _variableId;
             private readonly bool _expectedValue;
 
-            public BoolEqualsExpression(string variableId,bool expectedValue)
+            public BoolEqualsExpression(string variableId, bool expectedValue)
             {
                 _variableId = variableId;
                 _expectedValue = expectedValue;
@@ -246,7 +304,7 @@ namespace FuzzyGraph2.Runtime
                     throw new ArgumentNullException(nameof(source));
                 }
 
-                if (!source.TryGetBool(_variableId,out bool actualValue))
+                if (!source.TryGetBool(_variableId, out bool actualValue))
                 {
                     throw new KeyNotFoundException($"No Boolean value was found for '{_variableId}'.");
                 }

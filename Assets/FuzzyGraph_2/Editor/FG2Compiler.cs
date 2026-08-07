@@ -128,7 +128,7 @@ namespace FuzzyGraph2.Editor
                     {
                         compiledBand.consequences.Add(new RuntimeConsequence
                         {
-                            consequenceType = GetOptionValue(consequenceNode, ConsequenceNode.TypeOptionName, ConsequenceType.FireEvent),
+                            consequenceType = ConsequenceType.FireEvent,
                             targetKey = GetOptionValue(consequenceNode, ConsequenceNode.TargetOptionName, string.Empty)?.Trim(),
                             payLoad = GetOptionValue(consequenceNode, ConsequenceNode.PayloadOptionName, string.Empty)?.Trim()
                         });
@@ -225,6 +225,24 @@ namespace FuzzyGraph2.Editor
                             numberComparison = GetOptionValue(node, CriterionNode.ComparisonOptionName, NumberComparison.LessThanOrEqual),
                             comparisonValue = GetOptionValue(node, CriterionNode.ComparisonValueOptionName, 0f),
                             comparisonValue2 = GetOptionValue(node, CriterionNode.ComparisonValue2OptionName, 0f)
+                        });
+                        break;
+
+                    case CriterionMode.Exists:
+                        EnsureLeafCriterion(node, mode);
+                        expressionIndex = AddExpression(compiledEvent, new CompiledFuzzyExpression
+                        {
+                            kind = CompiledExpressionKind.Exists,
+                            variableId = GetRequiredText(node, CriterionNode.VariableIdOptionName, "exists criterion variable id")
+                        });
+                        break;
+
+                    case CriterionMode.DoesNotExist:
+                        EnsureLeafCriterion(node, mode);
+                        expressionIndex = AddExpression(compiledEvent, new CompiledFuzzyExpression
+                        {
+                            kind = CompiledExpressionKind.DoesNotExist,
+                            variableId = GetRequiredText(node, CriterionNode.VariableIdOptionName, "does-not-exist criterion variable id")
                         });
                         break;
 

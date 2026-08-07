@@ -12,7 +12,12 @@ namespace FuzzyGraph2.Editor
         public const string MinimumOptionName = "minimum";
         public const string FallbackOptionName = "fallback";
         public const string RunActionOptionName = "runAction";
+
+        // legacy key kept intentionally.
+        // existing graph data may still contain this option,
+        // but fuzzygraph2 now always compiles actions as fireevent.
         public const string TypeOptionName = "type";
+
         public const string TargetOptionName = "target";
         public const string PayloadOptionName = "payload";
 
@@ -23,62 +28,21 @@ namespace FuzzyGraph2.Editor
         {
             base.OnDefineOptions(context);
 
-            // id returned when this band wins
-            context
-                .AddOption<string>(OutcomeIdOptionName)
-                .WithDisplayName("Outcome ID")
-                .WithDefaultValue("Vendor.RevealsSecret")
-                .Build();
+            context.AddOption<string>(OutcomeIdOptionName).WithDisplayName("Outcome ID").WithDefaultValue("Vendor.RevealsSecret").Build();
+            context.AddOption<float>(MinimumOptionName).WithDisplayName("Minimum").WithDefaultValue(0.7f).Build();
+            context.AddOption<bool>(FallbackOptionName).WithDisplayName("Fallback").WithDefaultValue(false).Build();
 
-            // output has to reach this value
-            context
-                .AddOption<float>(MinimumOptionName)
-                .WithDisplayName("Minimum")
-                .WithDefaultValue(0.7f)
-                .Build();
-
-            // fallback skips the numeric threshold
-            context
-                .AddOption<bool>(FallbackOptionName)
-                .WithDisplayName("Fallback")
-                .WithDefaultValue(false)
-                .Build();
-
-            // state-only outcomes can skip the action
-            context
-                .AddOption<bool>(RunActionOptionName)
-                .WithDisplayName("Run Action")
-                .WithDefaultValue(true)
-                .Build();
-
-            // old runtime already knows these actions
-            context
-                .AddOption<ConsequenceType>(TypeOptionName)
-                .WithDisplayName("Action Type")
-                .WithDefaultValue(ConsequenceType.FireEvent)
-                .Build();
-
-            context
-                .AddOption<string>(TargetOptionName)
-                .WithDisplayName("Target")
-                .WithDefaultValue("DialogueGraph")
-                .Build();
-
-            context
-                .AddOption<string>(PayloadOptionName)
-                .WithDisplayName("Payload")
-                .WithDefaultValue("VendorSecretRevealed")
-                .Build();
+            // all executable fg2 consequences are dispatched as fireevent.
+            context.AddOption<bool>(RunActionOptionName).WithDisplayName("Fire Event").WithDefaultValue(true).Build();
+            context.AddOption<string>(TargetOptionName).WithDisplayName("Target").WithDefaultValue("DialogueGraph").Build();
+            context.AddOption<string>(PayloadOptionName).WithDisplayName("Payload").WithDefaultValue("VendorSecretRevealed").Build();
         }
 
         protected override void OnDefinePorts(IPortDefinitionContext context)
         {
             base.OnDefinePorts(context);
 
-            // event owns this outcome
             context.AddInputPort(EventPortName).WithDisplayName("Event").Build();
-
-            // state changes plug in later
             context.AddOutputPort(WriteBacksPortName).WithDisplayName("Write-Backs").Build();
         }
     }
