@@ -225,8 +225,7 @@ public class DialogueRunner : MonoBehaviour
 
         if (dialogueText != null)
         {
-            dialogueText.SetText(
-                currentNode.DialogueText ?? string.Empty);
+            dialogueText.SetText(currentNode.DialogueText ?? string.Empty);
         }
 
         ClearChoiceButtons();
@@ -235,78 +234,60 @@ public class DialogueRunner : MonoBehaviour
             CreateChoiceButtons(currentNode.Choices);
     }
 
-    private void CreateChoiceButtons(
-    List<ChoiceData> choices)
+    private void CreateChoiceButtons(List<ChoiceData> choices)
     {
-        if (choiceButtonPrefab == null ||
-            choiceButtonContainer == null)
+        if (choiceButtonPrefab == null || choiceButtonContainer == null)
         {
-            Debug.LogError(
-                "DialogueRunner has missing choice UI references.",
-                this);
-
+            Debug.LogError("DialogueRunner has missing choice UI references.", this);
             return;
         }
 
         foreach (ChoiceData choice in choices)
         {
-            if (!IsChoiceAvailable(choice))
-                continue;
+            if (!IsChoiceAvailable(choice)) continue;
 
-            Button button = Instantiate(
-                choiceButtonPrefab,
-                choiceButtonContainer);
-
-            TMP_Text buttonText =
-                button.GetComponentInChildren<TMP_Text>();
+            Button button = Instantiate(choiceButtonPrefab, choiceButtonContainer);
+            TMP_Text buttonText = button.GetComponentInChildren<TMP_Text>();
 
             if (buttonText != null)
             {
-                buttonText.SetText(
-                    choice.ChoiceText ?? string.Empty);
+                buttonText.SetText(choice.ChoiceText ?? string.Empty);
             }
 
-            string destinationNodeID =
-                choice.DestinationNodeID;
-
-            string fuzzyEventID =
-                choice.FuzzyEventID;
+            string destinationNodeID = choice.DestinationNodeID;
+            string fuzzyEventID = choice.FuzzyEventID;
 
             button.onClick.AddListener(() =>
             {
-                if (!string.IsNullOrWhiteSpace(
-                        fuzzyEventID))
+                // if this dialogue choice has a semantic fuzzygraph2 event attached, resolve it first
+                if (!string.IsNullOrWhiteSpace(fuzzyEventID))
                 {
-                    if (FuzzyGraphGameService.Instance == null)
+                    if (FG2GameServices.Instance == null)
                     {
-                        Debug.LogError(
-                            "Dialogue choice attempted to " +
-                            "raise a FuzzyGraph event, but " +
-                            "no FuzzyGraphGameService exists.",
-                            this);
-
+                        Debug.LogError("Dialogue choice attempted to raise a FuzzyGraph2 event, but no FG2GameServices exists.", this);
                         return;
                     }
 
-                    var result =
-                        FuzzyGraphGameService.Instance
-                            .RaiseEvent(
-                                fuzzyEventID,
-                                currentConversationActor);
+                    var result = FG2GameServices.Instance.RaiseEvent(fuzzyEventID, currentConversationActor);
 
-                    if (!result.hasMatch)
+                    // a null result means the event could not successfully resolve
+                    if (result == null)
                     {
-                        Debug.LogWarning(
-                            $"Dialogue choice event " +
-                            $"'{fuzzyEventID}' found no rule.",
-                            this);
+                        Debug.LogWarning($"Dialogue choice event '{fuzzyEventID}' could not be resolved by FuzzyGraph2.", this);
+                        return;
+                    }
 
+                    // for dialogue choice events, falling back means there was no valid authored contextual response
+                    // do not advance the dialogue in that case
+                    if (result.UsedFallback)
+                    {
+                        Debug.LogWarning($"Dialogue choice event '{fuzzyEventID}' resolved to its fallback. Dialogue will not advance.", this);
                         return;
                     }
                 }
 
-                if (!string.IsNullOrWhiteSpace(
-                        destinationNodeID))
+                // only continue the authored dialogue after fuzzygraph2 successfully accepts the choice
+                if (!string.IsNullOrWhiteSpace(destinationNodeID))
                 {
                     ShowNode(destinationNodeID);
                 }
@@ -318,29 +299,48 @@ public class DialogueRunner : MonoBehaviour
         }
     }
 
-    private bool IsChoiceAvailable(
-    ChoiceData choice)
+    //private bool IsChoiceAvailable(ChoiceData choice)
+    //{
+    //    if (choice == null)
+    //        return false;
+
+    //    if (string.IsNullOrWhiteSpace(
+    //            choice.ReqBoolKey))
+    //    {
+    //        return true;
+    //    }
+
+    //    if (FuzzyGraphGameService.Instance == null)
+    //        return false;
+
+    //    bool found =
+    //        FuzzyGraphGameService.Instance.Context.TryGet(
+    //            choice.ReqBoolKey,
+    //            out FuzzyValue value);
+
+    //    return found &&
+    //           value.type == FuzzyValueType.Bool &&
+    //           value.boolVal;
+    //}
+
+    private bool IsChoiceAvailable(ChoiceData choice)
     {
         if (choice == null)
             return false;
 
-        if (string.IsNullOrWhiteSpace(
-                choice.ReqBoolKey))
-        {
+        // No required persistent Boolean:
+        // the choice is always available.
+        if (string.IsNullOrWhiteSpace(choice.ReqBoolKey))
             return true;
+
+        if (FG2GameServices.Instance == null || FG2GameServices.Instance.Context == null)
+        {
+            return false;
         }
 
-        if (FuzzyGraphGameService.Instance == null)
-            return false;
+        bool found = FG2GameServices.Instance.Context.TryGet(choice.ReqBoolKey,out FuzzyValue value);
 
-        bool found =
-            FuzzyGraphGameService.Instance.Context.TryGet(
-                choice.ReqBoolKey,
-                out FuzzyValue value);
-
-        return found &&
-               value.type == FuzzyValueType.Bool &&
-               value.boolVal;
+        return found && value.type == FuzzyValueType.Bool && value.boolVal;
     }
 
     private void BuildNodeLookup(RuntimeDialogueGraph dialogueGraph)
@@ -363,8 +363,7 @@ public class DialogueRunner : MonoBehaviour
 
         for (int i = choiceButtonContainer.childCount - 1; i >= 0; i--)
         {
-            Destroy(
-                choiceButtonContainer.GetChild(i).gameObject);
+            Destroy(choiceButtonContainer.GetChild(i).gameObject);
         }
     }
 

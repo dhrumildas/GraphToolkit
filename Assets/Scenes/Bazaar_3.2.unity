@@ -443,7 +443,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 34188429}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.000005472593, y: 0.7071028, z: -0.0000054681896, w: 0.7071108}
+  m_LocalRotation: {x: 0.0000054556745, y: 0.707103, z: -0.000005451532, w: 0.7071106}
   m_LocalPosition: {x: -20.85, y: 2.86, z: 144.5098}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -5563,6 +5563,15 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 264538fa3dd2fcd4dbe462fe694cca0b, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1247322357}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 264538fa3dd2fcd4dbe462fe694cca0b, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1247322360}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 264538fa3dd2fcd4dbe462fe694cca0b, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1247322359}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 264538fa3dd2fcd4dbe462fe694cca0b, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1247322358}
   m_SourcePrefab: {fileID: 100100000, guid: 264538fa3dd2fcd4dbe462fe694cca0b, type: 3}
 --- !u!4 &1247322351 stripped
 Transform:
@@ -5605,7 +5614,73 @@ MonoBehaviour:
   fullMembershipDistance: 0
   zeroMembershipDistance: 5
   loiterRadius: 6
-  showAlways: 1
+  showAlways: 0
+--- !u!114 &1247322358
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 945535205}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eddde0a2a76471b46965a23e76ba5cfe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EventInvoker
+  eventID: Inspect
+  consequenceSource: {fileID: 1247322351}
+  distanceTelemetry: []
+--- !u!114 &1247322359
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 945535205}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a9d35a923b7d56647a97ca2d667f4482, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::InteractableObject
+  interactionPrompt: Interact
+  interactOnce: 1
+  objectToDisable: {fileID: 0}
+  onInteract:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1247322358}
+        m_TargetAssemblyTypeName: EventInvoker, Assembly-CSharp
+        m_MethodName: Raise
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!135 &1247322360
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 945535205}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 0.015
+  m_Center: {x: 0, y: -0.000000059604645, z: 0.00036272526}
 --- !u!1 &1257385486
 GameObject:
   m_ObjectHideFlags: 0
@@ -6412,6 +6487,9 @@ GameObject:
   - component: {fileID: 1474435341}
   - component: {fileID: 1474435340}
   - component: {fileID: 1474435339}
+  - component: {fileID: 1474435342}
+  - component: {fileID: 1474435344}
+  - component: {fileID: 1474435343}
   m_Layer: 0
   m_Name: Guard
   m_TagString: Untagged
@@ -6519,6 +6597,65 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1474435337}
   m_Mesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1474435342
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1474435337}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b1e551f439e2c449bce7859ed090066, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ConversationFacing
+  rotationSpeed: 8
+  target: {fileID: 0}
+--- !u!114 &1474435343
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1474435337}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eddde0a2a76471b46965a23e76ba5cfe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EventInvoker
+  eventID: BazaarTalkToGuard
+  consequenceSource: {fileID: 1474435338}
+  distanceTelemetry: []
+--- !u!114 &1474435344
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1474435337}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a9d35a923b7d56647a97ca2d667f4482, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::InteractableObject
+  interactionPrompt: Have a chat
+  interactOnce: 0
+  objectToDisable: {fileID: 0}
+  onInteract:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1474435343}
+        m_TargetAssemblyTypeName: EventInvoker, Assembly-CSharp
+        m_MethodName: Raise
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1492222186
 GameObject:
   m_ObjectHideFlags: 0
@@ -6532,6 +6669,7 @@ GameObject:
   - component: {fileID: 1492222189}
   - component: {fileID: 1492222192}
   - component: {fileID: 1492222193}
+  - component: {fileID: 1492222194}
   m_Layer: 0
   m_Name: Flower
   m_TagString: Untagged
@@ -6658,6 +6796,36 @@ MonoBehaviour:
   eventID: PickFlowers
   consequenceSource: {fileID: 1492222187}
   distanceTelemetry: []
+--- !u!114 &1492222194
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1492222186}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a9d35a923b7d56647a97ca2d667f4482, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::InteractableObject
+  interactionPrompt: Interact
+  interactOnce: 1
+  objectToDisable: {fileID: 0}
+  onInteract:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1492222193}
+        m_TargetAssemblyTypeName: EventInvoker, Assembly-CSharp
+        m_MethodName: Raise
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1516837993
 GameObject:
   m_ObjectHideFlags: 0
@@ -6788,7 +6956,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1520740022}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.000005472593, y: 0.7071028, z: -0.0000054681896, w: 0.7071108}
+  m_LocalRotation: {x: 0.0000054556745, y: 0.707103, z: -0.000005451532, w: 0.7071106}
   m_LocalPosition: {x: -19.029, y: 2.7480009, z: 144.60002}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -8121,8 +8289,6 @@ MonoBehaviour:
   - dialogueID: GuardRepeat
     dialogueGraph: {fileID: 3965311268370046156, guid: 1060e26dde7f6ee40abb27d9d323fbb1, type: 3}
   - dialogueID: GuardNoticesFlowers
-    dialogueGraph: {fileID: 3965311268370046156, guid: 98ca7f44765d41947973d0153e9ff7df, type: 3}
-  - dialogueID: GuardRequestsFlowers
     dialogueGraph: {fileID: 3965311268370046156, guid: 98ca7f44765d41947973d0153e9ff7df, type: 3}
 --- !u!4 &1885546863
 Transform:

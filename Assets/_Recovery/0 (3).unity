@@ -8122,8 +8122,6 @@ MonoBehaviour:
     dialogueGraph: {fileID: 3965311268370046156, guid: 1060e26dde7f6ee40abb27d9d323fbb1, type: 3}
   - dialogueID: GuardNoticesFlowers
     dialogueGraph: {fileID: 3965311268370046156, guid: 98ca7f44765d41947973d0153e9ff7df, type: 3}
-  - dialogueID: GuardRequestsFlowers
-    dialogueGraph: {fileID: 3965311268370046156, guid: 98ca7f44765d41947973d0153e9ff7df, type: 3}
 --- !u!4 &1885546863
 Transform:
   m_ObjectHideFlags: 0

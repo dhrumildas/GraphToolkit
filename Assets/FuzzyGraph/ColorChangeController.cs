@@ -96,7 +96,7 @@ public class ColorChangeController : MonoBehaviour
     {
         if (proximitySensor == null ||
             blushRenderer == null ||
-            FuzzyGraphGameService.Instance == null)
+            FG2GameServices.Instance == null)
         {
             return 0f;
         }
@@ -166,7 +166,7 @@ public class ColorChangeController : MonoBehaviour
     private bool ReadContextBool(string key)
     {
         PersistentContext context =
-            FuzzyGraphGameService.Instance.Context;
+            FG2GameServices.Instance.Context;
 
         bool found = context.TryGet(
             key,
