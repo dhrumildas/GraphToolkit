@@ -26,11 +26,12 @@ namespace FuzzyGraph2.Editor
         {
             base.OnDefinePorts(context);
 
+            // outcomes hang off the event here
+            context.AddOutputPort(ConsequencesPortName).WithDisplayName("Consequences").Build();
+
             // rules plug in here
             context.AddOutputPort(RulesPortName).WithDisplayName("Rules").Build();
 
-            // outcomes hang off the event here
-            context.AddOutputPort(ConsequencesPortName).WithDisplayName("Consequences").Build();
         }
     }
 }
