@@ -4,31 +4,46 @@ using UnityEngine;
 
 public class ColorChangeController : MonoBehaviour
 {
+    [Header("Context Conditions")]
+    [SerializeField]
+    private string requiredTrueKey;
+
+    [SerializeField]
+    private string[] suppressWhenTrueKeys;
+
+    [SerializeField]
+    private bool useProximity = true;
+    private float manualStrength;
+
     [Header("References")]
     [SerializeField] private ProximitySensor proximitySensor;
-    [SerializeField] private Renderer blushRenderer;
+    [SerializeField] private Renderer targetRenderer;
     [SerializeField]
     private Transform playerFacingTransform;
 
-    [Header("Blush Appearance")]
+    [Header("Color Change Appearance")]
     [SerializeField]
-    private Color blushColor =
+    private Color reactionColor =
         new Color(1f, 0.12f, 0.22f, 1f);
 
     [SerializeField, Range(0f, 1f)]
-    private float maximumBlush = 1f;
+    private float maximumStrength = 1f;
 
     [SerializeField, Min(0.01f)]
     private float fadeSpeed = 4f;
 
-    [Header("Player Facing Guard")]
-    [Tooltip("Blush begins fading when the Player faces roughly toward the Guard.")]
+    [Header("Player Facing Target")]
+    [Tooltip("Color change begins fading when the Player faces roughly toward the Target.")]
     [SerializeField, Range(-1f, 1f)]
     private float facingFadeStart = 0.70f;
 
-    [Tooltip("Blush is completely hidden when the Player faces this directly toward the Guard.")]
+    [Header("Facing Behaviour")]
+    [SerializeField]
+    private bool useFacingSuppression = true;
+
+    [Tooltip("Color change is completely hidden when the Player faces this directly toward the Target.")]
     [SerializeField, Range(-1f, 1f)]
-    private float fullyFacingGuard = 0.92f;
+    private float fullyFacingTarget = 0.92f;
 
     //[Tooltip("Blush is completely hidden at this camera alignment.")]
     //[SerializeField, Range(-1f, 1f)]
@@ -36,7 +51,7 @@ public class ColorChangeController : MonoBehaviour
 
     [Header("Runtime")]
     [SerializeField, Range(0f, 1f)]
-    private float displayedBlush;
+    private float displayedStrength;
 
     private static readonly int BaseColorID =
         Shader.PropertyToID("_BaseColor");
@@ -50,7 +65,7 @@ public class ColorChangeController : MonoBehaviour
 
     private void Reset()
     {
-        blushRenderer = GetComponent<Renderer>();
+        targetRenderer = GetComponent<Renderer>();
     }
 
     private void Awake()
@@ -60,7 +75,7 @@ public class ColorChangeController : MonoBehaviour
         ResolvePlayerFacingTransform();
 
         CacheNormalColour();
-        ApplyBlushColour(0f);
+        ApplyReactionColor(0f);
     }
 
     private void ResolvePlayerFacingTransform()
@@ -82,66 +97,90 @@ public class ColorChangeController : MonoBehaviour
     {
         ResolvePlayerFacingTransform();
 
-        float targetBlush = CalculateTargetBlush();
+        float targetStrength = CalculateTargetStrength();
 
-        displayedBlush = Mathf.MoveTowards(
-            displayedBlush,
-            targetBlush,
+        displayedStrength = Mathf.MoveTowards(
+            displayedStrength,
+            targetStrength,
             fadeSpeed * Time.deltaTime);
 
-        ApplyBlushColour(displayedBlush);
+        ApplyReactionColor(displayedStrength);
     }
 
-    private float CalculateTargetBlush()
+    private float CalculateTargetStrength()
     {
-        if (proximitySensor == null ||
-            blushRenderer == null ||
-            FG2GameServices.Instance == null)
-        {
+        if (targetRenderer == null)
             return 0f;
+
+        // Optional required context condition.
+        if (!string.IsNullOrWhiteSpace(requiredTrueKey))
+        {
+            if (FG2GameServices.Instance == null ||
+                !ReadContextBool(requiredTrueKey))
+            {
+                return 0f;
+            }
         }
 
-        // The guard should not react before meeting the player.
-        if (!ReadContextBool("Guard.HasMetPlayer"))
-            return 0f;
-
-        // Picking flowers or reaching a final guard outcome
-        // immediately removes the blush.
-        if (ReadContextBool("Player.HasFlowers") ||
-            ReadContextBool("Guard.Charmed") ||
-            ReadContextBool("Player.Arrested"))
+        // Optional suppression context conditions.
+        if (suppressWhenTrueKeys != null)
         {
-            return 0f;
+            foreach (string key in suppressWhenTrueKeys)
+            {
+                if (string.IsNullOrWhiteSpace(key))
+                    continue;
+
+                if (FG2GameServices.Instance == null)
+                    return 0f;
+
+                if (ReadContextBool(key))
+                    return 0f;
+            }
         }
 
-        float proximityStrength =
-            proximitySensor.CurrentProximity;
+        float sourceStrength;
 
-        float facingSuppression = CalculateFacingSuppression();
+        if (useProximity)
+        {
+            if (proximitySensor == null)
+                return 0f;
 
-        return Mathf.Clamp01(proximityStrength * (1f - facingSuppression) * maximumBlush);
+            sourceStrength = proximitySensor.CurrentProximity;
+        }
+        else
+        {
+            sourceStrength = manualStrength;
+        }
+
+        float facingSuppression =
+            useFacingSuppression
+                ? CalculateFacingSuppression()
+                : 0f;
+
+        return Mathf.Clamp01(
+            sourceStrength *
+            (1f - facingSuppression) *
+            maximumStrength);
     }
 
     private float CalculateFacingSuppression()
     {
         if (playerFacingTransform == null ||
-            blushRenderer == null)
+            targetRenderer == null)
         {
             return 0f;
         }
 
-        Vector3 directionToGuard =
-            blushRenderer.bounds.center -
-            playerFacingTransform.position;
+        Vector3 directionToTarget = targetRenderer.bounds.center - playerFacingTransform.position;
 
         // Ignore vertical height difference.
         // We only care about the Player's horizontal rotation.
-        directionToGuard.y = 0f;
+        directionToTarget.y = 0f;
 
-        if (directionToGuard.sqrMagnitude < 0.001f)
+        if (directionToTarget.sqrMagnitude < 0.001f)
             return 1f;
 
-        directionToGuard.Normalize();
+        directionToTarget.Normalize();
 
         Vector3 playerForward =
             playerFacingTransform.forward;
@@ -155,11 +194,11 @@ public class ColorChangeController : MonoBehaviour
 
         float alignment = Vector3.Dot(
             playerForward,
-            directionToGuard);
+            directionToTarget);
 
         return Mathf.InverseLerp(
             facingFadeStart,
-            fullyFacingGuard,
+            fullyFacingTarget,
             alignment);
     }
 
@@ -179,14 +218,14 @@ public class ColorChangeController : MonoBehaviour
 
     private void CacheNormalColour()
     {
-        if (blushRenderer == null ||
-            blushRenderer.sharedMaterial == null)
+        if (targetRenderer == null ||
+            targetRenderer.sharedMaterial == null)
         {
             return;
         }
 
         Material material =
-            blushRenderer.sharedMaterial;
+            targetRenderer.sharedMaterial;
 
         if (material.HasProperty(BaseColorID))
         {
@@ -208,9 +247,9 @@ public class ColorChangeController : MonoBehaviour
         }
     }
 
-    private void ApplyBlushColour(float strength)
+    private void ApplyReactionColor(float strength)
     {
-        if (blushRenderer == null ||
+        if (targetRenderer == null ||
             propertyBlock == null)
         {
             return;
@@ -218,34 +257,43 @@ public class ColorChangeController : MonoBehaviour
 
         Color finalColor = Color.Lerp(
             normalColor,
-            blushColor,
+            reactionColor,
             Mathf.Clamp01(strength));
 
-        blushRenderer.GetPropertyBlock(
+        targetRenderer.GetPropertyBlock(
             propertyBlock);
 
         propertyBlock.SetColor(
             activeColorProperty,
             finalColor);
 
-        blushRenderer.SetPropertyBlock(
+        targetRenderer.SetPropertyBlock(
             propertyBlock);
     }
 
     private void OnDisable()
     {
-        displayedBlush = 0f;
-        ApplyBlushColour(0f);
+        displayedStrength = 0f;
+        ApplyReactionColor(0f);
     }
 
     private void OnValidate()
     {
-        if (fullyFacingGuard <= facingFadeStart)
+        if (fullyFacingTarget <= facingFadeStart)
         {
-            fullyFacingGuard =
+            fullyFacingTarget =
                 Mathf.Min(
                     1f,
                     facingFadeStart + 0.01f);
         }
+    }
+
+    public void ShowReaction()
+    {
+        manualStrength = 1f;
+    }
+    public void HideReaction()
+    {
+        manualStrength = 0f;
     }
 }

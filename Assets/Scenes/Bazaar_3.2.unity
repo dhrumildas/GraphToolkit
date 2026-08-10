@@ -500,6 +500,8 @@ GameObject:
   - component: {fileID: 45293461}
   - component: {fileID: 45293460}
   - component: {fileID: 45293459}
+  - component: {fileID: 45293462}
+  - component: {fileID: 45293463}
   m_Layer: 0
   m_Name: Main_Vendor
   m_TagString: Player
@@ -582,8 +584,48 @@ Transform:
   - {fileID: 1140600541}
   - {fileID: 1606095686}
   - {fileID: 1872939773}
+  - {fileID: 1782288193}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+--- !u!114 &45293462
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 45293458}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bb160068a021fc44e9b4d16d1a643a89, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ColorChangeController
+  requiredTrueKey: Vendor.ReactionUnlocked
+  suppressWhenTrueKeys: []
+  useProximity: 1
+  proximitySensor: {fileID: 1186522426}
+  targetRenderer: {fileID: 45293459}
+  playerFacingTransform: {fileID: 580561020}
+  reactionColor: {r: 0.6792453, g: 0.6792453, b: 0.6792453, a: 1}
+  maximumStrength: 1
+  fadeSpeed: 4
+  facingFadeStart: 0.3
+  useFacingSuppression: 1
+  fullyFacingTarget: 0.6
+  displayedStrength: 0
+--- !u!114 &45293463
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 45293458}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b1e551f439e2c449bce7859ed090066, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ConversationFacing
+  rotationSpeed: 8
+  target: {fileID: 0}
 --- !u!1 &56354131
 GameObject:
   m_ObjectHideFlags: 0
@@ -1266,7 +1308,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 143.5398}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 1186522427}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &269527786
@@ -5481,6 +5524,59 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: ac46ca4bf3464a741af23e4c20734e59, type: 3}
   m_PrefabInstance: {fileID: 1182714082}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1186522425
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1186522427}
+  - component: {fileID: 1186522426}
+  m_Layer: 0
+  m_Name: ProximitySense(vendor)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1186522426
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1186522425}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e226b5e3372f9a40afd6016f5ea12a2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ProximitySensor
+  player: {fileID: 792556097}
+  target: {fileID: 1247322351}
+  nearDistance: 1.5
+  farDistance: 6
+  resetWhenTargetInactive: 0
+  currentProximityKey: Player.CarpetProximity
+  peakProximityKey: Player.PeakCarpetProximity
+  currentProximity: 0
+  peakProximity: 0
+--- !u!4 &1186522427
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1186522425}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -15.32, y: 0, z: 9.300201}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 191557057}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1247322350
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5644,6 +5740,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::InteractableObject
   interactionPrompt: Interact
   interactOnce: 1
+  requiredTrueKey: Player.NoticedVendorReaction
   objectToDisable: {fileID: 0}
   onInteract:
     m_PersistentCalls:
@@ -5711,22 +5808,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SignalRouter
   bindings:
-  - signalID: Vendor.ShowNervous
-    reaction:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 1872939769}
-          m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-          m_MethodName: SetActive
-          m_Mode: 6
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 1
-          m_CallState: 2
   - signalID: Flowers.Picked
     reaction:
       m_PersistentCalls:
@@ -6490,6 +6571,7 @@ GameObject:
   - component: {fileID: 1474435342}
   - component: {fileID: 1474435344}
   - component: {fileID: 1474435343}
+  - component: {fileID: 1474435345}
   m_Layer: 0
   m_Name: Guard
   m_TagString: Untagged
@@ -6640,6 +6722,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::InteractableObject
   interactionPrompt: Have a chat
   interactOnce: 0
+  requiredTrueKey: 
   objectToDisable: {fileID: 0}
   onInteract:
     m_PersistentCalls:
@@ -6656,6 +6739,34 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &1474435345
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1474435337}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bb160068a021fc44e9b4d16d1a643a89, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ColorChangeController
+  requiredTrueKey: Guard.HasMetPlayer
+  suppressWhenTrueKeys:
+  - Player.HasFlowers
+  - Guard.Charmed
+  - Player.Arrested
+  useProximity: 1
+  proximitySensor: {fileID: 2108888681}
+  targetRenderer: {fileID: 1474435340}
+  playerFacingTransform: {fileID: 792556097}
+  reactionColor: {r: 1, g: 0.12, b: 0.22, a: 1}
+  maximumStrength: 1
+  fadeSpeed: 4
+  facingFadeStart: 0.7
+  useFacingSuppression: 1
+  fullyFacingTarget: 0.92
+  displayedStrength: 0
 --- !u!1 &1492222186
 GameObject:
   m_ObjectHideFlags: 0
@@ -6810,7 +6921,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::InteractableObject
   interactionPrompt: Interact
   interactOnce: 1
-  objectToDisable: {fileID: 0}
+  requiredTrueKey: 
+  objectToDisable: {fileID: 1492222186}
   onInteract:
     m_PersistentCalls:
       m_Calls:
@@ -7760,6 +7872,107 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1718487910}
   m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1782288192
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1782288193}
+  - component: {fileID: 1782288196}
+  - component: {fileID: 1782288195}
+  - component: {fileID: 1782288194}
+  m_Layer: 0
+  m_Name: InteractionZone
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1782288193
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1782288192}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -1, z: 0}
+  m_LocalScale: {x: 4.77, y: 4.77, z: 4.77}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 45293461}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1782288194
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1782288192}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eddde0a2a76471b46965a23e76ba5cfe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EventInvoker
+  eventID: BazaarTalkToVendor
+  consequenceSource: {fileID: 45293461}
+  distanceTelemetry: []
+--- !u!114 &1782288195
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1782288192}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a9d35a923b7d56647a97ca2d667f4482, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::InteractableObject
+  interactionPrompt: Chat
+  interactOnce: 0
+  requiredTrueKey: 
+  objectToDisable: {fileID: 0}
+  onInteract:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1782288194}
+        m_TargetAssemblyTypeName: EventInvoker, Assembly-CSharp
+        m_MethodName: Raise
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!135 &1782288196
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1782288192}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 0.5
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1798494092
 GameObject:
   m_ObjectHideFlags: 0
@@ -8290,6 +8503,10 @@ MonoBehaviour:
     dialogueGraph: {fileID: 3965311268370046156, guid: 1060e26dde7f6ee40abb27d9d323fbb1, type: 3}
   - dialogueID: GuardNoticesFlowers
     dialogueGraph: {fileID: 3965311268370046156, guid: 98ca7f44765d41947973d0153e9ff7df, type: 3}
+  - dialogueID: VendorFirstMeeting
+    dialogueGraph: {fileID: 3965311268370046156, guid: f7f4c1944a131944f82d4ea696735253, type: 3}
+  - dialogueID: VendorReturning
+    dialogueGraph: {fileID: 3965311268370046156, guid: b67f97d9a25412d49860e0ffc697f70d, type: 3}
 --- !u!4 &1885546863
 Transform:
   m_ObjectHideFlags: 0
@@ -8885,7 +9102,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &2108888681
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8899,9 +9116,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ProximitySensor
   player: {fileID: 792556097}
-  flowerTarget: {fileID: 1492222187}
+  target: {fileID: 1492222187}
   nearDistance: 1
   farDistance: 7
+  resetWhenTargetInactive: 0
   currentProximityKey: Player.FlowerProximity
   peakProximityKey: Player.PeakFlowerProximity
   currentProximity: 0

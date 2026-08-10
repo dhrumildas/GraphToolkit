@@ -21,14 +21,14 @@ namespace FuzzyGraph2.Editor
             context
                 .AddOption<string>(RuleIdOptionName)
                 .WithDisplayName("Rule ID")
-                .WithDefaultValue("vendor_reveal_secret")
+                .WithDefaultValue("rule_id")
                 .Build();
 
             // this is the rule's sugeno vote
             context
                 .AddOption<float>(ConsequentOptionName)
                 .WithDisplayName("Consequent")
-                .WithDefaultValue(0.9f)
+                .WithDefaultValue(0.0f)
                 .Build();
         }
 
