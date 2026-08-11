@@ -647,7 +647,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb160068a021fc44e9b4d16d1a643a89, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ColorChangeController
-  requiredTrueKey: Vendor.ReactionUnlocked
+  useContextDrivenReaction: 1
+  reactionDriveKey: Vendor.Nervousness
+  driveStartsAt: 3
+  driveFullyActiveAt: 6
+  reactionSuppressKey: Vendor.Suspicion
+  suppressionStartsAt: 5
+  suppressionFullyActiveAt: 8
+  requiredTrueKey: 
   suppressWhenTrueKeys: []
   useProximity: 1
   proximitySensor: {fileID: 1186522426}
@@ -656,8 +663,8 @@ MonoBehaviour:
   reactionColor: {r: 0.6792453, g: 0.6792453, b: 0.6792453, a: 1}
   maximumStrength: 1
   fadeSpeed: 4
-  facingFadeStart: 0.3
   useFacingSuppression: 1
+  facingFadeStart: 0.3
   fullyFacingTarget: 0.6
   displayedStrength: 0
 --- !u!114 &45293463
@@ -2074,6 +2081,57 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: b15ee878c1e81804da1580f1ebd04946, type: 3}
   m_PrefabInstance: {fileID: 518234244}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &565138960
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 565138961}
+  - component: {fileID: 565138962}
+  m_Layer: 0
+  m_Name: PitReveal
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &565138961
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 565138960}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1544278307}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &565138962
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 565138960}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b38310d2aec656144b04442b0433449d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CarpetPit
+  carpet: {fileID: 945535205}
+  hiddenPitEntrance: {fileID: 753125771}
+  vendor: {fileID: 45293461}
+  confrontationDialogueID: VendorPitConfrontation
+  responseTime: 5
+  player: {fileID: 792556097}
+  pitLandingPoint: {fileID: 0}
 --- !u!1 &571253531
 GameObject:
   m_ObjectHideFlags: 0
@@ -3011,7 +3069,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &753125772
 Transform:
   m_ObjectHideFlags: 0
@@ -3147,6 +3205,7 @@ GameObject:
   - component: {fileID: 792556098}
   - component: {fileID: 792556099}
   - component: {fileID: 792556100}
+  - component: {fileID: 792556101}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -3268,7 +3327,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TPP_Controller
   cameraTarget: {fileID: 580561020}
-  moveSpeed: 5
+  moveSpeed: 10
   rotationSpeed: 12
   gravity: -9.81
   jumpHeight: 1.5
@@ -3287,6 +3346,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 06a4b847a5b72d5449feda6900ec36e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerInteractor
+--- !u!114 &792556101
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 792556093}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a0dc51f5b595dda40819d8f5494bbf54, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Arrest
+  controlsToDisable:
+  - {fileID: 792556099}
+  - {fileID: 792556100}
 --- !u!1 &873338197
 GameObject:
   m_ObjectHideFlags: 0
@@ -5464,6 +5538,53 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!1 &1116164429
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1116164430}
+  - component: {fileID: 1116164431}
+  m_Layer: 0
+  m_Name: VendorReaction
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1116164430
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1116164429}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1247322351}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1116164431
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1116164429}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eddde0a2a76471b46965a23e76ba5cfe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EventInvoker
+  eventID: NoticeVendorReaction
+  consequenceSource: {fileID: 1247322351}
+  distanceTelemetry: []
 --- !u!1001 &1140600540
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5747,7 +5868,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: 264538fa3dd2fcd4dbe462fe694cca0b, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1116164430}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 264538fa3dd2fcd4dbe462fe694cca0b, type: 3}
       insertIndex: -1
@@ -5835,12 +5959,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InteractableObject
   interactionPrompt: Interact
-  interactOnce: 1
-  requiredTrueKey: Player.NoticedVendorReaction
+  interactOnce: 0
+  requiredTrueKey: 
   objectToDisable: {fileID: 0}
   onInteract:
     m_PersistentCalls:
       m_Calls:
+      - m_Target: {fileID: 1116164431}
+        m_TargetAssemblyTypeName: EventInvoker, Assembly-CSharp
+        m_MethodName: Raise
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
       - m_Target: {fileID: 1247322358}
         m_TargetAssemblyTypeName: EventInvoker, Assembly-CSharp
         m_MethodName: Raise
@@ -5928,6 +6064,70 @@ MonoBehaviour:
           m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
           m_MethodName: SetActive
           m_Mode: 6
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - signalID: Pit.Revealed
+    reaction:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 565138962}
+          m_TargetAssemblyTypeName: CarpetPit, Assembly-CSharp
+          m_MethodName: BeginConfrontation
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - signalID: Pit.JumpChosen
+    reaction:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 565138962}
+          m_TargetAssemblyTypeName: CarpetPit, Assembly-CSharp
+          m_MethodName: ChooseJump
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - signalID: Pit.ExcuseChosen
+    reaction:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 565138962}
+          m_TargetAssemblyTypeName: CarpetPit, Assembly-CSharp
+          m_MethodName: ChooseExcuse
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - signalID: Player.Arrested
+    reaction:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 792556101}
+          m_TargetAssemblyTypeName: Arrest, Assembly-CSharp
+          m_MethodName: ArrestPlayer
+          m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
             m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -6684,6 +6884,7 @@ GameObject:
   - component: {fileID: 1474435344}
   - component: {fileID: 1474435343}
   - component: {fileID: 1474435345}
+  - component: {fileID: 1474435346}
   m_Layer: 0
   m_Name: Guard
   m_TagString: Untagged
@@ -6863,6 +7064,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb160068a021fc44e9b4d16d1a643a89, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ColorChangeController
+  useContextDrivenReaction: 0
+  reactionDriveKey: 
+  driveStartsAt: 3
+  driveFullyActiveAt: 6
+  reactionSuppressKey: 
+  suppressionStartsAt: 5
+  suppressionFullyActiveAt: 8
   requiredTrueKey: Guard.HasMetPlayer
   suppressWhenTrueKeys:
   - Player.HasFlowers
@@ -6875,10 +7083,26 @@ MonoBehaviour:
   reactionColor: {r: 1, g: 0.12, b: 0.22, a: 1}
   maximumStrength: 1
   fadeSpeed: 4
-  facingFadeStart: 0.7
   useFacingSuppression: 1
+  facingFadeStart: 0.7
   fullyFacingTarget: 0.92
   displayedStrength: 0
+--- !u!114 &1474435346
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1474435337}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2e511b4217e24c14e822eb4f4dc5875b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Pursuit
+  player: {fileID: 792556097}
+  moveSpeed: 12
+  rotationSpeed: 8
+  arrestDistance: 1.5
 --- !u!1 &1492222186
 GameObject:
   m_ObjectHideFlags: 0
@@ -7296,6 +7520,7 @@ Transform:
   - {fileID: 1247322351}
   - {fileID: 2112182714}
   - {fileID: 269527787}
+  - {fileID: 565138961}
   m_Father: {fileID: 1516837994}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1596025550
@@ -8647,6 +8872,14 @@ MonoBehaviour:
     dialogueGraph: {fileID: 3965311268370046156, guid: f7f4c1944a131944f82d4ea696735253, type: 3}
   - dialogueID: VendorReturning
     dialogueGraph: {fileID: 3965311268370046156, guid: b67f97d9a25412d49860e0ffc697f70d, type: 3}
+  - dialogueID: VendorPitConfrontation
+    dialogueGraph: {fileID: 3965311268370046156, guid: a774c15163db5c24380481f6b9649748, type: 3}
+  - dialogueID: GuardRequests
+    dialogueGraph: {fileID: 3965311268370046156, guid: b7fc27c2ebdbb4b46bf9438cca4e40e6, type: 3}
+  - dialogueID: GuardDismissesPlayer
+    dialogueGraph: {fileID: 3965311268370046156, guid: 85a931ad5b5cdc446bb7947e02116893, type: 3}
+  - dialogueID: GuardAllowedRepeat
+    dialogueGraph: {fileID: 3965311268370046156, guid: b6ba0ca1e24335a4095ba84e155dd541, type: 3}
 --- !u!4 &1885546863
 Transform:
   m_ObjectHideFlags: 0

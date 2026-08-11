@@ -48,10 +48,10 @@ MonoBehaviour:
         m_LocalSubgraphs: []
         m_LastKnownBounds:
           serializedVersion: 2
-          x: 266
-          y: 101
-          width: 702
-          height: 200
+          x: 310
+          y: 55
+          width: 658
+          height: 208
         m_GraphElementMetaData:
         - m_Guid:
             m_Value0: 7503379099856044988
@@ -147,7 +147,7 @@ MonoBehaviour:
           serializedVersion: 2
           Hash: bc830266895b2168c193461f91b9fc1d
         m_Version: 2
-        m_Position: {x: 266, y: 214}
+        m_Position: {x: 309.7, y: 55.299988}
         m_Title: 
         m_Tooltip: 
         m_NodePreviewModel:
@@ -292,7 +292,7 @@ MonoBehaviour:
           serializedVersion: 2
           Hash: 18f98d4642970f644c49afc6b25fe7c5
         m_Version: 2
-        m_Position: {x: 393, y: 119}
+        m_Position: {x: 355.05002, y: 202.94998}
         m_Title: Guard
         m_Tooltip: 
         m_NodePreviewModel:
