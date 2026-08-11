@@ -20,6 +20,10 @@ public sealed class LoiterTelemetry : MonoBehaviour
     [SerializeField] private float currentLoiterTime;
     [SerializeField] private float currentDistance;
 
+    public float CurrentLoiterTime => currentLoiterTime;
+    public float CurrentDistance => currentDistance;
+    public bool IsTracking => currentDistance <= trackingRadius;
+
     private void Update()
     {
         Refresh();

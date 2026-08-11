@@ -1309,6 +1309,7 @@ GameObject:
   - component: {fileID: 191557057}
   - component: {fileID: 191557056}
   - component: {fileID: 191557055}
+  - component: {fileID: 191557058}
   m_Layer: 0
   m_Name: FG2_AmbientPressure
   m_TagString: Untagged
@@ -1367,6 +1368,25 @@ Transform:
   - {fileID: 1186522427}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &191557058
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 191557054}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 11dda7f5531eb58439ce30fa9de951b1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LoiterDialogue
+  loiterTelemetry: {fileID: 191557056}
+  triggerTime: 5
+  raiseFuzzyEvent: 1
+  eventID: EvaluateLoitering
+  consequenceSource: {fileID: 45293461}
+  waitForDialogue: 1
+  firedThisVisit: 0
 --- !u!1 &269527786
 GameObject:
   m_ObjectHideFlags: 0
@@ -8880,6 +8900,14 @@ MonoBehaviour:
     dialogueGraph: {fileID: 3965311268370046156, guid: 85a931ad5b5cdc446bb7947e02116893, type: 3}
   - dialogueID: GuardAllowedRepeat
     dialogueGraph: {fileID: 3965311268370046156, guid: b6ba0ca1e24335a4095ba84e155dd541, type: 3}
+  - dialogueID: VendorCarpetCalm
+    dialogueGraph: {fileID: 3965311268370046156, guid: 3c82acfdca2721f48b9a8898768f7933, type: 3}
+  - dialogueID: VendorCarpetUneasy
+    dialogueGraph: {fileID: 3965311268370046156, guid: 527077acce24a6c40969910fb21dcaf9, type: 3}
+  - dialogueID: VendorCarpetWatched
+    dialogueGraph: {fileID: 3965311268370046156, guid: f4a192ff16670b44797c07fb2728dac1, type: 3}
+  - dialogueID: VendorCarpetIntervention
+    dialogueGraph: {fileID: 3965311268370046156, guid: 1f30ca724b62ce8428506d551fd9986f, type: 3}
 --- !u!4 &1885546863
 Transform:
   m_ObjectHideFlags: 0
