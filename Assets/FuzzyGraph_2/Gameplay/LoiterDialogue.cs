@@ -39,7 +39,7 @@ public sealed class LoiterDialogue : MonoBehaviour
 
         if (loiterTelemetry.CurrentLoiterTime < triggerTime) return;
 
-        if (waitForDialogue && DialogueRunner.IsDialogueOpen) return;
+        if (waitForDialogue && DialogueRunner.BlocksWorldInteraction) return;
 
         firedThisVisit = true;
 

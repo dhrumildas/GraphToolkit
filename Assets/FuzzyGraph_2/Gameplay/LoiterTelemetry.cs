@@ -34,9 +34,10 @@ public sealed class LoiterTelemetry : MonoBehaviour
         if (observer == null || target == null)
             return;
 
-        currentDistance = Vector3.Distance(
-            observer.position,
-            target.position);
+        currentDistance = Vector3.Distance(observer.position,target.position);
+
+        if (DialogueRunner.BlocksWorldInteraction)
+            currentLoiterTime = 0f;
 
         if (currentDistance <= trackingRadius)
         {

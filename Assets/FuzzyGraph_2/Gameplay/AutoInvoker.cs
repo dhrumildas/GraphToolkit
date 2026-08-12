@@ -19,6 +19,8 @@ public sealed class AutoInvoker : MonoBehaviour
     {
         if (!runAutomatically) return;
 
+        if (DialogueRunner.BlocksWorldInteraction) return;
+
         if (FG2GameServices.Instance == null) return;
 
         timer += Time.deltaTime;

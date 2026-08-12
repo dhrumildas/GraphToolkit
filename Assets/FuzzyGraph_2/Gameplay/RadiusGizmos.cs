@@ -19,6 +19,14 @@ public sealed class RadiusGizmos : MonoBehaviour
     [Header("Display")]
     [SerializeField] private bool showAlways = true;
 
+    [Header("Just for Threaten")]
+    [SerializeField] private ColorChangeController vendorColor;
+    [SerializeField] private DistanceTelemetry distanceTelemetry;
+    [SerializeField] private LoiterTelemetry loiterTelemetry;
+    [SerializeField] private LoiterDialogue loiterDialogue;
+    [SerializeField] private AutoInvoker ambientPressureInvoker;
+
+
     private void OnDrawGizmos()
     {
         if (!enabled)
@@ -64,5 +72,29 @@ public sealed class RadiusGizmos : MonoBehaviour
 #if UNITY_EDITOR
         Handles.Label(centre + Vector3.forward * radius, $"Near μ = {membership:0.00}");
 #endif
+    }
+
+    public void ShowMaximumReaction()
+    {
+        if (vendorColor != null)
+            vendorColor.ForceMaximumReaction();
+    }
+
+    public void FinishContext()
+    {
+        if (vendorColor != null)
+            vendorColor.DisableReaction();
+
+        if (loiterDialogue != null)
+            loiterDialogue.enabled = false;
+
+        if (loiterTelemetry != null)
+            loiterTelemetry.enabled = false;
+
+        if (distanceTelemetry != null)
+            distanceTelemetry.enabled = false;
+
+        if (ambientPressureInvoker != null)
+            ambientPressureInvoker.enabled = false;
     }
 }

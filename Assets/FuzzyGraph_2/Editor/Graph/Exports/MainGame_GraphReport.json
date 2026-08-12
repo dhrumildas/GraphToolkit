@@ -1,8 +1,8 @@
 ﻿{
     "graphName": "MainGame",
     "assetPath": "Assets/FuzzyGraph_2/Editor/Graph/MainGame.fuzzygraph2",
-    "exportedAt": "2026-08-11 06:39:45",
-    "compileCheck": "[fuzzygraph2] compiled 'export check' | events 25 | variables 8 | expressions 54 | rules 38 | bands 38 | fallbacks 25 | consequences 14 | write-backs 46",
+    "exportedAt": "2026-08-13 00:43:57",
+    "compileCheck": "[fuzzygraph2] compiled 'export check' | events 35 | variables 11 | expressions 79 | rules 54 | bands 52 | fallbacks 35 | consequences 26 | write-backs 55",
     "nodes": [
         {
             "id": "E01",
@@ -210,7 +210,7 @@
             "type": "ConsequenceNode",
             "data": [
                 "Outcome ID: SocialPressure.Intervention",
-                "Minimum: 0.8",
+                "Minimum: 0.72",
                 "Fallback: False",
                 "Fire Event: False"
             ]
@@ -234,9 +234,9 @@
                 "Set: Nervous",
                 "Shape: High",
                 "Minimum: 0",
-                "Maximum: 100",
-                "Point A: 10",
-                "Point B: 70"
+                "Maximum: 10",
+                "Point A: 3",
+                "Point B: 6"
             ]
         },
         {
@@ -1196,7 +1196,7 @@
             "id": "E16",
             "type": "EventNode",
             "data": [
-                "Event ID:  VendorRobberyWarning"
+                "Event ID: VendorRobberyWarning"
             ]
         },
         {
@@ -1803,7 +1803,7 @@
             "id": "O57",
             "type": "ConsequenceNode",
             "data": [
-                "Outcome ID: Vendor.RevealsSecret",
+                "Outcome ID: Guard.HasArrestedPlayer",
                 "Minimum: 0.5",
                 "Fallback: False",
                 "Fire Event: True",
@@ -2089,6 +2089,706 @@
                 "Target: DialogueGraph",
                 "Payload: GuardAllowedRepeat"
             ]
+        },
+        {
+            "id": "E26",
+            "type": "EventNode",
+            "data": [
+                "Event ID: EvaluateLoitering"
+            ]
+        },
+        {
+            "id": "R40",
+            "type": "RuleNode",
+            "data": [
+                "Rule ID: carpet_loiter_near",
+                "Consequent: 0.55"
+            ]
+        },
+        {
+            "id": "R41",
+            "type": "RuleNode",
+            "data": [
+                "Rule ID: carpet_loiter_mid",
+                "Consequent: 0.35"
+            ]
+        },
+        {
+            "id": "R42",
+            "type": "RuleNode",
+            "data": [
+                "Rule ID: carpet_loiter_far",
+                "Consequent: 0.15"
+            ]
+        },
+        {
+            "id": "R43",
+            "type": "RuleNode",
+            "data": [
+                "Rule ID: carpet_loiter_time",
+                "Consequent: 0.6"
+            ]
+        },
+        {
+            "id": "R44",
+            "type": "RuleNode",
+            "data": [
+                "Rule ID: carpet_loiter_near_and_time",
+                "Consequent: 0.9"
+            ]
+        },
+        {
+            "id": "R45",
+            "type": "RuleNode",
+            "data": [
+                "Rule ID: carpet_loiter_nervous_vendor",
+                "Consequent: 0.95"
+            ]
+        },
+        {
+            "id": "O64",
+            "type": "ConsequenceNode",
+            "data": [
+                "Outcome ID: CarpetLoiter.Calm",
+                "Minimum: 0",
+                "Fallback: False",
+                "Fire Event: True",
+                "Target: DialogueGraph",
+                "Payload: VendorCarpetCalm"
+            ]
+        },
+        {
+            "id": "O65",
+            "type": "ConsequenceNode",
+            "data": [
+                "Outcome ID: CarpetLoiter.Uneasy",
+                "Minimum: 0.3",
+                "Fallback: False",
+                "Fire Event: True",
+                "Target: DialogueGraph",
+                "Payload: VendorCarpetUneasy"
+            ]
+        },
+        {
+            "id": "O66",
+            "type": "ConsequenceNode",
+            "data": [
+                "Outcome ID: CarpetLoiter.Watched",
+                "Minimum: 0.6",
+                "Fallback: False",
+                "Fire Event: True",
+                "Target: DialogueGraph",
+                "Payload: VendorCarpetWatched"
+            ]
+        },
+        {
+            "id": "O67",
+            "type": "ConsequenceNode",
+            "data": [
+                "Outcome ID: CarpetLoiter.Intervention",
+                "Minimum: 0.72",
+                "Fallback: False",
+                "Fire Event: True",
+                "Target: DialogueGraph",
+                "Payload: VendorCarpetIntervention"
+            ]
+        },
+        {
+            "id": "O68",
+            "type": "ConsequenceNode",
+            "data": [
+                "Outcome ID: CarpetLoiter.NoContext",
+                "Minimum: 0",
+                "Fallback: True",
+                "Fire Event: False"
+            ]
+        },
+        {
+            "id": "E27",
+            "type": "EventNode",
+            "data": [
+                "Event ID: VendorBlackmail"
+            ]
+        },
+        {
+            "id": "R46",
+            "type": "RuleNode",
+            "data": [
+                "Rule ID: vendor_blackmail",
+                "Consequent: 0.9"
+            ]
+        },
+        {
+            "id": "C51",
+            "type": "CriterionNode",
+            "data": [
+                "Mode: Exists",
+                "Variable ID: Vendor.HasMetPlayer"
+            ]
+        },
+        {
+            "id": "O69",
+            "type": "ConsequenceNode",
+            "data": [
+                "Outcome ID: Vendor.ReportsBlackmail",
+                "Minimum: 0.5",
+                "Fallback: False",
+                "Fire Event: False"
+            ]
+        },
+        {
+            "id": "W47",
+            "type": "WriteBackNode",
+            "data": [
+                "Target Key: Guard.PursuePlayer",
+                "Operation: Set",
+                "Value Type: Bool",
+                "Value: True"
+            ]
+        },
+        {
+            "id": "O70",
+            "type": "ConsequenceNode",
+            "data": [
+                "Outcome ID: Vendor.BlackmailInvalid",
+                "Minimum: 0",
+                "Fallback: True",
+                "Fire Event: False"
+            ]
+        },
+        {
+            "id": "E28",
+            "type": "EventNode",
+            "data": [
+                "Event ID: VendorDeceive"
+            ]
+        },
+        {
+            "id": "C52",
+            "type": "CriterionNode",
+            "data": [
+                "Mode: Exists",
+                "Variable ID:  Vendor.HasMetPlayer"
+            ]
+        },
+        {
+            "id": "R47",
+            "type": "RuleNode",
+            "data": [
+                "Rule ID: vendor_deceive",
+                "Consequent: 0.9"
+            ]
+        },
+        {
+            "id": "O71",
+            "type": "ConsequenceNode",
+            "data": [
+                "Outcome ID: Vendor.DeceptionBegins",
+                "Minimum: 0.5",
+                "Fallback: False",
+                "Fire Event: False"
+            ]
+        },
+        {
+            "id": "O72",
+            "type": "ConsequenceNode",
+            "data": [
+                "Outcome ID: Vendor.DeceptionInvalid",
+                "Minimum: 0",
+                "Fallback: True",
+                "Fire Event: False"
+            ]
+        },
+        {
+            "id": "C53",
+            "type": "CriterionNode",
+            "data": [
+                "Mode: Exists",
+                "Variable ID: Vendor.HasMetPlayer"
+            ]
+        },
+        {
+            "id": "E29",
+            "type": "EventNode",
+            "data": [
+                "Event ID: VendorDeceiveThreat"
+            ]
+        },
+        {
+            "id": "R48",
+            "type": "RuleNode",
+            "data": [
+                "Rule ID: vendor_deceive_threat",
+                "Consequent: 0.9"
+            ]
+        },
+        {
+            "id": "O73",
+            "type": "ConsequenceNode",
+            "data": [
+                "Outcome ID: Vendor.Intimidated",
+                "Minimum: 0.5",
+                "Fallback: False",
+                "Fire Event: True",
+                "Target: GameplaySignal",
+                "Payload: Vendor.MaxReaction"
+            ]
+        },
+        {
+            "id": "W48",
+            "type": "WriteBackNode",
+            "data": [
+                "Target Key: Vendor.Nervousness",
+                "Operation: Set",
+                "Value Type: Float",
+                "Value: 10"
+            ]
+        },
+        {
+            "id": "O74",
+            "type": "ConsequenceNode",
+            "data": [
+                "Outcome ID: Vendor.IntimidationNoContext",
+                "Minimum: 0",
+                "Fallback: True",
+                "Fire Event: False"
+            ]
+        },
+        {
+            "id": "E30",
+            "type": "EventNode",
+            "data": [
+                "Event ID: VendorDeceiveReveal"
+            ]
+        },
+        {
+            "id": "O75",
+            "type": "ConsequenceNode",
+            "data": [
+                "Outcome ID: Vendor.DeceiveReveal",
+                "Minimum: 0.5",
+                "Fallback: False",
+                "Fire Event: True",
+                "Target: GameplaySignal",
+                "Payload: Pit.Revealed"
+            ]
+        },
+        {
+            "id": "C54",
+            "type": "CriterionNode",
+            "data": [
+                "Mode: BoolEquals",
+                "Variable ID: Vendor.HasMetPlayer",
+                "Expected Bool: True"
+            ]
+        },
+        {
+            "id": "R49",
+            "type": "RuleNode",
+            "data": [
+                "Rule ID: vendor_deceive_reveal",
+                "Consequent: 0.9"
+            ]
+        },
+        {
+            "id": "W49",
+            "type": "WriteBackNode",
+            "data": [
+                "Target Key: Player.FoundPitRoute",
+                "Operation: Set",
+                "Value Type: Bool",
+                "Value: True"
+            ]
+        },
+        {
+            "id": "O76",
+            "type": "ConsequenceNode",
+            "data": [
+                "Outcome ID: Vendor.DeceiveRevealFallback",
+                "Minimum: 0",
+                "Fallback: True",
+                "Fire Event: False"
+            ]
+        },
+        {
+            "id": "E31",
+            "type": "EventNode",
+            "data": [
+                "Event ID: VendorFlirt"
+            ]
+        },
+        {
+            "id": "R50",
+            "type": "RuleNode",
+            "data": [
+                "Rule ID: vendor_flirt",
+                "Consequent: 0.5"
+            ]
+        },
+        {
+            "id": "C55",
+            "type": "CriterionNode",
+            "data": [
+                "Mode: BoolEquals",
+                "Variable ID: Vendor.HasMetPlayer",
+                "Expected Bool: True"
+            ]
+        },
+        {
+            "id": "O77",
+            "type": "ConsequenceNode",
+            "data": [
+                "Outcome ID: Vendor.FlirtAccepted",
+                "Minimum: 0.5",
+                "Fallback: False",
+                "Fire Event: False"
+            ]
+        },
+        {
+            "id": "O78",
+            "type": "ConsequenceNode",
+            "data": [
+                "Outcome ID: Vendor.FlirtFallback",
+                "Minimum: 0",
+                "Fallback: True",
+                "Fire Event: False"
+            ]
+        },
+        {
+            "id": "E32",
+            "type": "EventNode",
+            "data": [
+                "Event ID: InspectTreeHollow"
+            ]
+        },
+        {
+            "id": "R51",
+            "type": "RuleNode",
+            "data": [
+                "Rule ID: tree_hollow_available",
+                "Consequent: 1"
+            ]
+        },
+        {
+            "id": "C56",
+            "type": "CriterionNode",
+            "data": [
+                "Mode: DoesNotExist",
+                "Variable ID: Player.HasTreeKey"
+            ]
+        },
+        {
+            "id": "O79",
+            "type": "ConsequenceNode",
+            "data": [
+                "Outcome ID: TreeHollow.Discovered",
+                "Minimum: 1",
+                "Fallback: False",
+                "Fire Event: True",
+                "Target: DialogueGraph",
+                "Payload: TreeHollowDiscovery"
+            ]
+        },
+        {
+            "id": "W50",
+            "type": "WriteBackNode",
+            "data": [
+                "Target Key: Player.InspectedTreeHollow",
+                "Operation: Set",
+                "Value Type: Bool",
+                "Value: True"
+            ]
+        },
+        {
+            "id": "O80",
+            "type": "ConsequenceNode",
+            "data": [
+                "Outcome ID: TreeHollow.AlreadyInspected",
+                "Minimum: 0",
+                "Fallback: True",
+                "Fire Event: False"
+            ]
+        },
+        {
+            "id": "E33",
+            "type": "EventNode",
+            "data": [
+                "Event ID: SearchTreeHollow"
+            ]
+        },
+        {
+            "id": "C57",
+            "type": "CriterionNode",
+            "data": [
+                "Mode: DoesNotExist",
+                "Variable ID: Player.HasTreeKey"
+            ]
+        },
+        {
+            "id": "R52",
+            "type": "RuleNode",
+            "data": [
+                "Rule ID: tree_hollow_search",
+                "Consequent: 1"
+            ]
+        },
+        {
+            "id": "O81",
+            "type": "ConsequenceNode",
+            "data": [
+                "Outcome ID: TreeHollow.SearchDNE",
+                "Minimum: 0",
+                "Fallback: True",
+                "Fire Event: False"
+            ]
+        },
+        {
+            "id": "W51",
+            "type": "WriteBackNode",
+            "data": [
+                "Target Key: Player.HasTreeKe",
+                "Operation: Set",
+                "Value Type: Bool",
+                "Value: True"
+            ]
+        },
+        {
+            "id": "O82",
+            "type": "ConsequenceNode",
+            "data": [
+                "Outcome ID: TreeHollow.SearchStarted",
+                "Minimum: 1",
+                "Fallback: False",
+                "Fire Event: True",
+                "Target: GameplaySignal",
+                "Payload: TreeHollow.SearchStarted"
+            ]
+        },
+        {
+            "id": "W52",
+            "type": "WriteBackNode",
+            "data": [
+                "Target Key: Guard.Suspicion",
+                "Operation: Add",
+                "Value Type: Float",
+                "Value: 10"
+            ]
+        },
+        {
+            "id": "C58",
+            "type": "CriterionNode",
+            "data": [
+                "Mode: BoolEquals",
+                "Variable ID: Player.InspectedTreeHollow",
+                "Expected Bool: True"
+            ]
+        },
+        {
+            "id": "E34",
+            "type": "EventNode",
+            "data": [
+                "Event ID: LeaveTreeHollow"
+            ]
+        },
+        {
+            "id": "R53",
+            "type": "RuleNode",
+            "data": [
+                "Rule ID: tree_hollow_walk_away",
+                "Consequent: 1"
+            ]
+        },
+        {
+            "id": "O83",
+            "type": "ConsequenceNode",
+            "data": [
+                "Outcome ID: TreeHollow.WalkAway",
+                "Minimum: 1",
+                "Fallback: False",
+                "Fire Event: True",
+                "Target: GameplaySignal",
+                "Payload: TreeHollow.WalkAway"
+            ]
+        },
+        {
+            "id": "O84",
+            "type": "ConsequenceNode",
+            "data": [
+                "Outcome ID: LeaveTreeHollow.Fallback",
+                "Minimum: 0",
+                "Fallback: True",
+                "Fire Event: True",
+                "Target: DialogueGraph",
+                "Payload: VendorSecretRevealed"
+            ]
+        },
+        {
+            "id": "E35",
+            "type": "EventNode",
+            "data": [
+                "Event ID: EnterVault"
+            ]
+        },
+        {
+            "id": "C59",
+            "type": "CriterionNode",
+            "data": [
+                "Mode: BoolEquals",
+                "Variable ID: Guard.AllowedEntry",
+                "Expected Bool: True"
+            ]
+        },
+        {
+            "id": "R54",
+            "type": "RuleNode",
+            "data": [
+                "Rule ID: enter_vault_accepted",
+                "Consequent: 1"
+            ]
+        },
+        {
+            "id": "R55",
+            "type": "RuleNode",
+            "data": [
+                "Rule ID: entry_vault_denied",
+                "Consequent: 0.5"
+            ]
+        },
+        {
+            "id": "C60",
+            "type": "CriterionNode",
+            "data": [
+                "Mode: DoesNotExist",
+                "Variable ID: Guard.AllowedEntry"
+            ]
+        },
+        {
+            "id": "O85",
+            "type": "ConsequenceNode",
+            "data": [
+                "Outcome ID: Vault.EntryAllowed",
+                "Minimum: 1",
+                "Fallback: False",
+                "Fire Event: True",
+                "Target: GameplaySignal",
+                "Payload: Vault.Enter"
+            ]
+        },
+        {
+            "id": "W53",
+            "type": "WriteBackNode",
+            "data": [
+                "Target Key: Player.EnteredVault",
+                "Operation: Set",
+                "Value Type: Bool",
+                "Value: True"
+            ]
+        },
+        {
+            "id": "W54",
+            "type": "WriteBackNode",
+            "data": [
+                "Target Key: Player.EnteredVault",
+                "Operation: Set",
+                "Value Type: Bool",
+                "Value: True"
+            ]
+        },
+        {
+            "id": "O86",
+            "type": "ConsequenceNode",
+            "data": [
+                "Outcome ID: Vault.DeniedEntry",
+                "Minimum: 0.5",
+                "Fallback: False",
+                "Fire Event: True",
+                "Target: DialogueGraph",
+                "Payload: GuardArrestsPlayer"
+            ]
+        },
+        {
+            "id": "C61",
+            "type": "CriterionNode",
+            "data": [
+                "Mode: BoolEquals",
+                "Variable ID: Guard.AllowedEntry",
+                "Expected Bool: False"
+            ]
+        },
+        {
+            "id": "C62",
+            "type": "CriterionNode",
+            "data": [
+                "Mode: DoesNotExist",
+                "Variable ID: Guard.AllowedEntry"
+            ]
+        },
+        {
+            "id": "C63",
+            "type": "CriterionNode",
+            "data": [
+                "Mode: Or"
+            ]
+        },
+        {
+            "id": "C64",
+            "type": "CriterionNode",
+            "data": [
+                "Mode: Or"
+            ]
+        },
+        {
+            "id": "O87",
+            "type": "ConsequenceNode",
+            "data": [
+                "Outcome ID: EnterVault.Fallback",
+                "Minimum: 0",
+                "Fallback: True",
+                "Fire Event: False"
+            ]
+        },
+        {
+            "id": "C65",
+            "type": "CriterionNode",
+            "data": [
+                "Mode: BoolEquals",
+                "Variable ID: Guard.AllowedEntry",
+                "Expected Bool: False"
+            ]
+        },
+        {
+            "id": "C66",
+            "type": "CriterionNode",
+            "data": [
+                "Mode: Or"
+            ]
+        },
+        {
+            "id": "W55",
+            "type": "WriteBackNode",
+            "data": [
+                "Target Key: Guard.PursuePlayer",
+                "Operation: Set",
+                "Value Type: Bool",
+                "Value: True"
+            ]
+        },
+        {
+            "id": "C67",
+            "type": "CriterionNode",
+            "data": [
+                "Mode: NumberCompare",
+                "Variable ID: Guard.TalkCount",
+                "Comparison: LessThanOrEqual",
+                "Compare A: 2"
+            ]
+        },
+        {
+            "id": "C68",
+            "type": "CriterionNode",
+            "data": [
+                "Mode: And"
+            ]
         }
     ],
     "links": [
@@ -2135,9 +2835,21 @@
             "toPort": "criteria"
         },
         {
+            "fromNode": "C01",
+            "fromPort": "rules",
+            "toNode": "R41",
+            "toPort": "criteria"
+        },
+        {
             "fromNode": "C02",
             "fromPort": "rules",
             "toNode": "R03",
+            "toPort": "criteria"
+        },
+        {
+            "fromNode": "C02",
+            "fromPort": "rules",
+            "toNode": "R42",
             "toPort": "criteria"
         },
         {
@@ -2219,6 +2931,12 @@
             "toPort": "criteria"
         },
         {
+            "fromNode": "C03",
+            "fromPort": "rules",
+            "toNode": "R40",
+            "toPort": "criteria"
+        },
+        {
             "fromNode": "C04",
             "fromPort": "rules",
             "toNode": "C05",
@@ -2237,9 +2955,21 @@
             "toPort": "criteriaA"
         },
         {
+            "fromNode": "C04",
+            "fromPort": "rules",
+            "toNode": "R43",
+            "toPort": "criteria"
+        },
+        {
             "fromNode": "C05",
             "fromPort": "rules",
             "toNode": "R05",
+            "toPort": "criteria"
+        },
+        {
+            "fromNode": "C05",
+            "fromPort": "rules",
+            "toNode": "R44",
             "toPort": "criteria"
         },
         {
@@ -2258,6 +2988,12 @@
             "fromNode": "C07",
             "fromPort": "rules",
             "toNode": "R07",
+            "toPort": "criteria"
+        },
+        {
+            "fromNode": "C07",
+            "fromPort": "rules",
+            "toNode": "R45",
             "toPort": "criteria"
         },
         {
@@ -2443,13 +3179,7 @@
         {
             "fromNode": "C14",
             "fromPort": "rules",
-            "toNode": "R12",
-            "toPort": "criteria"
-        },
-        {
-            "fromNode": "C14",
-            "fromPort": "rules",
-            "toNode": "R13",
+            "toNode": "R15",
             "toPort": "criteria"
         },
         {
@@ -2461,13 +3191,19 @@
         {
             "fromNode": "C14",
             "fromPort": "rules",
+            "toNode": "R13",
+            "toPort": "criteria"
+        },
+        {
+            "fromNode": "C14",
+            "fromPort": "rules",
             "toNode": "R14",
             "toPort": "criteria"
         },
         {
             "fromNode": "C14",
             "fromPort": "rules",
-            "toNode": "R15",
+            "toNode": "R12",
             "toPort": "criteria"
         },
         {
@@ -3101,6 +3837,12 @@
             "toPort": "criteria"
         },
         {
+            "fromNode": "O49",
+            "fromPort": "writeBacks",
+            "toNode": "W53",
+            "toPort": "consequence"
+        },
+        {
             "fromNode": "E21",
             "fromPort": "consequences",
             "toNode": "O51",
@@ -3205,8 +3947,8 @@
         {
             "fromNode": "C40",
             "fromPort": "rules",
-            "toNode": "R35",
-            "toPort": "criteria"
+            "toNode": "C64",
+            "toPort": "criteriaB"
         },
         {
             "fromNode": "O57",
@@ -3307,8 +4049,8 @@
         {
             "fromNode": "C47",
             "fromPort": "rules",
-            "toNode": "R38",
-            "toPort": "criteria"
+            "toNode": "C68",
+            "toPort": "criteriaA"
         },
         {
             "fromNode": "C48",
@@ -3326,6 +4068,402 @@
             "fromNode": "C50",
             "fromPort": "rules",
             "toNode": "R39",
+            "toPort": "criteria"
+        },
+        {
+            "fromNode": "E26",
+            "fromPort": "consequences",
+            "toNode": "O64",
+            "toPort": "event"
+        },
+        {
+            "fromNode": "E26",
+            "fromPort": "consequences",
+            "toNode": "O65",
+            "toPort": "event"
+        },
+        {
+            "fromNode": "E26",
+            "fromPort": "consequences",
+            "toNode": "O66",
+            "toPort": "event"
+        },
+        {
+            "fromNode": "E26",
+            "fromPort": "consequences",
+            "toNode": "O67",
+            "toPort": "event"
+        },
+        {
+            "fromNode": "E26",
+            "fromPort": "consequences",
+            "toNode": "O68",
+            "toPort": "event"
+        },
+        {
+            "fromNode": "E26",
+            "fromPort": "rules",
+            "toNode": "R41",
+            "toPort": "event"
+        },
+        {
+            "fromNode": "E26",
+            "fromPort": "rules",
+            "toNode": "R40",
+            "toPort": "event"
+        },
+        {
+            "fromNode": "E26",
+            "fromPort": "rules",
+            "toNode": "R44",
+            "toPort": "event"
+        },
+        {
+            "fromNode": "E26",
+            "fromPort": "rules",
+            "toNode": "R43",
+            "toPort": "event"
+        },
+        {
+            "fromNode": "E26",
+            "fromPort": "rules",
+            "toNode": "R45",
+            "toPort": "event"
+        },
+        {
+            "fromNode": "E26",
+            "fromPort": "rules",
+            "toNode": "R42",
+            "toPort": "event"
+        },
+        {
+            "fromNode": "E27",
+            "fromPort": "consequences",
+            "toNode": "O69",
+            "toPort": "event"
+        },
+        {
+            "fromNode": "E27",
+            "fromPort": "consequences",
+            "toNode": "O70",
+            "toPort": "event"
+        },
+        {
+            "fromNode": "E27",
+            "fromPort": "rules",
+            "toNode": "R46",
+            "toPort": "event"
+        },
+        {
+            "fromNode": "C51",
+            "fromPort": "rules",
+            "toNode": "R46",
+            "toPort": "criteria"
+        },
+        {
+            "fromNode": "O69",
+            "fromPort": "writeBacks",
+            "toNode": "W47",
+            "toPort": "consequence"
+        },
+        {
+            "fromNode": "E28",
+            "fromPort": "consequences",
+            "toNode": "O71",
+            "toPort": "event"
+        },
+        {
+            "fromNode": "E28",
+            "fromPort": "consequences",
+            "toNode": "O72",
+            "toPort": "event"
+        },
+        {
+            "fromNode": "E28",
+            "fromPort": "rules",
+            "toNode": "R47",
+            "toPort": "event"
+        },
+        {
+            "fromNode": "C52",
+            "fromPort": "rules",
+            "toNode": "R47",
+            "toPort": "criteria"
+        },
+        {
+            "fromNode": "C53",
+            "fromPort": "rules",
+            "toNode": "R48",
+            "toPort": "criteria"
+        },
+        {
+            "fromNode": "E29",
+            "fromPort": "consequences",
+            "toNode": "O73",
+            "toPort": "event"
+        },
+        {
+            "fromNode": "E29",
+            "fromPort": "consequences",
+            "toNode": "O74",
+            "toPort": "event"
+        },
+        {
+            "fromNode": "E29",
+            "fromPort": "rules",
+            "toNode": "R48",
+            "toPort": "event"
+        },
+        {
+            "fromNode": "O73",
+            "fromPort": "writeBacks",
+            "toNode": "W48",
+            "toPort": "consequence"
+        },
+        {
+            "fromNode": "E30",
+            "fromPort": "consequences",
+            "toNode": "O75",
+            "toPort": "event"
+        },
+        {
+            "fromNode": "E30",
+            "fromPort": "consequences",
+            "toNode": "O76",
+            "toPort": "event"
+        },
+        {
+            "fromNode": "E30",
+            "fromPort": "rules",
+            "toNode": "R49",
+            "toPort": "event"
+        },
+        {
+            "fromNode": "O75",
+            "fromPort": "writeBacks",
+            "toNode": "W49",
+            "toPort": "consequence"
+        },
+        {
+            "fromNode": "C54",
+            "fromPort": "rules",
+            "toNode": "R49",
+            "toPort": "criteria"
+        },
+        {
+            "fromNode": "E31",
+            "fromPort": "consequences",
+            "toNode": "O77",
+            "toPort": "event"
+        },
+        {
+            "fromNode": "E31",
+            "fromPort": "consequences",
+            "toNode": "O78",
+            "toPort": "event"
+        },
+        {
+            "fromNode": "E31",
+            "fromPort": "rules",
+            "toNode": "R50",
+            "toPort": "event"
+        },
+        {
+            "fromNode": "C55",
+            "fromPort": "rules",
+            "toNode": "R50",
+            "toPort": "criteria"
+        },
+        {
+            "fromNode": "E32",
+            "fromPort": "consequences",
+            "toNode": "O79",
+            "toPort": "event"
+        },
+        {
+            "fromNode": "E32",
+            "fromPort": "consequences",
+            "toNode": "O80",
+            "toPort": "event"
+        },
+        {
+            "fromNode": "E32",
+            "fromPort": "rules",
+            "toNode": "R51",
+            "toPort": "event"
+        },
+        {
+            "fromNode": "C56",
+            "fromPort": "rules",
+            "toNode": "R51",
+            "toPort": "criteria"
+        },
+        {
+            "fromNode": "O79",
+            "fromPort": "writeBacks",
+            "toNode": "W50",
+            "toPort": "consequence"
+        },
+        {
+            "fromNode": "E33",
+            "fromPort": "consequences",
+            "toNode": "O81",
+            "toPort": "event"
+        },
+        {
+            "fromNode": "E33",
+            "fromPort": "consequences",
+            "toNode": "O82",
+            "toPort": "event"
+        },
+        {
+            "fromNode": "E33",
+            "fromPort": "rules",
+            "toNode": "R52",
+            "toPort": "event"
+        },
+        {
+            "fromNode": "C57",
+            "fromPort": "rules",
+            "toNode": "R52",
+            "toPort": "criteria"
+        },
+        {
+            "fromNode": "O82",
+            "fromPort": "writeBacks",
+            "toNode": "W51",
+            "toPort": "consequence"
+        },
+        {
+            "fromNode": "O82",
+            "fromPort": "writeBacks",
+            "toNode": "W52",
+            "toPort": "consequence"
+        },
+        {
+            "fromNode": "C58",
+            "fromPort": "rules",
+            "toNode": "R53",
+            "toPort": "criteria"
+        },
+        {
+            "fromNode": "E34",
+            "fromPort": "consequences",
+            "toNode": "O83",
+            "toPort": "event"
+        },
+        {
+            "fromNode": "E34",
+            "fromPort": "consequences",
+            "toNode": "O84",
+            "toPort": "event"
+        },
+        {
+            "fromNode": "E34",
+            "fromPort": "rules",
+            "toNode": "R53",
+            "toPort": "event"
+        },
+        {
+            "fromNode": "E35",
+            "fromPort": "consequences",
+            "toNode": "O85",
+            "toPort": "event"
+        },
+        {
+            "fromNode": "E35",
+            "fromPort": "consequences",
+            "toNode": "O86",
+            "toPort": "event"
+        },
+        {
+            "fromNode": "E35",
+            "fromPort": "consequences",
+            "toNode": "O87",
+            "toPort": "event"
+        },
+        {
+            "fromNode": "E35",
+            "fromPort": "rules",
+            "toNode": "R54",
+            "toPort": "event"
+        },
+        {
+            "fromNode": "E35",
+            "fromPort": "rules",
+            "toNode": "R55",
+            "toPort": "event"
+        },
+        {
+            "fromNode": "C59",
+            "fromPort": "rules",
+            "toNode": "R54",
+            "toPort": "criteria"
+        },
+        {
+            "fromNode": "C60",
+            "fromPort": "rules",
+            "toNode": "C66",
+            "toPort": "criteriaA"
+        },
+        {
+            "fromNode": "O85",
+            "fromPort": "writeBacks",
+            "toNode": "W54",
+            "toPort": "consequence"
+        },
+        {
+            "fromNode": "O86",
+            "fromPort": "writeBacks",
+            "toNode": "W55",
+            "toPort": "consequence"
+        },
+        {
+            "fromNode": "C61",
+            "fromPort": "rules",
+            "toNode": "C63",
+            "toPort": "criteriaB"
+        },
+        {
+            "fromNode": "C62",
+            "fromPort": "rules",
+            "toNode": "C63",
+            "toPort": "criteriaA"
+        },
+        {
+            "fromNode": "C63",
+            "fromPort": "rules",
+            "toNode": "C64",
+            "toPort": "criteriaA"
+        },
+        {
+            "fromNode": "C64",
+            "fromPort": "rules",
+            "toNode": "R35",
+            "toPort": "criteria"
+        },
+        {
+            "fromNode": "C65",
+            "fromPort": "rules",
+            "toNode": "C66",
+            "toPort": "criteriaB"
+        },
+        {
+            "fromNode": "C66",
+            "fromPort": "rules",
+            "toNode": "R55",
+            "toPort": "criteria"
+        },
+        {
+            "fromNode": "C67",
+            "fromPort": "rules",
+            "toNode": "C68",
+            "toPort": "criteriaB"
+        },
+        {
+            "fromNode": "C68",
+            "fromPort": "rules",
+            "toNode": "R38",
             "toPort": "criteria"
         }
     ]

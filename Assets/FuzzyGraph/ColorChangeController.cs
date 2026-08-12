@@ -297,4 +297,18 @@ public class ColorChangeController : MonoBehaviour
     {
         manualStrength = 0f;
     }
+
+    public void ForceMaximumReaction()
+    {
+        useProximity = false;
+        useFacingSuppression = false;
+        manualStrength = 1f;
+    }
+
+    public void DisableReaction()
+    {
+        useProximity = false;
+        useFacingSuppression = false;
+        manualStrength = 0f;
+    }
 }
