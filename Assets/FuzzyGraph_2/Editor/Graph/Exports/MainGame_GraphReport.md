@@ -1,11 +1,11 @@
 ﻿# MainGame - FuzzyGraph2 graph report
 
 Source: `Assets/FuzzyGraph_2/Editor/Graph/MainGame.fuzzygraph2`
-Exported: 2026-08-13 00:43:57
+Exported: 2026-08-13 14:44:07
 
 ## Compile check
 
-`[fuzzygraph2] compiled 'export check' | events 35 | variables 11 | expressions 79 | rules 54 | bands 52 | fallbacks 35 | consequences 26 | write-backs 55`
+`[fuzzygraph2] compiled 'export check' | events 50 | variables 11 | expressions 106 | rules 71 | bands 69 | fallbacks 50 | consequences 39 | write-backs 74`
 
 ## Event overview
 
@@ -41,10 +41,10 @@ Consequences:
 ### BazaarTalkToGuard (E03)
 
 Rules:
-- `R11` guard_notices_held_flowers | z=1 | root C13
+- `R11` guard_notices_held_flowers | z=1 | root C68
 - `R08` guard_first_conversation | z=0.1 | root C08
 - `R09` guard_repeat_conversation | z=0.5 | root C49
-- `R38` guard_dismisses_player | z=0.95 | root C68
+- `R38` guard_dismisses_player | z=0.95 | root C47
 - `R36` guard_repetitions_request | z=0.8 | root C45
 - `R39` guard_allowed_entry_repeat | z=0.3 | root C50
 
@@ -414,6 +414,164 @@ Consequences:
 - `O86` Vault.DeniedEntry | min=0.5 | fallback=False
   - write-back `W55`
 - `O87` EnterVault.Fallback | min=0 | fallback=True
+
+### VaultLockSolved (E36)
+
+Rules:
+- `R56` vault_lock_solved | z=1 | root C69
+
+Consequences:
+- `O88` Vault.LockSolved | min=1 | fallback=False
+  - write-back `W56`
+- `O89` Vault.LockSolvedFallback | min=0 | fallback=True
+
+### InspectVaultHinges (E37)
+
+Rules:
+- `R57` inspect_vault_hinges | z=1 | root C70
+
+Consequences:
+- `O90` Vault.HingesInspected | min=1 | fallback=False
+  - write-back `W57`
+  - write-back `W60`
+- `O91` InspectVaultHinges.Fallback | min=0 | fallback=True
+
+### UseTreeKey (E38)
+
+Rules:
+- `R58` use_tree_key | z=1 | root C71
+
+Consequences:
+- `O92` Vault.TreeKeyAccepted | min=1 | fallback=False
+  - write-back `W58`
+- `O93` UseTreeKey.Fallback | min=0 | fallback=True
+
+### VaultDoorInteract (E39)
+
+Rules:
+- `R59` vault_door_interact | z=1 | root C72
+
+Consequences:
+- `O94` Vault.DoorInteraction | min=1 | fallback=False
+  - write-back `W59`
+  - write-back `W65`
+- `O95` VaultDoorInteract.Fallback | min=0 | fallback=True
+
+### ChooseVaultCombination (E40)
+
+Rules:
+- `R60` choose_vault_combination | z=1 | root C73
+
+Consequences:
+- `O96` Vault.CombinationChosen | min=1 | fallback=False
+- `O97` VaultCombi.Fallback | min=0 | fallback=True
+
+### VaultLockFailed (E41)
+
+Rules:
+- `R61` vault_lock_failed | z=1 | root C74
+
+Consequences:
+- `O98` Vault.LockFailed | min=1 | fallback=False
+  - write-back `W61`
+  - write-back `W62`
+- `O99` VaultLockFailed.Fallback | min=0 | fallback=True
+
+### VaultDoorNoiseCheck (E42)
+
+Rules:
+- `R62` door_opened_carefully | z=0.2 | root C75
+- `R63` Vault.DoorOpenedNoisily | z=0.8 | root C76
+
+Consequences:
+- `O100` Vault.DoorOpenedQuietly | min=0 | fallback=False
+  - write-back `W63`
+- `O101` Vault.DoorOpenedNoisily | min=0.5 | fallback=False
+  - write-back `W64`
+- `O102` VaultDoorNoiseCheck.Fallback | min=0 | fallback=True
+
+### VaultAlertCheck (E43)
+
+Rules:
+- `R64` vault_security_alert | z=1 | root C79
+
+Consequences:
+- `O103` Vault.SecurityAlerted | min=1 | fallback=False
+  - write-back `W66`
+- `O104` Vault.SecurityCalm | min=0 | fallback=True
+
+### PickupGuardDisguise (E44)
+
+Rules:
+- `R65` pickup_guard_disguise | z=1 | root C80
+
+Consequences:
+- `O105` Player.TakesGuardDisguise | min=1 | fallback=False
+  - write-back `W67`
+- `O106` PickupGuardDisguise.Fallback | min=0 | fallback=True
+
+### StealVaultFruit (E45)
+
+Rules:
+- `R66` steal_vault_fruit | z=1 | root C81
+
+Consequences:
+- `O107` Player.TakesVaultFruit | min=1 | fallback=False
+  - write-back `W68`
+- `O108` StealVaultFruit.Fallback | min=0 | fallback=True
+
+### ExitVault (E46)
+
+Rules:
+- `R67` exit_vault | z=1 | root C97
+
+Consequences:
+- `O109` Vault.PlayerExits | min=1 | fallback=False
+  - write-back `W69`
+- `O110` ExitVault.Fallback | min=0 | fallback=True
+
+### FinalGuardReaction (E47)
+
+Rules:
+- `R68` guard_accepts_deception | z=0.2 | root C87
+- `R69` guard_rejects_deception | z=1 | root C88
+
+Consequences:
+- `O111` Guard.DeceptionAccepted | min=0 | fallback=False
+  - write-back `W70`
+- `O112` Guard.DeceptionRejected | min=0.5 | fallback=False
+  - write-back `W71`
+- `O113` FinalGuardReaction.Fallback | min=0 | fallback=True
+  - write-back `W72`
+
+### NewKeyPicked (E48)
+
+Rules:
+- `R70` new_key | z=1 | root C89
+
+Consequences:
+- `O114` NewKeyacquired | min=1 | fallback=False
+  - write-back `W73`
+- `O115` NewKeyFallback | min=0 | fallback=True
+
+### GuardFellIntoPit (E49)
+
+Rules:
+- `R71` rule_id | z=1 | root C90
+
+Consequences:
+- `O116` Guard.Unavailable | min=1 | fallback=False
+  - write-back `W74`
+- `O119` GuardFellIntoPit | min=0 | fallback=True
+
+### CheckVaultExit (E50)
+
+Rules:
+- `R72` vault_exit_safe | z=1 | root C92
+
+Consequences:
+- `O117` Vault.GateExit | min=1 | fallback=False
+- `O118` CheckVaultExit.Blocked | min=0 | fallback=True
 
 ## Every node
 
@@ -2138,7 +2296,7 @@ Consequences:
 
 ### W51 - WriteBackNode
 
-- Target Key: Player.HasTreeKe
+- Target Key: Player.HasTreeKey
 - Operation: Set
 - Value Type: Bool
 - Value: True
@@ -2303,6 +2461,698 @@ Consequences:
 
 - Mode: And
 
+### E36 - EventNode
+
+- Event ID: VaultLockSolved
+
+### C69 - CriterionNode
+
+- Mode: DoesNotExist
+- Variable ID: Vault.PuzzleSolved
+
+### R56 - RuleNode
+
+- Rule ID: vault_lock_solved
+- Consequent: 1
+
+### O88 - ConsequenceNode
+
+- Outcome ID: Vault.LockSolved
+- Minimum: 1
+- Fallback: False
+- Fire Event: False
+
+### W56 - WriteBackNode
+
+- Target Key: Vault.PuzzleSolved
+- Operation: Set
+- Value Type: Bool
+- Value: True
+
+### O89 - ConsequenceNode
+
+- Outcome ID: Vault.LockSolvedFallback
+- Minimum: 0
+- Fallback: True
+- Fire Event: False
+
+### E37 - EventNode
+
+- Event ID: InspectVaultHinges
+
+### C70 - CriterionNode
+
+- Mode: DoesNotExist
+- Variable ID: Player.HingesData
+
+### R57 - RuleNode
+
+- Rule ID: inspect_vault_hinges
+- Consequent: 1
+
+### O90 - ConsequenceNode
+
+- Outcome ID: Vault.HingesInspected
+- Minimum: 1
+- Fallback: False
+- Fire Event: False
+
+### W57 - WriteBackNode
+
+- Target Key: Player.HingesData
+- Operation: Set
+- Value Type: Bool
+- Value: True
+
+### O91 - ConsequenceNode
+
+- Outcome ID: InspectVaultHinges.Fallback
+- Minimum: 0
+- Fallback: True
+- Fire Event: False
+
+### E38 - EventNode
+
+- Event ID: UseTreeKey
+
+### C71 - CriterionNode
+
+- Mode: BoolEquals
+- Variable ID: Player.HasTreeKey
+- Expected Bool: True
+
+### R58 - RuleNode
+
+- Rule ID: use_tree_key
+- Consequent: 1
+
+### O92 - ConsequenceNode
+
+- Outcome ID: Vault.TreeKeyAccepted
+- Minimum: 1
+- Fallback: False
+- Fire Event: True
+- Target: GameplaySignal
+- Payload: Vault.OpenDoor
+
+### W58 - WriteBackNode
+
+- Target Key: Vault.PuzzleSolved
+- Operation: Set
+- Value Type: Bool
+- Value: True
+
+### O93 - ConsequenceNode
+
+- Outcome ID: UseTreeKey.Fallback
+- Minimum: 0
+- Fallback: True
+- Fire Event: False
+
+### E39 - EventNode
+
+- Event ID: VaultDoorInteract
+
+### C72 - CriterionNode
+
+- Mode: DoesNotExist
+- Variable ID: Vault.PuzzleSolved
+
+### R59 - RuleNode
+
+- Rule ID: vault_door_interact
+- Consequent: 1
+
+### O94 - ConsequenceNode
+
+- Outcome ID: Vault.DoorInteraction
+- Minimum: 1
+- Fallback: False
+- Fire Event: True
+- Target: DialogueGraph
+- Payload: VaultDoor
+
+### O95 - ConsequenceNode
+
+- Outcome ID: VaultDoorInteract.Fallback
+- Minimum: 0
+- Fallback: True
+- Fire Event: False
+
+### E40 - EventNode
+
+- Event ID: ChooseVaultCombination
+
+### C73 - CriterionNode
+
+- Mode: DoesNotExist
+- Variable ID: Vault.PuzzleSolved
+
+### R60 - RuleNode
+
+- Rule ID: choose_vault_combination
+- Consequent: 1
+
+### O96 - ConsequenceNode
+
+- Outcome ID: Vault.CombinationChosen
+- Minimum: 1
+- Fallback: False
+- Fire Event: True
+- Target: GameplaySignal
+- Payload: Vault.BeginLock
+
+### O97 - ConsequenceNode
+
+- Outcome ID: VaultCombi.Fallback
+- Minimum: 0
+- Fallback: True
+- Fire Event: False
+
+### W59 - WriteBackNode
+
+- Target Key: Vault.CanInspectHinges
+- Operation: Set
+- Value Type: Bool
+- Value: True
+
+### W60 - WriteBackNode
+
+- Target Key: Vault.CanInspectHinges
+- Operation: Set
+- Value Type: Bool
+- Value: False
+
+### E41 - EventNode
+
+- Event ID: VaultLockFailed
+
+### C74 - CriterionNode
+
+- Mode: Exists
+- Variable ID: Vault.AlarmTriggered
+
+### R61 - RuleNode
+
+- Rule ID: vault_lock_failed
+- Consequent: 1
+
+### O98 - ConsequenceNode
+
+- Outcome ID: Vault.LockFailed
+- Minimum: 1
+- Fallback: False
+- Fire Event: True
+- Target: GameplaySignal
+- Payload: Vault.GuardAlerted
+
+### W61 - WriteBackNode
+
+- Target Key: Vault.AlarmTriggered
+- Operation: Set
+- Value Type: Bool
+- Value: True
+
+### W62 - WriteBackNode
+
+- Target Key: Guard.Alerted
+- Operation: Set
+- Value Type: Bool
+- Value: True
+
+### O99 - ConsequenceNode
+
+- Outcome ID: VaultLockFailed.Fallback
+- Minimum: 0
+- Fallback: True
+- Fire Event: False
+
+### E42 - EventNode
+
+- Event ID: VaultDoorNoiseCheck
+
+### C75 - CriterionNode
+
+- Mode: Not
+
+### R62 - RuleNode
+
+- Rule ID: door_opened_carefully
+- Consequent: 0.2
+
+### C76 - CriterionNode
+
+- Mode: BoolEquals
+- Variable ID: Vault.CanInspectHinges
+- Expected Bool: True
+
+### O100 - ConsequenceNode
+
+- Outcome ID: Vault.DoorOpenedQuietly
+- Minimum: 0
+- Fallback: False
+- Fire Event: False
+
+### W63 - WriteBackNode
+
+- Target Key: Vault.DoorMadeNoise
+- Operation: Set
+- Value Type: Bool
+- Value: False
+
+### R63 - RuleNode
+
+- Rule ID: Vault.DoorOpenedNoisily
+- Consequent: 0.8
+
+### O101 - ConsequenceNode
+
+- Outcome ID: Vault.DoorOpenedNoisily
+- Minimum: 0.5
+- Fallback: False
+- Fire Event: False
+
+### O102 - ConsequenceNode
+
+- Outcome ID: VaultDoorNoiseCheck.Fallback
+- Minimum: 0
+- Fallback: True
+- Fire Event: False
+
+### W64 - WriteBackNode
+
+- Target Key: Vault.DoorMadeNoise
+- Operation: Set
+- Value Type: Bool
+- Value: True
+
+### E43 - EventNode
+
+- Event ID: VaultAlertCheck
+
+### C77 - CriterionNode
+
+- Mode: BoolEquals
+- Variable ID: Vault.DoorMadeNoise
+- Expected Bool: True
+
+### R64 - RuleNode
+
+- Rule ID: vault_security_alert
+- Consequent: 1
+
+### C78 - CriterionNode
+
+- Mode: BoolEquals
+- Variable ID: Vault.AlarmTriggered
+- Expected Bool: True
+
+### C79 - CriterionNode
+
+- Mode: Or
+
+### W65 - WriteBackNode
+
+- Target Key: Vault.AlarmTriggered
+- Operation: Set
+- Value Type: Bool
+- Value: False
+
+### O103 - ConsequenceNode
+
+- Outcome ID: Vault.SecurityAlerted
+- Minimum: 1
+- Fallback: False
+- Fire Event: True
+- Target: GameplaySignal
+- Payload: Vault.GuardAlerted
+
+### W66 - WriteBackNode
+
+- Target Key: Guard.Alerted
+- Operation: Set
+- Value Type: Bool
+- Value: True
+
+### O104 - ConsequenceNode
+
+- Outcome ID: Vault.SecurityCalm
+- Minimum: 0
+- Fallback: True
+- Fire Event: False
+
+### E44 - EventNode
+
+- Event ID: PickupGuardDisguise
+
+### C80 - CriterionNode
+
+- Mode: DoesNotExist
+- Variable ID: Player.HasDisguise
+
+### R65 - RuleNode
+
+- Rule ID: pickup_guard_disguise
+- Consequent: 1
+
+### O105 - ConsequenceNode
+
+- Outcome ID: Player.TakesGuardDisguise
+- Minimum: 1
+- Fallback: False
+- Fire Event: True
+- Target: GameplaySignal
+- Payload: Disguise.Picked
+
+### W67 - WriteBackNode
+
+- Target Key: Player.HasDisguise
+- Operation: Set
+- Value Type: Bool
+- Value: True
+
+### O106 - ConsequenceNode
+
+- Outcome ID: PickupGuardDisguise.Fallback
+- Minimum: 0
+- Fallback: True
+- Fire Event: False
+
+### E45 - EventNode
+
+- Event ID: StealVaultFruit
+
+### C81 - CriterionNode
+
+- Mode: DoesNotExist
+- Variable ID: Player.HasFruit
+
+### R66 - RuleNode
+
+- Rule ID: steal_vault_fruit
+- Consequent: 1
+
+### O107 - ConsequenceNode
+
+- Outcome ID: Player.TakesVaultFruit
+- Minimum: 1
+- Fallback: False
+- Fire Event: False
+
+### W68 - WriteBackNode
+
+- Target Key: Player.HasFruit
+- Operation: Set
+- Value Type: Bool
+- Value: True
+
+### O108 - ConsequenceNode
+
+- Outcome ID: StealVaultFruit.Fallback
+- Minimum: 0
+- Fallback: True
+- Fire Event: False
+
+### E46 - EventNode
+
+- Event ID: ExitVault
+
+### C82 - CriterionNode
+
+- Mode: BoolEquals
+- Variable ID: Player.HasFruit
+- Expected Bool: True
+
+### R67 - RuleNode
+
+- Rule ID: exit_vault
+- Consequent: 1
+
+### O109 - ConsequenceNode
+
+- Outcome ID: Vault.PlayerExits
+- Minimum: 1
+- Fallback: False
+- Fire Event: True
+- Target: GameplaySignal
+- Payload: Vault.Exit
+
+### W69 - WriteBackNode
+
+- Target Key: Player.ExitedVault
+- Operation: Set
+- Value Type: Bool
+- Value: True
+
+### O110 - ConsequenceNode
+
+- Outcome ID: ExitVault.Fallback
+- Minimum: 0
+- Fallback: True
+- Fire Event: True
+- Target: DialogueGraph
+- Payload: StealReminder
+
+### C83 - CriterionNode
+
+- Mode: BoolEquals
+- Variable ID: Player.HasDisguise
+- Expected Bool: True
+
+### C84 - CriterionNode
+
+- Mode: DoesNotExist
+- Variable ID: Player.HasFruit
+
+### C85 - CriterionNode
+
+- Mode: NumberCompare
+- Variable ID: Guard.Relationship
+- Comparison: InclusiveRange
+- Compare A: 10
+- Compare B: 30
+
+### C86 - CriterionNode
+
+- Mode: And
+
+### C87 - CriterionNode
+
+- Mode: And
+
+### E47 - EventNode
+
+- Event ID: FinalGuardReaction
+
+### R68 - RuleNode
+
+- Rule ID: guard_accepts_deception
+- Consequent: 0.2
+
+### C88 - CriterionNode
+
+- Mode: NumberCompare
+- Variable ID: Guard.Suspicion
+- Comparison: GreaterThanOrEqual
+- Compare A: 20
+
+### R69 - RuleNode
+
+- Rule ID: guard_rejects_deception
+- Consequent: 1
+
+### O111 - ConsequenceNode
+
+- Outcome ID: Guard.DeceptionAccepted
+- Minimum: 0
+- Fallback: False
+- Fire Event: True
+- Target: GameplaySignal
+- Payload: Vault.GuardLeaves
+
+### O112 - ConsequenceNode
+
+- Outcome ID: Guard.DeceptionRejected
+- Minimum: 0.5
+- Fallback: False
+- Fire Event: True
+- Target: GameplaySignal
+- Payload: Vault.GuardChase
+
+### O113 - ConsequenceNode
+
+- Outcome ID: FinalGuardReaction.Fallback
+- Minimum: 0
+- Fallback: True
+- Fire Event: True
+- Target: GameplaySignal
+- Payload: Vault.GuardChase
+
+### W70 - WriteBackNode
+
+- Target Key: Guard.LeftVault
+- Operation: Set
+- Value Type: Bool
+- Value: True
+
+### W71 - WriteBackNode
+
+- Target Key: Guard.PursuePlayer
+- Operation: Set
+- Value Type: Bool
+- Value: True
+
+### W72 - WriteBackNode
+
+- Target Key: Guard.PursuePlayer
+- Operation: Set
+- Value Type: Bool
+- Value: True
+
+### E48 - EventNode
+
+- Event ID: NewKeyPicked
+
+### C89 - CriterionNode
+
+- Mode: DoesNotExist
+- Variable ID: Player.HasTreeKey
+
+### R70 - RuleNode
+
+- Rule ID: new_key
+- Consequent: 1
+
+### O114 - ConsequenceNode
+
+- Outcome ID: NewKeyacquired
+- Minimum: 1
+- Fallback: False
+- Fire Event: False
+
+### W73 - WriteBackNode
+
+- Target Key: Player.HasTreeKey
+- Operation: Set
+- Value Type: Bool
+- Value: True
+
+### O115 - ConsequenceNode
+
+- Outcome ID: NewKeyFallback
+- Minimum: 0
+- Fallback: True
+- Fire Event: False
+
+### E49 - EventNode
+
+- Event ID: GuardFellIntoPit
+
+### C90 - CriterionNode
+
+- Mode: DoesNotExist
+- Variable ID: Guard.InsidePit
+
+### R71 - RuleNode
+
+- Rule ID: rule_id
+- Consequent: 1
+
+### O116 - ConsequenceNode
+
+- Outcome ID: Guard.Unavailable
+- Minimum: 1
+- Fallback: False
+- Fire Event: False
+
+### W74 - WriteBackNode
+
+- Target Key: Guard.InsidePit
+- Operation: Set
+- Value Type: Bool
+- Value: True
+
+### E50 - EventNode
+
+- Event ID: CheckVaultExit
+
+### C91 - CriterionNode
+
+- Mode: BoolEquals
+- Variable ID: Guard.InsidePit
+- Expected Bool: True
+
+### C92 - CriterionNode
+
+- Mode: And
+
+### R72 - RuleNode
+
+- Rule ID: vault_exit_safe
+- Consequent: 1
+
+### C93 - CriterionNode
+
+- Mode: BoolEquals
+- Variable ID: Player.HasFruit
+- Expected Bool: True
+
+### O117 - ConsequenceNode
+
+- Outcome ID: Vault.GateExit
+- Minimum: 1
+- Fallback: False
+- Fire Event: True
+- Target: GameplaySignal
+- Payload: Vault.GateExit
+
+### O118 - ConsequenceNode
+
+- Outcome ID: CheckVaultExit.Blocked
+- Minimum: 0
+- Fallback: True
+- Fire Event: True
+- Target: DialogueGraph
+- Payload: UnableToExit
+
+### C94 - CriterionNode
+
+- Mode: FuzzyNumber
+- Variable ID: Player.DistanceToCarpet
+- Set: Near
+- Shape: Low
+- Minimum: 0
+- Maximum: 10
+- Point A: 0
+- Point B: 2.5
+
+### C95 - CriterionNode
+
+- Mode: FuzzyNumber
+- Variable ID: Player.DistanceToCarpet
+- Set: Near
+- Shape: Low
+- Minimum: 0
+- Maximum: 10
+- Point A: 0
+- Point B: 2.5
+
+### C96 - CriterionNode
+
+- Mode: DoesNotExist
+- Variable ID: Guard.InsidePit
+
+### C97 - CriterionNode
+
+- Mode: And
+
+### O119 - ConsequenceNode
+
+- Outcome ID: GuardFellIntoPit
+- Minimum: 0
+- Fallback: True
+- Fire Event: False
+
 ## Every connection
 
 - `E01.consequences` -> `O04.event`
@@ -2365,7 +3215,7 @@ Consequences:
 - `O13.writeBacks` -> `W05.consequence`
 - `C11.rules` -> `C13.criteriaB`
 - `C12.rules` -> `C13.criteriaA`
-- `C13.rules` -> `R11.criteria`
+- `C13.rules` -> `C68.criteriaA`
 - `E05.consequences` -> `O16.event`
 - `E05.consequences` -> `O17.event`
 - `E05.rules` -> `R12.event`
@@ -2514,7 +3364,7 @@ Consequences:
 - `C44.rules` -> `C45.criteriaB`
 - `C45.rules` -> `R36.criteria`
 - `C46.rules` -> `C47.criteriaB`
-- `C47.rules` -> `C68.criteriaA`
+- `C47.rules` -> `R38.criteria`
 - `C48.rules` -> `C49.criteriaB`
 - `C49.rules` -> `R09.criteria`
 - `C50.rules` -> `R39.criteria`
@@ -2583,4 +3433,100 @@ Consequences:
 - `C65.rules` -> `C66.criteriaB`
 - `C66.rules` -> `R55.criteria`
 - `C67.rules` -> `C68.criteriaB`
-- `C68.rules` -> `R38.criteria`
+- `C68.rules` -> `R11.criteria`
+- `E36.consequences` -> `O88.event`
+- `E36.consequences` -> `O89.event`
+- `E36.rules` -> `R56.event`
+- `C69.rules` -> `R56.criteria`
+- `O88.writeBacks` -> `W56.consequence`
+- `E37.consequences` -> `O90.event`
+- `E37.consequences` -> `O91.event`
+- `E37.rules` -> `R57.event`
+- `C70.rules` -> `R57.criteria`
+- `O90.writeBacks` -> `W57.consequence`
+- `O90.writeBacks` -> `W60.consequence`
+- `E38.consequences` -> `O92.event`
+- `E38.consequences` -> `O93.event`
+- `E38.rules` -> `R58.event`
+- `C71.rules` -> `R58.criteria`
+- `O92.writeBacks` -> `W58.consequence`
+- `E39.consequences` -> `O94.event`
+- `E39.consequences` -> `O95.event`
+- `E39.rules` -> `R59.event`
+- `C72.rules` -> `R59.criteria`
+- `O94.writeBacks` -> `W59.consequence`
+- `O94.writeBacks` -> `W65.consequence`
+- `E40.consequences` -> `O96.event`
+- `E40.consequences` -> `O97.event`
+- `E40.rules` -> `R60.event`
+- `C73.rules` -> `R60.criteria`
+- `E41.consequences` -> `O98.event`
+- `E41.consequences` -> `O99.event`
+- `E41.rules` -> `R61.event`
+- `C74.rules` -> `R61.criteria`
+- `O98.writeBacks` -> `W61.consequence`
+- `O98.writeBacks` -> `W62.consequence`
+- `E42.consequences` -> `O100.event`
+- `E42.consequences` -> `O101.event`
+- `E42.consequences` -> `O102.event`
+- `E42.rules` -> `R62.event`
+- `E42.rules` -> `R63.event`
+- `C75.rules` -> `R62.criteria`
+- `C76.rules` -> `C75.criteriaA`
+- `C76.rules` -> `R63.criteria`
+- `O100.writeBacks` -> `W63.consequence`
+- `O101.writeBacks` -> `W64.consequence`
+- `E43.consequences` -> `O103.event`
+- `E43.consequences` -> `O104.event`
+- `E43.rules` -> `R64.event`
+- `C77.rules` -> `C79.criteriaA`
+- `C78.rules` -> `C79.criteriaB`
+- `C79.rules` -> `R64.criteria`
+- `O103.writeBacks` -> `W66.consequence`
+- `E44.consequences` -> `O105.event`
+- `E44.consequences` -> `O106.event`
+- `E44.rules` -> `R65.event`
+- `C80.rules` -> `R65.criteria`
+- `O105.writeBacks` -> `W67.consequence`
+- `E45.consequences` -> `O107.event`
+- `E45.consequences` -> `O108.event`
+- `E45.rules` -> `R66.event`
+- `C81.rules` -> `R66.criteria`
+- `O107.writeBacks` -> `W68.consequence`
+- `E46.consequences` -> `O109.event`
+- `E46.consequences` -> `O110.event`
+- `E46.rules` -> `R67.event`
+- `C82.rules` -> `C97.criteriaA`
+- `O109.writeBacks` -> `W69.consequence`
+- `C83.rules` -> `C86.criteriaA`
+- `C84.rules` -> `C86.criteriaB`
+- `C85.rules` -> `C87.criteriaB`
+- `C86.rules` -> `C87.criteriaA`
+- `C87.rules` -> `R68.criteria`
+- `E47.consequences` -> `O111.event`
+- `E47.consequences` -> `O112.event`
+- `E47.consequences` -> `O113.event`
+- `E47.rules` -> `R68.event`
+- `E47.rules` -> `R69.event`
+- `C88.rules` -> `R69.criteria`
+- `O111.writeBacks` -> `W70.consequence`
+- `O112.writeBacks` -> `W71.consequence`
+- `O113.writeBacks` -> `W72.consequence`
+- `E48.consequences` -> `O114.event`
+- `E48.consequences` -> `O115.event`
+- `E48.rules` -> `R70.event`
+- `C89.rules` -> `R70.criteria`
+- `O114.writeBacks` -> `W73.consequence`
+- `E49.consequences` -> `O116.event`
+- `E49.consequences` -> `O119.event`
+- `E49.rules` -> `R71.event`
+- `C90.rules` -> `R71.criteria`
+- `O116.writeBacks` -> `W74.consequence`
+- `E50.consequences` -> `O117.event`
+- `E50.consequences` -> `O118.event`
+- `E50.rules` -> `R72.event`
+- `C91.rules` -> `C92.criteriaA`
+- `C92.rules` -> `R72.criteria`
+- `C93.rules` -> `C92.criteriaB`
+- `C96.rules` -> `C97.criteriaB`
+- `C97.rules` -> `R67.criteria`

@@ -1,8 +1,8 @@
 ﻿{
     "graphName": "MainGame",
     "assetPath": "Assets/FuzzyGraph_2/Editor/Graph/MainGame.fuzzygraph2",
-    "exportedAt": "2026-08-13 00:43:57",
-    "compileCheck": "[fuzzygraph2] compiled 'export check' | events 35 | variables 11 | expressions 79 | rules 54 | bands 52 | fallbacks 35 | consequences 26 | write-backs 55",
+    "exportedAt": "2026-08-13 14:44:07",
+    "compileCheck": "[fuzzygraph2] compiled 'export check' | events 50 | variables 11 | expressions 106 | rules 71 | bands 69 | fallbacks 50 | consequences 39 | write-backs 74",
     "nodes": [
         {
             "id": "E01",
@@ -2546,7 +2546,7 @@
             "id": "W51",
             "type": "WriteBackNode",
             "data": [
-                "Target Key: Player.HasTreeKe",
+                "Target Key: Player.HasTreeKey",
                 "Operation: Set",
                 "Value Type: Bool",
                 "Value: True"
@@ -2788,6 +2788,1034 @@
             "type": "CriterionNode",
             "data": [
                 "Mode: And"
+            ]
+        },
+        {
+            "id": "E36",
+            "type": "EventNode",
+            "data": [
+                "Event ID: VaultLockSolved"
+            ]
+        },
+        {
+            "id": "C69",
+            "type": "CriterionNode",
+            "data": [
+                "Mode: DoesNotExist",
+                "Variable ID: Vault.PuzzleSolved"
+            ]
+        },
+        {
+            "id": "R56",
+            "type": "RuleNode",
+            "data": [
+                "Rule ID: vault_lock_solved",
+                "Consequent: 1"
+            ]
+        },
+        {
+            "id": "O88",
+            "type": "ConsequenceNode",
+            "data": [
+                "Outcome ID: Vault.LockSolved",
+                "Minimum: 1",
+                "Fallback: False",
+                "Fire Event: False"
+            ]
+        },
+        {
+            "id": "W56",
+            "type": "WriteBackNode",
+            "data": [
+                "Target Key: Vault.PuzzleSolved",
+                "Operation: Set",
+                "Value Type: Bool",
+                "Value: True"
+            ]
+        },
+        {
+            "id": "O89",
+            "type": "ConsequenceNode",
+            "data": [
+                "Outcome ID: Vault.LockSolvedFallback",
+                "Minimum: 0",
+                "Fallback: True",
+                "Fire Event: False"
+            ]
+        },
+        {
+            "id": "E37",
+            "type": "EventNode",
+            "data": [
+                "Event ID: InspectVaultHinges"
+            ]
+        },
+        {
+            "id": "C70",
+            "type": "CriterionNode",
+            "data": [
+                "Mode: DoesNotExist",
+                "Variable ID: Player.HingesData"
+            ]
+        },
+        {
+            "id": "R57",
+            "type": "RuleNode",
+            "data": [
+                "Rule ID: inspect_vault_hinges",
+                "Consequent: 1"
+            ]
+        },
+        {
+            "id": "O90",
+            "type": "ConsequenceNode",
+            "data": [
+                "Outcome ID: Vault.HingesInspected",
+                "Minimum: 1",
+                "Fallback: False",
+                "Fire Event: False"
+            ]
+        },
+        {
+            "id": "W57",
+            "type": "WriteBackNode",
+            "data": [
+                "Target Key: Player.HingesData",
+                "Operation: Set",
+                "Value Type: Bool",
+                "Value: True"
+            ]
+        },
+        {
+            "id": "O91",
+            "type": "ConsequenceNode",
+            "data": [
+                "Outcome ID: InspectVaultHinges.Fallback",
+                "Minimum: 0",
+                "Fallback: True",
+                "Fire Event: False"
+            ]
+        },
+        {
+            "id": "E38",
+            "type": "EventNode",
+            "data": [
+                "Event ID: UseTreeKey"
+            ]
+        },
+        {
+            "id": "C71",
+            "type": "CriterionNode",
+            "data": [
+                "Mode: BoolEquals",
+                "Variable ID: Player.HasTreeKey",
+                "Expected Bool: True"
+            ]
+        },
+        {
+            "id": "R58",
+            "type": "RuleNode",
+            "data": [
+                "Rule ID: use_tree_key",
+                "Consequent: 1"
+            ]
+        },
+        {
+            "id": "O92",
+            "type": "ConsequenceNode",
+            "data": [
+                "Outcome ID: Vault.TreeKeyAccepted",
+                "Minimum: 1",
+                "Fallback: False",
+                "Fire Event: True",
+                "Target: GameplaySignal",
+                "Payload: Vault.OpenDoor"
+            ]
+        },
+        {
+            "id": "W58",
+            "type": "WriteBackNode",
+            "data": [
+                "Target Key: Vault.PuzzleSolved",
+                "Operation: Set",
+                "Value Type: Bool",
+                "Value: True"
+            ]
+        },
+        {
+            "id": "O93",
+            "type": "ConsequenceNode",
+            "data": [
+                "Outcome ID: UseTreeKey.Fallback",
+                "Minimum: 0",
+                "Fallback: True",
+                "Fire Event: False"
+            ]
+        },
+        {
+            "id": "E39",
+            "type": "EventNode",
+            "data": [
+                "Event ID: VaultDoorInteract"
+            ]
+        },
+        {
+            "id": "C72",
+            "type": "CriterionNode",
+            "data": [
+                "Mode: DoesNotExist",
+                "Variable ID: Vault.PuzzleSolved"
+            ]
+        },
+        {
+            "id": "R59",
+            "type": "RuleNode",
+            "data": [
+                "Rule ID: vault_door_interact",
+                "Consequent: 1"
+            ]
+        },
+        {
+            "id": "O94",
+            "type": "ConsequenceNode",
+            "data": [
+                "Outcome ID: Vault.DoorInteraction",
+                "Minimum: 1",
+                "Fallback: False",
+                "Fire Event: True",
+                "Target: DialogueGraph",
+                "Payload: VaultDoor"
+            ]
+        },
+        {
+            "id": "O95",
+            "type": "ConsequenceNode",
+            "data": [
+                "Outcome ID: VaultDoorInteract.Fallback",
+                "Minimum: 0",
+                "Fallback: True",
+                "Fire Event: False"
+            ]
+        },
+        {
+            "id": "E40",
+            "type": "EventNode",
+            "data": [
+                "Event ID: ChooseVaultCombination"
+            ]
+        },
+        {
+            "id": "C73",
+            "type": "CriterionNode",
+            "data": [
+                "Mode: DoesNotExist",
+                "Variable ID: Vault.PuzzleSolved"
+            ]
+        },
+        {
+            "id": "R60",
+            "type": "RuleNode",
+            "data": [
+                "Rule ID: choose_vault_combination",
+                "Consequent: 1"
+            ]
+        },
+        {
+            "id": "O96",
+            "type": "ConsequenceNode",
+            "data": [
+                "Outcome ID: Vault.CombinationChosen",
+                "Minimum: 1",
+                "Fallback: False",
+                "Fire Event: True",
+                "Target: GameplaySignal",
+                "Payload: Vault.BeginLock"
+            ]
+        },
+        {
+            "id": "O97",
+            "type": "ConsequenceNode",
+            "data": [
+                "Outcome ID: VaultCombi.Fallback",
+                "Minimum: 0",
+                "Fallback: True",
+                "Fire Event: False"
+            ]
+        },
+        {
+            "id": "W59",
+            "type": "WriteBackNode",
+            "data": [
+                "Target Key: Vault.CanInspectHinges",
+                "Operation: Set",
+                "Value Type: Bool",
+                "Value: True"
+            ]
+        },
+        {
+            "id": "W60",
+            "type": "WriteBackNode",
+            "data": [
+                "Target Key: Vault.CanInspectHinges",
+                "Operation: Set",
+                "Value Type: Bool",
+                "Value: False"
+            ]
+        },
+        {
+            "id": "E41",
+            "type": "EventNode",
+            "data": [
+                "Event ID: VaultLockFailed"
+            ]
+        },
+        {
+            "id": "C74",
+            "type": "CriterionNode",
+            "data": [
+                "Mode: Exists",
+                "Variable ID: Vault.AlarmTriggered"
+            ]
+        },
+        {
+            "id": "R61",
+            "type": "RuleNode",
+            "data": [
+                "Rule ID: vault_lock_failed",
+                "Consequent: 1"
+            ]
+        },
+        {
+            "id": "O98",
+            "type": "ConsequenceNode",
+            "data": [
+                "Outcome ID: Vault.LockFailed",
+                "Minimum: 1",
+                "Fallback: False",
+                "Fire Event: True",
+                "Target: GameplaySignal",
+                "Payload: Vault.GuardAlerted"
+            ]
+        },
+        {
+            "id": "W61",
+            "type": "WriteBackNode",
+            "data": [
+                "Target Key: Vault.AlarmTriggered",
+                "Operation: Set",
+                "Value Type: Bool",
+                "Value: True"
+            ]
+        },
+        {
+            "id": "W62",
+            "type": "WriteBackNode",
+            "data": [
+                "Target Key: Guard.Alerted",
+                "Operation: Set",
+                "Value Type: Bool",
+                "Value: True"
+            ]
+        },
+        {
+            "id": "O99",
+            "type": "ConsequenceNode",
+            "data": [
+                "Outcome ID: VaultLockFailed.Fallback",
+                "Minimum: 0",
+                "Fallback: True",
+                "Fire Event: False"
+            ]
+        },
+        {
+            "id": "E42",
+            "type": "EventNode",
+            "data": [
+                "Event ID: VaultDoorNoiseCheck"
+            ]
+        },
+        {
+            "id": "C75",
+            "type": "CriterionNode",
+            "data": [
+                "Mode: Not"
+            ]
+        },
+        {
+            "id": "R62",
+            "type": "RuleNode",
+            "data": [
+                "Rule ID: door_opened_carefully",
+                "Consequent: 0.2"
+            ]
+        },
+        {
+            "id": "C76",
+            "type": "CriterionNode",
+            "data": [
+                "Mode: BoolEquals",
+                "Variable ID: Vault.CanInspectHinges",
+                "Expected Bool: True"
+            ]
+        },
+        {
+            "id": "O100",
+            "type": "ConsequenceNode",
+            "data": [
+                "Outcome ID: Vault.DoorOpenedQuietly",
+                "Minimum: 0",
+                "Fallback: False",
+                "Fire Event: False"
+            ]
+        },
+        {
+            "id": "W63",
+            "type": "WriteBackNode",
+            "data": [
+                "Target Key: Vault.DoorMadeNoise",
+                "Operation: Set",
+                "Value Type: Bool",
+                "Value: False"
+            ]
+        },
+        {
+            "id": "R63",
+            "type": "RuleNode",
+            "data": [
+                "Rule ID: Vault.DoorOpenedNoisily",
+                "Consequent: 0.8"
+            ]
+        },
+        {
+            "id": "O101",
+            "type": "ConsequenceNode",
+            "data": [
+                "Outcome ID: Vault.DoorOpenedNoisily",
+                "Minimum: 0.5",
+                "Fallback: False",
+                "Fire Event: False"
+            ]
+        },
+        {
+            "id": "O102",
+            "type": "ConsequenceNode",
+            "data": [
+                "Outcome ID: VaultDoorNoiseCheck.Fallback",
+                "Minimum: 0",
+                "Fallback: True",
+                "Fire Event: False"
+            ]
+        },
+        {
+            "id": "W64",
+            "type": "WriteBackNode",
+            "data": [
+                "Target Key: Vault.DoorMadeNoise",
+                "Operation: Set",
+                "Value Type: Bool",
+                "Value: True"
+            ]
+        },
+        {
+            "id": "E43",
+            "type": "EventNode",
+            "data": [
+                "Event ID: VaultAlertCheck"
+            ]
+        },
+        {
+            "id": "C77",
+            "type": "CriterionNode",
+            "data": [
+                "Mode: BoolEquals",
+                "Variable ID: Vault.DoorMadeNoise",
+                "Expected Bool: True"
+            ]
+        },
+        {
+            "id": "R64",
+            "type": "RuleNode",
+            "data": [
+                "Rule ID: vault_security_alert",
+                "Consequent: 1"
+            ]
+        },
+        {
+            "id": "C78",
+            "type": "CriterionNode",
+            "data": [
+                "Mode: BoolEquals",
+                "Variable ID: Vault.AlarmTriggered",
+                "Expected Bool: True"
+            ]
+        },
+        {
+            "id": "C79",
+            "type": "CriterionNode",
+            "data": [
+                "Mode: Or"
+            ]
+        },
+        {
+            "id": "W65",
+            "type": "WriteBackNode",
+            "data": [
+                "Target Key: Vault.AlarmTriggered",
+                "Operation: Set",
+                "Value Type: Bool",
+                "Value: False"
+            ]
+        },
+        {
+            "id": "O103",
+            "type": "ConsequenceNode",
+            "data": [
+                "Outcome ID: Vault.SecurityAlerted",
+                "Minimum: 1",
+                "Fallback: False",
+                "Fire Event: True",
+                "Target: GameplaySignal",
+                "Payload: Vault.GuardAlerted"
+            ]
+        },
+        {
+            "id": "W66",
+            "type": "WriteBackNode",
+            "data": [
+                "Target Key: Guard.Alerted",
+                "Operation: Set",
+                "Value Type: Bool",
+                "Value: True"
+            ]
+        },
+        {
+            "id": "O104",
+            "type": "ConsequenceNode",
+            "data": [
+                "Outcome ID: Vault.SecurityCalm",
+                "Minimum: 0",
+                "Fallback: True",
+                "Fire Event: False"
+            ]
+        },
+        {
+            "id": "E44",
+            "type": "EventNode",
+            "data": [
+                "Event ID: PickupGuardDisguise"
+            ]
+        },
+        {
+            "id": "C80",
+            "type": "CriterionNode",
+            "data": [
+                "Mode: DoesNotExist",
+                "Variable ID: Player.HasDisguise"
+            ]
+        },
+        {
+            "id": "R65",
+            "type": "RuleNode",
+            "data": [
+                "Rule ID: pickup_guard_disguise",
+                "Consequent: 1"
+            ]
+        },
+        {
+            "id": "O105",
+            "type": "ConsequenceNode",
+            "data": [
+                "Outcome ID: Player.TakesGuardDisguise",
+                "Minimum: 1",
+                "Fallback: False",
+                "Fire Event: True",
+                "Target: GameplaySignal",
+                "Payload: Disguise.Picked"
+            ]
+        },
+        {
+            "id": "W67",
+            "type": "WriteBackNode",
+            "data": [
+                "Target Key: Player.HasDisguise",
+                "Operation: Set",
+                "Value Type: Bool",
+                "Value: True"
+            ]
+        },
+        {
+            "id": "O106",
+            "type": "ConsequenceNode",
+            "data": [
+                "Outcome ID: PickupGuardDisguise.Fallback",
+                "Minimum: 0",
+                "Fallback: True",
+                "Fire Event: False"
+            ]
+        },
+        {
+            "id": "E45",
+            "type": "EventNode",
+            "data": [
+                "Event ID: StealVaultFruit"
+            ]
+        },
+        {
+            "id": "C81",
+            "type": "CriterionNode",
+            "data": [
+                "Mode: DoesNotExist",
+                "Variable ID: Player.HasFruit"
+            ]
+        },
+        {
+            "id": "R66",
+            "type": "RuleNode",
+            "data": [
+                "Rule ID: steal_vault_fruit",
+                "Consequent: 1"
+            ]
+        },
+        {
+            "id": "O107",
+            "type": "ConsequenceNode",
+            "data": [
+                "Outcome ID: Player.TakesVaultFruit",
+                "Minimum: 1",
+                "Fallback: False",
+                "Fire Event: False"
+            ]
+        },
+        {
+            "id": "W68",
+            "type": "WriteBackNode",
+            "data": [
+                "Target Key: Player.HasFruit",
+                "Operation: Set",
+                "Value Type: Bool",
+                "Value: True"
+            ]
+        },
+        {
+            "id": "O108",
+            "type": "ConsequenceNode",
+            "data": [
+                "Outcome ID: StealVaultFruit.Fallback",
+                "Minimum: 0",
+                "Fallback: True",
+                "Fire Event: False"
+            ]
+        },
+        {
+            "id": "E46",
+            "type": "EventNode",
+            "data": [
+                "Event ID: ExitVault"
+            ]
+        },
+        {
+            "id": "C82",
+            "type": "CriterionNode",
+            "data": [
+                "Mode: BoolEquals",
+                "Variable ID: Player.HasFruit",
+                "Expected Bool: True"
+            ]
+        },
+        {
+            "id": "R67",
+            "type": "RuleNode",
+            "data": [
+                "Rule ID: exit_vault",
+                "Consequent: 1"
+            ]
+        },
+        {
+            "id": "O109",
+            "type": "ConsequenceNode",
+            "data": [
+                "Outcome ID: Vault.PlayerExits",
+                "Minimum: 1",
+                "Fallback: False",
+                "Fire Event: True",
+                "Target: GameplaySignal",
+                "Payload: Vault.Exit"
+            ]
+        },
+        {
+            "id": "W69",
+            "type": "WriteBackNode",
+            "data": [
+                "Target Key: Player.ExitedVault",
+                "Operation: Set",
+                "Value Type: Bool",
+                "Value: True"
+            ]
+        },
+        {
+            "id": "O110",
+            "type": "ConsequenceNode",
+            "data": [
+                "Outcome ID: ExitVault.Fallback",
+                "Minimum: 0",
+                "Fallback: True",
+                "Fire Event: True",
+                "Target: DialogueGraph",
+                "Payload: StealReminder"
+            ]
+        },
+        {
+            "id": "C83",
+            "type": "CriterionNode",
+            "data": [
+                "Mode: BoolEquals",
+                "Variable ID: Player.HasDisguise",
+                "Expected Bool: True"
+            ]
+        },
+        {
+            "id": "C84",
+            "type": "CriterionNode",
+            "data": [
+                "Mode: DoesNotExist",
+                "Variable ID: Player.HasFruit"
+            ]
+        },
+        {
+            "id": "C85",
+            "type": "CriterionNode",
+            "data": [
+                "Mode: NumberCompare",
+                "Variable ID: Guard.Relationship",
+                "Comparison: InclusiveRange",
+                "Compare A: 10",
+                "Compare B: 30"
+            ]
+        },
+        {
+            "id": "C86",
+            "type": "CriterionNode",
+            "data": [
+                "Mode: And"
+            ]
+        },
+        {
+            "id": "C87",
+            "type": "CriterionNode",
+            "data": [
+                "Mode: And"
+            ]
+        },
+        {
+            "id": "E47",
+            "type": "EventNode",
+            "data": [
+                "Event ID: FinalGuardReaction"
+            ]
+        },
+        {
+            "id": "R68",
+            "type": "RuleNode",
+            "data": [
+                "Rule ID: guard_accepts_deception",
+                "Consequent: 0.2"
+            ]
+        },
+        {
+            "id": "C88",
+            "type": "CriterionNode",
+            "data": [
+                "Mode: NumberCompare",
+                "Variable ID: Guard.Suspicion",
+                "Comparison: GreaterThanOrEqual",
+                "Compare A: 20"
+            ]
+        },
+        {
+            "id": "R69",
+            "type": "RuleNode",
+            "data": [
+                "Rule ID: guard_rejects_deception",
+                "Consequent: 1"
+            ]
+        },
+        {
+            "id": "O111",
+            "type": "ConsequenceNode",
+            "data": [
+                "Outcome ID: Guard.DeceptionAccepted",
+                "Minimum: 0",
+                "Fallback: False",
+                "Fire Event: True",
+                "Target: GameplaySignal",
+                "Payload: Vault.GuardLeaves"
+            ]
+        },
+        {
+            "id": "O112",
+            "type": "ConsequenceNode",
+            "data": [
+                "Outcome ID: Guard.DeceptionRejected",
+                "Minimum: 0.5",
+                "Fallback: False",
+                "Fire Event: True",
+                "Target: GameplaySignal",
+                "Payload: Vault.GuardChase"
+            ]
+        },
+        {
+            "id": "O113",
+            "type": "ConsequenceNode",
+            "data": [
+                "Outcome ID: FinalGuardReaction.Fallback",
+                "Minimum: 0",
+                "Fallback: True",
+                "Fire Event: True",
+                "Target: GameplaySignal",
+                "Payload: Vault.GuardChase"
+            ]
+        },
+        {
+            "id": "W70",
+            "type": "WriteBackNode",
+            "data": [
+                "Target Key: Guard.LeftVault",
+                "Operation: Set",
+                "Value Type: Bool",
+                "Value: True"
+            ]
+        },
+        {
+            "id": "W71",
+            "type": "WriteBackNode",
+            "data": [
+                "Target Key: Guard.PursuePlayer",
+                "Operation: Set",
+                "Value Type: Bool",
+                "Value: True"
+            ]
+        },
+        {
+            "id": "W72",
+            "type": "WriteBackNode",
+            "data": [
+                "Target Key: Guard.PursuePlayer",
+                "Operation: Set",
+                "Value Type: Bool",
+                "Value: True"
+            ]
+        },
+        {
+            "id": "E48",
+            "type": "EventNode",
+            "data": [
+                "Event ID: NewKeyPicked"
+            ]
+        },
+        {
+            "id": "C89",
+            "type": "CriterionNode",
+            "data": [
+                "Mode: DoesNotExist",
+                "Variable ID: Player.HasTreeKey"
+            ]
+        },
+        {
+            "id": "R70",
+            "type": "RuleNode",
+            "data": [
+                "Rule ID: new_key",
+                "Consequent: 1"
+            ]
+        },
+        {
+            "id": "O114",
+            "type": "ConsequenceNode",
+            "data": [
+                "Outcome ID: NewKeyacquired",
+                "Minimum: 1",
+                "Fallback: False",
+                "Fire Event: False"
+            ]
+        },
+        {
+            "id": "W73",
+            "type": "WriteBackNode",
+            "data": [
+                "Target Key: Player.HasTreeKey",
+                "Operation: Set",
+                "Value Type: Bool",
+                "Value: True"
+            ]
+        },
+        {
+            "id": "O115",
+            "type": "ConsequenceNode",
+            "data": [
+                "Outcome ID: NewKeyFallback",
+                "Minimum: 0",
+                "Fallback: True",
+                "Fire Event: False"
+            ]
+        },
+        {
+            "id": "E49",
+            "type": "EventNode",
+            "data": [
+                "Event ID: GuardFellIntoPit"
+            ]
+        },
+        {
+            "id": "C90",
+            "type": "CriterionNode",
+            "data": [
+                "Mode: DoesNotExist",
+                "Variable ID: Guard.InsidePit"
+            ]
+        },
+        {
+            "id": "R71",
+            "type": "RuleNode",
+            "data": [
+                "Rule ID: rule_id",
+                "Consequent: 1"
+            ]
+        },
+        {
+            "id": "O116",
+            "type": "ConsequenceNode",
+            "data": [
+                "Outcome ID: Guard.Unavailable",
+                "Minimum: 1",
+                "Fallback: False",
+                "Fire Event: False"
+            ]
+        },
+        {
+            "id": "W74",
+            "type": "WriteBackNode",
+            "data": [
+                "Target Key: Guard.InsidePit",
+                "Operation: Set",
+                "Value Type: Bool",
+                "Value: True"
+            ]
+        },
+        {
+            "id": "E50",
+            "type": "EventNode",
+            "data": [
+                "Event ID: CheckVaultExit"
+            ]
+        },
+        {
+            "id": "C91",
+            "type": "CriterionNode",
+            "data": [
+                "Mode: BoolEquals",
+                "Variable ID: Guard.InsidePit",
+                "Expected Bool: True"
+            ]
+        },
+        {
+            "id": "C92",
+            "type": "CriterionNode",
+            "data": [
+                "Mode: And"
+            ]
+        },
+        {
+            "id": "R72",
+            "type": "RuleNode",
+            "data": [
+                "Rule ID: vault_exit_safe",
+                "Consequent: 1"
+            ]
+        },
+        {
+            "id": "C93",
+            "type": "CriterionNode",
+            "data": [
+                "Mode: BoolEquals",
+                "Variable ID: Player.HasFruit",
+                "Expected Bool: True"
+            ]
+        },
+        {
+            "id": "O117",
+            "type": "ConsequenceNode",
+            "data": [
+                "Outcome ID: Vault.GateExit",
+                "Minimum: 1",
+                "Fallback: False",
+                "Fire Event: True",
+                "Target: GameplaySignal",
+                "Payload: Vault.GateExit"
+            ]
+        },
+        {
+            "id": "O118",
+            "type": "ConsequenceNode",
+            "data": [
+                "Outcome ID: CheckVaultExit.Blocked",
+                "Minimum: 0",
+                "Fallback: True",
+                "Fire Event: True",
+                "Target: DialogueGraph",
+                "Payload: UnableToExit"
+            ]
+        },
+        {
+            "id": "C94",
+            "type": "CriterionNode",
+            "data": [
+                "Mode: FuzzyNumber",
+                "Variable ID: Player.DistanceToCarpet",
+                "Set: Near",
+                "Shape: Low",
+                "Minimum: 0",
+                "Maximum: 10",
+                "Point A: 0",
+                "Point B: 2.5"
+            ]
+        },
+        {
+            "id": "C95",
+            "type": "CriterionNode",
+            "data": [
+                "Mode: FuzzyNumber",
+                "Variable ID: Player.DistanceToCarpet",
+                "Set: Near",
+                "Shape: Low",
+                "Minimum: 0",
+                "Maximum: 10",
+                "Point A: 0",
+                "Point B: 2.5"
+            ]
+        },
+        {
+            "id": "C96",
+            "type": "CriterionNode",
+            "data": [
+                "Mode: DoesNotExist",
+                "Variable ID: Guard.InsidePit"
+            ]
+        },
+        {
+            "id": "C97",
+            "type": "CriterionNode",
+            "data": [
+                "Mode: And"
+            ]
+        },
+        {
+            "id": "O119",
+            "type": "ConsequenceNode",
+            "data": [
+                "Outcome ID: GuardFellIntoPit",
+                "Minimum: 0",
+                "Fallback: True",
+                "Fire Event: False"
             ]
         }
     ],
@@ -3155,8 +4183,8 @@
         {
             "fromNode": "C13",
             "fromPort": "rules",
-            "toNode": "R11",
-            "toPort": "criteria"
+            "toNode": "C68",
+            "toPort": "criteriaA"
         },
         {
             "fromNode": "E05",
@@ -4049,8 +5077,8 @@
         {
             "fromNode": "C47",
             "fromPort": "rules",
-            "toNode": "C68",
-            "toPort": "criteriaA"
+            "toNode": "R38",
+            "toPort": "criteria"
         },
         {
             "fromNode": "C48",
@@ -4463,7 +5491,583 @@
         {
             "fromNode": "C68",
             "fromPort": "rules",
-            "toNode": "R38",
+            "toNode": "R11",
+            "toPort": "criteria"
+        },
+        {
+            "fromNode": "E36",
+            "fromPort": "consequences",
+            "toNode": "O88",
+            "toPort": "event"
+        },
+        {
+            "fromNode": "E36",
+            "fromPort": "consequences",
+            "toNode": "O89",
+            "toPort": "event"
+        },
+        {
+            "fromNode": "E36",
+            "fromPort": "rules",
+            "toNode": "R56",
+            "toPort": "event"
+        },
+        {
+            "fromNode": "C69",
+            "fromPort": "rules",
+            "toNode": "R56",
+            "toPort": "criteria"
+        },
+        {
+            "fromNode": "O88",
+            "fromPort": "writeBacks",
+            "toNode": "W56",
+            "toPort": "consequence"
+        },
+        {
+            "fromNode": "E37",
+            "fromPort": "consequences",
+            "toNode": "O90",
+            "toPort": "event"
+        },
+        {
+            "fromNode": "E37",
+            "fromPort": "consequences",
+            "toNode": "O91",
+            "toPort": "event"
+        },
+        {
+            "fromNode": "E37",
+            "fromPort": "rules",
+            "toNode": "R57",
+            "toPort": "event"
+        },
+        {
+            "fromNode": "C70",
+            "fromPort": "rules",
+            "toNode": "R57",
+            "toPort": "criteria"
+        },
+        {
+            "fromNode": "O90",
+            "fromPort": "writeBacks",
+            "toNode": "W57",
+            "toPort": "consequence"
+        },
+        {
+            "fromNode": "O90",
+            "fromPort": "writeBacks",
+            "toNode": "W60",
+            "toPort": "consequence"
+        },
+        {
+            "fromNode": "E38",
+            "fromPort": "consequences",
+            "toNode": "O92",
+            "toPort": "event"
+        },
+        {
+            "fromNode": "E38",
+            "fromPort": "consequences",
+            "toNode": "O93",
+            "toPort": "event"
+        },
+        {
+            "fromNode": "E38",
+            "fromPort": "rules",
+            "toNode": "R58",
+            "toPort": "event"
+        },
+        {
+            "fromNode": "C71",
+            "fromPort": "rules",
+            "toNode": "R58",
+            "toPort": "criteria"
+        },
+        {
+            "fromNode": "O92",
+            "fromPort": "writeBacks",
+            "toNode": "W58",
+            "toPort": "consequence"
+        },
+        {
+            "fromNode": "E39",
+            "fromPort": "consequences",
+            "toNode": "O94",
+            "toPort": "event"
+        },
+        {
+            "fromNode": "E39",
+            "fromPort": "consequences",
+            "toNode": "O95",
+            "toPort": "event"
+        },
+        {
+            "fromNode": "E39",
+            "fromPort": "rules",
+            "toNode": "R59",
+            "toPort": "event"
+        },
+        {
+            "fromNode": "C72",
+            "fromPort": "rules",
+            "toNode": "R59",
+            "toPort": "criteria"
+        },
+        {
+            "fromNode": "O94",
+            "fromPort": "writeBacks",
+            "toNode": "W59",
+            "toPort": "consequence"
+        },
+        {
+            "fromNode": "O94",
+            "fromPort": "writeBacks",
+            "toNode": "W65",
+            "toPort": "consequence"
+        },
+        {
+            "fromNode": "E40",
+            "fromPort": "consequences",
+            "toNode": "O96",
+            "toPort": "event"
+        },
+        {
+            "fromNode": "E40",
+            "fromPort": "consequences",
+            "toNode": "O97",
+            "toPort": "event"
+        },
+        {
+            "fromNode": "E40",
+            "fromPort": "rules",
+            "toNode": "R60",
+            "toPort": "event"
+        },
+        {
+            "fromNode": "C73",
+            "fromPort": "rules",
+            "toNode": "R60",
+            "toPort": "criteria"
+        },
+        {
+            "fromNode": "E41",
+            "fromPort": "consequences",
+            "toNode": "O98",
+            "toPort": "event"
+        },
+        {
+            "fromNode": "E41",
+            "fromPort": "consequences",
+            "toNode": "O99",
+            "toPort": "event"
+        },
+        {
+            "fromNode": "E41",
+            "fromPort": "rules",
+            "toNode": "R61",
+            "toPort": "event"
+        },
+        {
+            "fromNode": "C74",
+            "fromPort": "rules",
+            "toNode": "R61",
+            "toPort": "criteria"
+        },
+        {
+            "fromNode": "O98",
+            "fromPort": "writeBacks",
+            "toNode": "W61",
+            "toPort": "consequence"
+        },
+        {
+            "fromNode": "O98",
+            "fromPort": "writeBacks",
+            "toNode": "W62",
+            "toPort": "consequence"
+        },
+        {
+            "fromNode": "E42",
+            "fromPort": "consequences",
+            "toNode": "O100",
+            "toPort": "event"
+        },
+        {
+            "fromNode": "E42",
+            "fromPort": "consequences",
+            "toNode": "O101",
+            "toPort": "event"
+        },
+        {
+            "fromNode": "E42",
+            "fromPort": "consequences",
+            "toNode": "O102",
+            "toPort": "event"
+        },
+        {
+            "fromNode": "E42",
+            "fromPort": "rules",
+            "toNode": "R62",
+            "toPort": "event"
+        },
+        {
+            "fromNode": "E42",
+            "fromPort": "rules",
+            "toNode": "R63",
+            "toPort": "event"
+        },
+        {
+            "fromNode": "C75",
+            "fromPort": "rules",
+            "toNode": "R62",
+            "toPort": "criteria"
+        },
+        {
+            "fromNode": "C76",
+            "fromPort": "rules",
+            "toNode": "C75",
+            "toPort": "criteriaA"
+        },
+        {
+            "fromNode": "C76",
+            "fromPort": "rules",
+            "toNode": "R63",
+            "toPort": "criteria"
+        },
+        {
+            "fromNode": "O100",
+            "fromPort": "writeBacks",
+            "toNode": "W63",
+            "toPort": "consequence"
+        },
+        {
+            "fromNode": "O101",
+            "fromPort": "writeBacks",
+            "toNode": "W64",
+            "toPort": "consequence"
+        },
+        {
+            "fromNode": "E43",
+            "fromPort": "consequences",
+            "toNode": "O103",
+            "toPort": "event"
+        },
+        {
+            "fromNode": "E43",
+            "fromPort": "consequences",
+            "toNode": "O104",
+            "toPort": "event"
+        },
+        {
+            "fromNode": "E43",
+            "fromPort": "rules",
+            "toNode": "R64",
+            "toPort": "event"
+        },
+        {
+            "fromNode": "C77",
+            "fromPort": "rules",
+            "toNode": "C79",
+            "toPort": "criteriaA"
+        },
+        {
+            "fromNode": "C78",
+            "fromPort": "rules",
+            "toNode": "C79",
+            "toPort": "criteriaB"
+        },
+        {
+            "fromNode": "C79",
+            "fromPort": "rules",
+            "toNode": "R64",
+            "toPort": "criteria"
+        },
+        {
+            "fromNode": "O103",
+            "fromPort": "writeBacks",
+            "toNode": "W66",
+            "toPort": "consequence"
+        },
+        {
+            "fromNode": "E44",
+            "fromPort": "consequences",
+            "toNode": "O105",
+            "toPort": "event"
+        },
+        {
+            "fromNode": "E44",
+            "fromPort": "consequences",
+            "toNode": "O106",
+            "toPort": "event"
+        },
+        {
+            "fromNode": "E44",
+            "fromPort": "rules",
+            "toNode": "R65",
+            "toPort": "event"
+        },
+        {
+            "fromNode": "C80",
+            "fromPort": "rules",
+            "toNode": "R65",
+            "toPort": "criteria"
+        },
+        {
+            "fromNode": "O105",
+            "fromPort": "writeBacks",
+            "toNode": "W67",
+            "toPort": "consequence"
+        },
+        {
+            "fromNode": "E45",
+            "fromPort": "consequences",
+            "toNode": "O107",
+            "toPort": "event"
+        },
+        {
+            "fromNode": "E45",
+            "fromPort": "consequences",
+            "toNode": "O108",
+            "toPort": "event"
+        },
+        {
+            "fromNode": "E45",
+            "fromPort": "rules",
+            "toNode": "R66",
+            "toPort": "event"
+        },
+        {
+            "fromNode": "C81",
+            "fromPort": "rules",
+            "toNode": "R66",
+            "toPort": "criteria"
+        },
+        {
+            "fromNode": "O107",
+            "fromPort": "writeBacks",
+            "toNode": "W68",
+            "toPort": "consequence"
+        },
+        {
+            "fromNode": "E46",
+            "fromPort": "consequences",
+            "toNode": "O109",
+            "toPort": "event"
+        },
+        {
+            "fromNode": "E46",
+            "fromPort": "consequences",
+            "toNode": "O110",
+            "toPort": "event"
+        },
+        {
+            "fromNode": "E46",
+            "fromPort": "rules",
+            "toNode": "R67",
+            "toPort": "event"
+        },
+        {
+            "fromNode": "C82",
+            "fromPort": "rules",
+            "toNode": "C97",
+            "toPort": "criteriaA"
+        },
+        {
+            "fromNode": "O109",
+            "fromPort": "writeBacks",
+            "toNode": "W69",
+            "toPort": "consequence"
+        },
+        {
+            "fromNode": "C83",
+            "fromPort": "rules",
+            "toNode": "C86",
+            "toPort": "criteriaA"
+        },
+        {
+            "fromNode": "C84",
+            "fromPort": "rules",
+            "toNode": "C86",
+            "toPort": "criteriaB"
+        },
+        {
+            "fromNode": "C85",
+            "fromPort": "rules",
+            "toNode": "C87",
+            "toPort": "criteriaB"
+        },
+        {
+            "fromNode": "C86",
+            "fromPort": "rules",
+            "toNode": "C87",
+            "toPort": "criteriaA"
+        },
+        {
+            "fromNode": "C87",
+            "fromPort": "rules",
+            "toNode": "R68",
+            "toPort": "criteria"
+        },
+        {
+            "fromNode": "E47",
+            "fromPort": "consequences",
+            "toNode": "O111",
+            "toPort": "event"
+        },
+        {
+            "fromNode": "E47",
+            "fromPort": "consequences",
+            "toNode": "O112",
+            "toPort": "event"
+        },
+        {
+            "fromNode": "E47",
+            "fromPort": "consequences",
+            "toNode": "O113",
+            "toPort": "event"
+        },
+        {
+            "fromNode": "E47",
+            "fromPort": "rules",
+            "toNode": "R68",
+            "toPort": "event"
+        },
+        {
+            "fromNode": "E47",
+            "fromPort": "rules",
+            "toNode": "R69",
+            "toPort": "event"
+        },
+        {
+            "fromNode": "C88",
+            "fromPort": "rules",
+            "toNode": "R69",
+            "toPort": "criteria"
+        },
+        {
+            "fromNode": "O111",
+            "fromPort": "writeBacks",
+            "toNode": "W70",
+            "toPort": "consequence"
+        },
+        {
+            "fromNode": "O112",
+            "fromPort": "writeBacks",
+            "toNode": "W71",
+            "toPort": "consequence"
+        },
+        {
+            "fromNode": "O113",
+            "fromPort": "writeBacks",
+            "toNode": "W72",
+            "toPort": "consequence"
+        },
+        {
+            "fromNode": "E48",
+            "fromPort": "consequences",
+            "toNode": "O114",
+            "toPort": "event"
+        },
+        {
+            "fromNode": "E48",
+            "fromPort": "consequences",
+            "toNode": "O115",
+            "toPort": "event"
+        },
+        {
+            "fromNode": "E48",
+            "fromPort": "rules",
+            "toNode": "R70",
+            "toPort": "event"
+        },
+        {
+            "fromNode": "C89",
+            "fromPort": "rules",
+            "toNode": "R70",
+            "toPort": "criteria"
+        },
+        {
+            "fromNode": "O114",
+            "fromPort": "writeBacks",
+            "toNode": "W73",
+            "toPort": "consequence"
+        },
+        {
+            "fromNode": "E49",
+            "fromPort": "consequences",
+            "toNode": "O116",
+            "toPort": "event"
+        },
+        {
+            "fromNode": "E49",
+            "fromPort": "consequences",
+            "toNode": "O119",
+            "toPort": "event"
+        },
+        {
+            "fromNode": "E49",
+            "fromPort": "rules",
+            "toNode": "R71",
+            "toPort": "event"
+        },
+        {
+            "fromNode": "C90",
+            "fromPort": "rules",
+            "toNode": "R71",
+            "toPort": "criteria"
+        },
+        {
+            "fromNode": "O116",
+            "fromPort": "writeBacks",
+            "toNode": "W74",
+            "toPort": "consequence"
+        },
+        {
+            "fromNode": "E50",
+            "fromPort": "consequences",
+            "toNode": "O117",
+            "toPort": "event"
+        },
+        {
+            "fromNode": "E50",
+            "fromPort": "consequences",
+            "toNode": "O118",
+            "toPort": "event"
+        },
+        {
+            "fromNode": "E50",
+            "fromPort": "rules",
+            "toNode": "R72",
+            "toPort": "event"
+        },
+        {
+            "fromNode": "C91",
+            "fromPort": "rules",
+            "toNode": "C92",
+            "toPort": "criteriaA"
+        },
+        {
+            "fromNode": "C92",
+            "fromPort": "rules",
+            "toNode": "R72",
+            "toPort": "criteria"
+        },
+        {
+            "fromNode": "C93",
+            "fromPort": "rules",
+            "toNode": "C92",
+            "toPort": "criteriaB"
+        },
+        {
+            "fromNode": "C96",
+            "fromPort": "rules",
+            "toNode": "C97",
+            "toPort": "criteriaB"
+        },
+        {
+            "fromNode": "C97",
+            "fromPort": "rules",
+            "toNode": "R67",
             "toPort": "criteria"
         }
     ]

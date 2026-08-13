@@ -5,6 +5,7 @@ public class Pursuit : MonoBehaviour
 {
     [Header("Targets")]
     [SerializeField] private Transform player;
+    [SerializeField] private CharacterController playerController;
 
     [Header("Movement")]
     [SerializeField] private float moveSpeed = 3.5f;
@@ -35,7 +36,9 @@ public class Pursuit : MonoBehaviour
 
         Vector3 direction = targetPosition - transform.position;
 
-        if (direction.magnitude <= arrestDistance)
+        bool playerIsGrounded = playerController == null || playerController.isGrounded;
+
+        if (direction.magnitude <= arrestDistance && playerIsGrounded)
         {
             arrested = true;
             Debug.Log("[Pursuit] player reached arrest radius.");
