@@ -1,0 +1,186 @@
+FUZZYGRAPH2 SCENE BINDING AUDIT
+Scene: Bazaar_3.2
+Generated: 19-08-2026 16:43:53
+
+========================================
+EVENT INVOKERS
+========================================
+
+GameObject: Bazaar_Greybox/Hidden_Pit/HiddenPitEntrance/InteractZone
+Event ID: VendorPitJump
+Consequence Source: Bazaar_Greybox/Hidden_Pit/HiddenPitEntrance/InteractZone (Transform)
+
+GameObject: Bazaar_Greybox/Hidden_Pit/carpet2
+Event ID: Inspect
+Consequence Source: Bazaar_Greybox/Hidden_Pit/carpet2 (Transform)
+
+GameObject: Bazaar_Greybox/Coins
+Event ID: PickCoins
+Consequence Source: Bazaar_Greybox/Coins (Transform)
+
+GameObject: Main_Vendor/VendorStateEvaluator
+Event ID: VendorEvaluateState
+Consequence Source: Main_Vendor (Transform)
+
+GameObject: Temp
+Event ID: BazaarTalkToGuard
+Consequence Source: Bazaar_Greybox/Guard (Transform)
+
+GameObject: Bazaar_Greybox/Gate/VaultEntry
+Event ID: EnterVault
+Consequence Source: Bazaar_Greybox/Gate (Transform)
+
+GameObject: Bazaar_Greybox/Hidden_Pit/carpet2/TalkToVendor
+Event ID: BazaarTalkToVendor
+Consequence Source: Main_Vendor (Transform)
+
+GameObject: Bazaar_Greybox/Guard/ArrestDialogue
+Event ID: Inspect
+Consequence Source: Bazaar_Greybox/Guard (Transform)
+
+GameObject: Bazaar_Greybox/Guard
+Event ID: BazaarTalkToGuard
+Consequence Source: Bazaar_Greybox/Guard (Transform)
+
+GameObject: Bazaar_Greybox/Hidden_Pit/carpet2/VendorReaction
+Event ID: NoticeVendorReaction
+Consequence Source: Bazaar_Greybox/Hidden_Pit/carpet2 (Transform)
+
+GameObject: Main_Vendor/InteractionZone
+Event ID: VendorEvaluateState
+Consequence Source: Main_Vendor (Transform)
+
+GameObject: Bazaar_Greybox/Flower
+Event ID: PickFlowers
+Consequence Source: Bazaar_Greybox/Flower (Transform)
+
+GameObject: Bazaar_Greybox/Env/tree2/InteractionZone
+Event ID: InspectTreeHollow
+Consequence Source: Bazaar_Greybox/Guard (Transform)
+
+GameObject: Main_Vendor/InteractionZone
+Event ID: BazaarTalkToVendor
+Consequence Source: Main_Vendor (Transform)
+
+GameObject: FG2_CarpetInspect
+Event ID: Inspect
+Consequence Source: Main_Vendor (Transform)
+
+========================================
+SIGNAL ROUTER BINDINGS
+========================================
+
+Router: GameplaySignalRouter
+
+Signal: Flowers.Picked
+  [0] Bazaar_Greybox/Flower (GameObject) -> SetActive()
+
+Signal: Coins.Picked
+  [0] Bazaar_Greybox/Coins (GameObject) -> SetActive()
+
+Signal: Pit.Revealed
+  [0] Bazaar_Greybox/Hidden_Pit/PitReveal (CarpetPit) -> BeginConfrontation()
+  [1] Bazaar_Greybox/Hidden_Pit/carpet2 (RadiusGizmos) -> FinishContext()
+
+Signal: Pit.JumpChosen
+  [0] Bazaar_Greybox/Hidden_Pit/PitReveal (CarpetPit) -> ChooseJump()
+  [1] SceneTransition (SceneTransition) -> LoadVault()
+
+Signal: Pit.ExcuseChosen
+  [0] Bazaar_Greybox/Hidden_Pit/PitReveal (CarpetPit) -> ChooseExcuse()
+
+Signal: Player.Arrested
+  [0] Player (Arrest) -> ArrestPlayer()
+
+Signal: Vendor.MaxReaction
+  [0] Bazaar_Greybox/Hidden_Pit/carpet2 (RadiusGizmos) -> ShowMaximumReaction()
+
+Signal: TreeHollow.SearchStarted
+  [0] Bazaar_Greybox/Env/tree2 (Pursuit2) -> BeginSearch()
+  [1] Bazaar_Greybox/Env/tree2/InteractionZone (GameObject) -> SetActive()
+  [2] Key (GameObject) -> SetActive()
+
+Signal: TreeHollow.WalkAway
+  [0] Bazaar_Greybox/Env/tree2 (Pursuit2) -> WalkAway()
+
+Signal: Vault.Enter
+  [0] SceneTransition (SceneTransition) -> LoadVault()
+
+Signal: Bazaar.ReturnFromVaultGate
+  [0] SceneTransition (ReturnHandle) -> ReturnFromVaultGate()
+
+Signal: Pit.RevealedQuietly
+  [0] Bazaar_Greybox/Hidden_Pit/carpet2 (GameObject) -> SetActive()
+  [1] Bazaar_Greybox/Hidden_Pit/HiddenPitEntrance (GameObject) -> SetActive()
+
+========================================
+INTERACTABLE OBJECTS
+========================================
+
+GameObject: Bazaar_Greybox/Guard
+Prompt: Have a chat
+Interact Once: False
+Required True Key: <none>
+Object To Disable: <none>
+On Interact:
+  [0] Bazaar_Greybox/Guard (EventInvoker) -> Raise()
+
+GameObject: Bazaar_Greybox/Hidden_Pit/carpet2
+Prompt: Interact
+Interact Once: False
+Required True Key: <none>
+Object To Disable: <none>
+On Interact:
+  [0] Bazaar_Greybox/Hidden_Pit/carpet2/VendorReaction (EventInvoker) -> Raise()
+  [1] Bazaar_Greybox/Hidden_Pit/carpet2 (EventInvoker) -> Raise()
+  [2] Bazaar_Greybox/Hidden_Pit/carpet2/TalkToVendor (EventInvoker) -> Raise()
+
+GameObject: Bazaar_Greybox/Hidden_Pit/HiddenPitEntrance/InteractZone
+Prompt: Jump In
+Interact Once: True
+Required True Key: <none>
+Object To Disable: <none>
+On Interact:
+  [0] Bazaar_Greybox/Hidden_Pit/HiddenPitEntrance/InteractZone (EventInvoker) -> Raise()
+
+GameObject: Bazaar_Greybox/Gate/VaultEntry
+Prompt: Enter Vault
+Interact Once: True
+Required True Key: <none>
+Object To Disable: <none>
+On Interact:
+  [0] Bazaar_Greybox/Gate/VaultEntry (EventInvoker) -> Raise()
+
+GameObject: Bazaar_Greybox/Flower
+Prompt: Interact
+Interact Once: True
+Required True Key: <none>
+Object To Disable: Bazaar_Greybox/Flower (GameObject)
+On Interact:
+  [0] Bazaar_Greybox/Flower (EventInvoker) -> Raise()
+
+GameObject: Main_Vendor/InteractionZone
+Prompt: Chat
+Interact Once: False
+Required True Key: <none>
+Object To Disable: <none>
+On Interact:
+  [0] Main_Vendor/VendorStateEvaluator (EventInvoker) -> Raise()
+  [1] Main_Vendor/InteractionZone (EventInvoker) -> Raise()
+
+GameObject: Bazaar_Greybox/Env/tree2/InteractionZone
+Prompt: Inspect Tree
+Interact Once: False
+Required True Key: <none>
+Object To Disable: <none>
+On Interact:
+  [0] Bazaar_Greybox/Env/tree2/InteractionZone (EventInvoker) -> Raise()
+
+GameObject: Bazaar_Greybox/Coins
+Prompt: Collect
+Interact Once: True
+Required True Key: <none>
+Object To Disable: Bazaar_Greybox/Coins (GameObject)
+On Interact:
+  [0] Bazaar_Greybox/Coins (EventInvoker) -> Raise()
+

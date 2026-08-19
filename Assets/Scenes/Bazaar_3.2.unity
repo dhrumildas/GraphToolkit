@@ -1381,7 +1381,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LoiterDialogue
   loiterTelemetry: {fileID: 191557056}
-  triggerTime: 10
+  triggerTime: 7
   raiseFuzzyEvent: 1
   eventID: EvaluateLoitering
   consequenceSource: {fileID: 45293461}
@@ -1435,6 +1435,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SceneTransition
   vaultSceneName: Vault
   bazaarSceneName: Bazaar_3.2
+  mainMenuSceneName: Menu
 --- !u!114 &215783883
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2179,6 +2180,7 @@ MonoBehaviour:
   responseTime: 5
   player: {fileID: 792556097}
   pitLandingPoint: {fileID: 0}
+  carpetContext: {fileID: 1247322357}
 --- !u!1 &571253531
 GameObject:
   m_ObjectHideFlags: 0
@@ -5155,6 +5157,50 @@ MonoBehaviour:
         - m_Target: {fileID: 215783883}
           m_TargetAssemblyTypeName: ReturnHandle, Assembly-CSharp
           m_MethodName: ReturnFromVaultGate
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - signalID: Pit.RevealedQuietly
+    reaction:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 945535205}
+          m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_MethodName: SetActive
+          m_Mode: 6
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 753125771}
+          m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_MethodName: SetActive
+          m_Mode: 6
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 1
+          m_CallState: 2
+  - signalID: Pit.VendorChoiceReveal
+    reaction:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 565138962}
+          m_TargetAssemblyTypeName: CarpetPit, Assembly-CSharp
+          m_MethodName: RevealQuietlyAfterDialogue
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}

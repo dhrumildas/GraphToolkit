@@ -1,8 +1,8 @@
 ﻿{
     "graphName": "MainGame",
     "assetPath": "Assets/FuzzyGraph_2/Editor/Graph/MainGame.fuzzygraph2",
-    "exportedAt": "2026-08-18 22:55:29",
-    "compileCheck": "[fuzzygraph2] compiled 'export check' | events 51 | variables 11 | expressions 109 | rules 72 | bands 70 | fallbacks 51 | consequences 40 | write-backs 75",
+    "exportedAt": "2026-08-19 19:01:40",
+    "compileCheck": "[fuzzygraph2] compiled 'export check' | events 55 | variables 11 | expressions 123 | rules 77 | bands 74 | fallbacks 54 | consequences 43 | write-backs 85",
     "nodes": [
         {
             "id": "E01",
@@ -52,41 +52,11 @@
             ]
         },
         {
-            "id": "C01",
-            "type": "CriterionNode",
-            "data": [
-                "Mode: FuzzyNumber",
-                "Variable ID: Player.DistanceToCarpet",
-                "Set: Mid",
-                "Shape: Range",
-                "Minimum: 0",
-                "Maximum: 10",
-                "Point A: 2",
-                "Point B: 4",
-                "Point C: 6",
-                "Point D: 8"
-            ]
-        },
-        {
             "id": "R02",
             "type": "RuleNode",
             "data": [
                 "Rule ID: pressure_mid",
                 "Consequent: 0.35"
-            ]
-        },
-        {
-            "id": "C02",
-            "type": "CriterionNode",
-            "data": [
-                "Mode: FuzzyNumber",
-                "Variable ID: Player.DistanceToCarpet",
-                "Set: Far",
-                "Shape: High",
-                "Minimum: 0",
-                "Maximum: 10",
-                "Point A: 6",
-                "Point B: 10"
             ]
         },
         {
@@ -122,41 +92,6 @@
             "type": "EventNode",
             "data": [
                 "Event ID: AmbientSocialPressure"
-            ]
-        },
-        {
-            "id": "C03",
-            "type": "CriterionNode",
-            "data": [
-                "Mode: FuzzyNumber",
-                "Variable ID: Player.DistanceToCarpet",
-                "Set: Near",
-                "Shape: Low",
-                "Minimum: 0",
-                "Maximum: 10",
-                "Point A: 0",
-                "Point B: 4"
-            ]
-        },
-        {
-            "id": "C04",
-            "type": "CriterionNode",
-            "data": [
-                "Mode: FuzzyNumber",
-                "Variable ID: Player.LoiterTimeNearCarpet",
-                "Set: Lingering",
-                "Shape: High",
-                "Minimum: 0",
-                "Maximum: 14.9",
-                "Point A: 3",
-                "Point B: 10"
-            ]
-        },
-        {
-            "id": "C05",
-            "type": "CriterionNode",
-            "data": [
-                "Mode: And"
             ]
         },
         {
@@ -226,32 +161,11 @@
             ]
         },
         {
-            "id": "C06",
-            "type": "CriterionNode",
-            "data": [
-                "Mode: FuzzyNumber",
-                "Variable ID: Vendor.Nervousness",
-                "Set: Nervous",
-                "Shape: High",
-                "Minimum: 0",
-                "Maximum: 10",
-                "Point A: 3",
-                "Point B: 6"
-            ]
-        },
-        {
             "id": "R06",
             "type": "RuleNode",
             "data": [
                 "Rule ID: pressure_vendor_nervous",
                 "Consequent: 0.8"
-            ]
-        },
-        {
-            "id": "C07",
-            "type": "CriterionNode",
-            "data": [
-                "Mode: And"
             ]
         },
         {
@@ -350,35 +264,10 @@
             ]
         },
         {
-            "id": "C08",
-            "type": "CriterionNode",
-            "data": [
-                "Mode: DoesNotExist",
-                "Variable ID: Guard.HasMetPlayer"
-            ]
-        },
-        {
-            "id": "C09",
-            "type": "CriterionNode",
-            "data": [
-                "Mode: BoolEquals",
-                "Variable ID: Guard.HasMetPlayer",
-                "Expected Bool: True"
-            ]
-        },
-        {
             "id": "E04",
             "type": "EventNode",
             "data": [
                 "Event ID: PickFlowers"
-            ]
-        },
-        {
-            "id": "C10",
-            "type": "CriterionNode",
-            "data": [
-                "Mode: DoesNotExist",
-                "Variable ID: Player.HasFlowers"
             ]
         },
         {
@@ -422,31 +311,6 @@
             ]
         },
         {
-            "id": "C11",
-            "type": "CriterionNode",
-            "data": [
-                "Mode: BoolEquals",
-                "Variable ID: Guard.HasMetPlayer",
-                "Expected Bool: True"
-            ]
-        },
-        {
-            "id": "C12",
-            "type": "CriterionNode",
-            "data": [
-                "Mode: BoolEquals",
-                "Variable ID: Player.HasFlowers",
-                "Expected Bool: True"
-            ]
-        },
-        {
-            "id": "C13",
-            "type": "CriterionNode",
-            "data": [
-                "Mode: And"
-            ]
-        },
-        {
             "id": "R11",
             "type": "RuleNode",
             "data": [
@@ -471,15 +335,6 @@
             "type": "EventNode",
             "data": [
                 "Event ID: OfferFlowersToGuard"
-            ]
-        },
-        {
-            "id": "C14",
-            "type": "CriterionNode",
-            "data": [
-                "Mode: BoolEquals",
-                "Variable ID: Player.HasFlowers",
-                "Expected Bool: True"
             ]
         },
         {
@@ -758,27 +613,11 @@
             ]
         },
         {
-            "id": "C15",
-            "type": "CriterionNode",
-            "data": [
-                "Mode: DoesNotExist",
-                "Variable ID: Vendor.HasMetPlayer"
-            ]
-        },
-        {
             "id": "R17",
             "type": "RuleNode",
             "data": [
                 "Rule ID: vendor_first_meeting",
                 "Consequent: 0.1"
-            ]
-        },
-        {
-            "id": "C16",
-            "type": "CriterionNode",
-            "data": [
-                "Mode: Exists",
-                "Variable ID: Vendor.HasMetPlayer"
             ]
         },
         {
@@ -861,13 +700,6 @@
             ]
         },
         {
-            "id": "C17",
-            "type": "CriterionNode",
-            "data": [
-                "Mode: And"
-            ]
-        },
-        {
             "id": "R19",
             "type": "RuleNode",
             "data": [
@@ -923,14 +755,6 @@
             ]
         },
         {
-            "id": "C18",
-            "type": "CriterionNode",
-            "data": [
-                "Mode: Exists",
-                "Variable ID: Vendor.HasMetPlayer"
-            ]
-        },
-        {
             "id": "R20",
             "type": "RuleNode",
             "data": [
@@ -979,35 +803,10 @@
             ]
         },
         {
-            "id": "C19",
-            "type": "CriterionNode",
-            "data": [
-                "Mode: Exists",
-                "Variable ID: Vendor.HasMetPlayer"
-            ]
-        },
-        {
-            "id": "C20",
-            "type": "CriterionNode",
-            "data": [
-                "Mode: BoolEquals",
-                "Variable ID: Player.HasFlowers",
-                "Expected Bool: True"
-            ]
-        },
-        {
             "id": "E13",
             "type": "EventNode",
             "data": [
                 "Event ID: PickCoins"
-            ]
-        },
-        {
-            "id": "C21",
-            "type": "CriterionNode",
-            "data": [
-                "Mode: DoesNotExist",
-                "Variable ID: Player.HasCoins"
             ]
         },
         {
@@ -1055,30 +854,6 @@
             "type": "EventNode",
             "data": [
                 "Event ID: OfferVendorCoins"
-            ]
-        },
-        {
-            "id": "C22",
-            "type": "CriterionNode",
-            "data": [
-                "Mode: Exists",
-                "Variable ID: Vendor.HasMetPlayer"
-            ]
-        },
-        {
-            "id": "C23",
-            "type": "CriterionNode",
-            "data": [
-                "Mode: BoolEquals",
-                "Variable ID: Player.HasCoins",
-                "Expected Bool: True"
-            ]
-        },
-        {
-            "id": "C24",
-            "type": "CriterionNode",
-            "data": [
-                "Mode: And"
             ]
         },
         {
@@ -1137,14 +912,6 @@
             ]
         },
         {
-            "id": "C25",
-            "type": "CriterionNode",
-            "data": [
-                "Mode: Exists",
-                "Variable ID: Vendor.WasBribed"
-            ]
-        },
-        {
             "id": "R23",
             "type": "RuleNode",
             "data": [
@@ -1200,14 +967,6 @@
             ]
         },
         {
-            "id": "C26",
-            "type": "CriterionNode",
-            "data": [
-                "Mode: Exists",
-                "Variable ID: Vendor.WasBribed"
-            ]
-        },
-        {
             "id": "R24",
             "type": "RuleNode",
             "data": [
@@ -1260,14 +1019,6 @@
             "type": "EventNode",
             "data": [
                 "Event ID: VendorAdmitRobbery"
-            ]
-        },
-        {
-            "id": "C27",
-            "type": "CriterionNode",
-            "data": [
-                "Mode: Exists",
-                "Variable ID: Vendor.WasBribed"
             ]
         },
         {
@@ -1343,62 +1094,6 @@
             "type": "EventNode",
             "data": [
                 "Event ID: VendorEvaluateState"
-            ]
-        },
-        {
-            "id": "C28",
-            "type": "CriterionNode",
-            "data": [
-                "Mode: FuzzyNumber",
-                "Variable ID: Vendor.Suspicion",
-                "Set: SuspicionLow",
-                "Shape: Low",
-                "Minimum: 0",
-                "Maximum: 10",
-                "Point A: 2",
-                "Point B: 6"
-            ]
-        },
-        {
-            "id": "C29",
-            "type": "CriterionNode",
-            "data": [
-                "Mode: FuzzyNumber",
-                "Variable ID: Vendor.Suspicion",
-                "Set: SuspicionHigh",
-                "Shape: High",
-                "Minimum: 0",
-                "Maximum: 10",
-                "Point A: 5",
-                "Point B: 8"
-            ]
-        },
-        {
-            "id": "C30",
-            "type": "CriterionNode",
-            "data": [
-                "Mode: FuzzyNumber",
-                "Variable ID: Vendor.Nervousness",
-                "Set: NervousnessLow",
-                "Shape: Low",
-                "Minimum: 0",
-                "Maximum: 10",
-                "Point A: 2",
-                "Point B: 5"
-            ]
-        },
-        {
-            "id": "C31",
-            "type": "CriterionNode",
-            "data": [
-                "Mode: FuzzyNumber",
-                "Variable ID: Vendor.Nervousness",
-                "Set: NervousnessHigh",
-                "Shape: High",
-                "Minimum: 0",
-                "Maximum: 10",
-                "Point A: 3",
-                "Point B: 6"
             ]
         },
         {
@@ -1486,38 +1181,10 @@
             ]
         },
         {
-            "id": "C32",
-            "type": "CriterionNode",
-            "data": [
-                "Mode: And"
-            ]
-        },
-        {
-            "id": "C33",
-            "type": "CriterionNode",
-            "data": [
-                "Mode: And"
-            ]
-        },
-        {
             "id": "E19",
             "type": "EventNode",
             "data": [
                 "Event ID: NoticeVendorReaction"
-            ]
-        },
-        {
-            "id": "C34",
-            "type": "CriterionNode",
-            "data": [
-                "Mode: FuzzyNumber",
-                "Variable ID: Vendor.Nervousness",
-                "Set: VendorReactionNotice",
-                "Shape: High",
-                "Minimum: 0",
-                "Maximum: 10",
-                "Point A: 3",
-                "Point B: 6"
             ]
         },
         {
@@ -1559,28 +1226,10 @@
             ]
         },
         {
-            "id": "C35",
-            "type": "CriterionNode",
-            "data": [
-                "Mode: BoolEquals",
-                "Variable ID: Player.NoticedVendorReaction",
-                "Expected Bool: True"
-            ]
-        },
-        {
             "id": "E20",
             "type": "EventNode",
             "data": [
                 "Event ID: VendorPitJump"
-            ]
-        },
-        {
-            "id": "C36",
-            "type": "CriterionNode",
-            "data": [
-                "Mode: BoolEquals",
-                "Variable ID: Player.FoundPitRoute",
-                "Expected Bool: True"
             ]
         },
         {
@@ -1621,15 +1270,6 @@
             ]
         },
         {
-            "id": "C37",
-            "type": "CriterionNode",
-            "data": [
-                "Mode: BoolEquals",
-                "Variable ID: Player.FoundPitRoute",
-                "Expected Bool: True"
-            ]
-        },
-        {
             "id": "R31",
             "type": "RuleNode",
             "data": [
@@ -1664,15 +1304,6 @@
             "type": "EventNode",
             "data": [
                 "Event ID: VendorPitTimeout"
-            ]
-        },
-        {
-            "id": "C38",
-            "type": "CriterionNode",
-            "data": [
-                "Mode: BoolEquals",
-                "Variable ID: Player.FoundPitRoute",
-                "Expected Bool: True"
             ]
         },
         {
@@ -1718,15 +1349,6 @@
             "type": "EventNode",
             "data": [
                 "Event ID: VendorCallsGuard"
-            ]
-        },
-        {
-            "id": "C39",
-            "type": "CriterionNode",
-            "data": [
-                "Mode: BoolEquals",
-                "Variable ID: Player.FoundPitRoute",
-                "Expected Bool: True"
             ]
         },
         {
@@ -1783,15 +1405,6 @@
             ]
         },
         {
-            "id": "C40",
-            "type": "CriterionNode",
-            "data": [
-                "Mode: BoolEquals",
-                "Variable ID: Guard.PursuePlayer",
-                "Expected Bool: True"
-            ]
-        },
-        {
             "id": "R35",
             "type": "RuleNode",
             "data": [
@@ -1842,20 +1455,6 @@
             ]
         },
         {
-            "id": "C41",
-            "type": "CriterionNode",
-            "data": [
-                "Mode: FuzzyNumber",
-                "Variable ID: Guard.TalkCount",
-                "Set: High",
-                "Shape: High",
-                "Minimum: 0",
-                "Maximum: 10",
-                "Point A: 2",
-                "Point B: 4"
-            ]
-        },
-        {
             "id": "R36",
             "type": "RuleNode",
             "data": [
@@ -1890,15 +1489,6 @@
             "type": "EventNode",
             "data": [
                 "Event ID: GiveCoinsToGuard"
-            ]
-        },
-        {
-            "id": "C42",
-            "type": "CriterionNode",
-            "data": [
-                "Mode: BoolEquals",
-                "Variable ID: Player.HasCoins",
-                "Expected Bool: True"
             ]
         },
         {
@@ -1960,20 +1550,6 @@
             ]
         },
         {
-            "id": "C43",
-            "type": "CriterionNode",
-            "data": [
-                "Mode: FuzzyNumber",
-                "Variable ID: Guard.Suspicion",
-                "Set: High",
-                "Shape: High",
-                "Minimum: 0",
-                "Maximum: 40",
-                "Point A: 10",
-                "Point B: 20"
-            ]
-        },
-        {
             "id": "R38",
             "type": "RuleNode",
             "data": [
@@ -2011,63 +1587,6 @@
                 "Operation: Set",
                 "Value Type: Bool",
                 "Value: False"
-            ]
-        },
-        {
-            "id": "C44",
-            "type": "CriterionNode",
-            "data": [
-                "Mode: BoolEquals",
-                "Variable ID: Guard.AllowedEntry",
-                "Expected Bool: False"
-            ]
-        },
-        {
-            "id": "C45",
-            "type": "CriterionNode",
-            "data": [
-                "Mode: And"
-            ]
-        },
-        {
-            "id": "C46",
-            "type": "CriterionNode",
-            "data": [
-                "Mode: BoolEquals",
-                "Variable ID: Guard.AllowedEntry",
-                "Expected Bool: False"
-            ]
-        },
-        {
-            "id": "C47",
-            "type": "CriterionNode",
-            "data": [
-                "Mode: And"
-            ]
-        },
-        {
-            "id": "C48",
-            "type": "CriterionNode",
-            "data": [
-                "Mode: BoolEquals",
-                "Variable ID: Guard.AllowedEntry",
-                "Expected Bool: False"
-            ]
-        },
-        {
-            "id": "C49",
-            "type": "CriterionNode",
-            "data": [
-                "Mode: And"
-            ]
-        },
-        {
-            "id": "C50",
-            "type": "CriterionNode",
-            "data": [
-                "Mode: BoolEquals",
-                "Variable ID: Guard.AllowedEntry",
-                "Expected Bool: True"
             ]
         },
         {
@@ -2219,14 +1738,6 @@
             ]
         },
         {
-            "id": "C51",
-            "type": "CriterionNode",
-            "data": [
-                "Mode: Exists",
-                "Variable ID: Vendor.HasMetPlayer"
-            ]
-        },
-        {
             "id": "O69",
             "type": "ConsequenceNode",
             "data": [
@@ -2264,14 +1775,6 @@
             ]
         },
         {
-            "id": "C52",
-            "type": "CriterionNode",
-            "data": [
-                "Mode: Exists",
-                "Variable ID:  Vendor.HasMetPlayer"
-            ]
-        },
-        {
             "id": "R47",
             "type": "RuleNode",
             "data": [
@@ -2297,14 +1800,6 @@
                 "Minimum: 0",
                 "Fallback: True",
                 "Fire Event: False"
-            ]
-        },
-        {
-            "id": "C53",
-            "type": "CriterionNode",
-            "data": [
-                "Mode: Exists",
-                "Variable ID: Vendor.HasMetPlayer"
             ]
         },
         {
@@ -2370,16 +1865,7 @@
                 "Fallback: False",
                 "Fire Event: True",
                 "Target: GameplaySignal",
-                "Payload: Pit.Revealed"
-            ]
-        },
-        {
-            "id": "C54",
-            "type": "CriterionNode",
-            "data": [
-                "Mode: BoolEquals",
-                "Variable ID: Vendor.HasMetPlayer",
-                "Expected Bool: True"
+                "Payload: Pit.RevealedQuietly"
             ]
         },
         {
@@ -2426,15 +1912,6 @@
             ]
         },
         {
-            "id": "C55",
-            "type": "CriterionNode",
-            "data": [
-                "Mode: BoolEquals",
-                "Variable ID: Vendor.HasMetPlayer",
-                "Expected Bool: True"
-            ]
-        },
-        {
             "id": "O77",
             "type": "ConsequenceNode",
             "data": [
@@ -2467,14 +1944,6 @@
             "data": [
                 "Rule ID: tree_hollow_available",
                 "Consequent: 1"
-            ]
-        },
-        {
-            "id": "C56",
-            "type": "CriterionNode",
-            "data": [
-                "Mode: DoesNotExist",
-                "Variable ID: Player.HasTreeKey"
             ]
         },
         {
@@ -2514,14 +1983,6 @@
             "type": "EventNode",
             "data": [
                 "Event ID: SearchTreeHollow"
-            ]
-        },
-        {
-            "id": "C57",
-            "type": "CriterionNode",
-            "data": [
-                "Mode: DoesNotExist",
-                "Variable ID: Player.HasTreeKey"
             ]
         },
         {
@@ -2575,15 +2036,6 @@
             ]
         },
         {
-            "id": "C58",
-            "type": "CriterionNode",
-            "data": [
-                "Mode: BoolEquals",
-                "Variable ID: Player.InspectedTreeHollow",
-                "Expected Bool: True"
-            ]
-        },
-        {
             "id": "E34",
             "type": "EventNode",
             "data": [
@@ -2630,15 +2082,6 @@
             ]
         },
         {
-            "id": "C59",
-            "type": "CriterionNode",
-            "data": [
-                "Mode: BoolEquals",
-                "Variable ID: Guard.AllowedEntry",
-                "Expected Bool: True"
-            ]
-        },
-        {
             "id": "R54",
             "type": "RuleNode",
             "data": [
@@ -2652,14 +2095,6 @@
             "data": [
                 "Rule ID: entry_vault_denied",
                 "Consequent: 0.5"
-            ]
-        },
-        {
-            "id": "C60",
-            "type": "CriterionNode",
-            "data": [
-                "Mode: DoesNotExist",
-                "Variable ID: Guard.AllowedEntry"
             ]
         },
         {
@@ -2707,37 +2142,6 @@
             ]
         },
         {
-            "id": "C61",
-            "type": "CriterionNode",
-            "data": [
-                "Mode: BoolEquals",
-                "Variable ID: Guard.AllowedEntry",
-                "Expected Bool: False"
-            ]
-        },
-        {
-            "id": "C62",
-            "type": "CriterionNode",
-            "data": [
-                "Mode: DoesNotExist",
-                "Variable ID: Guard.AllowedEntry"
-            ]
-        },
-        {
-            "id": "C63",
-            "type": "CriterionNode",
-            "data": [
-                "Mode: Or"
-            ]
-        },
-        {
-            "id": "C64",
-            "type": "CriterionNode",
-            "data": [
-                "Mode: Or"
-            ]
-        },
-        {
             "id": "O87",
             "type": "ConsequenceNode",
             "data": [
@@ -2745,22 +2149,6 @@
                 "Minimum: 0",
                 "Fallback: True",
                 "Fire Event: False"
-            ]
-        },
-        {
-            "id": "C65",
-            "type": "CriterionNode",
-            "data": [
-                "Mode: BoolEquals",
-                "Variable ID: Guard.AllowedEntry",
-                "Expected Bool: False"
-            ]
-        },
-        {
-            "id": "C66",
-            "type": "CriterionNode",
-            "data": [
-                "Mode: Or"
             ]
         },
         {
@@ -2774,35 +2162,10 @@
             ]
         },
         {
-            "id": "C67",
-            "type": "CriterionNode",
-            "data": [
-                "Mode: NumberCompare",
-                "Variable ID: Guard.TalkCount",
-                "Comparison: LessThanOrEqual",
-                "Compare A: 2"
-            ]
-        },
-        {
-            "id": "C68",
-            "type": "CriterionNode",
-            "data": [
-                "Mode: And"
-            ]
-        },
-        {
             "id": "E36",
             "type": "EventNode",
             "data": [
                 "Event ID: VaultLockSolved"
-            ]
-        },
-        {
-            "id": "C69",
-            "type": "CriterionNode",
-            "data": [
-                "Mode: DoesNotExist",
-                "Variable ID: Vault.PuzzleSolved"
             ]
         },
         {
@@ -2851,14 +2214,6 @@
             ]
         },
         {
-            "id": "C70",
-            "type": "CriterionNode",
-            "data": [
-                "Mode: DoesNotExist",
-                "Variable ID: Player.HingesData"
-            ]
-        },
-        {
             "id": "R57",
             "type": "RuleNode",
             "data": [
@@ -2901,15 +2256,6 @@
             "type": "EventNode",
             "data": [
                 "Event ID: UseTreeKey"
-            ]
-        },
-        {
-            "id": "C71",
-            "type": "CriterionNode",
-            "data": [
-                "Mode: BoolEquals",
-                "Variable ID: Player.HasTreeKey",
-                "Expected Bool: True"
             ]
         },
         {
@@ -2960,14 +2306,6 @@
             ]
         },
         {
-            "id": "C72",
-            "type": "CriterionNode",
-            "data": [
-                "Mode: DoesNotExist",
-                "Variable ID: Vault.PuzzleSolved"
-            ]
-        },
-        {
             "id": "R59",
             "type": "RuleNode",
             "data": [
@@ -3002,14 +2340,6 @@
             "type": "EventNode",
             "data": [
                 "Event ID: ChooseVaultCombination"
-            ]
-        },
-        {
-            "id": "C73",
-            "type": "CriterionNode",
-            "data": [
-                "Mode: DoesNotExist",
-                "Variable ID: Vault.PuzzleSolved"
             ]
         },
         {
@@ -3070,14 +2400,6 @@
             ]
         },
         {
-            "id": "C74",
-            "type": "CriterionNode",
-            "data": [
-                "Mode: Exists",
-                "Variable ID: Vault.AlarmTriggered"
-            ]
-        },
-        {
             "id": "R61",
             "type": "RuleNode",
             "data": [
@@ -3135,27 +2457,11 @@
             ]
         },
         {
-            "id": "C75",
-            "type": "CriterionNode",
-            "data": [
-                "Mode: Not"
-            ]
-        },
-        {
             "id": "R62",
             "type": "RuleNode",
             "data": [
                 "Rule ID: door_opened_carefully",
                 "Consequent: 0.2"
-            ]
-        },
-        {
-            "id": "C76",
-            "type": "CriterionNode",
-            "data": [
-                "Mode: BoolEquals",
-                "Variable ID: Vault.CanInspectHinges",
-                "Expected Bool: True"
             ]
         },
         {
@@ -3224,36 +2530,11 @@
             ]
         },
         {
-            "id": "C77",
-            "type": "CriterionNode",
-            "data": [
-                "Mode: BoolEquals",
-                "Variable ID: Vault.DoorMadeNoise",
-                "Expected Bool: True"
-            ]
-        },
-        {
             "id": "R64",
             "type": "RuleNode",
             "data": [
                 "Rule ID: vault_security_alert",
                 "Consequent: 1"
-            ]
-        },
-        {
-            "id": "C78",
-            "type": "CriterionNode",
-            "data": [
-                "Mode: BoolEquals",
-                "Variable ID: Vault.AlarmTriggered",
-                "Expected Bool: True"
-            ]
-        },
-        {
-            "id": "C79",
-            "type": "CriterionNode",
-            "data": [
-                "Mode: Or"
             ]
         },
         {
@@ -3306,14 +2587,6 @@
             ]
         },
         {
-            "id": "C80",
-            "type": "CriterionNode",
-            "data": [
-                "Mode: DoesNotExist",
-                "Variable ID: Player.HasDisguise"
-            ]
-        },
-        {
             "id": "R65",
             "type": "RuleNode",
             "data": [
@@ -3358,14 +2631,6 @@
             "type": "EventNode",
             "data": [
                 "Event ID: StealVaultFruit"
-            ]
-        },
-        {
-            "id": "C81",
-            "type": "CriterionNode",
-            "data": [
-                "Mode: DoesNotExist",
-                "Variable ID: Player.HasFruit"
             ]
         },
         {
@@ -3414,15 +2679,6 @@
             ]
         },
         {
-            "id": "C82",
-            "type": "CriterionNode",
-            "data": [
-                "Mode: BoolEquals",
-                "Variable ID: Player.HasFruit",
-                "Expected Bool: True"
-            ]
-        },
-        {
             "id": "R67",
             "type": "RuleNode",
             "data": [
@@ -3465,48 +2721,6 @@
             ]
         },
         {
-            "id": "C83",
-            "type": "CriterionNode",
-            "data": [
-                "Mode: BoolEquals",
-                "Variable ID: Player.HasDisguise",
-                "Expected Bool: True"
-            ]
-        },
-        {
-            "id": "C84",
-            "type": "CriterionNode",
-            "data": [
-                "Mode: DoesNotExist",
-                "Variable ID: Player.HasFruit"
-            ]
-        },
-        {
-            "id": "C85",
-            "type": "CriterionNode",
-            "data": [
-                "Mode: NumberCompare",
-                "Variable ID: Guard.Relationship",
-                "Comparison: InclusiveRange",
-                "Compare A: 10",
-                "Compare B: 30"
-            ]
-        },
-        {
-            "id": "C86",
-            "type": "CriterionNode",
-            "data": [
-                "Mode: And"
-            ]
-        },
-        {
-            "id": "C87",
-            "type": "CriterionNode",
-            "data": [
-                "Mode: And"
-            ]
-        },
-        {
             "id": "E47",
             "type": "EventNode",
             "data": [
@@ -3519,16 +2733,6 @@
             "data": [
                 "Rule ID: guard_accepts_deception",
                 "Consequent: 0.2"
-            ]
-        },
-        {
-            "id": "C88",
-            "type": "CriterionNode",
-            "data": [
-                "Mode: NumberCompare",
-                "Variable ID: Guard.Suspicion",
-                "Comparison: GreaterThanOrEqual",
-                "Compare A: 20"
             ]
         },
         {
@@ -3613,14 +2817,6 @@
             ]
         },
         {
-            "id": "C89",
-            "type": "CriterionNode",
-            "data": [
-                "Mode: DoesNotExist",
-                "Variable ID: Player.HasTreeKey"
-            ]
-        },
-        {
             "id": "R70",
             "type": "RuleNode",
             "data": [
@@ -3666,14 +2862,6 @@
             ]
         },
         {
-            "id": "C90",
-            "type": "CriterionNode",
-            "data": [
-                "Mode: DoesNotExist",
-                "Variable ID: Guard.InsidePit"
-            ]
-        },
-        {
             "id": "R71",
             "type": "RuleNode",
             "data": [
@@ -3709,36 +2897,11 @@
             ]
         },
         {
-            "id": "C91",
-            "type": "CriterionNode",
-            "data": [
-                "Mode: BoolEquals",
-                "Variable ID: Guard.InsidePit",
-                "Expected Bool: True"
-            ]
-        },
-        {
-            "id": "C92",
-            "type": "CriterionNode",
-            "data": [
-                "Mode: And"
-            ]
-        },
-        {
             "id": "R72",
             "type": "RuleNode",
             "data": [
                 "Rule ID: vault_exit_safe",
                 "Consequent: 1"
-            ]
-        },
-        {
-            "id": "C93",
-            "type": "CriterionNode",
-            "data": [
-                "Mode: BoolEquals",
-                "Variable ID: Player.HasFruit",
-                "Expected Bool: True"
             ]
         },
         {
@@ -3763,21 +2926,6 @@
                 "Fire Event: True",
                 "Target: DialogueGraph",
                 "Payload: UnableToExit"
-            ]
-        },
-        {
-            "id": "C94",
-            "type": "CriterionNode",
-            "data": [
-                "Mode: DoesNotExist",
-                "Variable ID: Guard.InsidePit"
-            ]
-        },
-        {
-            "id": "C95",
-            "type": "CriterionNode",
-            "data": [
-                "Mode: And"
             ]
         },
         {
@@ -3808,31 +2956,6 @@
             ]
         },
         {
-            "id": "C96",
-            "type": "CriterionNode",
-            "data": [
-                "Mode: BoolEquals",
-                "Variable ID: Guard.InsidePit",
-                "Expected Bool: True"
-            ]
-        },
-        {
-            "id": "C97",
-            "type": "CriterionNode",
-            "data": [
-                "Mode: BoolEquals",
-                "Variable ID: Player.UsedVaultGateExit",
-                "Expected Bool: True"
-            ]
-        },
-        {
-            "id": "C98",
-            "type": "CriterionNode",
-            "data": [
-                "Mode: And"
-            ]
-        },
-        {
             "id": "R73",
             "type": "RuleNode",
             "data": [
@@ -3860,6 +2983,1229 @@
                 "Minimum: 0",
                 "Fallback: True",
                 "Fire Event: False"
+            ]
+        },
+        {
+            "id": "C01",
+            "type": "CriterionNodeV2",
+            "data": [
+                "Mode: Exists",
+                "Variable ID: Vendor.HasMetPlayer"
+            ]
+        },
+        {
+            "id": "C02",
+            "type": "CriterionNodeV2",
+            "data": [
+                "Mode: DoesNotExist",
+                "Variable ID: Player.HasFlowers"
+            ]
+        },
+        {
+            "id": "C03",
+            "type": "CriterionNodeV2",
+            "data": [
+                "Mode: BoolEquals",
+                "Variable ID: Player.FoundPitRoute",
+                "Expected Bool: True"
+            ]
+        },
+        {
+            "id": "C04",
+            "type": "CriterionNodeV2",
+            "data": [
+                "Mode: NumberCompare",
+                "Variable ID: Guard.Suspicion",
+                "Comparison: GreaterThanOrEqual",
+                "Compare A: 20"
+            ]
+        },
+        {
+            "id": "C05",
+            "type": "CriterionNodeV2",
+            "data": [
+                "Mode: FuzzyNumber",
+                "Variable ID: Vendor.Nervousness",
+                "Set: VendorReactionNotice",
+                "Shape: High",
+                "Minimum: 0",
+                "Maximum: 10",
+                "Point A: 3",
+                "Point B: 6"
+            ]
+        },
+        {
+            "id": "C06",
+            "type": "CriterionNodeV2",
+            "data": [
+                "Mode: And"
+            ]
+        },
+        {
+            "id": "C07",
+            "type": "CriterionNodeV2",
+            "data": [
+                "Mode: Or"
+            ]
+        },
+        {
+            "id": "C08",
+            "type": "CriterionNodeV2",
+            "data": [
+                "Mode: Not"
+            ]
+        },
+        {
+            "id": "C09",
+            "type": "CriterionNodeV2",
+            "data": [
+                "Mode: DoesNotExist",
+                "Variable ID: Vault.PuzzleSolved"
+            ]
+        },
+        {
+            "id": "C10",
+            "type": "CriterionNodeV2",
+            "data": [
+                "Mode: BoolEquals",
+                "Variable ID: Player.HasTreeKey",
+                "Expected Bool: True"
+            ]
+        },
+        {
+            "id": "C11",
+            "type": "CriterionNodeV2",
+            "data": [
+                "Mode: DoesNotExist",
+                "Variable ID: Player.HasFruit"
+            ]
+        },
+        {
+            "id": "C12",
+            "type": "CriterionNodeV2",
+            "data": [
+                "Mode: DoesNotExist",
+                "Variable ID: Guard.InsidePit"
+            ]
+        },
+        {
+            "id": "C13",
+            "type": "CriterionNodeV2",
+            "data": [
+                "Mode: BoolEquals",
+                "Variable ID: Guard.InsidePit",
+                "Expected Bool: True"
+            ]
+        },
+        {
+            "id": "C14",
+            "type": "CriterionNodeV2",
+            "data": [
+                "Mode: BoolEquals",
+                "Variable ID: Player.HasFruit",
+                "Expected Bool: True"
+            ]
+        },
+        {
+            "id": "C15",
+            "type": "CriterionNodeV2",
+            "data": [
+                "Mode: And"
+            ]
+        },
+        {
+            "id": "C16",
+            "type": "CriterionNodeV2",
+            "data": [
+                "Mode: DoesNotExist",
+                "Variable ID: Player.HasCoins"
+            ]
+        },
+        {
+            "id": "C17",
+            "type": "CriterionNodeV2",
+            "data": [
+                "Mode: DoesNotExist",
+                "Variable ID: Vault.PuzzleSolved"
+            ]
+        },
+        {
+            "id": "C18",
+            "type": "CriterionNodeV2",
+            "data": [
+                "Mode: DoesNotExist",
+                "Variable ID: Player.HasDisguise"
+            ]
+        },
+        {
+            "id": "C19",
+            "type": "CriterionNodeV2",
+            "data": [
+                "Mode: BoolEquals",
+                "Variable ID: Player.HasFruit",
+                "Expected Bool: True"
+            ]
+        },
+        {
+            "id": "C20",
+            "type": "CriterionNodeV2",
+            "data": [
+                "Mode: DoesNotExist",
+                "Variable ID: Guard.InsidePit"
+            ]
+        },
+        {
+            "id": "C21",
+            "type": "CriterionNodeV2",
+            "data": [
+                "Mode: And"
+            ]
+        },
+        {
+            "id": "C22",
+            "type": "CriterionNodeV2",
+            "data": [
+                "Mode: DoesNotExist",
+                "Variable ID: Player.HingesData"
+            ]
+        },
+        {
+            "id": "C23",
+            "type": "CriterionNodeV2",
+            "data": [
+                "Mode: DoesNotExist",
+                "Variable ID: Vault.PuzzleSolved"
+            ]
+        },
+        {
+            "id": "C24",
+            "type": "CriterionNodeV2",
+            "data": [
+                "Mode: BoolEquals",
+                "Variable ID: Vault.DoorMadeNoise",
+                "Expected Bool: True"
+            ]
+        },
+        {
+            "id": "C25",
+            "type": "CriterionNodeV2",
+            "data": [
+                "Mode: BoolEquals",
+                "Variable ID: Vault.AlarmTriggered",
+                "Expected Bool: True"
+            ]
+        },
+        {
+            "id": "C26",
+            "type": "CriterionNodeV2",
+            "data": [
+                "Mode: Or"
+            ]
+        },
+        {
+            "id": "C27",
+            "type": "CriterionNodeV2",
+            "data": [
+                "Mode: DoesNotExist",
+                "Variable ID: Player.HasTreeKey"
+            ]
+        },
+        {
+            "id": "C28",
+            "type": "CriterionNodeV2",
+            "data": [
+                "Mode: BoolEquals",
+                "Variable ID: Player.HasDisguise",
+                "Expected Bool: True"
+            ]
+        },
+        {
+            "id": "C29",
+            "type": "CriterionNodeV2",
+            "data": [
+                "Mode: DoesNotExist",
+                "Variable ID: Player.HasFruit"
+            ]
+        },
+        {
+            "id": "C30",
+            "type": "CriterionNodeV2",
+            "data": [
+                "Mode: And"
+            ]
+        },
+        {
+            "id": "C31",
+            "type": "CriterionNodeV2",
+            "data": [
+                "Mode: NumberCompare",
+                "Variable ID: Guard.Relationship",
+                "Comparison: InclusiveRange",
+                "Compare A: 10",
+                "Compare B: 30"
+            ]
+        },
+        {
+            "id": "C32",
+            "type": "CriterionNodeV2",
+            "data": [
+                "Mode: And"
+            ]
+        },
+        {
+            "id": "C33",
+            "type": "CriterionNodeV2",
+            "data": [
+                "Mode: Exists",
+                "Variable ID: Vault.AlarmTriggered"
+            ]
+        },
+        {
+            "id": "C34",
+            "type": "CriterionNodeV2",
+            "data": [
+                "Mode: BoolEquals",
+                "Variable ID: Vault.CanInspectHinges",
+                "Expected Bool: True"
+            ]
+        },
+        {
+            "id": "C35",
+            "type": "CriterionNodeV2",
+            "data": [
+                "Mode: BoolEquals",
+                "Variable ID: Guard.InsidePit",
+                "Expected Bool: True"
+            ]
+        },
+        {
+            "id": "C36",
+            "type": "CriterionNodeV2",
+            "data": [
+                "Mode: BoolEquals",
+                "Variable ID: Player.UsedVaultGateExit",
+                "Expected Bool: True"
+            ]
+        },
+        {
+            "id": "C37",
+            "type": "CriterionNodeV2",
+            "data": [
+                "Mode: And"
+            ]
+        },
+        {
+            "id": "C38",
+            "type": "CriterionNodeV2",
+            "data": [
+                "Mode: BoolEquals",
+                "Variable ID: Player.HasFlowers",
+                "Expected Bool: True"
+            ]
+        },
+        {
+            "id": "C39",
+            "type": "CriterionNodeV2",
+            "data": [
+                "Mode: BoolEquals",
+                "Variable ID: Guard.HasMetPlayer",
+                "Expected Bool: True"
+            ]
+        },
+        {
+            "id": "C40",
+            "type": "CriterionNodeV2",
+            "data": [
+                "Mode: And"
+            ]
+        },
+        {
+            "id": "C41",
+            "type": "CriterionNodeV2",
+            "data": [
+                "Mode: NumberCompare",
+                "Variable ID: Guard.TalkCount",
+                "Comparison: LessThanOrEqual",
+                "Compare A: 2"
+            ]
+        },
+        {
+            "id": "C42",
+            "type": "CriterionNodeV2",
+            "data": [
+                "Mode: And"
+            ]
+        },
+        {
+            "id": "C43",
+            "type": "CriterionNodeV2",
+            "data": [
+                "Mode: DoesNotExist",
+                "Variable ID: Guard.HasMetPlayer"
+            ]
+        },
+        {
+            "id": "C44",
+            "type": "CriterionNodeV2",
+            "data": [
+                "Mode: FuzzyNumber",
+                "Variable ID: Guard.Suspicion",
+                "Set: High",
+                "Shape: High",
+                "Minimum: 0",
+                "Maximum: 40",
+                "Point A: 10",
+                "Point B: 20"
+            ]
+        },
+        {
+            "id": "C45",
+            "type": "CriterionNodeV2",
+            "data": [
+                "Mode: BoolEquals",
+                "Variable ID: Guard.AllowedEntry",
+                "Expected Bool: False"
+            ]
+        },
+        {
+            "id": "C46",
+            "type": "CriterionNodeV2",
+            "data": [
+                "Mode: And"
+            ]
+        },
+        {
+            "id": "C47",
+            "type": "CriterionNodeV2",
+            "data": [
+                "Mode: FuzzyNumber",
+                "Variable ID: Guard.TalkCount",
+                "Set: High",
+                "Shape: High",
+                "Minimum: 0",
+                "Maximum: 10",
+                "Point A: 2",
+                "Point B: 4"
+            ]
+        },
+        {
+            "id": "C48",
+            "type": "CriterionNodeV2",
+            "data": [
+                "Mode: BoolEquals",
+                "Variable ID: Guard.AllowedEntry",
+                "Expected Bool: False"
+            ]
+        },
+        {
+            "id": "C49",
+            "type": "CriterionNodeV2",
+            "data": [
+                "Mode: And"
+            ]
+        },
+        {
+            "id": "C50",
+            "type": "CriterionNodeV2",
+            "data": [
+                "Mode: BoolEquals",
+                "Variable ID: Guard.HasMetPlayer",
+                "Expected Bool: True"
+            ]
+        },
+        {
+            "id": "C51",
+            "type": "CriterionNodeV2",
+            "data": [
+                "Mode: BoolEquals",
+                "Variable ID: Guard.AllowedEntry",
+                "Expected Bool: False"
+            ]
+        },
+        {
+            "id": "C52",
+            "type": "CriterionNodeV2",
+            "data": [
+                "Mode: And"
+            ]
+        },
+        {
+            "id": "C53",
+            "type": "CriterionNodeV2",
+            "data": [
+                "Mode: BoolEquals",
+                "Variable ID: Guard.AllowedEntry",
+                "Expected Bool: True"
+            ]
+        },
+        {
+            "id": "C54",
+            "type": "CriterionNodeV2",
+            "data": [
+                "Mode: BoolEquals",
+                "Variable ID: Player.HasFlowers",
+                "Expected Bool: True"
+            ]
+        },
+        {
+            "id": "C55",
+            "type": "CriterionNodeV2",
+            "data": [
+                "Mode: BoolEquals",
+                "Variable ID: Guard.AllowedEntry",
+                "Expected Bool: False"
+            ]
+        },
+        {
+            "id": "C56",
+            "type": "CriterionNodeV2",
+            "data": [
+                "Mode: DoesNotExist",
+                "Variable ID: Guard.AllowedEntry"
+            ]
+        },
+        {
+            "id": "C57",
+            "type": "CriterionNodeV2",
+            "data": [
+                "Mode: Or"
+            ]
+        },
+        {
+            "id": "C58",
+            "type": "CriterionNodeV2",
+            "data": [
+                "Mode: BoolEquals",
+                "Variable ID: Guard.PursuePlayer",
+                "Expected Bool: True"
+            ]
+        },
+        {
+            "id": "C59",
+            "type": "CriterionNodeV2",
+            "data": [
+                "Mode: Or"
+            ]
+        },
+        {
+            "id": "C60",
+            "type": "CriterionNodeV2",
+            "data": [
+                "Mode: BoolEquals",
+                "Variable ID: Player.HasCoins",
+                "Expected Bool: True"
+            ]
+        },
+        {
+            "id": "C61",
+            "type": "CriterionNodeV2",
+            "data": [
+                "Mode: BoolEquals",
+                "Variable ID: Player.InspectedTreeHollow",
+                "Expected Bool: True"
+            ]
+        },
+        {
+            "id": "C62",
+            "type": "CriterionNodeV2",
+            "data": [
+                "Mode: DoesNotExist",
+                "Variable ID: Player.HasTreeKey"
+            ]
+        },
+        {
+            "id": "C63",
+            "type": "CriterionNodeV2",
+            "data": [
+                "Mode: DoesNotExist",
+                "Variable ID: Player.HasTreeKey"
+            ]
+        },
+        {
+            "id": "C64",
+            "type": "CriterionNodeV2",
+            "data": [
+                "Mode: BoolEquals",
+                "Variable ID: Guard.AllowedEntry",
+                "Expected Bool: True"
+            ]
+        },
+        {
+            "id": "C65",
+            "type": "CriterionNodeV2",
+            "data": [
+                "Mode: DoesNotExist",
+                "Variable ID: Guard.AllowedEntry"
+            ]
+        },
+        {
+            "id": "C66",
+            "type": "CriterionNodeV2",
+            "data": [
+                "Mode: BoolEquals",
+                "Variable ID: Guard.AllowedEntry",
+                "Expected Bool: False"
+            ]
+        },
+        {
+            "id": "C67",
+            "type": "CriterionNodeV2",
+            "data": [
+                "Mode: DoesNotExist",
+                "Variable ID: Vendor.HasMetPlayer"
+            ]
+        },
+        {
+            "id": "C68",
+            "type": "CriterionNodeV2",
+            "data": [
+                "Mode: Exists",
+                "Variable ID: Vendor.HasMetPlayer"
+            ]
+        },
+        {
+            "id": "C69",
+            "type": "CriterionNodeV2",
+            "data": [
+                "Mode: Exists",
+                "Variable ID: Vendor.HasMetPlayer"
+            ]
+        },
+        {
+            "id": "C70",
+            "type": "CriterionNodeV2",
+            "data": [
+                "Mode: BoolEquals",
+                "Variable ID: Player.HasCoins",
+                "Expected Bool: True"
+            ]
+        },
+        {
+            "id": "C71",
+            "type": "CriterionNodeV2",
+            "data": [
+                "Mode: And"
+            ]
+        },
+        {
+            "id": "C72",
+            "type": "CriterionNodeV2",
+            "data": [
+                "Mode: Exists",
+                "Variable ID: Vendor.HasMetPlayer"
+            ]
+        },
+        {
+            "id": "C73",
+            "type": "CriterionNodeV2",
+            "data": [
+                "Mode: BoolEquals",
+                "Variable ID: Player.HasFlowers",
+                "Expected Bool: True"
+            ]
+        },
+        {
+            "id": "C74",
+            "type": "CriterionNodeV2",
+            "data": [
+                "Mode: And"
+            ]
+        },
+        {
+            "id": "C75",
+            "type": "CriterionNodeV2",
+            "data": [
+                "Mode: Exists",
+                "Variable ID: Vendor.WasBribed"
+            ]
+        },
+        {
+            "id": "C76",
+            "type": "CriterionNodeV2",
+            "data": [
+                "Mode: FuzzyNumber",
+                "Variable ID: Vendor.Nervousness",
+                "Set: NervousnessLow",
+                "Shape: Low",
+                "Minimum: 0",
+                "Maximum: 10",
+                "Point A: 2",
+                "Point B: 5"
+            ]
+        },
+        {
+            "id": "C77",
+            "type": "CriterionNodeV2",
+            "data": [
+                "Mode: FuzzyNumber",
+                "Variable ID: Vendor.Suspicion",
+                "Set: SuspicionLow",
+                "Shape: Low",
+                "Minimum: 0",
+                "Maximum: 10",
+                "Point A: 2",
+                "Point B: 6"
+            ]
+        },
+        {
+            "id": "C78",
+            "type": "CriterionNodeV2",
+            "data": [
+                "Mode: And"
+            ]
+        },
+        {
+            "id": "C79",
+            "type": "CriterionNodeV2",
+            "data": [
+                "Mode: FuzzyNumber",
+                "Variable ID: Vendor.Nervousness",
+                "Set: NervousnessHigh",
+                "Shape: High",
+                "Minimum: 0",
+                "Maximum: 10",
+                "Point A: 3",
+                "Point B: 6"
+            ]
+        },
+        {
+            "id": "C80",
+            "type": "CriterionNodeV2",
+            "data": [
+                "Mode: FuzzyNumber",
+                "Variable ID: Vendor.Suspicion",
+                "Set: SuspicionHigh",
+                "Shape: High",
+                "Minimum: 0",
+                "Maximum: 10",
+                "Point A: 5",
+                "Point B: 8"
+            ]
+        },
+        {
+            "id": "C81",
+            "type": "CriterionNodeV2",
+            "data": [
+                "Mode: And"
+            ]
+        },
+        {
+            "id": "C82",
+            "type": "CriterionNodeV2",
+            "data": [
+                "Mode: BoolEquals",
+                "Variable ID: Player.NoticedVendorReaction",
+                "Expected Bool: True"
+            ]
+        },
+        {
+            "id": "C83",
+            "type": "CriterionNodeV2",
+            "data": [
+                "Mode: Exists",
+                "Variable ID: Vendor.WasBribed"
+            ]
+        },
+        {
+            "id": "C84",
+            "type": "CriterionNodeV2",
+            "data": [
+                "Mode: Exists",
+                "Variable ID: Vendor.WasBribed"
+            ]
+        },
+        {
+            "id": "C85",
+            "type": "CriterionNodeV2",
+            "data": [
+                "Mode: FuzzyNumber",
+                "Variable ID: Player.DistanceToCarpet",
+                "Set: Near",
+                "Shape: Low",
+                "Minimum: 0",
+                "Maximum: 10",
+                "Point A: 0",
+                "Point B: 4"
+            ]
+        },
+        {
+            "id": "C86",
+            "type": "CriterionNodeV2",
+            "data": [
+                "Mode: And"
+            ]
+        },
+        {
+            "id": "C87",
+            "type": "CriterionNodeV2",
+            "data": [
+                "Mode: FuzzyNumber",
+                "Variable ID: Player.LoiterTimeNearCarpet",
+                "Set: Lingering",
+                "Shape: High",
+                "Minimum: 0",
+                "Maximum: 14.9",
+                "Point A: 3",
+                "Point B: 10"
+            ]
+        },
+        {
+            "id": "C88",
+            "type": "CriterionNodeV2",
+            "data": [
+                "Mode: FuzzyNumber",
+                "Variable ID: Vendor.Nervousness",
+                "Set: Nervous",
+                "Shape: High",
+                "Minimum: 0",
+                "Maximum: 10",
+                "Point A: 3",
+                "Point B: 6"
+            ]
+        },
+        {
+            "id": "C89",
+            "type": "CriterionNodeV2",
+            "data": [
+                "Mode: FuzzyNumber",
+                "Variable ID: Player.DistanceToCarpet",
+                "Set: Mid",
+                "Shape: Range",
+                "Minimum: 0",
+                "Maximum: 10",
+                "Point A: 2",
+                "Point B: 4",
+                "Point C: 6",
+                "Point D: 8"
+            ]
+        },
+        {
+            "id": "C90",
+            "type": "CriterionNodeV2",
+            "data": [
+                "Mode: FuzzyNumber",
+                "Variable ID: Player.DistanceToCarpet",
+                "Set: Far",
+                "Shape: High",
+                "Minimum: 0",
+                "Maximum: 10",
+                "Point A: 6",
+                "Point B: 10"
+            ]
+        },
+        {
+            "id": "C91",
+            "type": "CriterionNodeV2",
+            "data": [
+                "Mode: BoolEquals",
+                "Variable ID: Player.FoundPitRoute",
+                "Expected Bool: True"
+            ]
+        },
+        {
+            "id": "C92",
+            "type": "CriterionNodeV2",
+            "data": [
+                "Mode: BoolEquals",
+                "Variable ID: Vendor.HasMetPlayer",
+                "Expected Bool: True"
+            ]
+        },
+        {
+            "id": "C93",
+            "type": "CriterionNodeV2",
+            "data": [
+                "Mode: BoolEquals",
+                "Variable ID: Vendor.HasMetPlayer",
+                "Expected Bool: True"
+            ]
+        },
+        {
+            "id": "C94",
+            "type": "CriterionNodeV2",
+            "data": [
+                "Mode: BoolEquals",
+                "Variable ID: Player.FoundPitRoute",
+                "Expected Bool: True"
+            ]
+        },
+        {
+            "id": "C95",
+            "type": "CriterionNodeV2",
+            "data": [
+                "Mode: BoolEquals",
+                "Variable ID: Player.FoundPitRoute",
+                "Expected Bool: True"
+            ]
+        },
+        {
+            "id": "C96",
+            "type": "CriterionNodeV2",
+            "data": [
+                "Mode: Exists",
+                "Variable ID: Vendor.HasMetPlayer"
+            ]
+        },
+        {
+            "id": "C97",
+            "type": "CriterionNodeV2",
+            "data": [
+                "Mode: Exists",
+                "Variable ID:  Vendor.HasMetPlayer"
+            ]
+        },
+        {
+            "id": "C98",
+            "type": "CriterionNodeV2",
+            "data": [
+                "Mode: Exists",
+                "Variable ID: Vendor.HasMetPlayer"
+            ]
+        },
+        {
+            "id": "C99",
+            "type": "CriterionNodeV2",
+            "data": [
+                "Mode: DoesNotExist",
+                "Variable ID: Guard.PursuePlayer"
+            ]
+        },
+        {
+            "id": "C100",
+            "type": "CriterionNodeV2",
+            "data": [
+                "Mode: BoolEquals",
+                "Variable ID: Guard.PursuePlayer",
+                "Expected Bool: False"
+            ]
+        },
+        {
+            "id": "C101",
+            "type": "CriterionNodeV2",
+            "data": [
+                "Mode: Or"
+            ]
+        },
+        {
+            "id": "C102",
+            "type": "CriterionNodeV2",
+            "data": [
+                "Mode: And"
+            ]
+        },
+        {
+            "id": "W76",
+            "type": "WriteBackNode",
+            "data": [
+                "Target Key: Player.HasCoins",
+                "Operation: Set",
+                "Value Type: Bool",
+                "Value: True"
+            ]
+        },
+        {
+            "id": "E52",
+            "type": "EventNode",
+            "data": [
+                "Event ID: VendorChoiceRevealPit"
+            ]
+        },
+        {
+            "id": "C103",
+            "type": "CriterionNodeV2",
+            "data": [
+                "Mode: BoolEquals",
+                "Variable ID: Vendor.HasMetPlayer",
+                "Expected Bool: True"
+            ]
+        },
+        {
+            "id": "C104",
+            "type": "CriterionNodeV2",
+            "data": [
+                "Mode: Exists",
+                "Variable ID: Vendor.HasMetPlayer"
+            ]
+        },
+        {
+            "id": "C105",
+            "type": "CriterionNodeV2",
+            "data": [
+                "Mode: Or"
+            ]
+        },
+        {
+            "id": "R74",
+            "type": "RuleNode",
+            "data": [
+                "Rule ID: vendor_choice_reveals_pit",
+                "Consequent: 1"
+            ]
+        },
+        {
+            "id": "O122",
+            "type": "ConsequenceNode",
+            "data": [
+                "Outcome ID: Vendor.ChoiceRevealsPit",
+                "Minimum: 0.5",
+                "Fallback: False",
+                "Fire Event: True",
+                "Target: GameplaySignal",
+                "Payload: Pit.VendorChoiceReveal"
+            ]
+        },
+        {
+            "id": "W77",
+            "type": "WriteBackNode",
+            "data": [
+                "Target Key: Player.FoundPitRoute",
+                "Operation: Set",
+                "Value Type: Bool",
+                "Value: True"
+            ]
+        },
+        {
+            "id": "O123",
+            "type": "ConsequenceNode",
+            "data": [
+                "Outcome ID: VendorChoiceRevealPit.Fallback",
+                "Minimum: 0",
+                "Fallback: True",
+                "Fire Event: False"
+            ]
+        },
+        {
+            "id": "W78",
+            "type": "WriteBackNode",
+            "data": [
+                "Target Key: Player.NoticedVendorReaction",
+                "Operation: Set",
+                "Value Type: Bool",
+                "Value: True"
+            ]
+        },
+        {
+            "id": "W79",
+            "type": "WriteBackNode",
+            "data": [
+                "Target Key: Player.NoticedVendorReaction",
+                "Operation: Set",
+                "Value Type: Bool",
+                "Value: True"
+            ]
+        },
+        {
+            "id": "E53",
+            "type": "EventNode",
+            "data": [
+                "Event ID: VendorDirectVaultAsk"
+            ]
+        },
+        {
+            "id": "C106",
+            "type": "CriterionNodeV2",
+            "data": [
+                "Mode: Exists",
+                "Variable ID: Vendor.HasMetPlayer"
+            ]
+        },
+        {
+            "id": "R75",
+            "type": "RuleNode",
+            "data": [
+                "Rule ID: vendor_direct_vault_ask",
+                "Consequent: 0.55"
+            ]
+        },
+        {
+            "id": "O124",
+            "type": "ConsequenceNode",
+            "data": [
+                "Outcome ID: Vendor.DirectVaultAsk",
+                "Minimum: 0.5",
+                "Fallback: False",
+                "Fire Event: False"
+            ]
+        },
+        {
+            "id": "W80",
+            "type": "WriteBackNode",
+            "data": [
+                "Target Key: Vendor.Suspicion",
+                "Operation: Add",
+                "Value Type: Float",
+                "Value: 4"
+            ]
+        },
+        {
+            "id": "W81",
+            "type": "WriteBackNode",
+            "data": [
+                "Target Key: Vendor.Nervousness",
+                "Operation: Add",
+                "Value Type: Float",
+                "Value: 2"
+            ]
+        },
+        {
+            "id": "O125",
+            "type": "ConsequenceNode",
+            "data": [
+                "Outcome ID: VendorDirectVaultAsk.Fallback",
+                "Minimum: 0",
+                "Fallback: True",
+                "Fire Event: False"
+            ]
+        },
+        {
+            "id": "E54",
+            "type": "EventNode",
+            "data": [
+                "Event ID: VendorSplitDeal"
+            ]
+        },
+        {
+            "id": "C107",
+            "type": "CriterionNodeV2",
+            "data": [
+                "Mode: Exists",
+                "Variable ID: Vendor.HasMetPlayer"
+            ]
+        },
+        {
+            "id": "R76",
+            "type": "RuleNode",
+            "data": [
+                "Rule ID: vendor_split_deal",
+                "Consequent: 0.65"
+            ]
+        },
+        {
+            "id": "O126",
+            "type": "ConsequenceNode",
+            "data": [
+                "Outcome ID: Vendor.SplitDealAccepted",
+                "Minimum: 0.5",
+                "Fallback: False",
+                "Fire Event: True",
+                "Target: GameplaySignal",
+                "Payload: Pit.VendorChoiceReveal"
+            ]
+        },
+        {
+            "id": "W82",
+            "type": "WriteBackNode",
+            "data": [
+                "Target Key: Vendor.SplitDealOffered",
+                "Operation: Set",
+                "Value Type: Bool",
+                "Value: True"
+            ]
+        },
+        {
+            "id": "O127",
+            "type": "ConsequenceNode",
+            "data": [
+                "Outcome ID: VendorSplitDeal",
+                "Minimum: 0",
+                "Fallback: True",
+                "Fire Event: False"
+            ]
+        },
+        {
+            "id": "C108",
+            "type": "CriterionNodeV2",
+            "data": [
+                "Mode: DoesNotExist",
+                "Variable ID: Player.FoundPitRoute"
+            ]
+        },
+        {
+            "id": "C109",
+            "type": "CriterionNodeV2",
+            "data": [
+                "Mode: And"
+            ]
+        },
+        {
+            "id": "W83",
+            "type": "WriteBackNode",
+            "data": [
+                "Target Key: Player.FoundPitRoute",
+                "Operation: Set",
+                "Value Type: Bool",
+                "Value: True"
+            ]
+        },
+        {
+            "id": "E55",
+            "type": "EventNode",
+            "data": [
+                "Event ID: VendorGuardGrudge"
+            ]
+        },
+        {
+            "id": "C110",
+            "type": "CriterionNodeV2",
+            "data": [
+                "Mode: BoolEquals",
+                "Variable ID: Guard.DismissedPlayer",
+                "Expected Bool: True"
+            ]
+        },
+        {
+            "id": "C111",
+            "type": "CriterionNodeV2",
+            "data": [
+                "Mode: Or"
+            ]
+        },
+        {
+            "id": "C112",
+            "type": "CriterionNodeV2",
+            "data": [
+                "Mode: Exists",
+                "Variable ID: Guard.DismissedPlayer"
+            ]
+        },
+        {
+            "id": "R77",
+            "type": "RuleNode",
+            "data": [
+                "Rule ID: vendor_guard_grudge",
+                "Consequent: 0.75"
+            ]
+        },
+        {
+            "id": "O128",
+            "type": "ConsequenceNode",
+            "data": [
+                "Outcome ID: Vendor.Sympathizes",
+                "Minimum: 0.5",
+                "Fallback: False",
+                "Fire Event: True",
+                "Target: GameplaySignal",
+                "Payload: Pit.VendorChoiceReveal"
+            ]
+        },
+        {
+            "id": "W84",
+            "type": "WriteBackNode",
+            "data": [
+                "Target Key: Vendor.SharedGuardGrudge",
+                "Operation: Set",
+                "Value Type: Bool",
+                "Value: True"
+            ]
+        },
+        {
+            "id": "W85",
+            "type": "WriteBackNode",
+            "data": [
+                "Target Key: Player.FoundPitRoute",
+                "Operation: Set",
+                "Value Type: Bool",
+                "Value: True"
             ]
         }
     ],
@@ -3901,30 +4247,6 @@
             "toPort": "consequence"
         },
         {
-            "fromNode": "C01",
-            "fromPort": "rules",
-            "toNode": "R02",
-            "toPort": "criteria"
-        },
-        {
-            "fromNode": "C01",
-            "fromPort": "rules",
-            "toNode": "R41",
-            "toPort": "criteria"
-        },
-        {
-            "fromNode": "C02",
-            "fromPort": "rules",
-            "toNode": "R03",
-            "toPort": "criteria"
-        },
-        {
-            "fromNode": "C02",
-            "fromPort": "rules",
-            "toNode": "R42",
-            "toPort": "criteria"
-        },
-        {
             "fromNode": "E02",
             "fromPort": "consequences",
             "toNode": "O05",
@@ -3957,31 +4279,13 @@
         {
             "fromNode": "E02",
             "fromPort": "rules",
-            "toNode": "R04",
-            "toPort": "event"
-        },
-        {
-            "fromNode": "E02",
-            "fromPort": "rules",
-            "toNode": "R05",
-            "toPort": "event"
-        },
-        {
-            "fromNode": "E02",
-            "fromPort": "rules",
-            "toNode": "R07",
+            "toNode": "R02",
             "toPort": "event"
         },
         {
             "fromNode": "E02",
             "fromPort": "rules",
             "toNode": "R01",
-            "toPort": "event"
-        },
-        {
-            "fromNode": "E02",
-            "fromPort": "rules",
-            "toNode": "R02",
             "toPort": "event"
         },
         {
@@ -3991,82 +4295,28 @@
             "toPort": "event"
         },
         {
-            "fromNode": "C03",
-            "fromPort": "rules",
-            "toNode": "C05",
-            "toPort": "criteriaA"
-        },
-        {
-            "fromNode": "C03",
-            "fromPort": "rules",
-            "toNode": "R01",
-            "toPort": "criteria"
-        },
-        {
-            "fromNode": "C03",
-            "fromPort": "rules",
-            "toNode": "R40",
-            "toPort": "criteria"
-        },
-        {
-            "fromNode": "C04",
-            "fromPort": "rules",
-            "toNode": "C05",
-            "toPort": "criteriaB"
-        },
-        {
-            "fromNode": "C04",
+            "fromNode": "E02",
             "fromPort": "rules",
             "toNode": "R04",
-            "toPort": "criteria"
-        },
-        {
-            "fromNode": "C04",
-            "fromPort": "rules",
-            "toNode": "C07",
-            "toPort": "criteriaA"
-        },
-        {
-            "fromNode": "C04",
-            "fromPort": "rules",
-            "toNode": "R43",
-            "toPort": "criteria"
-        },
-        {
-            "fromNode": "C05",
-            "fromPort": "rules",
-            "toNode": "R05",
-            "toPort": "criteria"
-        },
-        {
-            "fromNode": "C05",
-            "fromPort": "rules",
-            "toNode": "R44",
-            "toPort": "criteria"
-        },
-        {
-            "fromNode": "C06",
-            "fromPort": "rules",
-            "toNode": "R06",
             "toPort": "event"
         },
         {
-            "fromNode": "C06",
-            "fromPort": "rules",
-            "toNode": "C07",
-            "toPort": "criteriaB"
-        },
-        {
-            "fromNode": "C07",
+            "fromNode": "E02",
             "fromPort": "rules",
             "toNode": "R07",
-            "toPort": "criteria"
+            "toPort": "event"
         },
         {
-            "fromNode": "C07",
+            "fromNode": "E02",
             "fromPort": "rules",
-            "toNode": "R45",
-            "toPort": "criteria"
+            "toNode": "R05",
+            "toPort": "event"
+        },
+        {
+            "fromNode": "E02",
+            "fromPort": "rules",
+            "toNode": "R06",
+            "toPort": "event"
         },
         {
             "fromNode": "E03",
@@ -4171,18 +4421,6 @@
             "toPort": "consequence"
         },
         {
-            "fromNode": "C08",
-            "fromPort": "rules",
-            "toNode": "R08",
-            "toPort": "criteria"
-        },
-        {
-            "fromNode": "C09",
-            "fromPort": "rules",
-            "toNode": "C49",
-            "toPort": "criteriaA"
-        },
-        {
             "fromNode": "E04",
             "fromPort": "consequences",
             "toNode": "O13",
@@ -4201,34 +4439,10 @@
             "toPort": "event"
         },
         {
-            "fromNode": "C10",
-            "fromPort": "rules",
-            "toNode": "R10",
-            "toPort": "criteria"
-        },
-        {
             "fromNode": "O13",
             "fromPort": "writeBacks",
             "toNode": "W05",
             "toPort": "consequence"
-        },
-        {
-            "fromNode": "C11",
-            "fromPort": "rules",
-            "toNode": "C13",
-            "toPort": "criteriaB"
-        },
-        {
-            "fromNode": "C12",
-            "fromPort": "rules",
-            "toNode": "C13",
-            "toPort": "criteriaA"
-        },
-        {
-            "fromNode": "C13",
-            "fromPort": "rules",
-            "toNode": "C68",
-            "toPort": "criteriaA"
         },
         {
             "fromNode": "E05",
@@ -4247,36 +4461,6 @@
             "fromPort": "rules",
             "toNode": "R12",
             "toPort": "event"
-        },
-        {
-            "fromNode": "C14",
-            "fromPort": "rules",
-            "toNode": "R15",
-            "toPort": "criteria"
-        },
-        {
-            "fromNode": "C14",
-            "fromPort": "rules",
-            "toNode": "R16",
-            "toPort": "criteria"
-        },
-        {
-            "fromNode": "C14",
-            "fromPort": "rules",
-            "toNode": "R13",
-            "toPort": "criteria"
-        },
-        {
-            "fromNode": "C14",
-            "fromPort": "rules",
-            "toNode": "R14",
-            "toPort": "criteria"
-        },
-        {
-            "fromNode": "C14",
-            "fromPort": "rules",
-            "toNode": "R12",
-            "toPort": "criteria"
         },
         {
             "fromNode": "O16",
@@ -4441,18 +4625,6 @@
             "toPort": "event"
         },
         {
-            "fromNode": "C15",
-            "fromPort": "rules",
-            "toNode": "R17",
-            "toPort": "criteria"
-        },
-        {
-            "fromNode": "C16",
-            "fromPort": "rules",
-            "toNode": "R18",
-            "toPort": "criteria"
-        },
-        {
             "fromNode": "O26",
             "fromPort": "writeBacks",
             "toNode": "W18",
@@ -4501,12 +4673,6 @@
             "toPort": "event"
         },
         {
-            "fromNode": "C17",
-            "fromPort": "rules",
-            "toNode": "R19",
-            "toPort": "criteria"
-        },
-        {
             "fromNode": "O29",
             "fromPort": "writeBacks",
             "toNode": "W19",
@@ -4537,12 +4703,6 @@
             "toPort": "event"
         },
         {
-            "fromNode": "C18",
-            "fromPort": "rules",
-            "toNode": "R20",
-            "toPort": "criteria"
-        },
-        {
             "fromNode": "O31",
             "fromPort": "writeBacks",
             "toNode": "W21",
@@ -4553,18 +4713,6 @@
             "fromPort": "writeBacks",
             "toNode": "W22",
             "toPort": "consequence"
-        },
-        {
-            "fromNode": "C19",
-            "fromPort": "rules",
-            "toNode": "C17",
-            "toPort": "criteriaA"
-        },
-        {
-            "fromNode": "C20",
-            "fromPort": "rules",
-            "toNode": "C17",
-            "toPort": "criteriaB"
         },
         {
             "fromNode": "E13",
@@ -4583,12 +4731,6 @@
             "fromPort": "rules",
             "toNode": "R21",
             "toPort": "event"
-        },
-        {
-            "fromNode": "C21",
-            "fromPort": "rules",
-            "toNode": "R21",
-            "toPort": "criteria"
         },
         {
             "fromNode": "O33",
@@ -4613,24 +4755,6 @@
             "fromPort": "rules",
             "toNode": "R22",
             "toPort": "event"
-        },
-        {
-            "fromNode": "C22",
-            "fromPort": "rules",
-            "toNode": "C24",
-            "toPort": "criteriaA"
-        },
-        {
-            "fromNode": "C23",
-            "fromPort": "rules",
-            "toNode": "C24",
-            "toPort": "criteriaB"
-        },
-        {
-            "fromNode": "C24",
-            "fromPort": "rules",
-            "toNode": "R22",
-            "toPort": "criteria"
         },
         {
             "fromNode": "O35",
@@ -4663,12 +4787,6 @@
             "toPort": "event"
         },
         {
-            "fromNode": "C25",
-            "fromPort": "rules",
-            "toNode": "R23",
-            "toPort": "criteria"
-        },
-        {
             "fromNode": "O37",
             "fromPort": "writeBacks",
             "toNode": "W26",
@@ -4699,12 +4817,6 @@
             "toPort": "event"
         },
         {
-            "fromNode": "C26",
-            "fromPort": "rules",
-            "toNode": "R24",
-            "toPort": "criteria"
-        },
-        {
             "fromNode": "O39",
             "fromPort": "writeBacks",
             "toNode": "W28",
@@ -4733,12 +4845,6 @@
             "fromPort": "rules",
             "toNode": "R25",
             "toPort": "event"
-        },
-        {
-            "fromNode": "C27",
-            "fromPort": "rules",
-            "toNode": "R25",
-            "toPort": "criteria"
         },
         {
             "fromNode": "O41",
@@ -4795,36 +4901,6 @@
             "toPort": "event"
         },
         {
-            "fromNode": "C28",
-            "fromPort": "rules",
-            "toNode": "C32",
-            "toPort": "criteriaB"
-        },
-        {
-            "fromNode": "C28",
-            "fromPort": "rules",
-            "toNode": "C33",
-            "toPort": "criteriaA"
-        },
-        {
-            "fromNode": "C29",
-            "fromPort": "rules",
-            "toNode": "R28",
-            "toPort": "criteria"
-        },
-        {
-            "fromNode": "C30",
-            "fromPort": "rules",
-            "toNode": "C32",
-            "toPort": "criteriaA"
-        },
-        {
-            "fromNode": "C31",
-            "fromPort": "rules",
-            "toNode": "C33",
-            "toPort": "criteriaB"
-        },
-        {
             "fromNode": "O44",
             "fromPort": "writeBacks",
             "toNode": "W34",
@@ -4835,18 +4911,6 @@
             "fromPort": "writeBacks",
             "toNode": "W35",
             "toPort": "consequence"
-        },
-        {
-            "fromNode": "C32",
-            "fromPort": "rules",
-            "toNode": "R26",
-            "toPort": "criteria"
-        },
-        {
-            "fromNode": "C33",
-            "fromPort": "rules",
-            "toNode": "R27",
-            "toPort": "criteria"
         },
         {
             "fromNode": "E19",
@@ -4867,22 +4931,10 @@
             "toPort": "event"
         },
         {
-            "fromNode": "C34",
-            "fromPort": "rules",
-            "toNode": "R29",
-            "toPort": "criteria"
-        },
-        {
             "fromNode": "O47",
             "fromPort": "writeBacks",
             "toNode": "W36",
             "toPort": "consequence"
-        },
-        {
-            "fromNode": "C35",
-            "fromPort": "rules",
-            "toNode": "R34",
-            "toPort": "criteria"
         },
         {
             "fromNode": "E20",
@@ -4901,12 +4953,6 @@
             "fromPort": "rules",
             "toNode": "R30",
             "toPort": "event"
-        },
-        {
-            "fromNode": "C36",
-            "fromPort": "rules",
-            "toNode": "R30",
-            "toPort": "criteria"
         },
         {
             "fromNode": "O49",
@@ -4933,12 +4979,6 @@
             "toPort": "event"
         },
         {
-            "fromNode": "C37",
-            "fromPort": "rules",
-            "toNode": "R31",
-            "toPort": "criteria"
-        },
-        {
             "fromNode": "E22",
             "fromPort": "consequences",
             "toNode": "O53",
@@ -4955,12 +4995,6 @@
             "fromPort": "rules",
             "toNode": "R32",
             "toPort": "event"
-        },
-        {
-            "fromNode": "C38",
-            "fromPort": "rules",
-            "toNode": "R32",
-            "toPort": "criteria"
         },
         {
             "fromNode": "O53",
@@ -4987,12 +5021,6 @@
             "toPort": "event"
         },
         {
-            "fromNode": "C39",
-            "fromPort": "rules",
-            "toNode": "R33",
-            "toPort": "criteria"
-        },
-        {
             "fromNode": "O55",
             "fromPort": "writeBacks",
             "toNode": "W38",
@@ -5017,12 +5045,6 @@
             "toPort": "event"
         },
         {
-            "fromNode": "C40",
-            "fromPort": "rules",
-            "toNode": "C64",
-            "toPort": "criteriaB"
-        },
-        {
             "fromNode": "O57",
             "fromPort": "writeBacks",
             "toNode": "W39",
@@ -5033,12 +5055,6 @@
             "fromPort": "writeBacks",
             "toNode": "W40",
             "toPort": "consequence"
-        },
-        {
-            "fromNode": "C41",
-            "fromPort": "rules",
-            "toNode": "C45",
-            "toPort": "criteriaA"
         },
         {
             "fromNode": "O59",
@@ -5065,12 +5081,6 @@
             "toPort": "event"
         },
         {
-            "fromNode": "C42",
-            "fromPort": "rules",
-            "toNode": "R37",
-            "toPort": "criteria"
-        },
-        {
             "fromNode": "O60",
             "fromPort": "writeBacks",
             "toNode": "W42",
@@ -5089,58 +5099,10 @@
             "toPort": "consequence"
         },
         {
-            "fromNode": "C43",
-            "fromPort": "rules",
-            "toNode": "C47",
-            "toPort": "criteriaA"
-        },
-        {
             "fromNode": "O62",
             "fromPort": "writeBacks",
             "toNode": "W45",
             "toPort": "consequence"
-        },
-        {
-            "fromNode": "C44",
-            "fromPort": "rules",
-            "toNode": "C45",
-            "toPort": "criteriaB"
-        },
-        {
-            "fromNode": "C45",
-            "fromPort": "rules",
-            "toNode": "R36",
-            "toPort": "criteria"
-        },
-        {
-            "fromNode": "C46",
-            "fromPort": "rules",
-            "toNode": "C47",
-            "toPort": "criteriaB"
-        },
-        {
-            "fromNode": "C47",
-            "fromPort": "rules",
-            "toNode": "R38",
-            "toPort": "criteria"
-        },
-        {
-            "fromNode": "C48",
-            "fromPort": "rules",
-            "toNode": "C49",
-            "toPort": "criteriaB"
-        },
-        {
-            "fromNode": "C49",
-            "fromPort": "rules",
-            "toNode": "R09",
-            "toPort": "criteria"
-        },
-        {
-            "fromNode": "C50",
-            "fromPort": "rules",
-            "toNode": "R39",
-            "toPort": "criteria"
         },
         {
             "fromNode": "E26",
@@ -5209,6 +5171,18 @@
             "toPort": "event"
         },
         {
+            "fromNode": "O66",
+            "fromPort": "writeBacks",
+            "toNode": "W78",
+            "toPort": "consequence"
+        },
+        {
+            "fromNode": "O67",
+            "fromPort": "writeBacks",
+            "toNode": "W79",
+            "toPort": "consequence"
+        },
+        {
             "fromNode": "E27",
             "fromPort": "consequences",
             "toNode": "O69",
@@ -5225,12 +5199,6 @@
             "fromPort": "rules",
             "toNode": "R46",
             "toPort": "event"
-        },
-        {
-            "fromNode": "C51",
-            "fromPort": "rules",
-            "toNode": "R46",
-            "toPort": "criteria"
         },
         {
             "fromNode": "O69",
@@ -5255,18 +5223,6 @@
             "fromPort": "rules",
             "toNode": "R47",
             "toPort": "event"
-        },
-        {
-            "fromNode": "C52",
-            "fromPort": "rules",
-            "toNode": "R47",
-            "toPort": "criteria"
-        },
-        {
-            "fromNode": "C53",
-            "fromPort": "rules",
-            "toNode": "R48",
-            "toPort": "criteria"
         },
         {
             "fromNode": "E29",
@@ -5317,12 +5273,6 @@
             "toPort": "consequence"
         },
         {
-            "fromNode": "C54",
-            "fromPort": "rules",
-            "toNode": "R49",
-            "toPort": "criteria"
-        },
-        {
             "fromNode": "E31",
             "fromPort": "consequences",
             "toNode": "O77",
@@ -5341,10 +5291,10 @@
             "toPort": "event"
         },
         {
-            "fromNode": "C55",
-            "fromPort": "rules",
-            "toNode": "R50",
-            "toPort": "criteria"
+            "fromNode": "O77",
+            "fromPort": "writeBacks",
+            "toNode": "W76",
+            "toPort": "consequence"
         },
         {
             "fromNode": "E32",
@@ -5363,12 +5313,6 @@
             "fromPort": "rules",
             "toNode": "R51",
             "toPort": "event"
-        },
-        {
-            "fromNode": "C56",
-            "fromPort": "rules",
-            "toNode": "R51",
-            "toPort": "criteria"
         },
         {
             "fromNode": "O79",
@@ -5395,12 +5339,6 @@
             "toPort": "event"
         },
         {
-            "fromNode": "C57",
-            "fromPort": "rules",
-            "toNode": "R52",
-            "toPort": "criteria"
-        },
-        {
             "fromNode": "O82",
             "fromPort": "writeBacks",
             "toNode": "W51",
@@ -5411,12 +5349,6 @@
             "fromPort": "writeBacks",
             "toNode": "W52",
             "toPort": "consequence"
-        },
-        {
-            "fromNode": "C58",
-            "fromPort": "rules",
-            "toNode": "R53",
-            "toPort": "criteria"
         },
         {
             "fromNode": "E34",
@@ -5467,18 +5399,6 @@
             "toPort": "event"
         },
         {
-            "fromNode": "C59",
-            "fromPort": "rules",
-            "toNode": "R54",
-            "toPort": "criteria"
-        },
-        {
-            "fromNode": "C60",
-            "fromPort": "rules",
-            "toNode": "C66",
-            "toPort": "criteriaA"
-        },
-        {
             "fromNode": "O85",
             "fromPort": "writeBacks",
             "toNode": "W54",
@@ -5489,54 +5409,6 @@
             "fromPort": "writeBacks",
             "toNode": "W55",
             "toPort": "consequence"
-        },
-        {
-            "fromNode": "C61",
-            "fromPort": "rules",
-            "toNode": "C63",
-            "toPort": "criteriaB"
-        },
-        {
-            "fromNode": "C62",
-            "fromPort": "rules",
-            "toNode": "C63",
-            "toPort": "criteriaA"
-        },
-        {
-            "fromNode": "C63",
-            "fromPort": "rules",
-            "toNode": "C64",
-            "toPort": "criteriaA"
-        },
-        {
-            "fromNode": "C64",
-            "fromPort": "rules",
-            "toNode": "R35",
-            "toPort": "criteria"
-        },
-        {
-            "fromNode": "C65",
-            "fromPort": "rules",
-            "toNode": "C66",
-            "toPort": "criteriaB"
-        },
-        {
-            "fromNode": "C66",
-            "fromPort": "rules",
-            "toNode": "R55",
-            "toPort": "criteria"
-        },
-        {
-            "fromNode": "C67",
-            "fromPort": "rules",
-            "toNode": "C68",
-            "toPort": "criteriaB"
-        },
-        {
-            "fromNode": "C68",
-            "fromPort": "rules",
-            "toNode": "R11",
-            "toPort": "criteria"
         },
         {
             "fromNode": "E36",
@@ -5555,12 +5427,6 @@
             "fromPort": "rules",
             "toNode": "R56",
             "toPort": "event"
-        },
-        {
-            "fromNode": "C69",
-            "fromPort": "rules",
-            "toNode": "R56",
-            "toPort": "criteria"
         },
         {
             "fromNode": "O88",
@@ -5585,12 +5451,6 @@
             "fromPort": "rules",
             "toNode": "R57",
             "toPort": "event"
-        },
-        {
-            "fromNode": "C70",
-            "fromPort": "rules",
-            "toNode": "R57",
-            "toPort": "criteria"
         },
         {
             "fromNode": "O90",
@@ -5623,12 +5483,6 @@
             "toPort": "event"
         },
         {
-            "fromNode": "C71",
-            "fromPort": "rules",
-            "toNode": "R58",
-            "toPort": "criteria"
-        },
-        {
             "fromNode": "O92",
             "fromPort": "writeBacks",
             "toNode": "W58",
@@ -5651,12 +5505,6 @@
             "fromPort": "rules",
             "toNode": "R59",
             "toPort": "event"
-        },
-        {
-            "fromNode": "C72",
-            "fromPort": "rules",
-            "toNode": "R59",
-            "toPort": "criteria"
         },
         {
             "fromNode": "O94",
@@ -5689,12 +5537,6 @@
             "toPort": "event"
         },
         {
-            "fromNode": "C73",
-            "fromPort": "rules",
-            "toNode": "R60",
-            "toPort": "criteria"
-        },
-        {
             "fromNode": "E41",
             "fromPort": "consequences",
             "toNode": "O98",
@@ -5711,12 +5553,6 @@
             "fromPort": "rules",
             "toNode": "R61",
             "toPort": "event"
-        },
-        {
-            "fromNode": "C74",
-            "fromPort": "rules",
-            "toNode": "R61",
-            "toPort": "criteria"
         },
         {
             "fromNode": "O98",
@@ -5761,24 +5597,6 @@
             "toPort": "event"
         },
         {
-            "fromNode": "C75",
-            "fromPort": "rules",
-            "toNode": "R62",
-            "toPort": "criteria"
-        },
-        {
-            "fromNode": "C76",
-            "fromPort": "rules",
-            "toNode": "C75",
-            "toPort": "criteriaA"
-        },
-        {
-            "fromNode": "C76",
-            "fromPort": "rules",
-            "toNode": "R63",
-            "toPort": "criteria"
-        },
-        {
             "fromNode": "O100",
             "fromPort": "writeBacks",
             "toNode": "W63",
@@ -5809,24 +5627,6 @@
             "toPort": "event"
         },
         {
-            "fromNode": "C77",
-            "fromPort": "rules",
-            "toNode": "C79",
-            "toPort": "criteriaA"
-        },
-        {
-            "fromNode": "C78",
-            "fromPort": "rules",
-            "toNode": "C79",
-            "toPort": "criteriaB"
-        },
-        {
-            "fromNode": "C79",
-            "fromPort": "rules",
-            "toNode": "R64",
-            "toPort": "criteria"
-        },
-        {
             "fromNode": "O103",
             "fromPort": "writeBacks",
             "toNode": "W66",
@@ -5849,12 +5649,6 @@
             "fromPort": "rules",
             "toNode": "R65",
             "toPort": "event"
-        },
-        {
-            "fromNode": "C80",
-            "fromPort": "rules",
-            "toNode": "R65",
-            "toPort": "criteria"
         },
         {
             "fromNode": "O105",
@@ -5881,12 +5675,6 @@
             "toPort": "event"
         },
         {
-            "fromNode": "C81",
-            "fromPort": "rules",
-            "toNode": "R66",
-            "toPort": "criteria"
-        },
-        {
             "fromNode": "O107",
             "fromPort": "writeBacks",
             "toNode": "W68",
@@ -5911,46 +5699,10 @@
             "toPort": "event"
         },
         {
-            "fromNode": "C82",
-            "fromPort": "rules",
-            "toNode": "C95",
-            "toPort": "criteriaA"
-        },
-        {
             "fromNode": "O109",
             "fromPort": "writeBacks",
             "toNode": "W69",
             "toPort": "consequence"
-        },
-        {
-            "fromNode": "C83",
-            "fromPort": "rules",
-            "toNode": "C86",
-            "toPort": "criteriaA"
-        },
-        {
-            "fromNode": "C84",
-            "fromPort": "rules",
-            "toNode": "C86",
-            "toPort": "criteriaB"
-        },
-        {
-            "fromNode": "C85",
-            "fromPort": "rules",
-            "toNode": "C87",
-            "toPort": "criteriaB"
-        },
-        {
-            "fromNode": "C86",
-            "fromPort": "rules",
-            "toNode": "C87",
-            "toPort": "criteriaA"
-        },
-        {
-            "fromNode": "C87",
-            "fromPort": "rules",
-            "toNode": "R68",
-            "toPort": "criteria"
         },
         {
             "fromNode": "E47",
@@ -5981,12 +5733,6 @@
             "fromPort": "rules",
             "toNode": "R69",
             "toPort": "event"
-        },
-        {
-            "fromNode": "C88",
-            "fromPort": "rules",
-            "toNode": "R69",
-            "toPort": "criteria"
         },
         {
             "fromNode": "O111",
@@ -6025,12 +5771,6 @@
             "toPort": "event"
         },
         {
-            "fromNode": "C89",
-            "fromPort": "rules",
-            "toNode": "R70",
-            "toPort": "criteria"
-        },
-        {
             "fromNode": "O114",
             "fromPort": "writeBacks",
             "toNode": "W73",
@@ -6053,12 +5793,6 @@
             "fromPort": "rules",
             "toNode": "R71",
             "toPort": "event"
-        },
-        {
-            "fromNode": "C90",
-            "fromPort": "rules",
-            "toNode": "R71",
-            "toPort": "criteria"
         },
         {
             "fromNode": "O116",
@@ -6085,40 +5819,10 @@
             "toPort": "event"
         },
         {
-            "fromNode": "C91",
-            "fromPort": "rules",
-            "toNode": "C92",
-            "toPort": "criteriaA"
-        },
-        {
-            "fromNode": "C92",
-            "fromPort": "rules",
-            "toNode": "R72",
-            "toPort": "criteria"
-        },
-        {
-            "fromNode": "C93",
-            "fromPort": "rules",
-            "toNode": "C92",
-            "toPort": "criteriaB"
-        },
-        {
             "fromNode": "O117",
             "fromPort": "writeBacks",
             "toNode": "W75",
             "toPort": "consequence"
-        },
-        {
-            "fromNode": "C94",
-            "fromPort": "rules",
-            "toNode": "C95",
-            "toPort": "criteriaB"
-        },
-        {
-            "fromNode": "C95",
-            "fromPort": "rules",
-            "toNode": "R67",
-            "toPort": "criteria"
         },
         {
             "fromNode": "E51",
@@ -6139,22 +5843,880 @@
             "toPort": "event"
         },
         {
+            "fromNode": "C01",
+            "fromPort": "rules",
+            "toNode": "R20",
+            "toPort": "criteria"
+        },
+        {
+            "fromNode": "C02",
+            "fromPort": "rules",
+            "toNode": "R10",
+            "toPort": "criteria"
+        },
+        {
+            "fromNode": "C03",
+            "fromPort": "rules",
+            "toNode": "R30",
+            "toPort": "criteria"
+        },
+        {
+            "fromNode": "C04",
+            "fromPort": "rules",
+            "toNode": "R69",
+            "toPort": "criteria"
+        },
+        {
+            "fromNode": "C05",
+            "fromPort": "rules",
+            "toNode": "R29",
+            "toPort": "criteria"
+        },
+        {
+            "fromNode": "C06",
+            "fromPort": "rules",
+            "toNode": "R44",
+            "toPort": "criteria"
+        },
+        {
+            "fromNode": "C06",
+            "fromPort": "rules",
+            "toNode": "R05",
+            "toPort": "criteria"
+        },
+        {
+            "fromNode": "C07",
+            "fromPort": "rules",
+            "toNode": "R55",
+            "toPort": "criteria"
+        },
+        {
+            "fromNode": "C08",
+            "fromPort": "rules",
+            "toNode": "R62",
+            "toPort": "criteria"
+        },
+        {
+            "fromNode": "C09",
+            "fromPort": "rules",
+            "toNode": "R56",
+            "toPort": "criteria"
+        },
+        {
+            "fromNode": "C10",
+            "fromPort": "rules",
+            "toNode": "R58",
+            "toPort": "criteria"
+        },
+        {
+            "fromNode": "C11",
+            "fromPort": "rules",
+            "toNode": "R66",
+            "toPort": "criteria"
+        },
+        {
+            "fromNode": "C12",
+            "fromPort": "rules",
+            "toNode": "R71",
+            "toPort": "criteria"
+        },
+        {
+            "fromNode": "C13",
+            "fromPort": "rules",
+            "toNode": "C15",
+            "toPort": "criteriaA"
+        },
+        {
+            "fromNode": "C14",
+            "fromPort": "rules",
+            "toNode": "C15",
+            "toPort": "criteriaB"
+        },
+        {
+            "fromNode": "C15",
+            "fromPort": "rules",
+            "toNode": "R72",
+            "toPort": "criteria"
+        },
+        {
+            "fromNode": "C16",
+            "fromPort": "rules",
+            "toNode": "R21",
+            "toPort": "criteria"
+        },
+        {
+            "fromNode": "C17",
+            "fromPort": "rules",
+            "toNode": "R59",
+            "toPort": "criteria"
+        },
+        {
+            "fromNode": "C18",
+            "fromPort": "rules",
+            "toNode": "R65",
+            "toPort": "criteria"
+        },
+        {
+            "fromNode": "C19",
+            "fromPort": "rules",
+            "toNode": "C21",
+            "toPort": "criteriaA"
+        },
+        {
+            "fromNode": "C20",
+            "fromPort": "rules",
+            "toNode": "C21",
+            "toPort": "criteriaB"
+        },
+        {
+            "fromNode": "C21",
+            "fromPort": "rules",
+            "toNode": "R67",
+            "toPort": "criteria"
+        },
+        {
+            "fromNode": "C22",
+            "fromPort": "rules",
+            "toNode": "R57",
+            "toPort": "criteria"
+        },
+        {
+            "fromNode": "C23",
+            "fromPort": "rules",
+            "toNode": "R60",
+            "toPort": "criteria"
+        },
+        {
+            "fromNode": "C24",
+            "fromPort": "rules",
+            "toNode": "C26",
+            "toPort": "criteriaA"
+        },
+        {
+            "fromNode": "C25",
+            "fromPort": "rules",
+            "toNode": "C26",
+            "toPort": "criteriaB"
+        },
+        {
+            "fromNode": "C26",
+            "fromPort": "rules",
+            "toNode": "C102",
+            "toPort": "criteriaA"
+        },
+        {
+            "fromNode": "C27",
+            "fromPort": "rules",
+            "toNode": "R70",
+            "toPort": "criteria"
+        },
+        {
+            "fromNode": "C28",
+            "fromPort": "rules",
+            "toNode": "C30",
+            "toPort": "criteriaA"
+        },
+        {
+            "fromNode": "C29",
+            "fromPort": "rules",
+            "toNode": "C30",
+            "toPort": "criteriaB"
+        },
+        {
+            "fromNode": "C30",
+            "fromPort": "rules",
+            "toNode": "C32",
+            "toPort": "criteriaA"
+        },
+        {
+            "fromNode": "C31",
+            "fromPort": "rules",
+            "toNode": "C32",
+            "toPort": "criteriaB"
+        },
+        {
+            "fromNode": "C32",
+            "fromPort": "rules",
+            "toNode": "R68",
+            "toPort": "criteria"
+        },
+        {
+            "fromNode": "C33",
+            "fromPort": "rules",
+            "toNode": "R61",
+            "toPort": "criteria"
+        },
+        {
+            "fromNode": "C34",
+            "fromPort": "rules",
+            "toNode": "R63",
+            "toPort": "criteria"
+        },
+        {
+            "fromNode": "C34",
+            "fromPort": "rules",
+            "toNode": "C08",
+            "toPort": "criteriaA"
+        },
+        {
+            "fromNode": "C35",
+            "fromPort": "rules",
+            "toNode": "C37",
+            "toPort": "criteriaA"
+        },
+        {
+            "fromNode": "C36",
+            "fromPort": "rules",
+            "toNode": "C37",
+            "toPort": "criteriaB"
+        },
+        {
+            "fromNode": "C37",
+            "fromPort": "rules",
+            "toNode": "R73",
+            "toPort": "criteria"
+        },
+        {
+            "fromNode": "C38",
+            "fromPort": "rules",
+            "toNode": "C40",
+            "toPort": "criteriaA"
+        },
+        {
+            "fromNode": "C39",
+            "fromPort": "rules",
+            "toNode": "C40",
+            "toPort": "criteriaB"
+        },
+        {
+            "fromNode": "C40",
+            "fromPort": "rules",
+            "toNode": "C42",
+            "toPort": "criteriaA"
+        },
+        {
+            "fromNode": "C41",
+            "fromPort": "rules",
+            "toNode": "C42",
+            "toPort": "criteriaB"
+        },
+        {
+            "fromNode": "C42",
+            "fromPort": "rules",
+            "toNode": "R11",
+            "toPort": "criteria"
+        },
+        {
+            "fromNode": "C43",
+            "fromPort": "rules",
+            "toNode": "R08",
+            "toPort": "criteria"
+        },
+        {
+            "fromNode": "C44",
+            "fromPort": "rules",
+            "toNode": "C46",
+            "toPort": "criteriaA"
+        },
+        {
+            "fromNode": "C45",
+            "fromPort": "rules",
+            "toNode": "C46",
+            "toPort": "criteriaB"
+        },
+        {
+            "fromNode": "C46",
+            "fromPort": "rules",
+            "toNode": "R38",
+            "toPort": "criteria"
+        },
+        {
+            "fromNode": "C47",
+            "fromPort": "rules",
+            "toNode": "C49",
+            "toPort": "criteriaA"
+        },
+        {
+            "fromNode": "C48",
+            "fromPort": "rules",
+            "toNode": "C49",
+            "toPort": "criteriaB"
+        },
+        {
+            "fromNode": "C49",
+            "fromPort": "rules",
+            "toNode": "R36",
+            "toPort": "criteria"
+        },
+        {
+            "fromNode": "C50",
+            "fromPort": "rules",
+            "toNode": "C52",
+            "toPort": "criteriaA"
+        },
+        {
+            "fromNode": "C51",
+            "fromPort": "rules",
+            "toNode": "C52",
+            "toPort": "criteriaB"
+        },
+        {
+            "fromNode": "C52",
+            "fromPort": "rules",
+            "toNode": "R09",
+            "toPort": "criteria"
+        },
+        {
+            "fromNode": "C53",
+            "fromPort": "rules",
+            "toNode": "R39",
+            "toPort": "criteria"
+        },
+        {
+            "fromNode": "C54",
+            "fromPort": "rules",
+            "toNode": "R15",
+            "toPort": "criteria"
+        },
+        {
+            "fromNode": "C54",
+            "fromPort": "rules",
+            "toNode": "R16",
+            "toPort": "criteria"
+        },
+        {
+            "fromNode": "C54",
+            "fromPort": "rules",
+            "toNode": "R13",
+            "toPort": "criteria"
+        },
+        {
+            "fromNode": "C54",
+            "fromPort": "rules",
+            "toNode": "R12",
+            "toPort": "criteria"
+        },
+        {
+            "fromNode": "C54",
+            "fromPort": "rules",
+            "toNode": "R14",
+            "toPort": "criteria"
+        },
+        {
+            "fromNode": "C55",
+            "fromPort": "rules",
+            "toNode": "C57",
+            "toPort": "criteriaB"
+        },
+        {
+            "fromNode": "C56",
+            "fromPort": "rules",
+            "toNode": "C57",
+            "toPort": "criteriaA"
+        },
+        {
+            "fromNode": "C57",
+            "fromPort": "rules",
+            "toNode": "C59",
+            "toPort": "criteriaA"
+        },
+        {
+            "fromNode": "C58",
+            "fromPort": "rules",
+            "toNode": "C59",
+            "toPort": "criteriaB"
+        },
+        {
+            "fromNode": "C59",
+            "fromPort": "rules",
+            "toNode": "R35",
+            "toPort": "criteria"
+        },
+        {
+            "fromNode": "C60",
+            "fromPort": "rules",
+            "toNode": "R37",
+            "toPort": "criteria"
+        },
+        {
+            "fromNode": "C61",
+            "fromPort": "rules",
+            "toNode": "R53",
+            "toPort": "criteria"
+        },
+        {
+            "fromNode": "C62",
+            "fromPort": "rules",
+            "toNode": "R52",
+            "toPort": "criteria"
+        },
+        {
+            "fromNode": "C63",
+            "fromPort": "rules",
+            "toNode": "R51",
+            "toPort": "criteria"
+        },
+        {
+            "fromNode": "C64",
+            "fromPort": "rules",
+            "toNode": "R54",
+            "toPort": "criteria"
+        },
+        {
+            "fromNode": "C65",
+            "fromPort": "rules",
+            "toNode": "C07",
+            "toPort": "criteriaA"
+        },
+        {
+            "fromNode": "C66",
+            "fromPort": "rules",
+            "toNode": "C07",
+            "toPort": "criteriaB"
+        },
+        {
+            "fromNode": "C67",
+            "fromPort": "rules",
+            "toNode": "R17",
+            "toPort": "criteria"
+        },
+        {
+            "fromNode": "C68",
+            "fromPort": "rules",
+            "toNode": "R18",
+            "toPort": "criteria"
+        },
+        {
+            "fromNode": "C69",
+            "fromPort": "rules",
+            "toNode": "C71",
+            "toPort": "criteriaA"
+        },
+        {
+            "fromNode": "C70",
+            "fromPort": "rules",
+            "toNode": "C71",
+            "toPort": "criteriaB"
+        },
+        {
+            "fromNode": "C71",
+            "fromPort": "rules",
+            "toNode": "R22",
+            "toPort": "criteria"
+        },
+        {
+            "fromNode": "C72",
+            "fromPort": "rules",
+            "toNode": "C74",
+            "toPort": "criteriaA"
+        },
+        {
+            "fromNode": "C73",
+            "fromPort": "rules",
+            "toNode": "C74",
+            "toPort": "criteriaB"
+        },
+        {
+            "fromNode": "C74",
+            "fromPort": "rules",
+            "toNode": "R19",
+            "toPort": "criteria"
+        },
+        {
+            "fromNode": "C75",
+            "fromPort": "rules",
+            "toNode": "R23",
+            "toPort": "criteria"
+        },
+        {
+            "fromNode": "C76",
+            "fromPort": "rules",
+            "toNode": "C78",
+            "toPort": "criteriaA"
+        },
+        {
+            "fromNode": "C77",
+            "fromPort": "rules",
+            "toNode": "C78",
+            "toPort": "criteriaB"
+        },
+        {
+            "fromNode": "C77",
+            "fromPort": "rules",
+            "toNode": "C81",
+            "toPort": "criteriaA"
+        },
+        {
+            "fromNode": "C78",
+            "fromPort": "rules",
+            "toNode": "R26",
+            "toPort": "criteria"
+        },
+        {
+            "fromNode": "C79",
+            "fromPort": "rules",
+            "toNode": "C81",
+            "toPort": "criteriaB"
+        },
+        {
+            "fromNode": "C80",
+            "fromPort": "rules",
+            "toNode": "R28",
+            "toPort": "criteria"
+        },
+        {
+            "fromNode": "C81",
+            "fromPort": "rules",
+            "toNode": "R27",
+            "toPort": "criteria"
+        },
+        {
+            "fromNode": "C82",
+            "fromPort": "rules",
+            "toNode": "R34",
+            "toPort": "criteria"
+        },
+        {
+            "fromNode": "C83",
+            "fromPort": "rules",
+            "toNode": "R24",
+            "toPort": "criteria"
+        },
+        {
+            "fromNode": "C84",
+            "fromPort": "rules",
+            "toNode": "R25",
+            "toPort": "criteria"
+        },
+        {
+            "fromNode": "C85",
+            "fromPort": "rules",
+            "toNode": "C06",
+            "toPort": "criteriaA"
+        },
+        {
+            "fromNode": "C85",
+            "fromPort": "rules",
+            "toNode": "R01",
+            "toPort": "criteria"
+        },
+        {
+            "fromNode": "C85",
+            "fromPort": "rules",
+            "toNode": "R40",
+            "toPort": "criteria"
+        },
+        {
+            "fromNode": "C86",
+            "fromPort": "rules",
+            "toNode": "R07",
+            "toPort": "criteria"
+        },
+        {
+            "fromNode": "C86",
+            "fromPort": "rules",
+            "toNode": "R45",
+            "toPort": "criteria"
+        },
+        {
+            "fromNode": "C87",
+            "fromPort": "rules",
+            "toNode": "C06",
+            "toPort": "criteriaB"
+        },
+        {
+            "fromNode": "C87",
+            "fromPort": "rules",
+            "toNode": "R04",
+            "toPort": "criteria"
+        },
+        {
+            "fromNode": "C87",
+            "fromPort": "rules",
+            "toNode": "C86",
+            "toPort": "criteriaA"
+        },
+        {
+            "fromNode": "C87",
+            "fromPort": "rules",
+            "toNode": "R43",
+            "toPort": "criteria"
+        },
+        {
+            "fromNode": "C88",
+            "fromPort": "rules",
+            "toNode": "C86",
+            "toPort": "criteriaB"
+        },
+        {
+            "fromNode": "C88",
+            "fromPort": "rules",
+            "toNode": "R06",
+            "toPort": "criteria"
+        },
+        {
+            "fromNode": "C89",
+            "fromPort": "rules",
+            "toNode": "R02",
+            "toPort": "criteria"
+        },
+        {
+            "fromNode": "C89",
+            "fromPort": "rules",
+            "toNode": "R41",
+            "toPort": "criteria"
+        },
+        {
+            "fromNode": "C90",
+            "fromPort": "rules",
+            "toNode": "R03",
+            "toPort": "criteria"
+        },
+        {
+            "fromNode": "C90",
+            "fromPort": "rules",
+            "toNode": "R42",
+            "toPort": "criteria"
+        },
+        {
+            "fromNode": "C91",
+            "fromPort": "rules",
+            "toNode": "R32",
+            "toPort": "criteria"
+        },
+        {
+            "fromNode": "C92",
+            "fromPort": "rules",
+            "toNode": "R50",
+            "toPort": "criteria"
+        },
+        {
+            "fromNode": "C93",
+            "fromPort": "rules",
+            "toNode": "R49",
+            "toPort": "criteria"
+        },
+        {
+            "fromNode": "C94",
+            "fromPort": "rules",
+            "toNode": "R31",
+            "toPort": "criteria"
+        },
+        {
+            "fromNode": "C95",
+            "fromPort": "rules",
+            "toNode": "R33",
+            "toPort": "criteria"
+        },
+        {
             "fromNode": "C96",
             "fromPort": "rules",
-            "toNode": "C98",
-            "toPort": "criteriaA"
+            "toNode": "R46",
+            "toPort": "criteria"
         },
         {
             "fromNode": "C97",
             "fromPort": "rules",
-            "toNode": "C98",
-            "toPort": "criteriaB"
+            "toNode": "R47",
+            "toPort": "criteria"
         },
         {
             "fromNode": "C98",
             "fromPort": "rules",
-            "toNode": "R73",
+            "toNode": "R48",
             "toPort": "criteria"
+        },
+        {
+            "fromNode": "C99",
+            "fromPort": "rules",
+            "toNode": "C101",
+            "toPort": "criteriaA"
+        },
+        {
+            "fromNode": "C100",
+            "fromPort": "rules",
+            "toNode": "C101",
+            "toPort": "criteriaB"
+        },
+        {
+            "fromNode": "C101",
+            "fromPort": "rules",
+            "toNode": "C102",
+            "toPort": "criteriaB"
+        },
+        {
+            "fromNode": "C102",
+            "fromPort": "rules",
+            "toNode": "R64",
+            "toPort": "criteria"
+        },
+        {
+            "fromNode": "E52",
+            "fromPort": "consequences",
+            "toNode": "O122",
+            "toPort": "event"
+        },
+        {
+            "fromNode": "E52",
+            "fromPort": "consequences",
+            "toNode": "O123",
+            "toPort": "event"
+        },
+        {
+            "fromNode": "E52",
+            "fromPort": "rules",
+            "toNode": "R74",
+            "toPort": "event"
+        },
+        {
+            "fromNode": "C103",
+            "fromPort": "rules",
+            "toNode": "C105",
+            "toPort": "criteriaB"
+        },
+        {
+            "fromNode": "C104",
+            "fromPort": "rules",
+            "toNode": "C105",
+            "toPort": "criteriaA"
+        },
+        {
+            "fromNode": "C105",
+            "fromPort": "rules",
+            "toNode": "R74",
+            "toPort": "criteria"
+        },
+        {
+            "fromNode": "O122",
+            "fromPort": "writeBacks",
+            "toNode": "W77",
+            "toPort": "consequence"
+        },
+        {
+            "fromNode": "E53",
+            "fromPort": "consequences",
+            "toNode": "O124",
+            "toPort": "event"
+        },
+        {
+            "fromNode": "E53",
+            "fromPort": "consequences",
+            "toNode": "O125",
+            "toPort": "event"
+        },
+        {
+            "fromNode": "E53",
+            "fromPort": "rules",
+            "toNode": "R75",
+            "toPort": "event"
+        },
+        {
+            "fromNode": "C106",
+            "fromPort": "rules",
+            "toNode": "R75",
+            "toPort": "criteria"
+        },
+        {
+            "fromNode": "O124",
+            "fromPort": "writeBacks",
+            "toNode": "W80",
+            "toPort": "consequence"
+        },
+        {
+            "fromNode": "O124",
+            "fromPort": "writeBacks",
+            "toNode": "W81",
+            "toPort": "consequence"
+        },
+        {
+            "fromNode": "E54",
+            "fromPort": "consequences",
+            "toNode": "O126",
+            "toPort": "event"
+        },
+        {
+            "fromNode": "E54",
+            "fromPort": "consequences",
+            "toNode": "O127",
+            "toPort": "event"
+        },
+        {
+            "fromNode": "E54",
+            "fromPort": "rules",
+            "toNode": "R76",
+            "toPort": "event"
+        },
+        {
+            "fromNode": "C107",
+            "fromPort": "rules",
+            "toNode": "C109",
+            "toPort": "criteriaA"
+        },
+        {
+            "fromNode": "O126",
+            "fromPort": "writeBacks",
+            "toNode": "W82",
+            "toPort": "consequence"
+        },
+        {
+            "fromNode": "O126",
+            "fromPort": "writeBacks",
+            "toNode": "W83",
+            "toPort": "consequence"
+        },
+        {
+            "fromNode": "C108",
+            "fromPort": "rules",
+            "toNode": "C109",
+            "toPort": "criteriaB"
+        },
+        {
+            "fromNode": "C109",
+            "fromPort": "rules",
+            "toNode": "R76",
+            "toPort": "criteria"
+        },
+        {
+            "fromNode": "E55",
+            "fromPort": "consequences",
+            "toNode": "O128",
+            "toPort": "event"
+        },
+        {
+            "fromNode": "E55",
+            "fromPort": "rules",
+            "toNode": "R77",
+            "toPort": "event"
+        },
+        {
+            "fromNode": "C110",
+            "fromPort": "rules",
+            "toNode": "C111",
+            "toPort": "criteriaB"
+        },
+        {
+            "fromNode": "C111",
+            "fromPort": "rules",
+            "toNode": "R77",
+            "toPort": "criteria"
+        },
+        {
+            "fromNode": "C112",
+            "fromPort": "rules",
+            "toNode": "C111",
+            "toPort": "criteriaA"
+        },
+        {
+            "fromNode": "O128",
+            "fromPort": "writeBacks",
+            "toNode": "W84",
+            "toPort": "consequence"
+        },
+        {
+            "fromNode": "O128",
+            "fromPort": "writeBacks",
+            "toNode": "W85",
+            "toPort": "consequence"
         }
     ]
 }

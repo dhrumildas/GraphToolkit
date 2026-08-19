@@ -111,7 +111,7 @@ namespace FuzzyGraph2.Editor
 
                     else
                     {
-                        antecedentIndex = CompileCriterionV2(compiledEvent, v2Criteria[0], compiledCriteriaV2, buildingCriteriaV2);
+                        antecedentIndex = CompileCriterionV2(compiledEvent, v2Criteria[0], compiledCriteriaV2, buildingCriteriaV2, compiledCriteria, buildingCriteria);
                     }
 
                         compiledEvent.rules.Add(new CompiledSugenoRule
@@ -195,10 +195,12 @@ namespace FuzzyGraph2.Editor
         }
 
         private static int CompileCriterionV2(
-    CompiledFuzzyEvent compiledEvent,
-    CriterionNodeV2 node,
-    IDictionary<CriterionNodeV2, int> compiledCriteria,
-    ISet<CriterionNodeV2> buildingCriteria)
+            CompiledFuzzyEvent compiledEvent,
+            CriterionNodeV2 node,
+            IDictionary<CriterionNodeV2, int> compiledCriteria,
+            ISet<CriterionNodeV2> buildingCriteria,
+            IDictionary<CriterionNode, int> legacyCompiledCriteria,
+            ISet<CriterionNode> legacyBuildingCriteria)
         {
             if (node == null)
                 throw new ArgumentNullException(nameof(node));
@@ -211,15 +213,19 @@ namespace FuzzyGraph2.Editor
 
             try
             {
-                CriterionMode mode = GetOptionValue(
-                    node,
-                    CriterionNodeV2.ModeOptionName,
-                    CriterionMode.BoolEquals);
+                CriterionMode mode = GetOptionValue(node,CriterionNodeV2.ModeOptionName,CriterionMode.BoolEquals);
 
                 int expressionIndex;
 
                 switch (mode)
                 {
+
+                    case CriterionMode.FuzzyNumber:
+                        expressionIndex = CompileFuzzyNumberCriterionV2(
+                            compiledEvent,
+                            node);
+                        break;
+
                     case CriterionMode.BoolEquals:
                         expressionIndex = AddExpression(
                             compiledEvent,
@@ -296,6 +302,39 @@ namespace FuzzyGraph2.Editor
                             });
                         break;
 
+
+                    case CriterionMode.And:
+                        expressionIndex = CompileBinaryCriterionV2(
+                            compiledEvent,
+                            node,
+                            CompiledExpressionKind.And,
+                            compiledCriteria,
+                            buildingCriteria,
+                            legacyCompiledCriteria,
+                            legacyBuildingCriteria);
+                        break;
+
+                    case CriterionMode.Or:
+                        expressionIndex = CompileBinaryCriterionV2(
+                            compiledEvent,
+                            node,
+                            CompiledExpressionKind.Or,
+                            compiledCriteria,
+                            buildingCriteria,
+                            legacyCompiledCriteria,
+                            legacyBuildingCriteria);
+                        break;
+
+                    case CriterionMode.Not:
+                        expressionIndex = CompileNotCriterionV2(
+                            compiledEvent,
+                            node,
+                            compiledCriteria,
+                            buildingCriteria,
+                            legacyCompiledCriteria,
+                            legacyBuildingCriteria);
+                        break;
+
                     default:
                         throw new InvalidOperationException(
                             $"CriterionNodeV2 mode '{mode}' is not supported yet");
@@ -308,6 +347,116 @@ namespace FuzzyGraph2.Editor
             {
                 buildingCriteria.Remove(node);
             }
+        }
+
+        private static int CompileBinaryCriterionV2(
+            CompiledFuzzyEvent compiledEvent,
+            CriterionNodeV2 node,
+            CompiledExpressionKind kind,
+            IDictionary<CriterionNodeV2, int> compiledCriteria,
+            ISet<CriterionNodeV2> buildingCriteria,
+            IDictionary<CriterionNode, int> legacyCompiledCriteria,
+            ISet<CriterionNode> legacyBuildingCriteria)
+        {
+            int childAIndex = CompileCriterionInputV2(
+                compiledEvent,
+                node,
+                CriterionNodeV2.CriteriaAPortName,
+                compiledCriteria,
+                buildingCriteria,
+                legacyCompiledCriteria,
+                legacyBuildingCriteria);
+
+            int childBIndex = CompileCriterionInputV2(
+                compiledEvent,
+                node,
+                CriterionNodeV2.CriteriaBPortName,
+                compiledCriteria,
+                buildingCriteria,
+                legacyCompiledCriteria,
+                legacyBuildingCriteria);
+
+            CompiledFuzzyExpression expression =
+                new CompiledFuzzyExpression
+                {
+                    kind = kind
+                };
+
+            expression.childExpressionIndices.Add(childAIndex);
+            expression.childExpressionIndices.Add(childBIndex);
+
+            return AddExpression(compiledEvent, expression);
+        }
+
+        private static int CompileNotCriterionV2(
+            CompiledFuzzyEvent compiledEvent,
+            CriterionNodeV2 node,
+            IDictionary<CriterionNodeV2, int> compiledCriteria,
+            ISet<CriterionNodeV2> buildingCriteria,
+            IDictionary<CriterionNode, int> legacyCompiledCriteria,
+            ISet<CriterionNode> legacyBuildingCriteria)
+        {
+            int childIndex = CompileCriterionInputV2(
+                compiledEvent,
+                node,
+                CriterionNodeV2.CriteriaAPortName,
+                compiledCriteria,
+                buildingCriteria,
+                legacyCompiledCriteria,
+                legacyBuildingCriteria);
+
+            CompiledFuzzyExpression expression =
+                new CompiledFuzzyExpression
+                {
+                    kind = CompiledExpressionKind.Not
+                };
+
+            expression.childExpressionIndices.Add(childIndex);
+
+            return AddExpression(compiledEvent, expression);
+        }
+
+        private static int CompileCriterionInputV2(
+            CompiledFuzzyEvent compiledEvent,
+            CriterionNodeV2 node,
+            string portName,
+            IDictionary<CriterionNodeV2, int> compiledCriteria,
+            ISet<CriterionNodeV2> buildingCriteria,
+            IDictionary<CriterionNode, int> legacyCompiledCriteria,
+            ISet<CriterionNode> legacyBuildingCriteria)
+        {
+            List<CriterionNode> legacyChildren =
+                GetConnectedNodesFromInput<CriterionNode>(
+                    node,
+                    portName).ToList();
+
+            List<CriterionNodeV2> v2Children =
+                GetConnectedNodesFromInput<CriterionNodeV2>(
+                    node,
+                    portName).ToList();
+
+            if (legacyChildren.Count + v2Children.Count != 1)
+            {
+                throw new InvalidOperationException(
+                    $"criterion '{node}' needs one link on '{portName}'");
+            }
+
+            if (legacyChildren.Count == 1)
+            {
+                return CompileCriterion(
+                    compiledEvent,
+                    legacyChildren[0],
+                    legacyCompiledCriteria,
+                    legacyBuildingCriteria);
+            }
+
+            return CompileCriterionV2(
+                compiledEvent,
+                v2Children[0],
+                compiledCriteria,
+                buildingCriteria,
+                legacyCompiledCriteria,
+                legacyBuildingCriteria);
         }
 
         private static int CompileCriterion(CompiledFuzzyEvent compiledEvent, CriterionNode node, IDictionary<CriterionNode, int> compiledCriteria, ISet<CriterionNode> buildingCriteria)
@@ -465,6 +614,123 @@ namespace FuzzyGraph2.Editor
             return value.Trim();
         }
 
+
+        //v2 FN Compilation Function
+        private static int CompileFuzzyNumberCriterionV2(CompiledFuzzyEvent compiledEvent,CriterionNodeV2 node)
+        {
+            string variableId = GetRequiredPortText(
+                node,
+                CriterionNodeV2.VariableIdPortName,
+                "fuzzy criterion variable id");
+
+            string setName = GetRequiredPortText(
+                node,
+                CriterionNodeV2.SetNamePortName,
+                "fuzzy set name");
+
+            float minimum = GetPortValue(
+                node,
+                CriterionNodeV2.MinimumPortName,
+                0f);
+
+            float maximum = GetPortValue(
+                node,
+                CriterionNodeV2.MaximumPortName,
+                1f);
+
+            FuzzySetShape shape = GetPortValue(
+                node,
+                CriterionNodeV2.ShapePortName,
+                FuzzySetShape.Low);
+
+            CompiledFuzzySet compiledSet = new CompiledFuzzySet
+            {
+                name = setName,
+                shape = shape,
+
+                first = GetPortValue(
+                    node,
+                    CriterionNodeV2.FirstPortName,
+                    0f),
+
+                second = GetPortValue(
+                    node,
+                    CriterionNodeV2.SecondPortName,
+                    0f),
+
+                third = GetPortValue(
+                    node,
+                    CriterionNodeV2.ThirdPortName,
+                    0f),
+
+                fourth = GetPortValue(
+                    node,
+                    CriterionNodeV2.FourthPortName,
+                    0f)
+            };
+
+            ValidateFuzzyDefinition(
+                variableId,
+                minimum,
+                maximum,
+                compiledSet);
+
+            CompiledFuzzyVariable variable =
+                compiledEvent.variables.FirstOrDefault(
+                    x => string.Equals(
+                        x.id,
+                        variableId,
+                        StringComparison.Ordinal));
+
+            if (variable == null)
+            {
+                variable = new CompiledFuzzyVariable
+                {
+                    id = variableId,
+                    displayName = variableId,
+                    minimum = minimum,
+                    maximum = maximum
+                };
+
+                compiledEvent.variables.Add(variable);
+            }
+            else if (
+                !Mathf.Approximately(variable.minimum, minimum) ||
+                !Mathf.Approximately(variable.maximum, maximum))
+            {
+                throw new InvalidOperationException(
+                    $"variable '{variableId}' has mixed domains");
+            }
+
+            CompiledFuzzySet existingSet =
+                variable.sets.FirstOrDefault(
+                    x => string.Equals(
+                        x.name,
+                        setName,
+                        StringComparison.Ordinal));
+
+            if (existingSet == null)
+            {
+                variable.sets.Add(compiledSet);
+            }
+            else if (!SameSet(existingSet, compiledSet))
+            {
+                throw new InvalidOperationException(
+                    $"set '{variableId}.{setName}' has mixed values");
+            }
+
+            return AddExpression(
+                compiledEvent,
+                new CompiledFuzzyExpression
+                {
+                    kind = CompiledExpressionKind.FuzzyIs,
+                    variableId = variableId,
+                    setName = setName
+                });
+        }
+
+
+        //legacy compilation function
         private static int CompileFuzzyNumberCriterion(CompiledFuzzyEvent compiledEvent, CriterionNode node)
         {
             string variableId = GetOptionValue(node, CriterionNode.VariableIdOptionName, string.Empty);

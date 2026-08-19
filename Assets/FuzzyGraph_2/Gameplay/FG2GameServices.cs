@@ -31,6 +31,24 @@ public sealed class FG2GameServices : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
+    public static void DestroyPersistentInstance()
+    {
+        if (Instance == null)
+            return;
+
+        Debug.Log("[FuzzyGraph2] Destroying persistent game services for new game.");
+
+        FG2GameServices oldInstance = Instance;
+
+        // Make room for the fresh instance in Bazaar immediately.
+        Instance = null;
+
+        // Safety: wipe the previous run's narrative state too.
+        oldInstance.Context?.Clear();
+
+        UnityEngine.Object.Destroy(oldInstance.gameObject);
+    }
+
     private void OnDestroy()
     {
         if (Instance == this)

@@ -22,6 +22,11 @@ public class CarpetPit : MonoBehaviour
     private bool resolved;
     private bool excuseChosen;
 
+    [Header("Quiet Vendor Reveal")]
+    [SerializeField] private RadiusGizmos carpetContext;
+
+    private Coroutine quietRevealRoutine;
+
     // called by gameplaysignal: pit.revealed
     public void BeginConfrontation()
     {
@@ -103,6 +108,39 @@ public class CarpetPit : MonoBehaviour
         Debug.Log("[CarpetPit] Player chose to make an excuse.");
     }
 
+    public void RevealQuietlyAfterDialogue()
+    {
+        if (quietRevealRoutine != null)
+            StopCoroutine(quietRevealRoutine);
+
+        quietRevealRoutine = StartCoroutine(QuietRevealRoutine());
+    }
+
+    private IEnumerator QuietRevealRoutine()
+    {
+        // Choice has just been pressed:
+        // force the vendor to maximum reaction.
+        if (carpetContext != null)
+            carpetContext.ShowMaximumReaction();
+
+        // D44 is still playing.
+        while (DialogueRunner.IsDialogueOpen)
+            yield return null;
+
+        // D44 has ended.
+        if (carpetContext != null)
+            carpetContext.FinishContext();
+
+        if (carpet != null)
+            carpet.SetActive(false);
+
+        if (hiddenPitEntrance != null)
+            hiddenPitEntrance.SetActive(true);
+
+        quietRevealRoutine = null;
+
+        Debug.Log("[CarpetPit] Quiet vendor reveal complete.");
+    }
     private void Update()
     {
         // excuse dialogue has finished. now trigger the guard response.

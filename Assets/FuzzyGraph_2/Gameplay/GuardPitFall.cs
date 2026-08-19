@@ -8,7 +8,7 @@ public class GuardPitFall : MonoBehaviour
 
     [Header("Forced Fall")]
     [SerializeField] private Transform fallTarget;
-    [SerializeField] private float triggerDistance = 1.2f;
+    //[SerializeField] private float triggerDistance = 1.2f;
     [SerializeField] private float fallSpeed = 7f;
 
     [Header("After Fall")]
@@ -40,29 +40,42 @@ public class GuardPitFall : MonoBehaviour
 
         if (!falling)
         {
-            CheckForPit();
+            //CheckForPit();
             return;
         }
 
         MoveGuardIntoPit();
     }
 
-    private void CheckForPit()
+    //private void CheckForPit()
+    //{
+    //    Vector2 guardPos = new Vector2(
+    //        guard.transform.position.x,
+    //        guard.transform.position.z);
+
+    //    Vector2 pitPos = new Vector2(
+    //        transform.position.x,
+    //        transform.position.z);
+
+    //    float distance = Vector2.Distance(
+    //        guardPos,
+    //        pitPos);
+
+    //    if (distance <= triggerDistance)
+    //        BeginFall();
+    //}
+
+
+    private void OnTriggerEnter(Collider other)
     {
-        Vector2 guardPos = new Vector2(
-            guard.transform.position.x,
-            guard.transform.position.z);
+        if (falling || fallCompleted)
+            return;
 
-        Vector2 pitPos = new Vector2(
-            transform.position.x,
-            transform.position.z);
-
-        float distance = Vector2.Distance(
-            guardPos,
-            pitPos);
-
-        if (distance <= triggerDistance)
+        if (other.CompareTag("Guard") ||
+            other.transform.root.CompareTag("Guard"))
+        {
             BeginFall();
+        }
     }
 
     public void BeginFall()

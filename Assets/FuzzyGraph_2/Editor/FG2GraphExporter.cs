@@ -147,7 +147,7 @@ namespace FuzzyGraph2.Editor
             {
                 if (node is EventNode) ids[node] = $"E{e++:00}";
                 else if (node is RuleNode) ids[node] = $"R{r++:00}";
-                else if (node is CriterionNode) ids[node] = $"C{c++:00}";
+                else if (node is CriterionNode || node is CriterionNodeV2) ids[node] = $"C{c++:00}";
                 else if (node is ConsequenceNode) ids[node] = $"O{o++:00}";
                 else if (node is WriteBackNode) ids[node] = $"W{w++:00}";
                 else ids[node] = $"N{n++:00}";
@@ -288,6 +288,131 @@ namespace FuzzyGraph2.Editor
                 return data;
             }
 
+
+
+            if (node is CriterionNodeV2 criterionV2)
+            {
+                CriterionMode mode = Opt(
+                    criterionV2,
+                    CriterionNodeV2.ModeOptionName,
+                    CriterionMode.FuzzyNumber);
+
+                Add(data, "Mode", mode.ToString());
+
+                if (mode == CriterionMode.And ||
+                    mode == CriterionMode.Or ||
+                    mode == CriterionMode.Not)
+                {
+                    return data;
+                }
+
+                Add(data, "Variable ID",
+                    Port(
+                        criterionV2,
+                        CriterionNodeV2.VariableIdPortName,
+                        ""));
+
+                if (mode == CriterionMode.FuzzyNumber)
+                {
+                    FuzzySetShape shape = Port(
+                        criterionV2,
+                        CriterionNodeV2.ShapePortName,
+                        FuzzySetShape.Low);
+
+                    Add(data, "Set",
+                        Port(
+                            criterionV2,
+                            CriterionNodeV2.SetNamePortName,
+                            ""));
+
+                    Add(data, "Shape", shape.ToString());
+
+                    Add(data, "Minimum",
+                        F(Port(
+                            criterionV2,
+                            CriterionNodeV2.MinimumPortName,
+                            0f)));
+
+                    Add(data, "Maximum",
+                        F(Port(
+                            criterionV2,
+                            CriterionNodeV2.MaximumPortName,
+                            1f)));
+
+                    Add(data, "Point A",
+                        F(Port(
+                            criterionV2,
+                            CriterionNodeV2.FirstPortName,
+                            0f)));
+
+                    Add(data, "Point B",
+                        F(Port(
+                            criterionV2,
+                            CriterionNodeV2.SecondPortName,
+                            0f)));
+
+                    if (shape == FuzzySetShape.Range)
+                    {
+                        Add(data, "Point C",
+                            F(Port(
+                                criterionV2,
+                                CriterionNodeV2.ThirdPortName,
+                                0f)));
+
+                        Add(data, "Point D",
+                            F(Port(
+                                criterionV2,
+                                CriterionNodeV2.FourthPortName,
+                                0f)));
+                    }
+                }
+                else if (mode == CriterionMode.BoolEquals)
+                {
+                    Add(data, "Expected Bool",
+                        Port(
+                            criterionV2,
+                            CriterionNodeV2.ExpectedBoolPortName,
+                            true).ToString());
+                }
+                else if (mode == CriterionMode.IdEquals)
+                {
+                    Add(data, "Expected ID",
+                        Port(
+                            criterionV2,
+                            CriterionNodeV2.ExpectedIdPortName,
+                            ""));
+                }
+                else if (mode == CriterionMode.NumberCompare)
+                {
+                    NumberComparison comparison = Port(
+                        criterionV2,
+                        CriterionNodeV2.ComparisonPortName,
+                        NumberComparison.LessThanOrEqual);
+
+                    Add(data, "Comparison", comparison.ToString());
+
+                    Add(data, "Compare A",
+                        F(Port(
+                            criterionV2,
+                            CriterionNodeV2.ComparisonValuePortName,
+                            0f)));
+
+                    if (comparison == NumberComparison.InclusiveRange)
+                    {
+                        Add(data, "Compare B",
+                            F(Port(
+                                criterionV2,
+                                CriterionNodeV2.ComparisonValue2PortName,
+                                0f)));
+                    }
+                }
+
+                return data;
+            }
+
+
+
+
             if (node is ConsequenceNode consequence)
             {
                 bool fireEvent = Opt(
@@ -408,10 +533,17 @@ namespace FuzzyGraph2.Editor
                             RuleNode.ConsequentOptionName,
                             0f);
 
-                        List<CriterionNode> roots =
+                        List<Node> roots = new List<Node>();
+
+                        roots.AddRange(
                             ConnectedFromInput<CriterionNode>(
                                 rule,
-                                RuleNode.CriteriaPortName).ToList();
+                                RuleNode.CriteriaPortName));
+
+                        roots.AddRange(
+                            ConnectedFromInput<CriterionNodeV2>(
+                                rule,
+                                RuleNode.CriteriaPortName));
 
                         string rootText = roots.Count == 0
                             ? "no criterion"
@@ -528,6 +660,21 @@ namespace FuzzyGraph2.Editor
 
             return ports.Select(x => x.GetNode()).OfType<T>();
         }
+
+
+        private static T Port<T>(Node node,string portName,T fallback)
+        {
+            IPort port = node?.GetInputPortByName(portName);
+
+            if (port != null &&
+                port.TryGetValue(out T value))
+            {
+                return value;
+            }
+
+            return fallback;
+        }
+
 
         private static T Opt<T>(Node node, string optionName, T fallback)
         {

@@ -1,18 +1,18 @@
 ﻿# MainGame - FuzzyGraph2 graph report
 
 Source: `Assets/FuzzyGraph_2/Editor/Graph/MainGame.fuzzygraph2`
-Exported: 2026-08-18 22:55:29
+Exported: 2026-08-19 19:01:40
 
 ## Compile check
 
-`[fuzzygraph2] compiled 'export check' | events 51 | variables 11 | expressions 109 | rules 72 | bands 70 | fallbacks 51 | consequences 40 | write-backs 75`
+`[fuzzygraph2] compiled 'export check' | events 55 | variables 11 | expressions 123 | rules 77 | bands 74 | fallbacks 54 | consequences 43 | write-backs 85`
 
 ## Event overview
 
 ### Inspect (E01)
 
 Rules:
-- `R34` reveal_noticed_carpet | z=0.9 | root C35
+- `R34` reveal_noticed_carpet | z=0.9 | root C82
 
 Consequences:
 - `O04` Vendor.NoValidOutput | min=0 | fallback=True
@@ -24,12 +24,13 @@ Consequences:
 ### AmbientSocialPressure (E02)
 
 Rules:
-- `R04` pressure_player_loitering | z=0.6 | root C04
-- `R05` pressure_near_and_loitering | z=0.9 | root C05
-- `R07` pressure_loitering_nervous_vendor | z=0.95 | root C07
-- `R01` pressure_near | z=0.55 | root C03
-- `R02` pressure_mid | z=0.35 | root C01
-- `R03` pressure_far | z=0.15 | root C02
+- `R02` pressure_mid | z=0.35 | root C89
+- `R01` pressure_near | z=0.55 | root C85
+- `R03` pressure_far | z=0.15 | root C90
+- `R04` pressure_player_loitering | z=0.6 | root C87
+- `R07` pressure_loitering_nervous_vendor | z=0.95 | root C86
+- `R05` pressure_near_and_loitering | z=0.9 | root C06
+- `R06` pressure_vendor_nervous | z=0.8 | root C88
 
 Consequences:
 - `O05` SocialPressure.Calm | min=0 | fallback=False
@@ -41,12 +42,12 @@ Consequences:
 ### BazaarTalkToGuard (E03)
 
 Rules:
-- `R11` guard_notices_held_flowers | z=1 | root C68
-- `R08` guard_first_conversation | z=0.1 | root C08
-- `R09` guard_repeat_conversation | z=0.5 | root C49
-- `R38` guard_dismisses_player | z=0.95 | root C47
-- `R36` guard_repetitions_request | z=0.8 | root C45
-- `R39` guard_allowed_entry_repeat | z=0.3 | root C50
+- `R11` guard_notices_held_flowers | z=1 | root C42
+- `R08` guard_first_conversation | z=0.1 | root C43
+- `R09` guard_repeat_conversation | z=0.5 | root C52
+- `R38` guard_dismisses_player | z=0.95 | root C46
+- `R36` guard_repetitions_request | z=0.8 | root C49
+- `R39` guard_allowed_entry_repeat | z=0.3 | root C53
 
 Consequences:
 - `O10` Guard.FirstConversation | min=0 | fallback=False
@@ -66,7 +67,7 @@ Consequences:
 ### PickFlowers (E04)
 
 Rules:
-- `R10` pick_flowers | z=0.9 | root C10
+- `R10` pick_flowers | z=0.9 | root C02
 
 Consequences:
 - `O13` Player.PicksFlowers | min=0.5 | fallback=False
@@ -76,7 +77,7 @@ Consequences:
 ### OfferFlowersToGuard (E05)
 
 Rules:
-- `R12` player_offers_flowers | z=0.9 | root C14
+- `R12` player_offers_flowers | z=0.9 | root C54
 
 Consequences:
 - `O16` Guard.FlowersOffered | min=0.5 | fallback=False
@@ -87,7 +88,7 @@ Consequences:
 ### TeaseGuardAboutFlowers (E06)
 
 Rules:
-- `R13` player_teases_guard | z=0.9 | root C14
+- `R13` player_teases_guard | z=0.9 | root C54
 
 Consequences:
 - `O18` Guard.TeasedAboutFlowers | min=0.5 | fallback=False
@@ -98,7 +99,7 @@ Consequences:
 ### GiveFlowersToGuard (E07)
 
 Rules:
-- `R14` guard_accepts_flowers | z=0.9 | root C14
+- `R14` guard_accepts_flowers | z=0.9 | root C54
 
 Consequences:
 - `O20` Guard.AcceptsFlowers | min=0.5 | fallback=False
@@ -111,7 +112,7 @@ Consequences:
 ### RefuseFlowersToGuard (E08)
 
 Rules:
-- `R15` player_refuses_flowers | z=0.9 | root C14
+- `R15` player_refuses_flowers | z=0.9 | root C54
 
 Consequences:
 - `O22` Guard.FlowersRefused | min=0.5 | fallback=False
@@ -121,7 +122,7 @@ Consequences:
 ### DelayFlowersToGuard (E09)
 
 Rules:
-- `R16` player_delays_flowers | z=0.9 | root C14
+- `R16` player_delays_flowers | z=0.9 | root C54
 
 Consequences:
 - `O24` Guard.FlowersDelayed | min=0.5 | fallback=False
@@ -131,8 +132,8 @@ Consequences:
 ### BazaarTalkToVendor (E10)
 
 Rules:
-- `R17` vendor_first_meeting | z=0.1 | root C15
-- `R18` vendor_returning | z=0.8 | root C16
+- `R17` vendor_first_meeting | z=0.1 | root C67
+- `R18` vendor_returning | z=0.8 | root C68
 
 Consequences:
 - `O27` Vendor.FirstMeeting | min=0 | fallback=False
@@ -147,7 +148,7 @@ Consequences:
 ### OfferVendorFlowers (E11)
 
 Rules:
-- `R19` vendor_flowers | z=0.5 | root C17
+- `R19` vendor_flowers | z=0.5 | root C74
 
 Consequences:
 - `O29` Vendor.FlowersOffered | min=0 | fallback=False
@@ -158,7 +159,7 @@ Consequences:
 ### VendorAskHelp (E12)
 
 Rules:
-- `R20` vendor_help_request | z=0.5 | root C18
+- `R20` vendor_help_request | z=0.5 | root C01
 
 Consequences:
 - `O31` Vendor.AgreesHelp | min=0 | fallback=False
@@ -169,7 +170,7 @@ Consequences:
 ### PickCoins (E13)
 
 Rules:
-- `R21` pick_coins | z=0.9 | root C21
+- `R21` pick_coins | z=0.9 | root C16
 
 Consequences:
 - `O33` Player.PicksCoins | min=0 | fallback=False
@@ -179,7 +180,7 @@ Consequences:
 ### OfferVendorCoins (E14)
 
 Rules:
-- `R22` vendor_coins | z=0.5 | root C24
+- `R22` vendor_coins | z=0.5 | root C71
 
 Consequences:
 - `O35` Vendor.CoinsAccepted | min=0 | fallback=False
@@ -190,7 +191,7 @@ Consequences:
 ### VendorRoyalLie (E15)
 
 Rules:
-- `R23` vendor_royal_lie | z=0.4 | root C25
+- `R23` vendor_royal_lie | z=0.4 | root C75
 
 Consequences:
 - `O37` Vendor.ConsidersRoyalClaim | min=0 | fallback=False
@@ -201,7 +202,7 @@ Consequences:
 ### VendorRobberyWarning (E16)
 
 Rules:
-- `R24` vendor_robbery_warning | z=0.45 | root C26
+- `R24` vendor_robbery_warning | z=0.45 | root C83
 
 Consequences:
 - `O39` Vendor.ConsidersRobberyWarning | min=0 | fallback=False
@@ -212,7 +213,7 @@ Consequences:
 ### VendorAdmitRobbery (E17)
 
 Rules:
-- `R25` vendor_admit_robbery | z=0.75 | root C27
+- `R25` vendor_admit_robbery | z=0.75 | root C84
 
 Consequences:
 - `O41` Vendor.AlarmedByConfession | min=0 | fallback=False
@@ -223,9 +224,9 @@ Consequences:
 ### VendorEvaluateState (E18)
 
 Rules:
-- `R26` vendor_calm | z=0.15 | root C32
-- `R28` vendor_alarmed | z=0.95 | root C29
-- `R27` vendor_nervous | z=0.6 | root C33
+- `R26` vendor_calm | z=0.15 | root C78
+- `R28` vendor_alarmed | z=0.95 | root C80
+- `R27` vendor_nervous | z=0.6 | root C81
 
 Consequences:
 - `O43` Vendor.StateCalm | min=0 | fallback=False
@@ -238,7 +239,7 @@ Consequences:
 ### NoticeVendorReaction (E19)
 
 Rules:
-- `R29` notice_vendor_reaction | z=0.7 | root C34
+- `R29` notice_vendor_reaction | z=0.7 | root C05
 
 Consequences:
 - `O47` Player.NoticesVendorReaction | min=0.5 | fallback=False
@@ -248,7 +249,7 @@ Consequences:
 ### VendorPitJump (E20)
 
 Rules:
-- `R30` rule_id | z=0.9 | root C36
+- `R30` rule_id | z=0.9 | root C03
 
 Consequences:
 - `O49` Player.JumpsIntoPit | min=0.5 | fallback=False
@@ -258,7 +259,7 @@ Consequences:
 ### VendorPitExcuse (E21)
 
 Rules:
-- `R31` vendor_pit_excuse  | z=0.6 | root C37
+- `R31` vendor_pit_excuse  | z=0.6 | root C94
 
 Consequences:
 - `O51` Player.AttemptsExcuse | min=0.5 | fallback=False
@@ -267,7 +268,7 @@ Consequences:
 ### VendorPitTimeout (E22)
 
 Rules:
-- `R32` vendor_pit_timeout | z=0.9 | root C38
+- `R32` vendor_pit_timeout | z=0.9 | root C91
 
 Consequences:
 - `O53` Vendor.CatchesPlayerAtPit | min=0.5 | fallback=False
@@ -277,7 +278,7 @@ Consequences:
 ### VendorCallsGuard (E23)
 
 Rules:
-- `R33` vendor_calls_guard | z=0.9 | root C39
+- `R33` vendor_calls_guard | z=0.9 | root C95
 
 Consequences:
 - `O55` Guard.AlertedByVendor | min=0.5 | fallback=False
@@ -287,7 +288,7 @@ Consequences:
 ### GuardArrestPlayer (E24)
 
 Rules:
-- `R35` guard_arrests_player | z=0.9 | root C64
+- `R35` guard_arrests_player | z=0.9 | root C59
 
 Consequences:
 - `O57` Guard.HasArrestedPlayer | min=0.5 | fallback=False
@@ -298,7 +299,7 @@ Consequences:
 ### GiveCoinsToGuard (E25)
 
 Rules:
-- `R37` player_bribes_guard | z=0.9 | root C42
+- `R37` player_bribes_guard | z=0.9 | root C60
 
 Consequences:
 - `O60` Guard.OfferedBribe | min=0.5 | fallback=False
@@ -310,24 +311,26 @@ Consequences:
 ### EvaluateLoitering (E26)
 
 Rules:
-- `R41` carpet_loiter_mid | z=0.35 | root C01
-- `R40` carpet_loiter_near | z=0.55 | root C03
-- `R44` carpet_loiter_near_and_time | z=0.9 | root C05
-- `R43` carpet_loiter_time | z=0.6 | root C04
-- `R45` carpet_loiter_nervous_vendor | z=0.95 | root C07
-- `R42` carpet_loiter_far | z=0.15 | root C02
+- `R41` carpet_loiter_mid | z=0.35 | root C89
+- `R40` carpet_loiter_near | z=0.55 | root C85
+- `R44` carpet_loiter_near_and_time | z=0.9 | root C06
+- `R43` carpet_loiter_time | z=0.6 | root C87
+- `R45` carpet_loiter_nervous_vendor | z=0.95 | root C86
+- `R42` carpet_loiter_far | z=0.15 | root C90
 
 Consequences:
 - `O64` CarpetLoiter.Calm | min=0 | fallback=False
 - `O65` CarpetLoiter.Uneasy | min=0.3 | fallback=False
 - `O66` CarpetLoiter.Watched | min=0.6 | fallback=False
+  - write-back `W78`
 - `O67` CarpetLoiter.Intervention | min=0.72 | fallback=False
+  - write-back `W79`
 - `O68` CarpetLoiter.NoContext | min=0 | fallback=True
 
 ### VendorBlackmail (E27)
 
 Rules:
-- `R46` vendor_blackmail | z=0.9 | root C51
+- `R46` vendor_blackmail | z=0.9 | root C96
 
 Consequences:
 - `O69` Vendor.ReportsBlackmail | min=0.5 | fallback=False
@@ -337,7 +340,7 @@ Consequences:
 ### VendorDeceive (E28)
 
 Rules:
-- `R47` vendor_deceive | z=0.9 | root C52
+- `R47` vendor_deceive | z=0.9 | root C97
 
 Consequences:
 - `O71` Vendor.DeceptionBegins | min=0.5 | fallback=False
@@ -346,7 +349,7 @@ Consequences:
 ### VendorDeceiveThreat (E29)
 
 Rules:
-- `R48` vendor_deceive_threat | z=0.9 | root C53
+- `R48` vendor_deceive_threat | z=0.9 | root C98
 
 Consequences:
 - `O73` Vendor.Intimidated | min=0.5 | fallback=False
@@ -356,7 +359,7 @@ Consequences:
 ### VendorDeceiveReveal (E30)
 
 Rules:
-- `R49` vendor_deceive_reveal | z=0.9 | root C54
+- `R49` vendor_deceive_reveal | z=0.9 | root C93
 
 Consequences:
 - `O75` Vendor.DeceiveReveal | min=0.5 | fallback=False
@@ -366,16 +369,17 @@ Consequences:
 ### VendorFlirt (E31)
 
 Rules:
-- `R50` vendor_flirt | z=0.5 | root C55
+- `R50` vendor_flirt | z=0.5 | root C92
 
 Consequences:
 - `O77` Vendor.FlirtAccepted | min=0.5 | fallback=False
+  - write-back `W76`
 - `O78` Vendor.FlirtFallback | min=0 | fallback=True
 
 ### InspectTreeHollow (E32)
 
 Rules:
-- `R51` tree_hollow_available | z=1 | root C56
+- `R51` tree_hollow_available | z=1 | root C63
 
 Consequences:
 - `O79` TreeHollow.Discovered | min=1 | fallback=False
@@ -385,7 +389,7 @@ Consequences:
 ### SearchTreeHollow (E33)
 
 Rules:
-- `R52` tree_hollow_search | z=1 | root C57
+- `R52` tree_hollow_search | z=1 | root C62
 
 Consequences:
 - `O81` TreeHollow.SearchDNE | min=0 | fallback=True
@@ -396,7 +400,7 @@ Consequences:
 ### LeaveTreeHollow (E34)
 
 Rules:
-- `R53` tree_hollow_walk_away | z=1 | root C58
+- `R53` tree_hollow_walk_away | z=1 | root C61
 
 Consequences:
 - `O83` TreeHollow.WalkAway | min=1 | fallback=False
@@ -405,8 +409,8 @@ Consequences:
 ### EnterVault (E35)
 
 Rules:
-- `R54` enter_vault_accepted | z=1 | root C59
-- `R55` entry_vault_denied | z=0.5 | root C66
+- `R54` enter_vault_accepted | z=1 | root C64
+- `R55` entry_vault_denied | z=0.5 | root C07
 
 Consequences:
 - `O85` Vault.EntryAllowed | min=1 | fallback=False
@@ -418,7 +422,7 @@ Consequences:
 ### VaultLockSolved (E36)
 
 Rules:
-- `R56` vault_lock_solved | z=1 | root C69
+- `R56` vault_lock_solved | z=1 | root C09
 
 Consequences:
 - `O88` Vault.LockSolved | min=1 | fallback=False
@@ -428,7 +432,7 @@ Consequences:
 ### InspectVaultHinges (E37)
 
 Rules:
-- `R57` inspect_vault_hinges | z=1 | root C70
+- `R57` inspect_vault_hinges | z=1 | root C22
 
 Consequences:
 - `O90` Vault.HingesInspected | min=1 | fallback=False
@@ -439,7 +443,7 @@ Consequences:
 ### UseTreeKey (E38)
 
 Rules:
-- `R58` use_tree_key | z=1 | root C71
+- `R58` use_tree_key | z=1 | root C10
 
 Consequences:
 - `O92` Vault.TreeKeyAccepted | min=1 | fallback=False
@@ -449,7 +453,7 @@ Consequences:
 ### VaultDoorInteract (E39)
 
 Rules:
-- `R59` vault_door_interact | z=1 | root C72
+- `R59` vault_door_interact | z=1 | root C17
 
 Consequences:
 - `O94` Vault.DoorInteraction | min=1 | fallback=False
@@ -460,7 +464,7 @@ Consequences:
 ### ChooseVaultCombination (E40)
 
 Rules:
-- `R60` choose_vault_combination | z=1 | root C73
+- `R60` choose_vault_combination | z=1 | root C23
 
 Consequences:
 - `O96` Vault.CombinationChosen | min=1 | fallback=False
@@ -469,7 +473,7 @@ Consequences:
 ### VaultLockFailed (E41)
 
 Rules:
-- `R61` vault_lock_failed | z=1 | root C74
+- `R61` vault_lock_failed | z=1 | root C33
 
 Consequences:
 - `O98` Vault.LockFailed | min=1 | fallback=False
@@ -480,8 +484,8 @@ Consequences:
 ### VaultDoorNoiseCheck (E42)
 
 Rules:
-- `R62` door_opened_carefully | z=0.2 | root C75
-- `R63` Vault.DoorOpenedNoisily | z=0.8 | root C76
+- `R62` door_opened_carefully | z=0.2 | root C08
+- `R63` Vault.DoorOpenedNoisily | z=0.8 | root C34
 
 Consequences:
 - `O100` Vault.DoorOpenedQuietly | min=0 | fallback=False
@@ -493,7 +497,7 @@ Consequences:
 ### VaultAlertCheck (E43)
 
 Rules:
-- `R64` vault_security_alert | z=1 | root C79
+- `R64` vault_security_alert | z=1 | root C102
 
 Consequences:
 - `O103` Vault.SecurityAlerted | min=1 | fallback=False
@@ -503,7 +507,7 @@ Consequences:
 ### PickupGuardDisguise (E44)
 
 Rules:
-- `R65` pickup_guard_disguise | z=1 | root C80
+- `R65` pickup_guard_disguise | z=1 | root C18
 
 Consequences:
 - `O105` Player.TakesGuardDisguise | min=1 | fallback=False
@@ -513,7 +517,7 @@ Consequences:
 ### StealVaultFruit (E45)
 
 Rules:
-- `R66` steal_vault_fruit | z=1 | root C81
+- `R66` steal_vault_fruit | z=1 | root C11
 
 Consequences:
 - `O107` Player.TakesVaultFruit | min=1 | fallback=False
@@ -523,7 +527,7 @@ Consequences:
 ### ExitVault (E46)
 
 Rules:
-- `R67` exit_vault | z=1 | root C95
+- `R67` exit_vault | z=1 | root C21
 
 Consequences:
 - `O109` Vault.PlayerExits | min=1 | fallback=False
@@ -533,8 +537,8 @@ Consequences:
 ### FinalGuardReaction (E47)
 
 Rules:
-- `R68` guard_accepts_deception | z=0.2 | root C87
-- `R69` guard_rejects_deception | z=1 | root C88
+- `R68` guard_accepts_deception | z=0.2 | root C32
+- `R69` guard_rejects_deception | z=1 | root C04
 
 Consequences:
 - `O111` Guard.DeceptionAccepted | min=0 | fallback=False
@@ -547,7 +551,7 @@ Consequences:
 ### NewKeyPicked (E48)
 
 Rules:
-- `R70` new_key | z=1 | root C89
+- `R70` new_key | z=1 | root C27
 
 Consequences:
 - `O114` NewKeyacquired | min=1 | fallback=False
@@ -557,7 +561,7 @@ Consequences:
 ### GuardFellIntoPit (E49)
 
 Rules:
-- `R71` rule_id | z=1 | root C90
+- `R71` rule_id | z=1 | root C12
 
 Consequences:
 - `O116` Guard.Unavailable | min=1 | fallback=False
@@ -567,7 +571,7 @@ Consequences:
 ### CheckVaultExit (E50)
 
 Rules:
-- `R72` vault_exit_safe | z=1 | root C92
+- `R72` vault_exit_safe | z=1 | root C15
 
 Consequences:
 - `O117` Vault.GateExit | min=1 | fallback=False
@@ -577,11 +581,53 @@ Consequences:
 ### BazaarReturnCheck (E51)
 
 Rules:
-- `R73` bazaar_return_from_vault_gate | z=1 | root C98
+- `R73` bazaar_return_from_vault_gate | z=1 | root C37
 
 Consequences:
 - `O120` Bazaar.ReturnFromVaultGate | min=1 | fallback=False
 - `O121` Bazaar.ReturnNormal | min=0 | fallback=True
+
+### VendorChoiceRevealPit (E52)
+
+Rules:
+- `R74` vendor_choice_reveals_pit | z=1 | root C105
+
+Consequences:
+- `O122` Vendor.ChoiceRevealsPit | min=0.5 | fallback=False
+  - write-back `W77`
+- `O123` VendorChoiceRevealPit.Fallback | min=0 | fallback=True
+
+### VendorDirectVaultAsk (E53)
+
+Rules:
+- `R75` vendor_direct_vault_ask | z=0.55 | root C106
+
+Consequences:
+- `O124` Vendor.DirectVaultAsk | min=0.5 | fallback=False
+  - write-back `W80`
+  - write-back `W81`
+- `O125` VendorDirectVaultAsk.Fallback | min=0 | fallback=True
+
+### VendorSplitDeal (E54)
+
+Rules:
+- `R76` vendor_split_deal | z=0.65 | root C109
+
+Consequences:
+- `O126` Vendor.SplitDealAccepted | min=0.5 | fallback=False
+  - write-back `W82`
+  - write-back `W83`
+- `O127` VendorSplitDeal | min=0 | fallback=True
+
+### VendorGuardGrudge (E55)
+
+Rules:
+- `R77` vendor_guard_grudge | z=0.75 | root C111
+
+Consequences:
+- `O128` Vendor.Sympathizes | min=0.5 | fallback=False
+  - write-back `W84`
+  - write-back `W85`
 
 ## Every node
 
@@ -617,34 +663,10 @@ Consequences:
 - Value Type: Bool
 - Value: True
 
-### C01 - CriterionNode
-
-- Mode: FuzzyNumber
-- Variable ID: Player.DistanceToCarpet
-- Set: Mid
-- Shape: Range
-- Minimum: 0
-- Maximum: 10
-- Point A: 2
-- Point B: 4
-- Point C: 6
-- Point D: 8
-
 ### R02 - RuleNode
 
 - Rule ID: pressure_mid
 - Consequent: 0.35
-
-### C02 - CriterionNode
-
-- Mode: FuzzyNumber
-- Variable ID: Player.DistanceToCarpet
-- Set: Far
-- Shape: High
-- Minimum: 0
-- Maximum: 10
-- Point A: 6
-- Point B: 10
 
 ### R03 - RuleNode
 
@@ -668,32 +690,6 @@ Consequences:
 ### E02 - EventNode
 
 - Event ID: AmbientSocialPressure
-
-### C03 - CriterionNode
-
-- Mode: FuzzyNumber
-- Variable ID: Player.DistanceToCarpet
-- Set: Near
-- Shape: Low
-- Minimum: 0
-- Maximum: 10
-- Point A: 0
-- Point B: 4
-
-### C04 - CriterionNode
-
-- Mode: FuzzyNumber
-- Variable ID: Player.LoiterTimeNearCarpet
-- Set: Lingering
-- Shape: High
-- Minimum: 0
-- Maximum: 14.9
-- Point A: 3
-- Point B: 10
-
-### C05 - CriterionNode
-
-- Mode: And
 
 ### R04 - RuleNode
 
@@ -740,25 +736,10 @@ Consequences:
 - Fallback: True
 - Fire Event: False
 
-### C06 - CriterionNode
-
-- Mode: FuzzyNumber
-- Variable ID: Vendor.Nervousness
-- Set: Nervous
-- Shape: High
-- Minimum: 0
-- Maximum: 10
-- Point A: 3
-- Point B: 6
-
 ### R06 - RuleNode
 
 - Rule ID: pressure_vendor_nervous
 - Consequent: 0.8
-
-### C07 - CriterionNode
-
-- Mode: And
 
 ### R07 - RuleNode
 
@@ -825,25 +806,9 @@ Consequences:
 - Fallback: True
 - Fire Event: False
 
-### C08 - CriterionNode
-
-- Mode: DoesNotExist
-- Variable ID: Guard.HasMetPlayer
-
-### C09 - CriterionNode
-
-- Mode: BoolEquals
-- Variable ID: Guard.HasMetPlayer
-- Expected Bool: True
-
 ### E04 - EventNode
 
 - Event ID: PickFlowers
-
-### C10 - CriterionNode
-
-- Mode: DoesNotExist
-- Variable ID: Player.HasFlowers
 
 ### R10 - RuleNode
 
@@ -873,22 +838,6 @@ Consequences:
 - Fallback: True
 - Fire Event: False
 
-### C11 - CriterionNode
-
-- Mode: BoolEquals
-- Variable ID: Guard.HasMetPlayer
-- Expected Bool: True
-
-### C12 - CriterionNode
-
-- Mode: BoolEquals
-- Variable ID: Player.HasFlowers
-- Expected Bool: True
-
-### C13 - CriterionNode
-
-- Mode: And
-
 ### R11 - RuleNode
 
 - Rule ID: guard_notices_held_flowers
@@ -906,12 +855,6 @@ Consequences:
 ### E05 - EventNode
 
 - Event ID: OfferFlowersToGuard
-
-### C14 - CriterionNode
-
-- Mode: BoolEquals
-- Variable ID: Player.HasFlowers
-- Expected Bool: True
 
 ### R12 - RuleNode
 
@@ -1098,20 +1041,10 @@ Consequences:
 
 - Event ID: BazaarTalkToVendor
 
-### C15 - CriterionNode
-
-- Mode: DoesNotExist
-- Variable ID: Vendor.HasMetPlayer
-
 ### R17 - RuleNode
 
 - Rule ID: vendor_first_meeting
 - Consequent: 0.1
-
-### C16 - CriterionNode
-
-- Mode: Exists
-- Variable ID: Vendor.HasMetPlayer
 
 ### R18 - RuleNode
 
@@ -1168,10 +1101,6 @@ Consequences:
 
 - Event ID: OfferVendorFlowers
 
-### C17 - CriterionNode
-
-- Mode: And
-
 ### R19 - RuleNode
 
 - Rule ID: vendor_flowers
@@ -1209,11 +1138,6 @@ Consequences:
 
 - Event ID: VendorAskHelp
 
-### C18 - CriterionNode
-
-- Mode: Exists
-- Variable ID: Vendor.HasMetPlayer
-
 ### R20 - RuleNode
 
 - Rule ID: vendor_help_request
@@ -1247,25 +1171,9 @@ Consequences:
 - Fallback: True
 - Fire Event: False
 
-### C19 - CriterionNode
-
-- Mode: Exists
-- Variable ID: Vendor.HasMetPlayer
-
-### C20 - CriterionNode
-
-- Mode: BoolEquals
-- Variable ID: Player.HasFlowers
-- Expected Bool: True
-
 ### E13 - EventNode
 
 - Event ID: PickCoins
-
-### C21 - CriterionNode
-
-- Mode: DoesNotExist
-- Variable ID: Player.HasCoins
 
 ### R21 - RuleNode
 
@@ -1298,21 +1206,6 @@ Consequences:
 ### E14 - EventNode
 
 - Event ID: OfferVendorCoins
-
-### C22 - CriterionNode
-
-- Mode: Exists
-- Variable ID: Vendor.HasMetPlayer
-
-### C23 - CriterionNode
-
-- Mode: BoolEquals
-- Variable ID: Player.HasCoins
-- Expected Bool: True
-
-### C24 - CriterionNode
-
-- Mode: And
 
 ### R22 - RuleNode
 
@@ -1351,11 +1244,6 @@ Consequences:
 
 - Event ID: VendorRoyalLie
 
-### C25 - CriterionNode
-
-- Mode: Exists
-- Variable ID: Vendor.WasBribed
-
 ### R23 - RuleNode
 
 - Rule ID: vendor_royal_lie
@@ -1393,11 +1281,6 @@ Consequences:
 
 - Event ID: VendorRobberyWarning
 
-### C26 - CriterionNode
-
-- Mode: Exists
-- Variable ID: Vendor.WasBribed
-
 ### R24 - RuleNode
 
 - Rule ID: vendor_robbery_warning
@@ -1434,11 +1317,6 @@ Consequences:
 ### E17 - EventNode
 
 - Event ID: VendorAdmitRobbery
-
-### C27 - CriterionNode
-
-- Mode: Exists
-- Variable ID: Vendor.WasBribed
 
 ### R25 - RuleNode
 
@@ -1490,50 +1368,6 @@ Consequences:
 ### E18 - EventNode
 
 - Event ID: VendorEvaluateState
-
-### C28 - CriterionNode
-
-- Mode: FuzzyNumber
-- Variable ID: Vendor.Suspicion
-- Set: SuspicionLow
-- Shape: Low
-- Minimum: 0
-- Maximum: 10
-- Point A: 2
-- Point B: 6
-
-### C29 - CriterionNode
-
-- Mode: FuzzyNumber
-- Variable ID: Vendor.Suspicion
-- Set: SuspicionHigh
-- Shape: High
-- Minimum: 0
-- Maximum: 10
-- Point A: 5
-- Point B: 8
-
-### C30 - CriterionNode
-
-- Mode: FuzzyNumber
-- Variable ID: Vendor.Nervousness
-- Set: NervousnessLow
-- Shape: Low
-- Minimum: 0
-- Maximum: 10
-- Point A: 2
-- Point B: 5
-
-### C31 - CriterionNode
-
-- Mode: FuzzyNumber
-- Variable ID: Vendor.Nervousness
-- Set: NervousnessHigh
-- Shape: High
-- Minimum: 0
-- Maximum: 10
-- Point A: 3
-- Point B: 6
 
 ### R26 - RuleNode
 
@@ -1592,28 +1426,9 @@ Consequences:
 - Fallback: True
 - Fire Event: False
 
-### C32 - CriterionNode
-
-- Mode: And
-
-### C33 - CriterionNode
-
-- Mode: And
-
 ### E19 - EventNode
 
 - Event ID: NoticeVendorReaction
-
-### C34 - CriterionNode
-
-- Mode: FuzzyNumber
-- Variable ID: Vendor.Nervousness
-- Set: VendorReactionNotice
-- Shape: High
-- Minimum: 0
-- Maximum: 10
-- Point A: 3
-- Point B: 6
 
 ### R29 - RuleNode
 
@@ -1641,21 +1456,9 @@ Consequences:
 - Fallback: True
 - Fire Event: False
 
-### C35 - CriterionNode
-
-- Mode: BoolEquals
-- Variable ID: Player.NoticedVendorReaction
-- Expected Bool: True
-
 ### E20 - EventNode
 
 - Event ID: VendorPitJump
-
-### C36 - CriterionNode
-
-- Mode: BoolEquals
-- Variable ID: Player.FoundPitRoute
-- Expected Bool: True
 
 ### R30 - RuleNode
 
@@ -1682,12 +1485,6 @@ Consequences:
 
 - Event ID: VendorPitExcuse
 
-### C37 - CriterionNode
-
-- Mode: BoolEquals
-- Variable ID: Player.FoundPitRoute
-- Expected Bool: True
-
 ### R31 - RuleNode
 
 - Rule ID: vendor_pit_excuse 
@@ -1712,12 +1509,6 @@ Consequences:
 ### E22 - EventNode
 
 - Event ID: VendorPitTimeout
-
-### C38 - CriterionNode
-
-- Mode: BoolEquals
-- Variable ID: Player.FoundPitRoute
-- Expected Bool: True
 
 ### R32 - RuleNode
 
@@ -1748,12 +1539,6 @@ Consequences:
 ### E23 - EventNode
 
 - Event ID: VendorCallsGuard
-
-### C39 - CriterionNode
-
-- Mode: BoolEquals
-- Variable ID: Player.FoundPitRoute
-- Expected Bool: True
 
 ### R33 - RuleNode
 
@@ -1790,12 +1575,6 @@ Consequences:
 
 - Event ID: GuardArrestPlayer
 
-### C40 - CriterionNode
-
-- Mode: BoolEquals
-- Variable ID: Guard.PursuePlayer
-- Expected Bool: True
-
 ### R35 - RuleNode
 
 - Rule ID: guard_arrests_player
@@ -1831,17 +1610,6 @@ Consequences:
 - Fallback: True
 - Fire Event: False
 
-### C41 - CriterionNode
-
-- Mode: FuzzyNumber
-- Variable ID: Guard.TalkCount
-- Set: High
-- Shape: High
-- Minimum: 0
-- Maximum: 10
-- Point A: 2
-- Point B: 4
-
 ### R36 - RuleNode
 
 - Rule ID: guard_repetitions_request
@@ -1866,12 +1634,6 @@ Consequences:
 ### E25 - EventNode
 
 - Event ID: GiveCoinsToGuard
-
-### C42 - CriterionNode
-
-- Mode: BoolEquals
-- Variable ID: Player.HasCoins
-- Expected Bool: True
 
 ### R37 - RuleNode
 
@@ -1913,17 +1675,6 @@ Consequences:
 - Fallback: True
 - Fire Event: False
 
-### C43 - CriterionNode
-
-- Mode: FuzzyNumber
-- Variable ID: Guard.Suspicion
-- Set: High
-- Shape: High
-- Minimum: 0
-- Maximum: 40
-- Point A: 10
-- Point B: 20
-
 ### R38 - RuleNode
 
 - Rule ID: guard_dismisses_player
@@ -1951,42 +1702,6 @@ Consequences:
 - Operation: Set
 - Value Type: Bool
 - Value: False
-
-### C44 - CriterionNode
-
-- Mode: BoolEquals
-- Variable ID: Guard.AllowedEntry
-- Expected Bool: False
-
-### C45 - CriterionNode
-
-- Mode: And
-
-### C46 - CriterionNode
-
-- Mode: BoolEquals
-- Variable ID: Guard.AllowedEntry
-- Expected Bool: False
-
-### C47 - CriterionNode
-
-- Mode: And
-
-### C48 - CriterionNode
-
-- Mode: BoolEquals
-- Variable ID: Guard.AllowedEntry
-- Expected Bool: False
-
-### C49 - CriterionNode
-
-- Mode: And
-
-### C50 - CriterionNode
-
-- Mode: BoolEquals
-- Variable ID: Guard.AllowedEntry
-- Expected Bool: True
 
 ### R39 - RuleNode
 
@@ -2088,11 +1803,6 @@ Consequences:
 - Rule ID: vendor_blackmail
 - Consequent: 0.9
 
-### C51 - CriterionNode
-
-- Mode: Exists
-- Variable ID: Vendor.HasMetPlayer
-
 ### O69 - ConsequenceNode
 
 - Outcome ID: Vendor.ReportsBlackmail
@@ -2118,11 +1828,6 @@ Consequences:
 
 - Event ID: VendorDeceive
 
-### C52 - CriterionNode
-
-- Mode: Exists
-- Variable ID:  Vendor.HasMetPlayer
-
 ### R47 - RuleNode
 
 - Rule ID: vendor_deceive
@@ -2141,11 +1846,6 @@ Consequences:
 - Minimum: 0
 - Fallback: True
 - Fire Event: False
-
-### C53 - CriterionNode
-
-- Mode: Exists
-- Variable ID: Vendor.HasMetPlayer
 
 ### E29 - EventNode
 
@@ -2190,13 +1890,7 @@ Consequences:
 - Fallback: False
 - Fire Event: True
 - Target: GameplaySignal
-- Payload: Pit.Revealed
-
-### C54 - CriterionNode
-
-- Mode: BoolEquals
-- Variable ID: Vendor.HasMetPlayer
-- Expected Bool: True
+- Payload: Pit.RevealedQuietly
 
 ### R49 - RuleNode
 
@@ -2226,12 +1920,6 @@ Consequences:
 - Rule ID: vendor_flirt
 - Consequent: 0.5
 
-### C55 - CriterionNode
-
-- Mode: BoolEquals
-- Variable ID: Vendor.HasMetPlayer
-- Expected Bool: True
-
 ### O77 - ConsequenceNode
 
 - Outcome ID: Vendor.FlirtAccepted
@@ -2254,11 +1942,6 @@ Consequences:
 
 - Rule ID: tree_hollow_available
 - Consequent: 1
-
-### C56 - CriterionNode
-
-- Mode: DoesNotExist
-- Variable ID: Player.HasTreeKey
 
 ### O79 - ConsequenceNode
 
@@ -2286,11 +1969,6 @@ Consequences:
 ### E33 - EventNode
 
 - Event ID: SearchTreeHollow
-
-### C57 - CriterionNode
-
-- Mode: DoesNotExist
-- Variable ID: Player.HasTreeKey
 
 ### R52 - RuleNode
 
@@ -2327,12 +2005,6 @@ Consequences:
 - Value Type: Float
 - Value: 10
 
-### C58 - CriterionNode
-
-- Mode: BoolEquals
-- Variable ID: Player.InspectedTreeHollow
-- Expected Bool: True
-
 ### E34 - EventNode
 
 - Event ID: LeaveTreeHollow
@@ -2364,12 +2036,6 @@ Consequences:
 
 - Event ID: EnterVault
 
-### C59 - CriterionNode
-
-- Mode: BoolEquals
-- Variable ID: Guard.AllowedEntry
-- Expected Bool: True
-
 ### R54 - RuleNode
 
 - Rule ID: enter_vault_accepted
@@ -2379,11 +2045,6 @@ Consequences:
 
 - Rule ID: entry_vault_denied
 - Consequent: 0.5
-
-### C60 - CriterionNode
-
-- Mode: DoesNotExist
-- Variable ID: Guard.AllowedEntry
 
 ### O85 - ConsequenceNode
 
@@ -2417,41 +2078,12 @@ Consequences:
 - Target: DialogueGraph
 - Payload: GuardArrestsPlayer
 
-### C61 - CriterionNode
-
-- Mode: BoolEquals
-- Variable ID: Guard.AllowedEntry
-- Expected Bool: False
-
-### C62 - CriterionNode
-
-- Mode: DoesNotExist
-- Variable ID: Guard.AllowedEntry
-
-### C63 - CriterionNode
-
-- Mode: Or
-
-### C64 - CriterionNode
-
-- Mode: Or
-
 ### O87 - ConsequenceNode
 
 - Outcome ID: EnterVault.Fallback
 - Minimum: 0
 - Fallback: True
 - Fire Event: False
-
-### C65 - CriterionNode
-
-- Mode: BoolEquals
-- Variable ID: Guard.AllowedEntry
-- Expected Bool: False
-
-### C66 - CriterionNode
-
-- Mode: Or
 
 ### W55 - WriteBackNode
 
@@ -2460,25 +2092,9 @@ Consequences:
 - Value Type: Bool
 - Value: True
 
-### C67 - CriterionNode
-
-- Mode: NumberCompare
-- Variable ID: Guard.TalkCount
-- Comparison: LessThanOrEqual
-- Compare A: 2
-
-### C68 - CriterionNode
-
-- Mode: And
-
 ### E36 - EventNode
 
 - Event ID: VaultLockSolved
-
-### C69 - CriterionNode
-
-- Mode: DoesNotExist
-- Variable ID: Vault.PuzzleSolved
 
 ### R56 - RuleNode
 
@@ -2510,11 +2126,6 @@ Consequences:
 
 - Event ID: InspectVaultHinges
 
-### C70 - CriterionNode
-
-- Mode: DoesNotExist
-- Variable ID: Player.HingesData
-
 ### R57 - RuleNode
 
 - Rule ID: inspect_vault_hinges
@@ -2544,12 +2155,6 @@ Consequences:
 ### E38 - EventNode
 
 - Event ID: UseTreeKey
-
-### C71 - CriterionNode
-
-- Mode: BoolEquals
-- Variable ID: Player.HasTreeKey
-- Expected Bool: True
 
 ### R58 - RuleNode
 
@@ -2583,11 +2188,6 @@ Consequences:
 
 - Event ID: VaultDoorInteract
 
-### C72 - CriterionNode
-
-- Mode: DoesNotExist
-- Variable ID: Vault.PuzzleSolved
-
 ### R59 - RuleNode
 
 - Rule ID: vault_door_interact
@@ -2612,11 +2212,6 @@ Consequences:
 ### E40 - EventNode
 
 - Event ID: ChooseVaultCombination
-
-### C73 - CriterionNode
-
-- Mode: DoesNotExist
-- Variable ID: Vault.PuzzleSolved
 
 ### R60 - RuleNode
 
@@ -2657,11 +2252,6 @@ Consequences:
 
 - Event ID: VaultLockFailed
 
-### C74 - CriterionNode
-
-- Mode: Exists
-- Variable ID: Vault.AlarmTriggered
-
 ### R61 - RuleNode
 
 - Rule ID: vault_lock_failed
@@ -2701,20 +2291,10 @@ Consequences:
 
 - Event ID: VaultDoorNoiseCheck
 
-### C75 - CriterionNode
-
-- Mode: Not
-
 ### R62 - RuleNode
 
 - Rule ID: door_opened_carefully
 - Consequent: 0.2
-
-### C76 - CriterionNode
-
-- Mode: BoolEquals
-- Variable ID: Vault.CanInspectHinges
-- Expected Bool: True
 
 ### O100 - ConsequenceNode
 
@@ -2760,26 +2340,10 @@ Consequences:
 
 - Event ID: VaultAlertCheck
 
-### C77 - CriterionNode
-
-- Mode: BoolEquals
-- Variable ID: Vault.DoorMadeNoise
-- Expected Bool: True
-
 ### R64 - RuleNode
 
 - Rule ID: vault_security_alert
 - Consequent: 1
-
-### C78 - CriterionNode
-
-- Mode: BoolEquals
-- Variable ID: Vault.AlarmTriggered
-- Expected Bool: True
-
-### C79 - CriterionNode
-
-- Mode: Or
 
 ### W65 - WriteBackNode
 
@@ -2815,11 +2379,6 @@ Consequences:
 
 - Event ID: PickupGuardDisguise
 
-### C80 - CriterionNode
-
-- Mode: DoesNotExist
-- Variable ID: Player.HasDisguise
-
 ### R65 - RuleNode
 
 - Rule ID: pickup_guard_disguise
@@ -2852,11 +2411,6 @@ Consequences:
 
 - Event ID: StealVaultFruit
 
-### C81 - CriterionNode
-
-- Mode: DoesNotExist
-- Variable ID: Player.HasFruit
-
 ### R66 - RuleNode
 
 - Rule ID: steal_vault_fruit
@@ -2886,12 +2440,6 @@ Consequences:
 ### E46 - EventNode
 
 - Event ID: ExitVault
-
-### C82 - CriterionNode
-
-- Mode: BoolEquals
-- Variable ID: Player.HasFruit
-- Expected Bool: True
 
 ### R67 - RuleNode
 
@@ -2923,33 +2471,6 @@ Consequences:
 - Target: DialogueGraph
 - Payload: StealReminder
 
-### C83 - CriterionNode
-
-- Mode: BoolEquals
-- Variable ID: Player.HasDisguise
-- Expected Bool: True
-
-### C84 - CriterionNode
-
-- Mode: DoesNotExist
-- Variable ID: Player.HasFruit
-
-### C85 - CriterionNode
-
-- Mode: NumberCompare
-- Variable ID: Guard.Relationship
-- Comparison: InclusiveRange
-- Compare A: 10
-- Compare B: 30
-
-### C86 - CriterionNode
-
-- Mode: And
-
-### C87 - CriterionNode
-
-- Mode: And
-
 ### E47 - EventNode
 
 - Event ID: FinalGuardReaction
@@ -2958,13 +2479,6 @@ Consequences:
 
 - Rule ID: guard_accepts_deception
 - Consequent: 0.2
-
-### C88 - CriterionNode
-
-- Mode: NumberCompare
-- Variable ID: Guard.Suspicion
-- Comparison: GreaterThanOrEqual
-- Compare A: 20
 
 ### R69 - RuleNode
 
@@ -3023,11 +2537,6 @@ Consequences:
 
 - Event ID: NewKeyPicked
 
-### C89 - CriterionNode
-
-- Mode: DoesNotExist
-- Variable ID: Player.HasTreeKey
-
 ### R70 - RuleNode
 
 - Rule ID: new_key
@@ -3058,11 +2567,6 @@ Consequences:
 
 - Event ID: GuardFellIntoPit
 
-### C90 - CriterionNode
-
-- Mode: DoesNotExist
-- Variable ID: Guard.InsidePit
-
 ### R71 - RuleNode
 
 - Rule ID: rule_id
@@ -3086,26 +2590,10 @@ Consequences:
 
 - Event ID: CheckVaultExit
 
-### C91 - CriterionNode
-
-- Mode: BoolEquals
-- Variable ID: Guard.InsidePit
-- Expected Bool: True
-
-### C92 - CriterionNode
-
-- Mode: And
-
 ### R72 - RuleNode
 
 - Rule ID: vault_exit_safe
 - Consequent: 1
-
-### C93 - CriterionNode
-
-- Mode: BoolEquals
-- Variable ID: Player.HasFruit
-- Expected Bool: True
 
 ### O117 - ConsequenceNode
 
@@ -3125,15 +2613,6 @@ Consequences:
 - Target: DialogueGraph
 - Payload: UnableToExit
 
-### C94 - CriterionNode
-
-- Mode: DoesNotExist
-- Variable ID: Guard.InsidePit
-
-### C95 - CriterionNode
-
-- Mode: And
-
 ### O119 - ConsequenceNode
 
 - Outcome ID: GuardFellIntoPit
@@ -3151,22 +2630,6 @@ Consequences:
 ### E51 - EventNode
 
 - Event ID: BazaarReturnCheck
-
-### C96 - CriterionNode
-
-- Mode: BoolEquals
-- Variable ID: Guard.InsidePit
-- Expected Bool: True
-
-### C97 - CriterionNode
-
-- Mode: BoolEquals
-- Variable ID: Player.UsedVaultGateExit
-- Expected Bool: True
-
-### C98 - CriterionNode
-
-- Mode: And
 
 ### R73 - RuleNode
 
@@ -3189,6 +2652,818 @@ Consequences:
 - Fallback: True
 - Fire Event: False
 
+### C01 - CriterionNodeV2
+
+- Mode: Exists
+- Variable ID: Vendor.HasMetPlayer
+
+### C02 - CriterionNodeV2
+
+- Mode: DoesNotExist
+- Variable ID: Player.HasFlowers
+
+### C03 - CriterionNodeV2
+
+- Mode: BoolEquals
+- Variable ID: Player.FoundPitRoute
+- Expected Bool: True
+
+### C04 - CriterionNodeV2
+
+- Mode: NumberCompare
+- Variable ID: Guard.Suspicion
+- Comparison: GreaterThanOrEqual
+- Compare A: 20
+
+### C05 - CriterionNodeV2
+
+- Mode: FuzzyNumber
+- Variable ID: Vendor.Nervousness
+- Set: VendorReactionNotice
+- Shape: High
+- Minimum: 0
+- Maximum: 10
+- Point A: 3
+- Point B: 6
+
+### C06 - CriterionNodeV2
+
+- Mode: And
+
+### C07 - CriterionNodeV2
+
+- Mode: Or
+
+### C08 - CriterionNodeV2
+
+- Mode: Not
+
+### C09 - CriterionNodeV2
+
+- Mode: DoesNotExist
+- Variable ID: Vault.PuzzleSolved
+
+### C10 - CriterionNodeV2
+
+- Mode: BoolEquals
+- Variable ID: Player.HasTreeKey
+- Expected Bool: True
+
+### C11 - CriterionNodeV2
+
+- Mode: DoesNotExist
+- Variable ID: Player.HasFruit
+
+### C12 - CriterionNodeV2
+
+- Mode: DoesNotExist
+- Variable ID: Guard.InsidePit
+
+### C13 - CriterionNodeV2
+
+- Mode: BoolEquals
+- Variable ID: Guard.InsidePit
+- Expected Bool: True
+
+### C14 - CriterionNodeV2
+
+- Mode: BoolEquals
+- Variable ID: Player.HasFruit
+- Expected Bool: True
+
+### C15 - CriterionNodeV2
+
+- Mode: And
+
+### C16 - CriterionNodeV2
+
+- Mode: DoesNotExist
+- Variable ID: Player.HasCoins
+
+### C17 - CriterionNodeV2
+
+- Mode: DoesNotExist
+- Variable ID: Vault.PuzzleSolved
+
+### C18 - CriterionNodeV2
+
+- Mode: DoesNotExist
+- Variable ID: Player.HasDisguise
+
+### C19 - CriterionNodeV2
+
+- Mode: BoolEquals
+- Variable ID: Player.HasFruit
+- Expected Bool: True
+
+### C20 - CriterionNodeV2
+
+- Mode: DoesNotExist
+- Variable ID: Guard.InsidePit
+
+### C21 - CriterionNodeV2
+
+- Mode: And
+
+### C22 - CriterionNodeV2
+
+- Mode: DoesNotExist
+- Variable ID: Player.HingesData
+
+### C23 - CriterionNodeV2
+
+- Mode: DoesNotExist
+- Variable ID: Vault.PuzzleSolved
+
+### C24 - CriterionNodeV2
+
+- Mode: BoolEquals
+- Variable ID: Vault.DoorMadeNoise
+- Expected Bool: True
+
+### C25 - CriterionNodeV2
+
+- Mode: BoolEquals
+- Variable ID: Vault.AlarmTriggered
+- Expected Bool: True
+
+### C26 - CriterionNodeV2
+
+- Mode: Or
+
+### C27 - CriterionNodeV2
+
+- Mode: DoesNotExist
+- Variable ID: Player.HasTreeKey
+
+### C28 - CriterionNodeV2
+
+- Mode: BoolEquals
+- Variable ID: Player.HasDisguise
+- Expected Bool: True
+
+### C29 - CriterionNodeV2
+
+- Mode: DoesNotExist
+- Variable ID: Player.HasFruit
+
+### C30 - CriterionNodeV2
+
+- Mode: And
+
+### C31 - CriterionNodeV2
+
+- Mode: NumberCompare
+- Variable ID: Guard.Relationship
+- Comparison: InclusiveRange
+- Compare A: 10
+- Compare B: 30
+
+### C32 - CriterionNodeV2
+
+- Mode: And
+
+### C33 - CriterionNodeV2
+
+- Mode: Exists
+- Variable ID: Vault.AlarmTriggered
+
+### C34 - CriterionNodeV2
+
+- Mode: BoolEquals
+- Variable ID: Vault.CanInspectHinges
+- Expected Bool: True
+
+### C35 - CriterionNodeV2
+
+- Mode: BoolEquals
+- Variable ID: Guard.InsidePit
+- Expected Bool: True
+
+### C36 - CriterionNodeV2
+
+- Mode: BoolEquals
+- Variable ID: Player.UsedVaultGateExit
+- Expected Bool: True
+
+### C37 - CriterionNodeV2
+
+- Mode: And
+
+### C38 - CriterionNodeV2
+
+- Mode: BoolEquals
+- Variable ID: Player.HasFlowers
+- Expected Bool: True
+
+### C39 - CriterionNodeV2
+
+- Mode: BoolEquals
+- Variable ID: Guard.HasMetPlayer
+- Expected Bool: True
+
+### C40 - CriterionNodeV2
+
+- Mode: And
+
+### C41 - CriterionNodeV2
+
+- Mode: NumberCompare
+- Variable ID: Guard.TalkCount
+- Comparison: LessThanOrEqual
+- Compare A: 2
+
+### C42 - CriterionNodeV2
+
+- Mode: And
+
+### C43 - CriterionNodeV2
+
+- Mode: DoesNotExist
+- Variable ID: Guard.HasMetPlayer
+
+### C44 - CriterionNodeV2
+
+- Mode: FuzzyNumber
+- Variable ID: Guard.Suspicion
+- Set: High
+- Shape: High
+- Minimum: 0
+- Maximum: 40
+- Point A: 10
+- Point B: 20
+
+### C45 - CriterionNodeV2
+
+- Mode: BoolEquals
+- Variable ID: Guard.AllowedEntry
+- Expected Bool: False
+
+### C46 - CriterionNodeV2
+
+- Mode: And
+
+### C47 - CriterionNodeV2
+
+- Mode: FuzzyNumber
+- Variable ID: Guard.TalkCount
+- Set: High
+- Shape: High
+- Minimum: 0
+- Maximum: 10
+- Point A: 2
+- Point B: 4
+
+### C48 - CriterionNodeV2
+
+- Mode: BoolEquals
+- Variable ID: Guard.AllowedEntry
+- Expected Bool: False
+
+### C49 - CriterionNodeV2
+
+- Mode: And
+
+### C50 - CriterionNodeV2
+
+- Mode: BoolEquals
+- Variable ID: Guard.HasMetPlayer
+- Expected Bool: True
+
+### C51 - CriterionNodeV2
+
+- Mode: BoolEquals
+- Variable ID: Guard.AllowedEntry
+- Expected Bool: False
+
+### C52 - CriterionNodeV2
+
+- Mode: And
+
+### C53 - CriterionNodeV2
+
+- Mode: BoolEquals
+- Variable ID: Guard.AllowedEntry
+- Expected Bool: True
+
+### C54 - CriterionNodeV2
+
+- Mode: BoolEquals
+- Variable ID: Player.HasFlowers
+- Expected Bool: True
+
+### C55 - CriterionNodeV2
+
+- Mode: BoolEquals
+- Variable ID: Guard.AllowedEntry
+- Expected Bool: False
+
+### C56 - CriterionNodeV2
+
+- Mode: DoesNotExist
+- Variable ID: Guard.AllowedEntry
+
+### C57 - CriterionNodeV2
+
+- Mode: Or
+
+### C58 - CriterionNodeV2
+
+- Mode: BoolEquals
+- Variable ID: Guard.PursuePlayer
+- Expected Bool: True
+
+### C59 - CriterionNodeV2
+
+- Mode: Or
+
+### C60 - CriterionNodeV2
+
+- Mode: BoolEquals
+- Variable ID: Player.HasCoins
+- Expected Bool: True
+
+### C61 - CriterionNodeV2
+
+- Mode: BoolEquals
+- Variable ID: Player.InspectedTreeHollow
+- Expected Bool: True
+
+### C62 - CriterionNodeV2
+
+- Mode: DoesNotExist
+- Variable ID: Player.HasTreeKey
+
+### C63 - CriterionNodeV2
+
+- Mode: DoesNotExist
+- Variable ID: Player.HasTreeKey
+
+### C64 - CriterionNodeV2
+
+- Mode: BoolEquals
+- Variable ID: Guard.AllowedEntry
+- Expected Bool: True
+
+### C65 - CriterionNodeV2
+
+- Mode: DoesNotExist
+- Variable ID: Guard.AllowedEntry
+
+### C66 - CriterionNodeV2
+
+- Mode: BoolEquals
+- Variable ID: Guard.AllowedEntry
+- Expected Bool: False
+
+### C67 - CriterionNodeV2
+
+- Mode: DoesNotExist
+- Variable ID: Vendor.HasMetPlayer
+
+### C68 - CriterionNodeV2
+
+- Mode: Exists
+- Variable ID: Vendor.HasMetPlayer
+
+### C69 - CriterionNodeV2
+
+- Mode: Exists
+- Variable ID: Vendor.HasMetPlayer
+
+### C70 - CriterionNodeV2
+
+- Mode: BoolEquals
+- Variable ID: Player.HasCoins
+- Expected Bool: True
+
+### C71 - CriterionNodeV2
+
+- Mode: And
+
+### C72 - CriterionNodeV2
+
+- Mode: Exists
+- Variable ID: Vendor.HasMetPlayer
+
+### C73 - CriterionNodeV2
+
+- Mode: BoolEquals
+- Variable ID: Player.HasFlowers
+- Expected Bool: True
+
+### C74 - CriterionNodeV2
+
+- Mode: And
+
+### C75 - CriterionNodeV2
+
+- Mode: Exists
+- Variable ID: Vendor.WasBribed
+
+### C76 - CriterionNodeV2
+
+- Mode: FuzzyNumber
+- Variable ID: Vendor.Nervousness
+- Set: NervousnessLow
+- Shape: Low
+- Minimum: 0
+- Maximum: 10
+- Point A: 2
+- Point B: 5
+
+### C77 - CriterionNodeV2
+
+- Mode: FuzzyNumber
+- Variable ID: Vendor.Suspicion
+- Set: SuspicionLow
+- Shape: Low
+- Minimum: 0
+- Maximum: 10
+- Point A: 2
+- Point B: 6
+
+### C78 - CriterionNodeV2
+
+- Mode: And
+
+### C79 - CriterionNodeV2
+
+- Mode: FuzzyNumber
+- Variable ID: Vendor.Nervousness
+- Set: NervousnessHigh
+- Shape: High
+- Minimum: 0
+- Maximum: 10
+- Point A: 3
+- Point B: 6
+
+### C80 - CriterionNodeV2
+
+- Mode: FuzzyNumber
+- Variable ID: Vendor.Suspicion
+- Set: SuspicionHigh
+- Shape: High
+- Minimum: 0
+- Maximum: 10
+- Point A: 5
+- Point B: 8
+
+### C81 - CriterionNodeV2
+
+- Mode: And
+
+### C82 - CriterionNodeV2
+
+- Mode: BoolEquals
+- Variable ID: Player.NoticedVendorReaction
+- Expected Bool: True
+
+### C83 - CriterionNodeV2
+
+- Mode: Exists
+- Variable ID: Vendor.WasBribed
+
+### C84 - CriterionNodeV2
+
+- Mode: Exists
+- Variable ID: Vendor.WasBribed
+
+### C85 - CriterionNodeV2
+
+- Mode: FuzzyNumber
+- Variable ID: Player.DistanceToCarpet
+- Set: Near
+- Shape: Low
+- Minimum: 0
+- Maximum: 10
+- Point A: 0
+- Point B: 4
+
+### C86 - CriterionNodeV2
+
+- Mode: And
+
+### C87 - CriterionNodeV2
+
+- Mode: FuzzyNumber
+- Variable ID: Player.LoiterTimeNearCarpet
+- Set: Lingering
+- Shape: High
+- Minimum: 0
+- Maximum: 14.9
+- Point A: 3
+- Point B: 10
+
+### C88 - CriterionNodeV2
+
+- Mode: FuzzyNumber
+- Variable ID: Vendor.Nervousness
+- Set: Nervous
+- Shape: High
+- Minimum: 0
+- Maximum: 10
+- Point A: 3
+- Point B: 6
+
+### C89 - CriterionNodeV2
+
+- Mode: FuzzyNumber
+- Variable ID: Player.DistanceToCarpet
+- Set: Mid
+- Shape: Range
+- Minimum: 0
+- Maximum: 10
+- Point A: 2
+- Point B: 4
+- Point C: 6
+- Point D: 8
+
+### C90 - CriterionNodeV2
+
+- Mode: FuzzyNumber
+- Variable ID: Player.DistanceToCarpet
+- Set: Far
+- Shape: High
+- Minimum: 0
+- Maximum: 10
+- Point A: 6
+- Point B: 10
+
+### C91 - CriterionNodeV2
+
+- Mode: BoolEquals
+- Variable ID: Player.FoundPitRoute
+- Expected Bool: True
+
+### C92 - CriterionNodeV2
+
+- Mode: BoolEquals
+- Variable ID: Vendor.HasMetPlayer
+- Expected Bool: True
+
+### C93 - CriterionNodeV2
+
+- Mode: BoolEquals
+- Variable ID: Vendor.HasMetPlayer
+- Expected Bool: True
+
+### C94 - CriterionNodeV2
+
+- Mode: BoolEquals
+- Variable ID: Player.FoundPitRoute
+- Expected Bool: True
+
+### C95 - CriterionNodeV2
+
+- Mode: BoolEquals
+- Variable ID: Player.FoundPitRoute
+- Expected Bool: True
+
+### C96 - CriterionNodeV2
+
+- Mode: Exists
+- Variable ID: Vendor.HasMetPlayer
+
+### C97 - CriterionNodeV2
+
+- Mode: Exists
+- Variable ID:  Vendor.HasMetPlayer
+
+### C98 - CriterionNodeV2
+
+- Mode: Exists
+- Variable ID: Vendor.HasMetPlayer
+
+### C99 - CriterionNodeV2
+
+- Mode: DoesNotExist
+- Variable ID: Guard.PursuePlayer
+
+### C100 - CriterionNodeV2
+
+- Mode: BoolEquals
+- Variable ID: Guard.PursuePlayer
+- Expected Bool: False
+
+### C101 - CriterionNodeV2
+
+- Mode: Or
+
+### C102 - CriterionNodeV2
+
+- Mode: And
+
+### W76 - WriteBackNode
+
+- Target Key: Player.HasCoins
+- Operation: Set
+- Value Type: Bool
+- Value: True
+
+### E52 - EventNode
+
+- Event ID: VendorChoiceRevealPit
+
+### C103 - CriterionNodeV2
+
+- Mode: BoolEquals
+- Variable ID: Vendor.HasMetPlayer
+- Expected Bool: True
+
+### C104 - CriterionNodeV2
+
+- Mode: Exists
+- Variable ID: Vendor.HasMetPlayer
+
+### C105 - CriterionNodeV2
+
+- Mode: Or
+
+### R74 - RuleNode
+
+- Rule ID: vendor_choice_reveals_pit
+- Consequent: 1
+
+### O122 - ConsequenceNode
+
+- Outcome ID: Vendor.ChoiceRevealsPit
+- Minimum: 0.5
+- Fallback: False
+- Fire Event: True
+- Target: GameplaySignal
+- Payload: Pit.VendorChoiceReveal
+
+### W77 - WriteBackNode
+
+- Target Key: Player.FoundPitRoute
+- Operation: Set
+- Value Type: Bool
+- Value: True
+
+### O123 - ConsequenceNode
+
+- Outcome ID: VendorChoiceRevealPit.Fallback
+- Minimum: 0
+- Fallback: True
+- Fire Event: False
+
+### W78 - WriteBackNode
+
+- Target Key: Player.NoticedVendorReaction
+- Operation: Set
+- Value Type: Bool
+- Value: True
+
+### W79 - WriteBackNode
+
+- Target Key: Player.NoticedVendorReaction
+- Operation: Set
+- Value Type: Bool
+- Value: True
+
+### E53 - EventNode
+
+- Event ID: VendorDirectVaultAsk
+
+### C106 - CriterionNodeV2
+
+- Mode: Exists
+- Variable ID: Vendor.HasMetPlayer
+
+### R75 - RuleNode
+
+- Rule ID: vendor_direct_vault_ask
+- Consequent: 0.55
+
+### O124 - ConsequenceNode
+
+- Outcome ID: Vendor.DirectVaultAsk
+- Minimum: 0.5
+- Fallback: False
+- Fire Event: False
+
+### W80 - WriteBackNode
+
+- Target Key: Vendor.Suspicion
+- Operation: Add
+- Value Type: Float
+- Value: 4
+
+### W81 - WriteBackNode
+
+- Target Key: Vendor.Nervousness
+- Operation: Add
+- Value Type: Float
+- Value: 2
+
+### O125 - ConsequenceNode
+
+- Outcome ID: VendorDirectVaultAsk.Fallback
+- Minimum: 0
+- Fallback: True
+- Fire Event: False
+
+### E54 - EventNode
+
+- Event ID: VendorSplitDeal
+
+### C107 - CriterionNodeV2
+
+- Mode: Exists
+- Variable ID: Vendor.HasMetPlayer
+
+### R76 - RuleNode
+
+- Rule ID: vendor_split_deal
+- Consequent: 0.65
+
+### O126 - ConsequenceNode
+
+- Outcome ID: Vendor.SplitDealAccepted
+- Minimum: 0.5
+- Fallback: False
+- Fire Event: True
+- Target: GameplaySignal
+- Payload: Pit.VendorChoiceReveal
+
+### W82 - WriteBackNode
+
+- Target Key: Vendor.SplitDealOffered
+- Operation: Set
+- Value Type: Bool
+- Value: True
+
+### O127 - ConsequenceNode
+
+- Outcome ID: VendorSplitDeal
+- Minimum: 0
+- Fallback: True
+- Fire Event: False
+
+### C108 - CriterionNodeV2
+
+- Mode: DoesNotExist
+- Variable ID: Player.FoundPitRoute
+
+### C109 - CriterionNodeV2
+
+- Mode: And
+
+### W83 - WriteBackNode
+
+- Target Key: Player.FoundPitRoute
+- Operation: Set
+- Value Type: Bool
+- Value: True
+
+### E55 - EventNode
+
+- Event ID: VendorGuardGrudge
+
+### C110 - CriterionNodeV2
+
+- Mode: BoolEquals
+- Variable ID: Guard.DismissedPlayer
+- Expected Bool: True
+
+### C111 - CriterionNodeV2
+
+- Mode: Or
+
+### C112 - CriterionNodeV2
+
+- Mode: Exists
+- Variable ID: Guard.DismissedPlayer
+
+### R77 - RuleNode
+
+- Rule ID: vendor_guard_grudge
+- Consequent: 0.75
+
+### O128 - ConsequenceNode
+
+- Outcome ID: Vendor.Sympathizes
+- Minimum: 0.5
+- Fallback: False
+- Fire Event: True
+- Target: GameplaySignal
+- Payload: Pit.VendorChoiceReveal
+
+### W84 - WriteBackNode
+
+- Target Key: Vendor.SharedGuardGrudge
+- Operation: Set
+- Value Type: Bool
+- Value: True
+
+### W85 - WriteBackNode
+
+- Target Key: Player.FoundPitRoute
+- Operation: Set
+- Value Type: Bool
+- Value: True
+
 ## Every connection
 
 - `E01.consequences` -> `O04.event`
@@ -3197,34 +3472,18 @@ Consequences:
 - `E01.consequences` -> `O01.event`
 - `E01.rules` -> `R34.event`
 - `O01.writeBacks` -> `W01.consequence`
-- `C01.rules` -> `R02.criteria`
-- `C01.rules` -> `R41.criteria`
-- `C02.rules` -> `R03.criteria`
-- `C02.rules` -> `R42.criteria`
 - `E02.consequences` -> `O05.event`
 - `E02.consequences` -> `O07.event`
 - `E02.consequences` -> `O08.event`
 - `E02.consequences` -> `O06.event`
 - `E02.consequences` -> `O09.event`
-- `E02.rules` -> `R04.event`
-- `E02.rules` -> `R05.event`
-- `E02.rules` -> `R07.event`
-- `E02.rules` -> `R01.event`
 - `E02.rules` -> `R02.event`
+- `E02.rules` -> `R01.event`
 - `E02.rules` -> `R03.event`
-- `C03.rules` -> `C05.criteriaA`
-- `C03.rules` -> `R01.criteria`
-- `C03.rules` -> `R40.criteria`
-- `C04.rules` -> `C05.criteriaB`
-- `C04.rules` -> `R04.criteria`
-- `C04.rules` -> `C07.criteriaA`
-- `C04.rules` -> `R43.criteria`
-- `C05.rules` -> `R05.criteria`
-- `C05.rules` -> `R44.criteria`
-- `C06.rules` -> `R06.event`
-- `C06.rules` -> `C07.criteriaB`
-- `C07.rules` -> `R07.criteria`
-- `C07.rules` -> `R45.criteria`
+- `E02.rules` -> `R04.event`
+- `E02.rules` -> `R07.event`
+- `E02.rules` -> `R05.event`
+- `E02.rules` -> `R06.event`
 - `E03.consequences` -> `O10.event`
 - `E03.consequences` -> `O15.event`
 - `E03.consequences` -> `O12.event`
@@ -3242,24 +3501,13 @@ Consequences:
 - `O10.writeBacks` -> `W03.consequence`
 - `O10.writeBacks` -> `W46.consequence`
 - `O11.writeBacks` -> `W04.consequence`
-- `C08.rules` -> `R08.criteria`
-- `C09.rules` -> `C49.criteriaA`
 - `E04.consequences` -> `O13.event`
 - `E04.consequences` -> `O14.event`
 - `E04.rules` -> `R10.event`
-- `C10.rules` -> `R10.criteria`
 - `O13.writeBacks` -> `W05.consequence`
-- `C11.rules` -> `C13.criteriaB`
-- `C12.rules` -> `C13.criteriaA`
-- `C13.rules` -> `C68.criteriaA`
 - `E05.consequences` -> `O16.event`
 - `E05.consequences` -> `O17.event`
 - `E05.rules` -> `R12.event`
-- `C14.rules` -> `R15.criteria`
-- `C14.rules` -> `R16.criteria`
-- `C14.rules` -> `R13.criteria`
-- `C14.rules` -> `R14.criteria`
-- `C14.rules` -> `R12.criteria`
 - `O16.writeBacks` -> `W06.consequence`
 - `O16.writeBacks` -> `W07.consequence`
 - `E06.consequences` -> `O18.event`
@@ -3287,8 +3535,6 @@ Consequences:
 - `E10.consequences` -> `O28.event`
 - `E10.rules` -> `R17.event`
 - `E10.rules` -> `R18.event`
-- `C15.rules` -> `R17.criteria`
-- `C16.rules` -> `R18.criteria`
 - `O26.writeBacks` -> `W18.consequence`
 - `O27.writeBacks` -> `W16.consequence`
 - `O27.writeBacks` -> `W17.consequence`
@@ -3297,46 +3543,35 @@ Consequences:
 - `E11.consequences` -> `O29.event`
 - `E11.consequences` -> `O30.event`
 - `E11.rules` -> `R19.event`
-- `C17.rules` -> `R19.criteria`
 - `O29.writeBacks` -> `W19.consequence`
 - `O29.writeBacks` -> `W20.consequence`
 - `E12.consequences` -> `O31.event`
 - `E12.consequences` -> `O32.event`
 - `E12.rules` -> `R20.event`
-- `C18.rules` -> `R20.criteria`
 - `O31.writeBacks` -> `W21.consequence`
 - `O31.writeBacks` -> `W22.consequence`
-- `C19.rules` -> `C17.criteriaA`
-- `C20.rules` -> `C17.criteriaB`
 - `E13.consequences` -> `O33.event`
 - `E13.consequences` -> `O34.event`
 - `E13.rules` -> `R21.event`
-- `C21.rules` -> `R21.criteria`
 - `O33.writeBacks` -> `W23.consequence`
 - `E14.consequences` -> `O35.event`
 - `E14.consequences` -> `O36.event`
 - `E14.rules` -> `R22.event`
-- `C22.rules` -> `C24.criteriaA`
-- `C23.rules` -> `C24.criteriaB`
-- `C24.rules` -> `R22.criteria`
 - `O35.writeBacks` -> `W24.consequence`
 - `O35.writeBacks` -> `W25.consequence`
 - `E15.consequences` -> `O37.event`
 - `E15.consequences` -> `O38.event`
 - `E15.rules` -> `R23.event`
-- `C25.rules` -> `R23.criteria`
 - `O37.writeBacks` -> `W26.consequence`
 - `O37.writeBacks` -> `W27.consequence`
 - `E16.consequences` -> `O39.event`
 - `E16.consequences` -> `O40.event`
 - `E16.rules` -> `R24.event`
-- `C26.rules` -> `R24.criteria`
 - `O39.writeBacks` -> `W28.consequence`
 - `O39.writeBacks` -> `W29.consequence`
 - `E17.consequences` -> `O41.event`
 - `E17.consequences` -> `O42.event`
 - `E17.rules` -> `R25.event`
-- `C27.rules` -> `R25.criteria`
 - `O41.writeBacks` -> `W30.consequence`
 - `O41.writeBacks` -> `W31.consequence`
 - `E18.consequences` -> `O43.event`
@@ -3346,64 +3581,40 @@ Consequences:
 - `E18.rules` -> `R26.event`
 - `E18.rules` -> `R28.event`
 - `E18.rules` -> `R27.event`
-- `C28.rules` -> `C32.criteriaB`
-- `C28.rules` -> `C33.criteriaA`
-- `C29.rules` -> `R28.criteria`
-- `C30.rules` -> `C32.criteriaA`
-- `C31.rules` -> `C33.criteriaB`
 - `O44.writeBacks` -> `W34.consequence`
 - `O45.writeBacks` -> `W35.consequence`
-- `C32.rules` -> `R26.criteria`
-- `C33.rules` -> `R27.criteria`
 - `E19.consequences` -> `O47.event`
 - `E19.consequences` -> `O48.event`
 - `E19.rules` -> `R29.event`
-- `C34.rules` -> `R29.criteria`
 - `O47.writeBacks` -> `W36.consequence`
-- `C35.rules` -> `R34.criteria`
 - `E20.consequences` -> `O49.event`
 - `E20.consequences` -> `O50.event`
 - `E20.rules` -> `R30.event`
-- `C36.rules` -> `R30.criteria`
 - `O49.writeBacks` -> `W53.consequence`
 - `E21.consequences` -> `O51.event`
 - `E21.consequences` -> `O52.event`
 - `E21.rules` -> `R31.event`
-- `C37.rules` -> `R31.criteria`
 - `E22.consequences` -> `O53.event`
 - `E22.consequences` -> `O54.event`
 - `E22.rules` -> `R32.event`
-- `C38.rules` -> `R32.criteria`
 - `O53.writeBacks` -> `W37.consequence`
 - `E23.consequences` -> `O55.event`
 - `E23.consequences` -> `O56.event`
 - `E23.rules` -> `R33.event`
-- `C39.rules` -> `R33.criteria`
 - `O55.writeBacks` -> `W38.consequence`
 - `E24.consequences` -> `O57.event`
 - `E24.consequences` -> `O58.event`
 - `E24.rules` -> `R35.event`
-- `C40.rules` -> `C64.criteriaB`
 - `O57.writeBacks` -> `W39.consequence`
 - `O57.writeBacks` -> `W40.consequence`
-- `C41.rules` -> `C45.criteriaA`
 - `O59.writeBacks` -> `W41.consequence`
 - `E25.consequences` -> `O60.event`
 - `E25.consequences` -> `O61.event`
 - `E25.rules` -> `R37.event`
-- `C42.rules` -> `R37.criteria`
 - `O60.writeBacks` -> `W42.consequence`
 - `O60.writeBacks` -> `W43.consequence`
 - `O60.writeBacks` -> `W44.consequence`
-- `C43.rules` -> `C47.criteriaA`
 - `O62.writeBacks` -> `W45.consequence`
-- `C44.rules` -> `C45.criteriaB`
-- `C45.rules` -> `R36.criteria`
-- `C46.rules` -> `C47.criteriaB`
-- `C47.rules` -> `R38.criteria`
-- `C48.rules` -> `C49.criteriaB`
-- `C49.rules` -> `R09.criteria`
-- `C50.rules` -> `R39.criteria`
 - `E26.consequences` -> `O64.event`
 - `E26.consequences` -> `O65.event`
 - `E26.consequences` -> `O66.event`
@@ -3415,16 +3626,15 @@ Consequences:
 - `E26.rules` -> `R43.event`
 - `E26.rules` -> `R45.event`
 - `E26.rules` -> `R42.event`
+- `O66.writeBacks` -> `W78.consequence`
+- `O67.writeBacks` -> `W79.consequence`
 - `E27.consequences` -> `O69.event`
 - `E27.consequences` -> `O70.event`
 - `E27.rules` -> `R46.event`
-- `C51.rules` -> `R46.criteria`
 - `O69.writeBacks` -> `W47.consequence`
 - `E28.consequences` -> `O71.event`
 - `E28.consequences` -> `O72.event`
 - `E28.rules` -> `R47.event`
-- `C52.rules` -> `R47.criteria`
-- `C53.rules` -> `R48.criteria`
 - `E29.consequences` -> `O73.event`
 - `E29.consequences` -> `O74.event`
 - `E29.rules` -> `R48.event`
@@ -3433,23 +3643,19 @@ Consequences:
 - `E30.consequences` -> `O76.event`
 - `E30.rules` -> `R49.event`
 - `O75.writeBacks` -> `W49.consequence`
-- `C54.rules` -> `R49.criteria`
 - `E31.consequences` -> `O77.event`
 - `E31.consequences` -> `O78.event`
 - `E31.rules` -> `R50.event`
-- `C55.rules` -> `R50.criteria`
+- `O77.writeBacks` -> `W76.consequence`
 - `E32.consequences` -> `O79.event`
 - `E32.consequences` -> `O80.event`
 - `E32.rules` -> `R51.event`
-- `C56.rules` -> `R51.criteria`
 - `O79.writeBacks` -> `W50.consequence`
 - `E33.consequences` -> `O81.event`
 - `E33.consequences` -> `O82.event`
 - `E33.rules` -> `R52.event`
-- `C57.rules` -> `R52.criteria`
 - `O82.writeBacks` -> `W51.consequence`
 - `O82.writeBacks` -> `W52.consequence`
-- `C58.rules` -> `R53.criteria`
 - `E34.consequences` -> `O83.event`
 - `E34.consequences` -> `O84.event`
 - `E34.rules` -> `R53.event`
@@ -3458,48 +3664,32 @@ Consequences:
 - `E35.consequences` -> `O87.event`
 - `E35.rules` -> `R54.event`
 - `E35.rules` -> `R55.event`
-- `C59.rules` -> `R54.criteria`
-- `C60.rules` -> `C66.criteriaA`
 - `O85.writeBacks` -> `W54.consequence`
 - `O86.writeBacks` -> `W55.consequence`
-- `C61.rules` -> `C63.criteriaB`
-- `C62.rules` -> `C63.criteriaA`
-- `C63.rules` -> `C64.criteriaA`
-- `C64.rules` -> `R35.criteria`
-- `C65.rules` -> `C66.criteriaB`
-- `C66.rules` -> `R55.criteria`
-- `C67.rules` -> `C68.criteriaB`
-- `C68.rules` -> `R11.criteria`
 - `E36.consequences` -> `O88.event`
 - `E36.consequences` -> `O89.event`
 - `E36.rules` -> `R56.event`
-- `C69.rules` -> `R56.criteria`
 - `O88.writeBacks` -> `W56.consequence`
 - `E37.consequences` -> `O90.event`
 - `E37.consequences` -> `O91.event`
 - `E37.rules` -> `R57.event`
-- `C70.rules` -> `R57.criteria`
 - `O90.writeBacks` -> `W57.consequence`
 - `O90.writeBacks` -> `W60.consequence`
 - `E38.consequences` -> `O92.event`
 - `E38.consequences` -> `O93.event`
 - `E38.rules` -> `R58.event`
-- `C71.rules` -> `R58.criteria`
 - `O92.writeBacks` -> `W58.consequence`
 - `E39.consequences` -> `O94.event`
 - `E39.consequences` -> `O95.event`
 - `E39.rules` -> `R59.event`
-- `C72.rules` -> `R59.criteria`
 - `O94.writeBacks` -> `W59.consequence`
 - `O94.writeBacks` -> `W65.consequence`
 - `E40.consequences` -> `O96.event`
 - `E40.consequences` -> `O97.event`
 - `E40.rules` -> `R60.event`
-- `C73.rules` -> `R60.criteria`
 - `E41.consequences` -> `O98.event`
 - `E41.consequences` -> `O99.event`
 - `E41.rules` -> `R61.event`
-- `C74.rules` -> `R61.criteria`
 - `O98.writeBacks` -> `W61.consequence`
 - `O98.writeBacks` -> `W62.consequence`
 - `E42.consequences` -> `O100.event`
@@ -3507,69 +3697,190 @@ Consequences:
 - `E42.consequences` -> `O102.event`
 - `E42.rules` -> `R62.event`
 - `E42.rules` -> `R63.event`
-- `C75.rules` -> `R62.criteria`
-- `C76.rules` -> `C75.criteriaA`
-- `C76.rules` -> `R63.criteria`
 - `O100.writeBacks` -> `W63.consequence`
 - `O101.writeBacks` -> `W64.consequence`
 - `E43.consequences` -> `O103.event`
 - `E43.consequences` -> `O104.event`
 - `E43.rules` -> `R64.event`
-- `C77.rules` -> `C79.criteriaA`
-- `C78.rules` -> `C79.criteriaB`
-- `C79.rules` -> `R64.criteria`
 - `O103.writeBacks` -> `W66.consequence`
 - `E44.consequences` -> `O105.event`
 - `E44.consequences` -> `O106.event`
 - `E44.rules` -> `R65.event`
-- `C80.rules` -> `R65.criteria`
 - `O105.writeBacks` -> `W67.consequence`
 - `E45.consequences` -> `O107.event`
 - `E45.consequences` -> `O108.event`
 - `E45.rules` -> `R66.event`
-- `C81.rules` -> `R66.criteria`
 - `O107.writeBacks` -> `W68.consequence`
 - `E46.consequences` -> `O109.event`
 - `E46.consequences` -> `O110.event`
 - `E46.rules` -> `R67.event`
-- `C82.rules` -> `C95.criteriaA`
 - `O109.writeBacks` -> `W69.consequence`
-- `C83.rules` -> `C86.criteriaA`
-- `C84.rules` -> `C86.criteriaB`
-- `C85.rules` -> `C87.criteriaB`
-- `C86.rules` -> `C87.criteriaA`
-- `C87.rules` -> `R68.criteria`
 - `E47.consequences` -> `O111.event`
 - `E47.consequences` -> `O112.event`
 - `E47.consequences` -> `O113.event`
 - `E47.rules` -> `R68.event`
 - `E47.rules` -> `R69.event`
-- `C88.rules` -> `R69.criteria`
 - `O111.writeBacks` -> `W70.consequence`
 - `O112.writeBacks` -> `W71.consequence`
 - `O113.writeBacks` -> `W72.consequence`
 - `E48.consequences` -> `O114.event`
 - `E48.consequences` -> `O115.event`
 - `E48.rules` -> `R70.event`
-- `C89.rules` -> `R70.criteria`
 - `O114.writeBacks` -> `W73.consequence`
 - `E49.consequences` -> `O116.event`
 - `E49.consequences` -> `O119.event`
 - `E49.rules` -> `R71.event`
-- `C90.rules` -> `R71.criteria`
 - `O116.writeBacks` -> `W74.consequence`
 - `E50.consequences` -> `O117.event`
 - `E50.consequences` -> `O118.event`
 - `E50.rules` -> `R72.event`
-- `C91.rules` -> `C92.criteriaA`
-- `C92.rules` -> `R72.criteria`
-- `C93.rules` -> `C92.criteriaB`
 - `O117.writeBacks` -> `W75.consequence`
-- `C94.rules` -> `C95.criteriaB`
-- `C95.rules` -> `R67.criteria`
 - `E51.consequences` -> `O120.event`
 - `E51.consequences` -> `O121.event`
 - `E51.rules` -> `R73.event`
-- `C96.rules` -> `C98.criteriaA`
-- `C97.rules` -> `C98.criteriaB`
-- `C98.rules` -> `R73.criteria`
+- `C01.rules` -> `R20.criteria`
+- `C02.rules` -> `R10.criteria`
+- `C03.rules` -> `R30.criteria`
+- `C04.rules` -> `R69.criteria`
+- `C05.rules` -> `R29.criteria`
+- `C06.rules` -> `R44.criteria`
+- `C06.rules` -> `R05.criteria`
+- `C07.rules` -> `R55.criteria`
+- `C08.rules` -> `R62.criteria`
+- `C09.rules` -> `R56.criteria`
+- `C10.rules` -> `R58.criteria`
+- `C11.rules` -> `R66.criteria`
+- `C12.rules` -> `R71.criteria`
+- `C13.rules` -> `C15.criteriaA`
+- `C14.rules` -> `C15.criteriaB`
+- `C15.rules` -> `R72.criteria`
+- `C16.rules` -> `R21.criteria`
+- `C17.rules` -> `R59.criteria`
+- `C18.rules` -> `R65.criteria`
+- `C19.rules` -> `C21.criteriaA`
+- `C20.rules` -> `C21.criteriaB`
+- `C21.rules` -> `R67.criteria`
+- `C22.rules` -> `R57.criteria`
+- `C23.rules` -> `R60.criteria`
+- `C24.rules` -> `C26.criteriaA`
+- `C25.rules` -> `C26.criteriaB`
+- `C26.rules` -> `C102.criteriaA`
+- `C27.rules` -> `R70.criteria`
+- `C28.rules` -> `C30.criteriaA`
+- `C29.rules` -> `C30.criteriaB`
+- `C30.rules` -> `C32.criteriaA`
+- `C31.rules` -> `C32.criteriaB`
+- `C32.rules` -> `R68.criteria`
+- `C33.rules` -> `R61.criteria`
+- `C34.rules` -> `R63.criteria`
+- `C34.rules` -> `C08.criteriaA`
+- `C35.rules` -> `C37.criteriaA`
+- `C36.rules` -> `C37.criteriaB`
+- `C37.rules` -> `R73.criteria`
+- `C38.rules` -> `C40.criteriaA`
+- `C39.rules` -> `C40.criteriaB`
+- `C40.rules` -> `C42.criteriaA`
+- `C41.rules` -> `C42.criteriaB`
+- `C42.rules` -> `R11.criteria`
+- `C43.rules` -> `R08.criteria`
+- `C44.rules` -> `C46.criteriaA`
+- `C45.rules` -> `C46.criteriaB`
+- `C46.rules` -> `R38.criteria`
+- `C47.rules` -> `C49.criteriaA`
+- `C48.rules` -> `C49.criteriaB`
+- `C49.rules` -> `R36.criteria`
+- `C50.rules` -> `C52.criteriaA`
+- `C51.rules` -> `C52.criteriaB`
+- `C52.rules` -> `R09.criteria`
+- `C53.rules` -> `R39.criteria`
+- `C54.rules` -> `R15.criteria`
+- `C54.rules` -> `R16.criteria`
+- `C54.rules` -> `R13.criteria`
+- `C54.rules` -> `R12.criteria`
+- `C54.rules` -> `R14.criteria`
+- `C55.rules` -> `C57.criteriaB`
+- `C56.rules` -> `C57.criteriaA`
+- `C57.rules` -> `C59.criteriaA`
+- `C58.rules` -> `C59.criteriaB`
+- `C59.rules` -> `R35.criteria`
+- `C60.rules` -> `R37.criteria`
+- `C61.rules` -> `R53.criteria`
+- `C62.rules` -> `R52.criteria`
+- `C63.rules` -> `R51.criteria`
+- `C64.rules` -> `R54.criteria`
+- `C65.rules` -> `C07.criteriaA`
+- `C66.rules` -> `C07.criteriaB`
+- `C67.rules` -> `R17.criteria`
+- `C68.rules` -> `R18.criteria`
+- `C69.rules` -> `C71.criteriaA`
+- `C70.rules` -> `C71.criteriaB`
+- `C71.rules` -> `R22.criteria`
+- `C72.rules` -> `C74.criteriaA`
+- `C73.rules` -> `C74.criteriaB`
+- `C74.rules` -> `R19.criteria`
+- `C75.rules` -> `R23.criteria`
+- `C76.rules` -> `C78.criteriaA`
+- `C77.rules` -> `C78.criteriaB`
+- `C77.rules` -> `C81.criteriaA`
+- `C78.rules` -> `R26.criteria`
+- `C79.rules` -> `C81.criteriaB`
+- `C80.rules` -> `R28.criteria`
+- `C81.rules` -> `R27.criteria`
+- `C82.rules` -> `R34.criteria`
+- `C83.rules` -> `R24.criteria`
+- `C84.rules` -> `R25.criteria`
+- `C85.rules` -> `C06.criteriaA`
+- `C85.rules` -> `R01.criteria`
+- `C85.rules` -> `R40.criteria`
+- `C86.rules` -> `R07.criteria`
+- `C86.rules` -> `R45.criteria`
+- `C87.rules` -> `C06.criteriaB`
+- `C87.rules` -> `R04.criteria`
+- `C87.rules` -> `C86.criteriaA`
+- `C87.rules` -> `R43.criteria`
+- `C88.rules` -> `C86.criteriaB`
+- `C88.rules` -> `R06.criteria`
+- `C89.rules` -> `R02.criteria`
+- `C89.rules` -> `R41.criteria`
+- `C90.rules` -> `R03.criteria`
+- `C90.rules` -> `R42.criteria`
+- `C91.rules` -> `R32.criteria`
+- `C92.rules` -> `R50.criteria`
+- `C93.rules` -> `R49.criteria`
+- `C94.rules` -> `R31.criteria`
+- `C95.rules` -> `R33.criteria`
+- `C96.rules` -> `R46.criteria`
+- `C97.rules` -> `R47.criteria`
+- `C98.rules` -> `R48.criteria`
+- `C99.rules` -> `C101.criteriaA`
+- `C100.rules` -> `C101.criteriaB`
+- `C101.rules` -> `C102.criteriaB`
+- `C102.rules` -> `R64.criteria`
+- `E52.consequences` -> `O122.event`
+- `E52.consequences` -> `O123.event`
+- `E52.rules` -> `R74.event`
+- `C103.rules` -> `C105.criteriaB`
+- `C104.rules` -> `C105.criteriaA`
+- `C105.rules` -> `R74.criteria`
+- `O122.writeBacks` -> `W77.consequence`
+- `E53.consequences` -> `O124.event`
+- `E53.consequences` -> `O125.event`
+- `E53.rules` -> `R75.event`
+- `C106.rules` -> `R75.criteria`
+- `O124.writeBacks` -> `W80.consequence`
+- `O124.writeBacks` -> `W81.consequence`
+- `E54.consequences` -> `O126.event`
+- `E54.consequences` -> `O127.event`
+- `E54.rules` -> `R76.event`
+- `C107.rules` -> `C109.criteriaA`
+- `O126.writeBacks` -> `W82.consequence`
+- `O126.writeBacks` -> `W83.consequence`
+- `C108.rules` -> `C109.criteriaB`
+- `C109.rules` -> `R76.criteria`
+- `E55.consequences` -> `O128.event`
+- `E55.rules` -> `R77.event`
+- `C110.rules` -> `C111.criteriaB`
+- `C111.rules` -> `R77.criteria`
+- `C112.rules` -> `C111.criteriaA`
+- `O128.writeBacks` -> `W84.consequence`
+- `O128.writeBacks` -> `W85.consequence`
