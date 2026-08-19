@@ -267,6 +267,35 @@ namespace FuzzyGraph2.Editor
                             });
                         break;
 
+                    case CriterionMode.NumberCompare:
+                        expressionIndex = AddExpression(
+                            compiledEvent,
+                            new CompiledFuzzyExpression
+                            {
+                                kind = CompiledExpressionKind.NumberCompare,
+
+                                variableId = GetRequiredPortText(
+                                    node,
+                                    CriterionNodeV2.VariableIdPortName,
+                                    "number criterion variable id"),
+
+                                numberComparison = GetPortValue(
+                                    node,
+                                    CriterionNodeV2.ComparisonPortName,
+                                    NumberComparison.LessThanOrEqual),
+
+                                comparisonValue = GetPortValue(
+                                    node,
+                                    CriterionNodeV2.ComparisonValuePortName,
+                                    0f),
+
+                                comparisonValue2 = GetPortValue(
+                                    node,
+                                    CriterionNodeV2.ComparisonValue2PortName,
+                                    0f)
+                            });
+                        break;
+
                     default:
                         throw new InvalidOperationException(
                             $"CriterionNodeV2 mode '{mode}' is not supported yet");
