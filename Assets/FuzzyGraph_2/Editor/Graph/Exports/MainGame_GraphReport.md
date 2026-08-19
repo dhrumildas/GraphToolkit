@@ -1,11 +1,11 @@
 ﻿# MainGame - FuzzyGraph2 graph report
 
 Source: `Assets/FuzzyGraph_2/Editor/Graph/MainGame.fuzzygraph2`
-Exported: 2026-08-13 14:44:07
+Exported: 2026-08-18 22:55:29
 
 ## Compile check
 
-`[fuzzygraph2] compiled 'export check' | events 50 | variables 11 | expressions 106 | rules 71 | bands 69 | fallbacks 50 | consequences 39 | write-backs 74`
+`[fuzzygraph2] compiled 'export check' | events 51 | variables 11 | expressions 109 | rules 72 | bands 70 | fallbacks 51 | consequences 40 | write-backs 75`
 
 ## Event overview
 
@@ -523,7 +523,7 @@ Consequences:
 ### ExitVault (E46)
 
 Rules:
-- `R67` exit_vault | z=1 | root C97
+- `R67` exit_vault | z=1 | root C95
 
 Consequences:
 - `O109` Vault.PlayerExits | min=1 | fallback=False
@@ -571,7 +571,17 @@ Rules:
 
 Consequences:
 - `O117` Vault.GateExit | min=1 | fallback=False
+  - write-back `W75`
 - `O118` CheckVaultExit.Blocked | min=0 | fallback=True
+
+### BazaarReturnCheck (E51)
+
+Rules:
+- `R73` bazaar_return_from_vault_gate | z=1 | root C98
+
+Consequences:
+- `O120` Bazaar.ReturnFromVaultGate | min=1 | fallback=False
+- `O121` Bazaar.ReturnNormal | min=0 | fallback=True
 
 ## Every node
 
@@ -3117,38 +3127,64 @@ Consequences:
 
 ### C94 - CriterionNode
 
-- Mode: FuzzyNumber
-- Variable ID: Player.DistanceToCarpet
-- Set: Near
-- Shape: Low
-- Minimum: 0
-- Maximum: 10
-- Point A: 0
-- Point B: 2.5
-
-### C95 - CriterionNode
-
-- Mode: FuzzyNumber
-- Variable ID: Player.DistanceToCarpet
-- Set: Near
-- Shape: Low
-- Minimum: 0
-- Maximum: 10
-- Point A: 0
-- Point B: 2.5
-
-### C96 - CriterionNode
-
 - Mode: DoesNotExist
 - Variable ID: Guard.InsidePit
 
-### C97 - CriterionNode
+### C95 - CriterionNode
 
 - Mode: And
 
 ### O119 - ConsequenceNode
 
 - Outcome ID: GuardFellIntoPit
+- Minimum: 0
+- Fallback: True
+- Fire Event: False
+
+### W75 - WriteBackNode
+
+- Target Key: Player.UsedVaultGateExit
+- Operation: Set
+- Value Type: Bool
+- Value: True
+
+### E51 - EventNode
+
+- Event ID: BazaarReturnCheck
+
+### C96 - CriterionNode
+
+- Mode: BoolEquals
+- Variable ID: Guard.InsidePit
+- Expected Bool: True
+
+### C97 - CriterionNode
+
+- Mode: BoolEquals
+- Variable ID: Player.UsedVaultGateExit
+- Expected Bool: True
+
+### C98 - CriterionNode
+
+- Mode: And
+
+### R73 - RuleNode
+
+- Rule ID: bazaar_return_from_vault_gate
+- Consequent: 1
+
+### O120 - ConsequenceNode
+
+- Outcome ID: Bazaar.ReturnFromVaultGate
+- Minimum: 1
+- Fallback: False
+- Fire Event: True
+- Target: GameplaySignal
+- Payload: Bazaar.ReturnFromVaultGate
+
+### O121 - ConsequenceNode
+
+- Outcome ID: Bazaar.ReturnNormal
 - Minimum: 0
 - Fallback: True
 - Fire Event: False
@@ -3496,7 +3532,7 @@ Consequences:
 - `E46.consequences` -> `O109.event`
 - `E46.consequences` -> `O110.event`
 - `E46.rules` -> `R67.event`
-- `C82.rules` -> `C97.criteriaA`
+- `C82.rules` -> `C95.criteriaA`
 - `O109.writeBacks` -> `W69.consequence`
 - `C83.rules` -> `C86.criteriaA`
 - `C84.rules` -> `C86.criteriaB`
@@ -3528,5 +3564,12 @@ Consequences:
 - `C91.rules` -> `C92.criteriaA`
 - `C92.rules` -> `R72.criteria`
 - `C93.rules` -> `C92.criteriaB`
-- `C96.rules` -> `C97.criteriaB`
-- `C97.rules` -> `R67.criteria`
+- `O117.writeBacks` -> `W75.consequence`
+- `C94.rules` -> `C95.criteriaB`
+- `C95.rules` -> `R67.criteria`
+- `E51.consequences` -> `O120.event`
+- `E51.consequences` -> `O121.event`
+- `E51.rules` -> `R73.event`
+- `C96.rules` -> `C98.criteriaA`
+- `C97.rules` -> `C98.criteriaB`
+- `C98.rules` -> `R73.criteria`

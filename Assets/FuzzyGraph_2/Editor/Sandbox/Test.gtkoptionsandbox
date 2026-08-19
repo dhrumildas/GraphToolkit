@@ -1,0 +1,137 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &1
+MonoBehaviour:
+  m_ObjectHideFlags: 61
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 12501, guid: 0000000000000000e000000000000000, type: 0}
+  m_Name: Test
+  m_EditorClassIdentifier: UnityEditor.dll::Unity.GraphToolkit.Editor.Implementation.GraphObjectImp
+  m_GraphModel:
+    rid: 2840202783604080745
+  references:
+    version: 2
+    RefIds:
+    - rid: -2
+      type: {class: , ns: , asm: }
+    - rid: 2840202783604080745
+      type: {class: GraphModelImp, ns: Unity.GraphToolkit.Editor.Implementation, asm: UnityEditor.GraphToolkitModule}
+      data:
+        m_Guid:
+          m_Value0: 15037053089628128098
+          m_Value1: 14540411565385804660
+        m_HashGuid:
+          serializedVersion: 2
+          Hash: 6283f9831d58aed0746bcdc247ebc9c9
+        m_Name: 
+        m_GraphNodeModels:
+        - rid: 2840202790532808767
+        m_GraphWireModels: []
+        m_GraphStickyNoteModels: []
+        m_GraphPlacematModels: []
+        m_GraphVariableModels: []
+        m_GraphPortalModels: []
+        m_SectionModels:
+        - rid: 2840202783604080746
+        m_LocalSubgraphs: []
+        m_LastKnownBounds:
+          serializedVersion: 2
+          x: -1878
+          y: 404
+          width: 276
+          height: 145
+        m_GraphElementMetaData:
+        - m_Guid:
+            m_Value0: 15944798997693725034
+            m_Value1: 9003420621458500853
+          m_HashGuid:
+            serializedVersion: 2
+            Hash: 6af98990354e47ddf5ec75615a93f27c
+          m_Category: 0
+          m_Index: 0
+        m_EntryPoint:
+          rid: 2840202790532808767
+        m_Graph:
+          rid: 2840202783604080747
+    - rid: 2840202783604080746
+      type: {class: SectionModel, ns: Unity.GraphToolkit.Editor, asm: UnityEditor.GraphToolkitModule}
+      data:
+        m_Guid:
+          m_Value0: 17390912557800679827
+          m_Value1: 1436229648762570737
+        m_HashGuid:
+          serializedVersion: 2
+          Hash: 93e9968fd4ee58f1f187608e4183ee13
+        m_Version: 2
+        m_Items: []
+        m_Title: 
+    - rid: 2840202783604080747
+      type: {class: OptionSandboxGraph, ns: FuzzyGraph2.Editor.Sandbox, asm: FuzzyGraph2.Editor}
+      data: 
+    - rid: 2840202790532808767
+      type: {class: UserNodeModelImp, ns: Unity.GraphToolkit.Editor.Implementation, asm: UnityEditor.GraphToolkitModule}
+      data:
+        m_Guid:
+          m_Value0: 15944798997693725034
+          m_Value1: 9003420621458500853
+        m_HashGuid:
+          serializedVersion: 2
+          Hash: 6af98990354e47ddf5ec75615a93f27c
+        m_Version: 2
+        m_Position: {x: -1878.2095, y: 404.22955}
+        m_Title: 
+        m_Tooltip: 
+        m_NodePreviewModel:
+          rid: -2
+        m_State: 0
+        m_InputConstantsById:
+          m_KeyList:
+          - __option_mode
+          - expectedBool
+          - variableId
+          m_ValueList:
+          - rid: 2840202790532808768
+          - rid: 2840202790532808790
+          - rid: 2840202790532808786
+        m_InputPortInfos:
+          expandedPortsById:
+            m_KeyList: []
+            m_ValueList: 
+        m_OutputPortInfos:
+          expandedPortsById:
+            m_KeyList: []
+            m_ValueList: 
+        m_Collapsed: 0
+        m_CurrentModeIndex: 0
+        m_ElementColor:
+          m_Color: {r: 0, g: 0, b: 0, a: 0}
+          m_HasUserColor: 0
+        m_Node:
+          rid: 2840202790532808771
+    - rid: 2840202790532808768
+      type: {class: EnumConstant, ns: Unity.GraphToolkit.Editor, asm: UnityEditor.GraphToolkitModule}
+      data:
+        m_Value:
+          m_EnumType:
+            m_Identification: FuzzyGraph2.Editor.CriterionMode, FuzzyGraph2.Editor,
+              Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+          m_Value: 1
+        m_EnumType:
+          m_Identification: FuzzyGraph2.Editor.CriterionMode, FuzzyGraph2.Editor,
+            Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+    - rid: 2840202790532808771
+      type: {class: CriterionPortProbeNode, ns: FuzzyGraph2.Editor.Sandbox, asm: FuzzyGraph2.Editor}
+      data: 
+    - rid: 2840202790532808786
+      type: {class: 'Constant`1[[System.String, mscorlib]]', ns: Unity.GraphToolkit.Editor, asm: UnityEditor.GraphToolkitModule}
+      data:
+        m_Value: TEST.HasFlowers
+    - rid: 2840202790532808790
+      type: {class: 'Constant`1[[System.Boolean, mscorlib]]', ns: Unity.GraphToolkit.Editor, asm: UnityEditor.GraphToolkitModule}
+      data:
+        m_Value: 1

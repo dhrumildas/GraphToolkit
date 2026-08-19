@@ -86,6 +86,9 @@ namespace FuzzyGraph2.Editor
                 Dictionary<CriterionNode, int> compiledCriteria = new Dictionary<CriterionNode, int>();
                 HashSet<CriterionNode> buildingCriteria = new HashSet<CriterionNode>();
 
+                Dictionary<CriterionNodeV2, int> compiledCriteriaV2 = new Dictionary<CriterionNodeV2, int>();
+                HashSet<CriterionNodeV2> buildingCriteriaV2 = new HashSet<CriterionNodeV2>();
+
                 IEnumerable<RuleNode> connectedRules = GetConnectedNodesFromOutput<RuleNode>(eventNode, EventNode.RulesPortName);
 
                 foreach (RuleNode ruleNode in connectedRules)
@@ -94,16 +97,29 @@ namespace FuzzyGraph2.Editor
                     if (string.IsNullOrWhiteSpace(ruleId)) throw new InvalidOperationException($"event '{eventId}' has a rule with no id");
 
                     List<CriterionNode> criteria = GetConnectedNodesFromInput<CriterionNode>(ruleNode, RuleNode.CriteriaPortName).ToList();
-                    if (criteria.Count != 1) throw new InvalidOperationException($"rule '{ruleId}' needs one root criterion");
 
-                    int antecedentIndex = CompileCriterion(compiledEvent, criteria[0], compiledCriteria, buildingCriteria);
+                    List<CriterionNodeV2> v2Criteria = GetConnectedNodesFromInput<CriterionNodeV2>(ruleNode,RuleNode.CriteriaPortName).ToList();
 
-                    compiledEvent.rules.Add(new CompiledSugenoRule
+                    if (criteria.Count + v2Criteria.Count != 1) throw new InvalidOperationException($"rule '{ruleId}' needs one root criterion");
+
+                    int antecedentIndex;/* = CompileCriterion(compiledEvent, criteria[0], compiledCriteria, buildingCriteria);*/
+
+                    if(criteria.Count == 1)
                     {
-                        ruleId = ruleId.Trim(),
-                        antecedentExpressionIndex = antecedentIndex,
-                        consequent = GetOptionValue(ruleNode, RuleNode.ConsequentOptionName, 0f)
-                    });
+                        antecedentIndex = CompileCriterion(compiledEvent, criteria[0], compiledCriteria, buildingCriteria);
+                    }
+
+                    else
+                    {
+                        antecedentIndex = CompileCriterionV2(compiledEvent, v2Criteria[0], compiledCriteriaV2, buildingCriteriaV2);
+                    }
+
+                        compiledEvent.rules.Add(new CompiledSugenoRule
+                        {
+                            ruleId = ruleId.Trim(),
+                            antecedentExpressionIndex = antecedentIndex,
+                            consequent = GetOptionValue(ruleNode, RuleNode.ConsequentOptionName, 0f)
+                        });
                 }
 
                 List<ConsequenceNode> consequenceNodes = GetConnectedNodesFromOutput<ConsequenceNode>(eventNode, EventNode.ConsequencesPortName).ToList();
@@ -176,6 +192,93 @@ namespace FuzzyGraph2.Editor
         private static IEnumerable<T> GetConnectedNodesFromInput<T>(Node node, string portName) where T : Node
         {
             return GetConnectedNodes<T>(node.GetInputPortByName(portName));
+        }
+
+        private static int CompileCriterionV2(
+    CompiledFuzzyEvent compiledEvent,
+    CriterionNodeV2 node,
+    IDictionary<CriterionNodeV2, int> compiledCriteria,
+    ISet<CriterionNodeV2> buildingCriteria)
+        {
+            if (node == null)
+                throw new ArgumentNullException(nameof(node));
+
+            if (compiledCriteria.TryGetValue(node, out int existingIndex))
+                return existingIndex;
+
+            if (!buildingCriteria.Add(node))
+                throw new InvalidOperationException("criterion nodes contain a loop");
+
+            try
+            {
+                CriterionMode mode = GetOptionValue(
+                    node,
+                    CriterionNodeV2.ModeOptionName,
+                    CriterionMode.BoolEquals);
+
+                int expressionIndex;
+
+                switch (mode)
+                {
+                    case CriterionMode.BoolEquals:
+                        expressionIndex = AddExpression(
+                            compiledEvent,
+                            new CompiledFuzzyExpression
+                            {
+                                kind = CompiledExpressionKind.BoolEquals,
+
+                                variableId = GetRequiredPortText(
+                                    node,
+                                    CriterionNodeV2.VariableIdPortName,
+                                    "bool criterion variable id"),
+
+                                expectedBool = GetPortValue(
+                                    node,
+                                    CriterionNodeV2.ExpectedBoolPortName,
+                                    true)
+                            });
+                        break;
+
+                    case CriterionMode.Exists:
+                        expressionIndex = AddExpression(
+                            compiledEvent,
+                            new CompiledFuzzyExpression
+                            {
+                                kind = CompiledExpressionKind.Exists,
+
+                                variableId = GetRequiredPortText(
+                                    node,
+                                    CriterionNodeV2.VariableIdPortName,
+                                    "exists criterion variable id")
+                            });
+                        break;
+
+                    case CriterionMode.DoesNotExist:
+                        expressionIndex = AddExpression(
+                            compiledEvent,
+                            new CompiledFuzzyExpression
+                            {
+                                kind = CompiledExpressionKind.DoesNotExist,
+
+                                variableId = GetRequiredPortText(
+                                    node,
+                                    CriterionNodeV2.VariableIdPortName,
+                                    "does-not-exist criterion variable id")
+                            });
+                        break;
+
+                    default:
+                        throw new InvalidOperationException(
+                            $"CriterionNodeV2 mode '{mode}' is not supported yet");
+                }
+
+                compiledCriteria.Add(node, expressionIndex);
+                return expressionIndex;
+            }
+            finally
+            {
+                buildingCriteria.Remove(node);
+            }
         }
 
         private static int CompileCriterion(CompiledFuzzyEvent compiledEvent, CriterionNode node, IDictionary<CriterionNode, int> compiledCriteria, ISet<CriterionNode> buildingCriteria)
@@ -478,6 +581,28 @@ namespace FuzzyGraph2.Editor
                 default:
                     throw new InvalidOperationException($"unsupported write-back value type: {valueType}");
             }
+        }
+
+        private static T GetPortValue<T>(Node node,string portName,T fallback)
+        {
+            IPort port = node?.GetInputPortByName(portName);
+
+            if (port != null && port.TryGetValue(out T value))
+                return value;
+
+            return fallback;
+        }
+
+
+        //explicitly for v2CriteriaNode
+        private static string GetRequiredPortText(Node node,string portName,string label)
+        {
+            string value = GetPortValue(node,portName,string.Empty);
+
+            if (string.IsNullOrWhiteSpace(value))
+                throw new InvalidOperationException($"{label} is missing");
+
+            return value.Trim();
         }
 
         private static T GetOptionValue<T>(Node node, string optionName, T fallback)

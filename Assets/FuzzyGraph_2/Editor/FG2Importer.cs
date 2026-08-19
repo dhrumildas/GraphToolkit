@@ -53,7 +53,7 @@ namespace FuzzyGraph2.Editor
             {
                 ctx.LogImportError(
                     $"fuzzygraph2 compile failed: "
-                    + exception.Message);
+                    + exception.ToString());
             }
         }
     }

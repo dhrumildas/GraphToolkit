@@ -1,8 +1,8 @@
 ﻿{
     "graphName": "MainGame",
     "assetPath": "Assets/FuzzyGraph_2/Editor/Graph/MainGame.fuzzygraph2",
-    "exportedAt": "2026-08-13 14:44:07",
-    "compileCheck": "[fuzzygraph2] compiled 'export check' | events 50 | variables 11 | expressions 106 | rules 71 | bands 69 | fallbacks 50 | consequences 39 | write-backs 74",
+    "exportedAt": "2026-08-18 22:55:29",
+    "compileCheck": "[fuzzygraph2] compiled 'export check' | events 51 | variables 11 | expressions 109 | rules 72 | bands 70 | fallbacks 51 | consequences 40 | write-backs 75",
     "nodes": [
         {
             "id": "E01",
@@ -3769,40 +3769,12 @@
             "id": "C94",
             "type": "CriterionNode",
             "data": [
-                "Mode: FuzzyNumber",
-                "Variable ID: Player.DistanceToCarpet",
-                "Set: Near",
-                "Shape: Low",
-                "Minimum: 0",
-                "Maximum: 10",
-                "Point A: 0",
-                "Point B: 2.5"
-            ]
-        },
-        {
-            "id": "C95",
-            "type": "CriterionNode",
-            "data": [
-                "Mode: FuzzyNumber",
-                "Variable ID: Player.DistanceToCarpet",
-                "Set: Near",
-                "Shape: Low",
-                "Minimum: 0",
-                "Maximum: 10",
-                "Point A: 0",
-                "Point B: 2.5"
-            ]
-        },
-        {
-            "id": "C96",
-            "type": "CriterionNode",
-            "data": [
                 "Mode: DoesNotExist",
                 "Variable ID: Guard.InsidePit"
             ]
         },
         {
-            "id": "C97",
+            "id": "C95",
             "type": "CriterionNode",
             "data": [
                 "Mode: And"
@@ -3813,6 +3785,78 @@
             "type": "ConsequenceNode",
             "data": [
                 "Outcome ID: GuardFellIntoPit",
+                "Minimum: 0",
+                "Fallback: True",
+                "Fire Event: False"
+            ]
+        },
+        {
+            "id": "W75",
+            "type": "WriteBackNode",
+            "data": [
+                "Target Key: Player.UsedVaultGateExit",
+                "Operation: Set",
+                "Value Type: Bool",
+                "Value: True"
+            ]
+        },
+        {
+            "id": "E51",
+            "type": "EventNode",
+            "data": [
+                "Event ID: BazaarReturnCheck"
+            ]
+        },
+        {
+            "id": "C96",
+            "type": "CriterionNode",
+            "data": [
+                "Mode: BoolEquals",
+                "Variable ID: Guard.InsidePit",
+                "Expected Bool: True"
+            ]
+        },
+        {
+            "id": "C97",
+            "type": "CriterionNode",
+            "data": [
+                "Mode: BoolEquals",
+                "Variable ID: Player.UsedVaultGateExit",
+                "Expected Bool: True"
+            ]
+        },
+        {
+            "id": "C98",
+            "type": "CriterionNode",
+            "data": [
+                "Mode: And"
+            ]
+        },
+        {
+            "id": "R73",
+            "type": "RuleNode",
+            "data": [
+                "Rule ID: bazaar_return_from_vault_gate",
+                "Consequent: 1"
+            ]
+        },
+        {
+            "id": "O120",
+            "type": "ConsequenceNode",
+            "data": [
+                "Outcome ID: Bazaar.ReturnFromVaultGate",
+                "Minimum: 1",
+                "Fallback: False",
+                "Fire Event: True",
+                "Target: GameplaySignal",
+                "Payload: Bazaar.ReturnFromVaultGate"
+            ]
+        },
+        {
+            "id": "O121",
+            "type": "ConsequenceNode",
+            "data": [
+                "Outcome ID: Bazaar.ReturnNormal",
                 "Minimum: 0",
                 "Fallback: True",
                 "Fire Event: False"
@@ -5869,7 +5913,7 @@
         {
             "fromNode": "C82",
             "fromPort": "rules",
-            "toNode": "C97",
+            "toNode": "C95",
             "toPort": "criteriaA"
         },
         {
@@ -6059,15 +6103,57 @@
             "toPort": "criteriaB"
         },
         {
+            "fromNode": "O117",
+            "fromPort": "writeBacks",
+            "toNode": "W75",
+            "toPort": "consequence"
+        },
+        {
+            "fromNode": "C94",
+            "fromPort": "rules",
+            "toNode": "C95",
+            "toPort": "criteriaB"
+        },
+        {
+            "fromNode": "C95",
+            "fromPort": "rules",
+            "toNode": "R67",
+            "toPort": "criteria"
+        },
+        {
+            "fromNode": "E51",
+            "fromPort": "consequences",
+            "toNode": "O120",
+            "toPort": "event"
+        },
+        {
+            "fromNode": "E51",
+            "fromPort": "consequences",
+            "toNode": "O121",
+            "toPort": "event"
+        },
+        {
+            "fromNode": "E51",
+            "fromPort": "rules",
+            "toNode": "R73",
+            "toPort": "event"
+        },
+        {
             "fromNode": "C96",
             "fromPort": "rules",
-            "toNode": "C97",
-            "toPort": "criteriaB"
+            "toNode": "C98",
+            "toPort": "criteriaA"
         },
         {
             "fromNode": "C97",
             "fromPort": "rules",
-            "toNode": "R67",
+            "toNode": "C98",
+            "toPort": "criteriaB"
+        },
+        {
+            "fromNode": "C98",
+            "fromPort": "rules",
+            "toNode": "R73",
             "toPort": "criteria"
         }
     ]
