@@ -1,8 +1,13 @@
+using System;
 using System.Collections;
+using TMPro;
 using UnityEngine;
 
 public class CarpetPit : MonoBehaviour
 {
+    [Header("Timed Event UI")]
+    [SerializeField] private TextMeshProUGUI timedEventText;
+
     [Header("Scene")]
     [SerializeField] private GameObject carpet;
     [SerializeField] private GameObject hiddenPitEntrance;
@@ -43,16 +48,61 @@ public class CarpetPit : MonoBehaviour
 
         if (timerRoutine != null) StopCoroutine(timerRoutine);
 
-        timerRoutine = StartCoroutine(ResponseTimer());
+        timerRoutine = StartCoroutine(WaitForChoice());
+    }
+
+    private IEnumerator WaitForChoice()
+    {
+        // Wait while the opening dialogue is being read.
+        while (DialogueRunner.IsDialogueOpen && !DialogueRunner.IsChoiceOpen)
+            yield return null;
+
+        // Dialogue somehow ended before reaching the choice.
+        if (!DialogueRunner.IsDialogueOpen)
+            yield break;
+
+        // NOW the Jump / Excuse choice is actually visible.
+        yield return ResponseTimer();
     }
 
     private IEnumerator ResponseTimer()
     {
-        yield return new WaitForSeconds(responseTime);
+        float timeRemaining = responseTime;
 
-        if (resolved) yield break;
+        if (timedEventText != null)
+        {
+            timedEventText.gameObject.SetActive(true);
+            timedEventText.text = $"DECIDE: JUMP OR EXCUSE  {timeRemaining:0.0}";
+        }
+
+        while (timeRemaining > 0f)
+        {
+            if (resolved)
+            {
+                HideTimedText();
+                yield break;
+            }
+
+            timeRemaining -= Time.deltaTime;
+
+            if (timedEventText != null)
+            {
+                timedEventText.text =
+                    $"DECIDE: JUMP OR EXCUSE  {Mathf.Max(0f, timeRemaining):0.0}";
+            }
+
+            yield return null;
+        }
+
+        if (resolved)
+        {
+            HideTimedText();
+            yield break;
+        }
 
         resolved = true;
+
+        HideTimedText();
 
         Debug.Log("[CarpetPit] Player failed to answer in time.");
 
@@ -67,6 +117,12 @@ public class CarpetPit : MonoBehaviour
         }
     }
 
+    private void HideTimedText()
+    {
+        if (timedEventText != null)
+            timedEventText.gameObject.SetActive(false);
+    }
+
     // gameplaysignal: pit.jumpchosen
     public void ChooseJump()
     {
@@ -75,6 +131,8 @@ public class CarpetPit : MonoBehaviour
         resolved = true;
 
         if (timerRoutine != null) StopCoroutine(timerRoutine);
+
+        HideTimedText();
 
         if (DialogueRunner.Instance != null && DialogueRunner.IsDialogueOpen)
         {
@@ -104,6 +162,8 @@ public class CarpetPit : MonoBehaviour
         excuseChosen = true;
 
         if (timerRoutine != null) StopCoroutine(timerRoutine);
+
+        HideTimedText();
 
         Debug.Log("[CarpetPit] Player chose to make an excuse.");
     }

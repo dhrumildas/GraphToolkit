@@ -1,11 +1,11 @@
 ﻿# MainGame - FuzzyGraph2 graph report
 
 Source: `Assets/FuzzyGraph_2/Editor/Graph/MainGame.fuzzygraph2`
-Exported: 2026-08-19 19:01:40
+Exported: 2026-08-20 19:04:16
 
 ## Compile check
 
-`[fuzzygraph2] compiled 'export check' | events 55 | variables 11 | expressions 123 | rules 77 | bands 74 | fallbacks 54 | consequences 43 | write-backs 85`
+`[fuzzygraph2] compiled 'export check' | events 57 | variables 11 | expressions 124 | rules 80 | bands 77 | fallbacks 57 | consequences 47 | write-backs 86`
 
 ## Event overview
 
@@ -59,6 +59,7 @@ Consequences:
 - `O63` Guard.AllowedRepeat | min=0.25 | fallback=False
 - `O11` Guard.RepeatConversation | min=0.4 | fallback=False
   - write-back `W04`
+  - write-back `W86`
 - `O62` Guard.DismissesPlayer | min=0.8 | fallback=False
   - write-back `W45`
 - `O59` Guard.RequestsItems | min=0.55 | fallback=False
@@ -622,12 +623,33 @@ Consequences:
 ### VendorGuardGrudge (E55)
 
 Rules:
-- `R77` vendor_guard_grudge | z=0.75 | root C111
+- `R77` vendor_guard_grudge | z=0.75 | root C110
 
 Consequences:
 - `O128` Vendor.Sympathizes | min=0.5 | fallback=False
   - write-back `W84`
   - write-back `W85`
+- `O129` VendorGuardGrudge.Fallback | min=0 | fallback=True
+
+### BazaarEndingVendor (E56)
+
+Rules:
+- `R78` bazaar_end_vendor_split | z=0.9 | root C111
+- `R79` rule_id | z=0.7 | root C112
+
+Consequences:
+- `O130` VendorEnding.Split | min=0.8 | fallback=False
+- `O131` VendorEnding.Grudge | min=0.6 | fallback=False
+- `O132` VendorEnding.Default | min=0 | fallback=True
+
+### BazaarEndingCheck (E57)
+
+Rules:
+- `R80` bazaar_has_returned_from_vault | z=1 | root C113
+
+Consequences:
+- `O133` Bazaar.EndingAvailable | min=1 | fallback=False
+- `O134` Bazaar.EndingUnavailable | min=0.7 | fallback=True
 
 ## Every node
 
@@ -1687,7 +1709,7 @@ Consequences:
 - Fallback: False
 - Fire Event: True
 - Target: DialogueGraph
-- Payload: GuardDismissesPlayer
+- Payload: GuardRequests
 
 ### W45 - WriteBackNode
 
@@ -3424,17 +3446,8 @@ Consequences:
 ### C110 - CriterionNodeV2
 
 - Mode: BoolEquals
-- Variable ID: Guard.DismissedPlayer
+- Variable ID: Guard.WasRudeToPlayer
 - Expected Bool: True
-
-### C111 - CriterionNodeV2
-
-- Mode: Or
-
-### C112 - CriterionNodeV2
-
-- Mode: Exists
-- Variable ID: Guard.DismissedPlayer
 
 ### R77 - RuleNode
 
@@ -3463,6 +3476,104 @@ Consequences:
 - Operation: Set
 - Value Type: Bool
 - Value: True
+
+### W86 - WriteBackNode
+
+- Target Key: Guard.WasRudeToPlayer
+- Operation: Set
+- Value Type: Bool
+- Value: True
+
+### O129 - ConsequenceNode
+
+- Outcome ID: VendorGuardGrudge.Fallback
+- Minimum: 0
+- Fallback: True
+- Fire Event: False
+
+### E56 - EventNode
+
+- Event ID: BazaarEndingVendor
+
+### C111 - CriterionNodeV2
+
+- Mode: BoolEquals
+- Variable ID: Vendor.SplitDealOffered
+- Expected Bool: True
+
+### R78 - RuleNode
+
+- Rule ID: bazaar_end_vendor_split
+- Consequent: 0.9
+
+### C112 - CriterionNodeV2
+
+- Mode: BoolEquals
+- Variable ID: Vendor.SharedGuardGrudge
+- Expected Bool: True
+
+### R79 - RuleNode
+
+- Rule ID: rule_id
+- Consequent: 0.7
+
+### O130 - ConsequenceNode
+
+- Outcome ID: VendorEnding.Split
+- Minimum: 0.8
+- Fallback: False
+- Fire Event: True
+- Target: DialogueGraph
+- Payload: VendorEndingSplit
+
+### O131 - ConsequenceNode
+
+- Outcome ID: VendorEnding.Grudge
+- Minimum: 0.6
+- Fallback: False
+- Fire Event: True
+- Target: DialogueGraph
+- Payload: VendorEndingGrudge
+
+### O132 - ConsequenceNode
+
+- Outcome ID: VendorEnding.Default
+- Minimum: 0
+- Fallback: True
+- Fire Event: True
+- Target: DialogueGraph
+- Payload: VendorEndingDefault
+
+### C113 - CriterionNodeV2
+
+- Mode: BoolEquals
+- Variable ID: Player.EnteredVault
+- Expected Bool: True
+
+### E57 - EventNode
+
+- Event ID: BazaarEndingCheck
+
+### R80 - RuleNode
+
+- Rule ID: bazaar_has_returned_from_vault
+- Consequent: 1
+
+### O133 - ConsequenceNode
+
+- Outcome ID: Bazaar.EndingAvailable
+- Minimum: 1
+- Fallback: False
+- Fire Event: True
+- Target: FuzzyEvent
+- Payload: BazaarEndingVendor
+
+### O134 - ConsequenceNode
+
+- Outcome ID: Bazaar.EndingUnavailable
+- Minimum: 0.7
+- Fallback: True
+- Fire Event: False
 
 ## Every connection
 
@@ -3501,6 +3612,7 @@ Consequences:
 - `O10.writeBacks` -> `W03.consequence`
 - `O10.writeBacks` -> `W46.consequence`
 - `O11.writeBacks` -> `W04.consequence`
+- `O11.writeBacks` -> `W86.consequence`
 - `E04.consequences` -> `O13.event`
 - `E04.consequences` -> `O14.event`
 - `E04.rules` -> `R10.event`
@@ -3878,9 +3990,19 @@ Consequences:
 - `C108.rules` -> `C109.criteriaB`
 - `C109.rules` -> `R76.criteria`
 - `E55.consequences` -> `O128.event`
+- `E55.consequences` -> `O129.event`
 - `E55.rules` -> `R77.event`
-- `C110.rules` -> `C111.criteriaB`
-- `C111.rules` -> `R77.criteria`
-- `C112.rules` -> `C111.criteriaA`
+- `C110.rules` -> `R77.criteria`
 - `O128.writeBacks` -> `W84.consequence`
 - `O128.writeBacks` -> `W85.consequence`
+- `E56.consequences` -> `O130.event`
+- `E56.consequences` -> `O131.event`
+- `E56.consequences` -> `O132.event`
+- `E56.rules` -> `R78.event`
+- `E56.rules` -> `R79.event`
+- `C111.rules` -> `R78.criteria`
+- `C112.rules` -> `R79.criteria`
+- `C113.rules` -> `R80.criteria`
+- `E57.consequences` -> `O133.event`
+- `E57.consequences` -> `O134.event`
+- `E57.rules` -> `R80.event`

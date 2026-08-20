@@ -1,7 +1,12 @@
 using UnityEngine;
+using TMPro;
 
 public class VaultGuardSequence : MonoBehaviour
 {
+    [Header("Timed Event UI")]
+    [SerializeField] private GameObject timerCanvas;
+    [SerializeField] private TextMeshProUGUI timedEventText;
+
     [Header("References")]
     [SerializeField] private Transform guard;
     [SerializeField] private Transform player;
@@ -14,7 +19,6 @@ public class VaultGuardSequence : MonoBehaviour
 
     [Header("Arrival")]
     [SerializeField] private float arrivalDuration = 2.3f;
-    [SerializeField] private float stopDistance = 2f;
 
     private Vector3 startPosition;
     private Vector3 targetPosition;
@@ -56,6 +60,15 @@ public class VaultGuardSequence : MonoBehaviour
         timer = 0f;
         arriving = true;
 
+        if (timerCanvas != null)
+            timerCanvas.SetActive(true);
+
+        if (timedEventText != null)
+        {
+            timedEventText.gameObject.SetActive(true);
+            timedEventText.text = $"GUARD ARRIVING: {arrivalDuration:0.0}";
+        }
+
         if (guardFacing != null)
             guardFacing.BeginFacing(player);
 
@@ -68,14 +81,16 @@ public class VaultGuardSequence : MonoBehaviour
         {
             timer += Time.deltaTime;
 
-            float t =
-                Mathf.Clamp01(timer / arrivalDuration);
+            if (timedEventText != null)
+            {
+                float remaining = Mathf.Max(0f, arrivalDuration - timer);
 
-            guard.position =
-                Vector3.Lerp(
-                    startPosition,
-                    targetPosition,
-                    t);
+                timedEventText.text = $"GUARD ARRIVING: {remaining:0.0}";
+            }
+
+            float t = Mathf.Clamp01(timer / arrivalDuration);
+
+            guard.position = Vector3.Lerp(startPosition, targetPosition, t);
 
             if (t >= 1f)
                 FinishArrival();
@@ -110,16 +125,13 @@ public class VaultGuardSequence : MonoBehaviour
         {
             MoveGuardTowards(guardExitPoint.position);
 
-            if (Vector3.Distance(
-                    guard.position,
-                    guardExitPoint.position) <= 0.05f)
+            if (Vector3.Distance(guard.position,guardExitPoint.position) <= 0.05f)
             {
                 guard.gameObject.SetActive(false);
 
                 leaveState = LeaveState.None;
 
-                Debug.Log(
-                    "[VaultGuard] Guard unlocked the door and left.");
+                Debug.Log("[VaultGuard] Guard unlocked the door and left.");
             }
         }
     }
@@ -127,6 +139,13 @@ public class VaultGuardSequence : MonoBehaviour
     private void FinishArrival()
     {
         arriving = false;
+
+        if (timerCanvas != null)
+            timerCanvas.SetActive(false);
+
+        if (timedEventText != null)
+            timedEventText.gameObject.SetActive(false);
+        
         guard.position = targetPosition;
 
         if (guardFacing != null)

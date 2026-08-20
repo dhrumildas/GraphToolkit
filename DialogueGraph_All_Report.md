@@ -1,7 +1,7 @@
 ﻿# Dialogue Graph Audit
 
-Generated: 19-08-2026 19:02:05
-Graphs found: 22
+Generated: 20-08-2026 19:36:47
+Graphs found: 27
 
 ========================================
 ## TreeHollowDiscovery
@@ -187,6 +187,50 @@ Entry: D01
 - Speaker: <none>
 - Dialogue: <none>
 - Next: <END>
+
+### Flow
+
+- D01 --> <END/EXTERNAL>
+
+
+========================================
+## GuardEndingCharmed
+========================================
+
+Path: `Assets/DialogueSystem/Graphs/GuardEndingCharmed.dialoguegraph`
+
+Entry: D01
+
+### Nodes
+
+#### D01 - Dialogue
+
+- Runtime Node ID: `9ac6db2b-51d5-4ba7-9276-2f28272820e7`
+- Speaker: `Guard`
+- Dialogue: `Oh, you sure don't want to keep me waiting`
+- Next: <END/EXTERNAL>
+
+### Flow
+
+- D01 --> <END/EXTERNAL>
+
+
+========================================
+## GuardEndingRude
+========================================
+
+Path: `Assets/DialogueSystem/Graphs/GuardEndingRude.dialoguegraph`
+
+Entry: D01
+
+### Nodes
+
+#### D01 - Dialogue
+
+- Runtime Node ID: `2272bad1-364d-4409-89c8-fbb90e5eaa59`
+- Speaker: `Guard`
+- Dialogue: `Brother, this job doesnt pay me enough. Just go man. Pls`
+- Next: <END/EXTERNAL>
 
 ### Flow
 
@@ -862,6 +906,72 @@ Entry: D01
 
 
 ========================================
+## VendorEndingDefault
+========================================
+
+Path: `Assets/DialogueSystem/Graphs/VendorDialogues/VendorEndingDefault.dialoguegraph`
+
+Entry: D01
+
+### Nodes
+
+#### D01 - Dialogue
+
+- Runtime Node ID: `5e9fde96-a3cb-436b-bf0d-69d4fefe67e2`
+- Speaker: `Vendor`
+- Dialogue: `You're alive? Frankly, that's more than I expected.`
+- Next: <END/EXTERNAL>
+
+### Flow
+
+- D01 --> <END/EXTERNAL>
+
+
+========================================
+## VendorEndingGrudge
+========================================
+
+Path: `Assets/DialogueSystem/Graphs/VendorDialogues/VendorEndingGrudge.dialoguegraph`
+
+Entry: D01
+
+### Nodes
+
+#### D01 - Dialogue
+
+- Runtime Node ID: `0a705dae-0d14-4b5f-92f0-258c1fc7eefd`
+- Speaker: `Vendor`
+- Dialogue: `HA! I knew sending you in there would ruin his day.`
+- Next: <END/EXTERNAL>
+
+### Flow
+
+- D01 --> <END/EXTERNAL>
+
+
+========================================
+## VendorEndingSplit
+========================================
+
+Path: `Assets/DialogueSystem/Graphs/VendorDialogues/VendorEndingSplit.dialoguegraph`
+
+Entry: D01
+
+### Nodes
+
+#### D01 - Dialogue
+
+- Runtime Node ID: `6e0979da-7a92-4f8e-b0e1-593b79566425`
+- Speaker: `Vendor`
+- Dialogue: `You made it! ...Now, about my cut.`
+- Next: <END/EXTERNAL>
+
+### Flow
+
+- D01 --> <END/EXTERNAL>
+
+
+========================================
 ## VendorFirstMeeting
 ========================================
 
@@ -873,14 +983,14 @@ Entry: D01
 
 #### D01 - Dialogue
 
-- Runtime Node ID: `6960e357-03a0-4b20-a5b3-abe64d729301`
+- Runtime Node ID: `d721d3cb-d8a1-4b76-a6ed-bbdec52a8fb5`
 - Speaker: `Vendor`
 - Dialogue: `Greetings! What carpet do you need?`
 - Next: C01
 
 #### C01 - Choice
 
-- Runtime Node ID: `dc010747-61c6-4b25-be16-ac7dc9739e23`
+- Runtime Node ID: `b6f3617f-8f83-4ede-b607-e75077e06acd`
 - Speaker: `Player`
 - Dialogue: `Funny you should ask...`
 - Choices:
@@ -899,28 +1009,28 @@ Entry: D01
 
 #### D02 - Dialogue
 
-- Runtime Node ID: `467bf8e0-293b-4d36-9b31-d8a4bc7ffee8`
+- Runtime Node ID: `81cc4868-795a-4dd3-a810-222dc5547766`
 - Speaker: `Vendor`
 - Dialogue: `And, what do you bring, in exchange?`
 - Next: C02
 
 #### D03 - Dialogue
 
-- Runtime Node ID: `e1f41c31-3455-461a-9dd5-423f4a42782c`
+- Runtime Node ID: `f4c732e4-8608-4732-9b79-7c74f0ec5a04`
 - Speaker: `Vendor`
 - Dialogue: `We sell carpets, not rumors!`
 - Next: C08
 
 #### D04 - Dialogue
 
-- Runtime Node ID: `917aab39-ef35-4f65-8952-3d55ae9c27a8`
+- Runtime Node ID: `45844ac4-181f-4cec-b2dc-1e7ba81a5069`
 - Speaker: `Vendor`
 - Dialogue: `Bold of you to think of me as a Crime Partner!`
 - Next: <END/EXTERNAL>
 
 #### C02 - Choice
 
-- Runtime Node ID: `8acc5021-5c97-4ffc-b0a8-8fb6be3d4cbf`
+- Runtime Node ID: `ce99a011-47ef-40db-af58-8862d460c673`
 - Speaker: `Player`
 - Dialogue: `Let me see...`
 - Choices:
@@ -939,42 +1049,42 @@ Entry: D01
 
 #### D05 - Dialogue
 
-- Runtime Node ID: `dc388d36-ecf7-4f05-9d70-32d42924cacb`
+- Runtime Node ID: `3f9211f8-4e3d-4e50-80b4-697fc3a7e2db`
 - Speaker: `Vendor`
 - Dialogue: `Ah… Why these rags of arts are worth mere pennies.`
 - Next: D06
 
 #### D06 - Dialogue
 
-- Runtime Node ID: `23b3b2de-c4ec-43fd-b562-60ad6d9fc08b`
+- Runtime Node ID: `47b86f9c-cad4-454c-8fc2-b678dc514cc8`
 - Speaker: `Vendor`
 - Dialogue: `You seek something more than carpets, don’t you?`
 - Next: C05
 
 #### D07 - Dialogue
 
-- Runtime Node ID: `5441b5cb-7385-434f-b582-f7ba9b276987`
+- Runtime Node ID: `a7281363-4586-4a0c-a405-fa73a534ddf6`
 - Speaker: `Vendor`
 - Dialogue: `Ugh! Peasant!`
 - Next: D08
 
 #### D08 - Dialogue
 
-- Runtime Node ID: `52324476-4ef9-431a-adbc-77d551b00e9e`
+- Runtime Node ID: `a6ee7d2d-32e8-45f7-9438-ff804bd3f90e`
 - Speaker: `Vendor`
 - Dialogue: `Get these away from me and come back when you have something useful for me.`
 - Next: <END/EXTERNAL>
 
 #### D09 - Dialogue
 
-- Runtime Node ID: `757ffd7a-d9f7-483e-8948-cc1dd062d7e7`
+- Runtime Node ID: `70ba4eae-9714-4e06-b5b6-62dea9650997`
 - Speaker: `Vendor`
 - Dialogue: `Okay then, but I must recieve something GOOD.`
 - Next: C03
 
 #### C03 - Choice
 
-- Runtime Node ID: `dc8697a7-433c-47f5-b0d0-7769cb03fcde`
+- Runtime Node ID: `fd6e6d01-1277-442f-a49b-d4868bf37daa`
 - Speaker: `Player`
 - Dialogue: `You see...`
 - Choices:
@@ -997,14 +1107,14 @@ Entry: D01
 
 #### D10 - Dialogue
 
-- Runtime Node ID: `8139b18b-7d11-4f43-acef-e0f01c6c0228`
+- Runtime Node ID: `4b2aa476-913e-4281-b3d4-d9ae7099ee11`
 - Speaker: `Vendor`
 - Dialogue: `And, why would I help you in that case?`
 - Next: C04
 
 #### C04 - Choice
 
-- Runtime Node ID: `3cd8073e-89ab-4b36-b3e6-618e1bf22221`
+- Runtime Node ID: `a80ea58a-7ac4-4af3-aca5-64c569da4788`
 - Speaker: `Player`
 - Dialogue: `You might like the answer...`
 - Choices:
@@ -1014,12 +1124,12 @@ Entry: D01
     - Destination: D45
   - Choice 1: `That guard, PISSES me off!`
     - Fuzzy Event ID: `VendorGuardGrudge`
-    - Required Bool Key: `Guard.DismissedPlayer`
+    - Required Bool Key: `Guard.WasRudeToPlayer`
     - Destination: D46
 
 #### C05 - Choice
 
-- Runtime Node ID: `e5e39cb9-4923-420c-a167-5e2af9f82ec4`
+- Runtime Node ID: `ff3a942b-e602-4699-8fa8-61e2a2590881`
 - Speaker: `Player`
 - Dialogue: `The thing is...`
 - Choices:
@@ -1038,182 +1148,182 @@ Entry: D01
 
 #### D11 - Dialogue
 
-- Runtime Node ID: `f91db521-0979-446a-86a2-343a88fd07e1`
+- Runtime Node ID: `5456bef5-fe5d-4f6b-bed5-9cc2f9e0a41e`
 - Speaker: `Vendor`
 - Dialogue: `Royal business, is it? The guard would be of better help.`
 - Next: <END/EXTERNAL>
 
 #### D12 - Dialogue
 
-- Runtime Node ID: `12408d2e-4ac6-4efe-94a5-77953b090402`
+- Runtime Node ID: `62a463ff-1008-40db-ad46-3976ddd36f54`
 - Speaker: `Vendor`
 - Dialogue: `Someone plans to rob it? I suggest you inform it to the guard`
 - Next: <END/EXTERNAL>
 
 #### D13 - Dialogue
 
-- Runtime Node ID: `4b2cb962-7224-448e-a2d0-a35b03a1b5ad`
+- Runtime Node ID: `44b8deb4-3002-4f0a-88f2-4a2c668bbe4c`
 - Speaker: `Vendor`
 - Dialogue: `You know you've got some mouth on you? I'll call the guards if you bother me again!`
 - Next: <END/EXTERNAL>
 
 #### D14 - Dialogue
 
-- Runtime Node ID: `245738b0-be55-4e2d-a411-3429fd0e960f`
+- Runtime Node ID: `719d6211-99c1-4287-95ef-0fc702f2bb13`
 - Speaker: `Player`
 - Dialogue: `I know the skeletons in your closet are rotting. I can help you`
 - Next: D15
 
 #### D15 - Dialogue
 
-- Runtime Node ID: `316def70-4e8b-4311-b019-36c7aae35451`
+- Runtime Node ID: `18ecf9a4-e139-4a30-a4ce-c8a81bd8e1a4`
 - Speaker: `Player`
 - Dialogue: `That is... if you cooperate`
 - Next: D16
 
 #### D16 - Dialogue
 
-- Runtime Node ID: `0fb47911-ad96-48b5-b352-48d60ec7abaa`
+- Runtime Node ID: `07737138-a6c7-4642-813f-b958ec7b4210`
 - Speaker: `Vendor`
 - Dialogue: `My dirt? Friend, you're about to join them.`
 - Next: D17
 
 #### D17 - Dialogue
 
-- Runtime Node ID: `695cea63-49ce-428b-8488-25b883120992`
+- Runtime Node ID: `7a14d03f-f4ec-4616-a87a-772633b0dcae`
 - Speaker: `Player`
 - Dialogue: `I beg your pardon?`
 - Next: D18
 
 #### D18 - Dialogue
 
-- Runtime Node ID: `ef06dfe1-9404-46ef-aa12-4ee7036a88c0`
+- Runtime Node ID: `1cd2907c-1f00-48ea-bd88-b7bdba225a2b`
 - Speaker: `Vendor`
 - Dialogue: `GUARD! This guy is a MENACE! He is stealing, THE APPLE!!!`
 - Next: D19
 
 #### D19 - Dialogue
 
-- Runtime Node ID: `14c521fe-514a-48c7-b980-b74c18ae3349`
+- Runtime Node ID: `7c4f6a36-39b8-43e9-92e5-ffe77e590d29`
 - Speaker: `Player`
 - Dialogue: `Aw shit, here we go again.`
 - Next: <END/EXTERNAL>
 
 #### D20 - Dialogue
 
-- Runtime Node ID: `b3cc6fdf-e65f-453a-a81f-2a3e580aa30d`
+- Runtime Node ID: `5d36bb6d-03d4-4161-bbee-734bc81802d9`
 - Speaker: `Vendor`
 - Dialogue: `Oh... No...`
 - Next: D21
 
 #### D21 - Dialogue
 
-- Runtime Node ID: `cef75754-7336-46f1-8c5b-b58544096ba5`
+- Runtime Node ID: `173531ec-c52e-40e4-9165-033dd4d1438f`
 - Speaker: `Player`
 - Dialogue: `Oh... Yea...`
 - Next: D22
 
 #### D22 - Dialogue
 
-- Runtime Node ID: `6d5a7499-3912-4f0e-a28e-970f1217dfcb`
+- Runtime Node ID: `3a50c766-2347-4c69-a1b7-4a0ae8eb98fa`
 - Speaker: `Vendor`
 - Dialogue: `Oh, Gods!!`
 - Next: D23
 
 #### D23 - Dialogue
 
-- Runtime Node ID: `62fa74c8-929c-4cee-a222-21c61019058d`
+- Runtime Node ID: `9f3a1d3a-644e-4a11-ab9b-4b3595869374`
 - Speaker: `Player`
 - Dialogue: `Oh, the Devil!`
 - Next: D24
 
 #### D24 - Dialogue
 
-- Runtime Node ID: `1604ac9b-3d5d-4429-9d4e-07f901ae4acb`
+- Runtime Node ID: `940c5eb1-4575-4a1f-852e-c9b090cd082f`
 - Speaker: `Vendor`
 - Dialogue: `Goodness Almighty!!!`
 - Next: D25
 
 #### D25 - Dialogue
 
-- Runtime Node ID: `c8061548-26f4-4c5e-a45f-15e7c3ed143a`
+- Runtime Node ID: `b536ad77-a1b2-43cb-b76d-13dc8c59c9be`
 - Speaker: `Player`
 - Dialogue: `Can we stop now? I know you... killed Uncle Ben!`
 - Next: D26
 
 #### D26 - Dialogue
 
-- Runtime Node ID: `b20d3e90-5175-4374-b442-91de92501873`
+- Runtime Node ID: `80b5ac27-aa8d-4bc7-9685-1ef10511469a`
 - Speaker: `Player`
 - Dialogue: `Now if you just let me enter the vault`
 - Next: D27
 
 #### D27 - Dialogue
 
-- Runtime Node ID: `bbe07c11-ef6c-4085-ac6f-d3730bd008ee`
+- Runtime Node ID: `0012ca8f-55ae-453d-a581-783dbbe75c71`
 - Speaker: `Vendor`
 - Dialogue: `Uncle Ben?`
 - Next: D28
 
 #### D28 - Dialogue
 
-- Runtime Node ID: `c7c3ef8f-dd2c-4ad6-8817-a4e812721fc3`
+- Runtime Node ID: `52f2ebc5-8497-4cba-aaa5-1c18208fa812`
 - Speaker: `Player`
 - Dialogue: `Yeah, the one who stubbed his toe on our 2nd birthday`
 - Next: D29
 
 #### D29 - Dialogue
 
-- Runtime Node ID: `e846921e-9b75-4c3c-9032-60824876d25a`
+- Runtime Node ID: `d6ae5be0-43be-4938-a73c-eb1e0de4d986`
 - Speaker: `Vendor`
 - Dialogue: `The one with 3 wives?`
 - Next: D30
 
 #### D30 - Dialogue
 
-- Runtime Node ID: `44a9be16-58d5-429d-90fe-7ed5cfd43de7`
+- Runtime Node ID: `9665e188-9c79-4cd0-92e3-60233fa84bfb`
 - Speaker: `Player`
 - Dialogue: `4 actually.`
 - Next: D31
 
 #### D31 - Dialogue
 
-- Runtime Node ID: `24ddee32-c53b-46db-abea-46740c39ad36`
+- Runtime Node ID: `8549ea59-1b77-4b50-b6ff-fac9c709ff09`
 - Speaker: `Vendor`
 - Dialogue: `Ay! Would you look at that? More money for us!`
 - Next: D32
 
 #### D32 - Dialogue
 
-- Runtime Node ID: `62c40054-7d89-4f59-aacb-0a2262a9d7e0`
+- Runtime Node ID: `a2cc7658-07a0-4c49-a25d-aa827acd7a17`
 - Speaker: `Vendor`
 - Dialogue: `Isn't that right? Brother? Who ratted me out?`
 - Next: D33
 
 #### D33 - Dialogue
 
-- Runtime Node ID: `a8efb5e2-d03e-4ecd-8db5-f061a7471cfe`
+- Runtime Node ID: `af0a32ec-8629-4d77-9b35-c0b6554bb257`
 - Speaker: `Player`
 - Dialogue: `Now, ain't that sweet.`
 - Next: D34
 
 #### D34 - Dialogue
 
-- Runtime Node ID: `dd4225a5-f885-4f58-9a62-f30e87f29d23`
+- Runtime Node ID: `31028ae6-00cf-4644-9630-ba4710ac3396`
 - Speaker: `Player`
 - Dialogue: `Now, before I slice your face off... The vault, please, dear brother?`
 - Next: D35
 
 #### D35 - Dialogue
 
-- Runtime Node ID: `c993db27-e2e4-4614-9d21-f89322eec90f`
+- Runtime Node ID: `caf89782-5446-4e7d-9ac5-ab59dbe4d43c`
 - Speaker: `Vendor`
 - Dialogue: `Right, right, of course. Guar...!!`
 - Next: C06
 
 #### C06 - Choice
 
-- Runtime Node ID: `b570f2bb-3c96-4557-a9ca-934f4dbbed92`
+- Runtime Node ID: `f0be86d3-4fda-4b6e-90ec-c3adbdae9d99`
 - Speaker: `Player`
 - Dialogue: `Now, now.`
 - Choices:
@@ -1224,14 +1334,14 @@ Entry: D01
 
 #### D36 - Dialogue
 
-- Runtime Node ID: `48378668-b575-4fec-90ec-660eb5cad943`
+- Runtime Node ID: `384d36bb-c1c9-4977-bd27-36dabae9955b`
 - Speaker: `Vendor`
 - Dialogue: `Okay! Okay, fine!`
 - Next: C07
 
 #### C07 - Choice
 
-- Runtime Node ID: `f607afef-b0aa-4350-8c9f-365d92ffb45a`
+- Runtime Node ID: `cbfa9f3c-8f1c-455d-a41a-fb97ace81d18`
 - Speaker: `Player`
 - Dialogue: `See? Such love amongst brothers!`
 - Choices:
@@ -1242,56 +1352,56 @@ Entry: D01
 
 #### D37 - Dialogue
 
-- Runtime Node ID: `e0b86904-4f0d-4bf4-8747-84dbe7c7436e`
+- Runtime Node ID: `79bfbbe4-4496-4df1-8192-ae0142962ee0`
 - Speaker: `Vendor`
 - Dialogue: `...`
 - Next: D38
 
 #### D38 - Dialogue
 
-- Runtime Node ID: `e1d61f3b-5916-42a6-8907-0adb381b219a`
+- Runtime Node ID: `fdc5a481-d3ba-4899-b68d-8bddf832925f`
 - Speaker: `Vendor`
 - Dialogue: `You are not my type.`
 - Next: D39
 
 #### D39 - Dialogue
 
-- Runtime Node ID: `38d53857-5744-426d-adcf-7680dc30e43b`
+- Runtime Node ID: `34237c4d-cad8-4c4e-a1f0-eff39802b539`
 - Speaker: `Vendor`
 - Dialogue: `But that Guard over there...`
 - Next: D40
 
 #### D40 - Dialogue
 
-- Runtime Node ID: `ba68af4a-1d6b-44eb-93b4-a22da1d1eab8`
+- Runtime Node ID: `ee86660f-0749-48fc-8e82-1d497c9e2be9`
 - Speaker: `Player`
 - Dialogue: `You want me to.. charm him? For you?`
 - Next: D41
 
 #### D41 - Dialogue
 
-- Runtime Node ID: `bccacca6-54fa-4692-b786-cc4f4b5f4e32`
+- Runtime Node ID: `e6be64ba-6c41-4e32-9c46-3da9542c2f7b`
 - Speaker: `Vendor`
 - Dialogue: `YES! Here, take these gold coins and try to make him understand`
 - Next: D42
 
 #### D42 - Dialogue
 
-- Runtime Node ID: `61dcf9f4-b331-4574-969d-41375fe26456`
+- Runtime Node ID: `745a4626-8145-4f52-8185-ba0cd11b975d`
 - Speaker: `Vendor`
 - Dialogue: `He would very VERY much like it.`
 - Next: D43
 
 #### D43 - Dialogue
 
-- Runtime Node ID: `6b4a41df-c362-4653-ae23-1a21d8969b76`
+- Runtime Node ID: `607cc99f-e70b-4698-9c94-f4e5d49abbae`
 - Speaker: `Vendor`
 - Dialogue: `*GASP* Don't tell him they are from me!`
 - Next: <END/EXTERNAL>
 
 #### C08 - Choice
 
-- Runtime Node ID: `5e0e0475-67ad-486f-b722-136363098760`
+- Runtime Node ID: `52477f65-b924-453e-ae50-ec4783a8b732`
 - Speaker: `Player`
 - Dialogue: `I know what's there`
 - Choices:
@@ -1306,28 +1416,28 @@ Entry: D01
 
 #### D44 - Dialogue
 
-- Runtime Node ID: `c07b7e48-3316-4ddc-b09e-77c3817b9359`
+- Runtime Node ID: `97d54566-1f0c-44de-a417-50b69f3b09bf`
 - Speaker: `Vendor`
 - Dialogue: `Ahh! No please, just GO! There's the pit. Just please LEAVE ME ALONE!`
 - Next: <END/EXTERNAL>
 
 #### D45 - Dialogue
 
-- Runtime Node ID: `ff8dd04d-33a6-4d6c-9b0d-477e874ccefc`
+- Runtime Node ID: `8ec8c097-8279-4da2-b723-0acc8375e768`
 - Speaker: `Vendor`
 - Dialogue: `Now you're speaking my language. Just make sure my cut is worth the trouble.`
 - Next: <END/EXTERNAL>
 
 #### D46 - Dialogue
 
-- Runtime Node ID: `05f0fcba-effc-41c2-830b-0844e74783c5`
+- Runtime Node ID: `97936190-3ec3-4cec-9f5b-a37d49e5db3a`
 - Speaker: `Vendor`
 - Dialogue: `He doesn't appeal to me either. You know what? I have an idea...`
 - Next: D47
 
 #### D47 - Dialogue
 
-- Runtime Node ID: `b9713486-557c-4815-becc-d6cca06c1fbf`
+- Runtime Node ID: `5dc65a2f-a6a5-49e2-8c29-f60bf7a01719`
 - Speaker: `Vendor`
 - Dialogue: `See that carpet? There's a way underneath it. To the VAULT! Go cause some trouble.`
 - Next: <END/EXTERNAL>
@@ -1485,14 +1595,14 @@ Entry: D01
 
 #### D01 - Dialogue
 
-- Runtime Node ID: `92c32a97-d4a9-4ced-a24c-9ca00791ea84`
+- Runtime Node ID: `717b66b7-7016-4736-84fd-b62b0751df97`
 - Speaker: `Vendor`
 - Dialogue: `Greetings! What carpe— ...Oh. It's you.`
 - Next: C01
 
 #### C01 - Choice
 
-- Runtime Node ID: `01b1468f-5eaf-450e-915c-cbe4582e63e7`
+- Runtime Node ID: `c198997b-e2f3-42d1-8357-0526b0beb5d2`
 - Speaker: `Player`
 - Dialogue: <none>
 - Choices:
@@ -1511,21 +1621,21 @@ Entry: D01
 
 #### D02 - Dialogue
 
-- Runtime Node ID: `10cc66c2-b3a7-4ba5-9587-d121028eda38`
+- Runtime Node ID: `1a21acfc-0b15-4b3d-9e95-17b6598bf910`
 - Speaker: `Vendor`
 - Dialogue: `Fine. What are you offering`
 - Next: C02
 
 #### D03 - Dialogue
 
-- Runtime Node ID: `e8d7bfee-8308-401e-a970-a20ee5adb3fc`
+- Runtime Node ID: `15ad31e5-d787-4032-b3fe-e6ed4b7f34d6`
 - Speaker: `Vendor`
 - Dialogue: `You're still interested in that thing`
 - Next: D06
 
 #### C02 - Choice
 
-- Runtime Node ID: `62199204-2ae3-4b40-a706-4c9744631c1e`
+- Runtime Node ID: `3a8b2bc4-1239-4cc9-b596-c26d5421ac58`
 - Speaker: `Player`
 - Dialogue: <none>
 - Choices:
@@ -1548,28 +1658,28 @@ Entry: D01
 
 #### D04 - Dialogue
 
-- Runtime Node ID: `2c125351-2e98-41f7-bafa-ce9883bdd554`
+- Runtime Node ID: `c3ee73a1-7d10-4901-ab1a-8b72baeb5176`
 - Speaker: `Vendor`
 - Dialogue: `I see you DO mean business. Now, what can I offer?`
 - Next: <END>
 
 #### D05 - Dialogue
 
-- Runtime Node ID: `7170acae-99c7-4385-a324-5c62feadecb6`
+- Runtime Node ID: `9dc40591-f822-4e1a-93cb-87e08aa6e2a6`
 - Speaker: `Vendor`
 - Dialogue: `Ahh! No please, just GO! There's the pit. Just please LEAVE ME ALONE!`
 - Next: <END/EXTERNAL>
 
 #### D06 - Dialogue
 
-- Runtime Node ID: `3546281a-ba12-480e-a20c-93cf98a5fe7d`
+- Runtime Node ID: `96121e28-676f-4d44-bbe4-a3749e020095`
 - Speaker: `Vendor`
 - Dialogue: `I told you! We sell carpets, not rumors!`
 - Next: C03
 
 #### C03 - Choice
 
-- Runtime Node ID: `35470936-43ee-414c-a34c-6ac76e43413d`
+- Runtime Node ID: `adb7846d-5348-4a76-8937-b226398eb607`
 - Speaker: `Player`
 - Dialogue: `I know what's there`
 - Choices:
@@ -1584,28 +1694,28 @@ Entry: D01
 
 #### D07 - Dialogue
 
-- Runtime Node ID: `46b7a5d1-0e41-45eb-93dd-1d58c81ef5a4`
+- Runtime Node ID: `0a58bdaa-6928-4fb3-9846-9cd7bc7492d5`
 - Speaker: `Vendor`
 - Dialogue: `Ugh! Peasant!`
 - Next: D08
 
 #### D08 - Dialogue
 
-- Runtime Node ID: `a9d5daec-62b5-41b4-9fe1-d32b74f7b8d9`
+- Runtime Node ID: `64f5fcab-2d3e-41ff-a569-7be068959b31`
 - Speaker: `Vendor`
 - Dialogue: `Get these away from me and come back when you have something useful for me.`
 - Next: <END/EXTERNAL>
 
 #### D09 - Dialogue
 
-- Runtime Node ID: `97134596-47c0-4a92-b005-63ff9cb4c514`
+- Runtime Node ID: `7fba709d-ab46-4cdf-a81b-b0cd7ae7059e`
 - Speaker: `Vendor`
 - Dialogue: `Okay then, but I must recieve something GOOD.`
 - Next: C04
 
 #### C04 - Choice
 
-- Runtime Node ID: `195feed3-09f9-4b3a-9485-b028ab6e0871`
+- Runtime Node ID: `a797badd-03a7-4172-9ff5-a6a2e002c2d0`
 - Speaker: `Player`
 - Dialogue: `You see...`
 - Choices:
@@ -1628,14 +1738,14 @@ Entry: D01
 
 #### D10 - Dialogue
 
-- Runtime Node ID: `55b6a17a-b4c7-405e-8ee0-22472a1cf2a9`
+- Runtime Node ID: `e506a6a6-624a-4d24-95a5-1220331d4370`
 - Speaker: `Vendor`
 - Dialogue: `And, why would I help you in that case?`
 - Next: C05
 
 #### C05 - Choice
 
-- Runtime Node ID: `35e9eec3-9372-4135-b34c-0269ff91ead1`
+- Runtime Node ID: `d44286a8-677b-4a90-a35c-f57c63cf051f`
 - Speaker: `Player`
 - Dialogue: `You might like the answer...`
 - Choices:
@@ -1645,89 +1755,89 @@ Entry: D01
     - Destination: D41
   - Choice 1: `That guard, PISSES me off!`
     - Fuzzy Event ID: `VendorGuardGrudge`
-    - Required Bool Key: `Guard.DismissedPlayer`
+    - Required Bool Key: `Guard.WasRudeToPlayer`
     - Destination: D43
 
 #### D11 - Dialogue
 
-- Runtime Node ID: `02521712-8a01-4152-a796-0388474c1d23`
+- Runtime Node ID: `e4eed20a-6ae9-4675-86af-2f0c4e1f85bb`
 - Speaker: `Player`
 - Dialogue: `I know the skeletons in your closet are rotting. I can help you`
 - Next: D13
 
 #### D12 - Dialogue
 
-- Runtime Node ID: `8df4850d-92d1-4826-8340-b723e50f0af0`
+- Runtime Node ID: `40c20795-483b-4980-bae3-d41875dfaea5`
 - Speaker: `Vendor`
 - Dialogue: `My dirt? Friend, you're about to join them.`
 - Next: D14
 
 #### D13 - Dialogue
 
-- Runtime Node ID: `0d9f50a3-dfb0-4f34-9b5a-105e1efcde9e`
+- Runtime Node ID: `a5a79d6e-6e5b-4b58-a901-7ad18b6363b3`
 - Speaker: `Player`
 - Dialogue: `That is... if you cooperate`
 - Next: D12
 
 #### D14 - Dialogue
 
-- Runtime Node ID: `214952bb-18fe-4dcc-af6e-3114b9d76c66`
+- Runtime Node ID: `18a72e0f-9494-45be-b99f-dd2a07a1ad48`
 - Speaker: `Player`
 - Dialogue: `I beg your pardon?`
 - Next: D15
 
 #### D15 - Dialogue
 
-- Runtime Node ID: `15a4f243-498d-4b80-9d16-7780258b33dc`
+- Runtime Node ID: `2204dd59-c67f-47ac-95de-7cc5234add0a`
 - Speaker: `Vendor`
 - Dialogue: `GUARD! This guy is a MENACE! He is stealing, THE APPLE!!!`
 - Next: D16
 
 #### D16 - Dialogue
 
-- Runtime Node ID: `1557c196-e092-441f-bc93-e492ed7aea20`
+- Runtime Node ID: `fe47f994-c463-4568-83e9-fcecca376164`
 - Speaker: `Player`
 - Dialogue: `Aw shit, here we go again.`
 - Next: <END>
 
 #### D17 - Dialogue
 
-- Runtime Node ID: `5029e388-a6a7-4832-8618-77515f429c64`
+- Runtime Node ID: `aa6d2fd3-23c2-4e80-a5da-f539235ab670`
 - Speaker: `Player`
 - Dialogue: `Oh, the Devil!`
 - Next: D25
 
 #### D18 - Dialogue
 
-- Runtime Node ID: `224c2861-1529-4082-ba1e-5ea389f25924`
+- Runtime Node ID: `19fc84e1-2079-4890-a454-42d76f487198`
 - Speaker: `Vendor`
 - Dialogue: `Oh... No...`
 - Next: D19
 
 #### D19 - Dialogue
 
-- Runtime Node ID: `f150d741-dc31-4b19-9f7b-8eca11ad8eaf`
+- Runtime Node ID: `37fc2c5b-e7d2-41ed-82c5-8b1ae277f8ef`
 - Speaker: `Player`
 - Dialogue: `Oh... Yea...`
 - Next: D20
 
 #### D20 - Dialogue
 
-- Runtime Node ID: `b7f096ea-c043-44cb-8f8e-e7d564ecbc7e`
+- Runtime Node ID: `d799f6a2-ed06-401b-9441-81451a93884d`
 - Speaker: `Vendor`
 - Dialogue: `Oh, Gods!!`
 - Next: D17
 
 #### D21 - Dialogue
 
-- Runtime Node ID: `fb4c4eaf-8ecd-45b3-8fb7-4e4db2948913`
+- Runtime Node ID: `14572190-0f38-4701-9419-e5fbbdfc558d`
 - Speaker: `Vendor`
 - Dialogue: `The one with 3 wives?`
 - Next: D22
 
 #### C06 - Choice
 
-- Runtime Node ID: `fee8c56f-cfc6-4dda-adf8-3abacfc0749c`
+- Runtime Node ID: `2cf682ff-1d26-4abd-b5ff-00cbe73c09c8`
 - Speaker: `Player`
 - Dialogue: `See? Such love amongst brothers!`
 - Choices:
@@ -1738,91 +1848,91 @@ Entry: D01
 
 #### D22 - Dialogue
 
-- Runtime Node ID: `9f217366-3475-4e3c-8d02-5ac70b2092ee`
+- Runtime Node ID: `96645592-701b-4eb3-a9b1-c179a46378e2`
 - Speaker: `Player`
 - Dialogue: `4 actually.`
 - Next: D30
 
 #### D23 - Dialogue
 
-- Runtime Node ID: `837afd1c-c5df-4192-b28b-4fc22932f512`
+- Runtime Node ID: `f073cf44-b5c2-45f1-b46c-98c8a02a72f4`
 - Speaker: `Player`
 - Dialogue: `Now if you just let me enter the vault`
 - Next: D24
 
 #### D24 - Dialogue
 
-- Runtime Node ID: `dcb2aace-3157-4629-a249-c93dbfe45e56`
+- Runtime Node ID: `943ea949-0d14-4336-b4e3-29da49922c04`
 - Speaker: `Vendor`
 - Dialogue: `Uncle Ben?`
 - Next: D27
 
 #### D25 - Dialogue
 
-- Runtime Node ID: `ded57bf7-b54e-4253-ba23-e4d754e104bc`
+- Runtime Node ID: `aab899a6-9310-4701-89cf-4627b951cc4a`
 - Speaker: `Vendor`
 - Dialogue: `Goodness Almighty!!!`
 - Next: D26
 
 #### D26 - Dialogue
 
-- Runtime Node ID: `8e74d1f4-5a0d-48d3-9b6c-a14aa9d01dcb`
+- Runtime Node ID: `a0a1d9d3-858d-4285-989c-9e2b6fdfce6f`
 - Speaker: `Player`
 - Dialogue: `Can we stop now? I know you... killed Uncle Ben!`
 - Next: D23
 
 #### D27 - Dialogue
 
-- Runtime Node ID: `6a2b8dae-978c-4513-bf0a-20782395fc7a`
+- Runtime Node ID: `04dd7d62-0ec8-49dd-b6c5-8101a4851d27`
 - Speaker: `Player`
 - Dialogue: `Yeah, the one who stubbed his toe on our 2nd birthday`
 - Next: D21
 
 #### D28 - Dialogue
 
-- Runtime Node ID: `b6e2e29e-4197-426d-80d0-6007a5c9b811`
+- Runtime Node ID: `02e497ff-80f3-4678-9897-823f3879ddc1`
 - Speaker: `Vendor`
 - Dialogue: `Okay! Okay, fine!`
 - Next: C06
 
 #### D29 - Dialogue
 
-- Runtime Node ID: `3c4b89aa-21e1-4e4e-b6d3-fc9b9a1b21f6`
+- Runtime Node ID: `b5551c34-1a56-43eb-8555-e8a66edf6068`
 - Speaker: `Vendor`
 - Dialogue: `Right, right, of course. Guar...!!`
 - Next: C07
 
 #### D30 - Dialogue
 
-- Runtime Node ID: `e987f4eb-e829-4ce5-86f1-6384f25c1514`
+- Runtime Node ID: `57766e3e-738b-4f77-99bf-79adddb8ea89`
 - Speaker: `Vendor`
 - Dialogue: `Ay! Would you look at that? More money for us!`
 - Next: D33
 
 #### D31 - Dialogue
 
-- Runtime Node ID: `50765601-d6a2-4142-880d-73257f946ab2`
+- Runtime Node ID: `b3fdf84a-c352-42f5-8197-0dbea2fb3f68`
 - Speaker: `Player`
 - Dialogue: `Now, ain't that sweet.`
 - Next: D32
 
 #### D32 - Dialogue
 
-- Runtime Node ID: `52198d2c-a655-4b7f-b3da-31ab456e7334`
+- Runtime Node ID: `64be1c10-d61e-4973-9f29-89187218b4ad`
 - Speaker: `Player`
 - Dialogue: `Now, before I slice your face off... The vault, please, dear brother?`
 - Next: D29
 
 #### D33 - Dialogue
 
-- Runtime Node ID: `405004e3-f6c8-42fd-ab96-80b3959a5e15`
+- Runtime Node ID: `811be171-72b9-4ab1-a21a-27f74c2f782a`
 - Speaker: `Vendor`
 - Dialogue: `Isn't that right? Brother? Who ratted me out?`
 - Next: D31
 
 #### C07 - Choice
 
-- Runtime Node ID: `3a9508e1-74c2-4e40-871c-33c413c5fb0c`
+- Runtime Node ID: `e4402c5c-9f4d-4e0f-ac99-89971e60e027`
 - Speaker: `Player`
 - Dialogue: `Now, now.`
 - Choices:
@@ -1833,70 +1943,70 @@ Entry: D01
 
 #### D34 - Dialogue
 
-- Runtime Node ID: `e8e78531-3ef5-45ee-aa8e-e43a9239c316`
+- Runtime Node ID: `44f456bd-33ce-4fce-a0fb-75af1096c5e4`
 - Speaker: `Vendor`
 - Dialogue: `...`
 - Next: D36
 
 #### D35 - Dialogue
 
-- Runtime Node ID: `ce7b4a34-680e-47ef-9072-b00783461094`
+- Runtime Node ID: `6b522932-9bdb-45d6-9b76-199e74c06e93`
 - Speaker: `Vendor`
 - Dialogue: `But that Guard over there...`
 - Next: D37
 
 #### D36 - Dialogue
 
-- Runtime Node ID: `e32a1536-753f-4554-8bda-b03d7bfe9f03`
+- Runtime Node ID: `f65b8692-92c0-4448-a95a-332e1e271441`
 - Speaker: `Vendor`
 - Dialogue: `You are not my type.`
 - Next: D35
 
 #### D37 - Dialogue
 
-- Runtime Node ID: `39f62aa5-03b0-44b4-905f-6d80e9764562`
+- Runtime Node ID: `1e08605c-bcb7-4981-a29c-3f0d18680dc1`
 - Speaker: `Player`
 - Dialogue: `You want me to.. charm him? For you?`
 - Next: D39
 
 #### D38 - Dialogue
 
-- Runtime Node ID: `b7566ca9-c20b-4020-be16-744c6a819ef1`
+- Runtime Node ID: `6978963d-70f5-41cf-8130-4161742bbfae`
 - Speaker: `Vendor`
 - Dialogue: `*GASP* Don't tell him they are from me!`
 - Next: <END/EXTERNAL>
 
 #### D39 - Dialogue
 
-- Runtime Node ID: `b590481d-de3d-4f91-8617-5967b6c0436d`
+- Runtime Node ID: `96b86836-8bc0-4335-81b0-2d2a8faa6afa`
 - Speaker: `Vendor`
 - Dialogue: `YES! Here, take these gold coins and try to make him understand`
 - Next: D40
 
 #### D40 - Dialogue
 
-- Runtime Node ID: `abb4e07e-95e1-42a9-addf-e7d553f88515`
+- Runtime Node ID: `6dde2b4c-5411-4a6c-be56-9c894bc67387`
 - Speaker: `Vendor`
 - Dialogue: `He would very VERY much like it.`
 - Next: D38
 
 #### D41 - Dialogue
 
-- Runtime Node ID: `9aa6f340-0780-4b95-b446-9c77a313c7dd`
+- Runtime Node ID: `69982db8-eeb7-4204-a763-9a49e35820c5`
 - Speaker: `Vendor`
 - Dialogue: `Now you're speaking my language. Just make sure my cut is worth the trouble.`
 - Next: <END/EXTERNAL>
 
 #### D42 - Dialogue
 
-- Runtime Node ID: `cbcb6f0d-5733-4c9b-a4ba-a2e57f2cdaa7`
+- Runtime Node ID: `e5507069-0abd-405f-b5bf-2661e0b5b15c`
 - Speaker: `Vendor`
 - Dialogue: `See that carpet? There's a way underneath it. To the VAULT! Go cause some trouble.`
 - Next: <END/EXTERNAL>
 
 #### D43 - Dialogue
 
-- Runtime Node ID: `e872d539-dca1-4e3f-a93c-21904b1410cc`
+- Runtime Node ID: `dcff1c5c-8907-4379-9008-ddb4d5a9c706`
 - Speaker: `Vendor`
 - Dialogue: `He doesn't appeal to me either. You know what? I have an idea...`
 - Next: D42

@@ -1,8 +1,12 @@
 using UnityEngine;
+using System.Collections;
 
 // raises a stable fuzzygraph2 event id. telemetry is refreshed before resolution.
 public sealed class EventInvoker : MonoBehaviour
 {
+    [Header("Startup")]
+    [SerializeField] private bool raiseOnStart;
+
     [Header("FuzzyGraph2 Event")]
     [SerializeField]
     private string eventID = "Inspect";
@@ -20,6 +24,19 @@ public sealed class EventInvoker : MonoBehaviour
     {
         consequenceSource = transform;
     }
+
+
+    private IEnumerator Start()
+    {
+        if (!raiseOnStart)
+            yield break;
+
+        // Let FG2GameServices / SignalRouter initialise first.
+        yield return null;
+
+        Raise();
+    }
+
 
     // can be called by interaction components, triggers, unityevents or dialogue choices
     public void Raise()

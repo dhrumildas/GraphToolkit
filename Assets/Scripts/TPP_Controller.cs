@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 [RequireComponent(typeof(CharacterController))]
 public class TPP_Controller : MonoBehaviour
@@ -51,8 +52,20 @@ public class TPP_Controller : MonoBehaviour
         Cursor.visible = !v;
     }
 
+
     private void Update()
     {
+
+        if (Keyboard.current != null && Keyboard.current.f1Key.wasPressedThisFrame)
+        {
+            Time.timeScale = 1f;
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+
+            SceneManager.LoadScene("Menu");
+            return;
+        }
+
         HandleCursor();
 
         if (DialogueRunner.IsDialogueOpen)

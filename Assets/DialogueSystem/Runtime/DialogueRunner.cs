@@ -13,6 +13,12 @@ public class DialogueRunner : MonoBehaviour
     public static bool IsDialogueOpen =>
         Instance != null && Instance.isDialogueOpen;
 
+    public static bool IsChoiceOpen =>
+        Instance != null &&
+        Instance.isDialogueOpen &&
+        Instance.currentNode != null &&
+        Instance.currentNode.Choices.Count > 0;
+
     public static bool BlocksWorldInteraction =>
         Instance != null &&
         (

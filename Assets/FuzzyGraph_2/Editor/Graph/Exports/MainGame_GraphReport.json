@@ -1,8 +1,8 @@
 ﻿{
     "graphName": "MainGame",
     "assetPath": "Assets/FuzzyGraph_2/Editor/Graph/MainGame.fuzzygraph2",
-    "exportedAt": "2026-08-19 19:01:40",
-    "compileCheck": "[fuzzygraph2] compiled 'export check' | events 55 | variables 11 | expressions 123 | rules 77 | bands 74 | fallbacks 54 | consequences 43 | write-backs 85",
+    "exportedAt": "2026-08-20 19:04:16",
+    "compileCheck": "[fuzzygraph2] compiled 'export check' | events 57 | variables 11 | expressions 124 | rules 80 | bands 77 | fallbacks 57 | consequences 47 | write-backs 86",
     "nodes": [
         {
             "id": "E01",
@@ -1566,7 +1566,7 @@
                 "Fallback: False",
                 "Fire Event: True",
                 "Target: DialogueGraph",
-                "Payload: GuardDismissesPlayer"
+                "Payload: GuardRequests"
             ]
         },
         {
@@ -4149,23 +4149,8 @@
             "type": "CriterionNodeV2",
             "data": [
                 "Mode: BoolEquals",
-                "Variable ID: Guard.DismissedPlayer",
+                "Variable ID: Guard.WasRudeToPlayer",
                 "Expected Bool: True"
-            ]
-        },
-        {
-            "id": "C111",
-            "type": "CriterionNodeV2",
-            "data": [
-                "Mode: Or"
-            ]
-        },
-        {
-            "id": "C112",
-            "type": "CriterionNodeV2",
-            "data": [
-                "Mode: Exists",
-                "Variable ID: Guard.DismissedPlayer"
             ]
         },
         {
@@ -4206,6 +4191,149 @@
                 "Operation: Set",
                 "Value Type: Bool",
                 "Value: True"
+            ]
+        },
+        {
+            "id": "W86",
+            "type": "WriteBackNode",
+            "data": [
+                "Target Key: Guard.WasRudeToPlayer",
+                "Operation: Set",
+                "Value Type: Bool",
+                "Value: True"
+            ]
+        },
+        {
+            "id": "O129",
+            "type": "ConsequenceNode",
+            "data": [
+                "Outcome ID: VendorGuardGrudge.Fallback",
+                "Minimum: 0",
+                "Fallback: True",
+                "Fire Event: False"
+            ]
+        },
+        {
+            "id": "E56",
+            "type": "EventNode",
+            "data": [
+                "Event ID: BazaarEndingVendor"
+            ]
+        },
+        {
+            "id": "C111",
+            "type": "CriterionNodeV2",
+            "data": [
+                "Mode: BoolEquals",
+                "Variable ID: Vendor.SplitDealOffered",
+                "Expected Bool: True"
+            ]
+        },
+        {
+            "id": "R78",
+            "type": "RuleNode",
+            "data": [
+                "Rule ID: bazaar_end_vendor_split",
+                "Consequent: 0.9"
+            ]
+        },
+        {
+            "id": "C112",
+            "type": "CriterionNodeV2",
+            "data": [
+                "Mode: BoolEquals",
+                "Variable ID: Vendor.SharedGuardGrudge",
+                "Expected Bool: True"
+            ]
+        },
+        {
+            "id": "R79",
+            "type": "RuleNode",
+            "data": [
+                "Rule ID: rule_id",
+                "Consequent: 0.7"
+            ]
+        },
+        {
+            "id": "O130",
+            "type": "ConsequenceNode",
+            "data": [
+                "Outcome ID: VendorEnding.Split",
+                "Minimum: 0.8",
+                "Fallback: False",
+                "Fire Event: True",
+                "Target: DialogueGraph",
+                "Payload: VendorEndingSplit"
+            ]
+        },
+        {
+            "id": "O131",
+            "type": "ConsequenceNode",
+            "data": [
+                "Outcome ID: VendorEnding.Grudge",
+                "Minimum: 0.6",
+                "Fallback: False",
+                "Fire Event: True",
+                "Target: DialogueGraph",
+                "Payload: VendorEndingGrudge"
+            ]
+        },
+        {
+            "id": "O132",
+            "type": "ConsequenceNode",
+            "data": [
+                "Outcome ID: VendorEnding.Default",
+                "Minimum: 0",
+                "Fallback: True",
+                "Fire Event: True",
+                "Target: DialogueGraph",
+                "Payload: VendorEndingDefault"
+            ]
+        },
+        {
+            "id": "C113",
+            "type": "CriterionNodeV2",
+            "data": [
+                "Mode: BoolEquals",
+                "Variable ID: Player.EnteredVault",
+                "Expected Bool: True"
+            ]
+        },
+        {
+            "id": "E57",
+            "type": "EventNode",
+            "data": [
+                "Event ID: BazaarEndingCheck"
+            ]
+        },
+        {
+            "id": "R80",
+            "type": "RuleNode",
+            "data": [
+                "Rule ID: bazaar_has_returned_from_vault",
+                "Consequent: 1"
+            ]
+        },
+        {
+            "id": "O133",
+            "type": "ConsequenceNode",
+            "data": [
+                "Outcome ID: Bazaar.EndingAvailable",
+                "Minimum: 1",
+                "Fallback: False",
+                "Fire Event: True",
+                "Target: FuzzyEvent",
+                "Payload: BazaarEndingVendor"
+            ]
+        },
+        {
+            "id": "O134",
+            "type": "ConsequenceNode",
+            "data": [
+                "Outcome ID: Bazaar.EndingUnavailable",
+                "Minimum: 0.7",
+                "Fallback: True",
+                "Fire Event: False"
             ]
         }
     ],
@@ -4418,6 +4546,12 @@
             "fromNode": "O11",
             "fromPort": "writeBacks",
             "toNode": "W04",
+            "toPort": "consequence"
+        },
+        {
+            "fromNode": "O11",
+            "fromPort": "writeBacks",
+            "toNode": "W86",
             "toPort": "consequence"
         },
         {
@@ -6684,6 +6818,12 @@
         },
         {
             "fromNode": "E55",
+            "fromPort": "consequences",
+            "toNode": "O129",
+            "toPort": "event"
+        },
+        {
+            "fromNode": "E55",
             "fromPort": "rules",
             "toNode": "R77",
             "toPort": "event"
@@ -6691,20 +6831,8 @@
         {
             "fromNode": "C110",
             "fromPort": "rules",
-            "toNode": "C111",
-            "toPort": "criteriaB"
-        },
-        {
-            "fromNode": "C111",
-            "fromPort": "rules",
             "toNode": "R77",
             "toPort": "criteria"
-        },
-        {
-            "fromNode": "C112",
-            "fromPort": "rules",
-            "toNode": "C111",
-            "toPort": "criteriaA"
         },
         {
             "fromNode": "O128",
@@ -6717,6 +6845,72 @@
             "fromPort": "writeBacks",
             "toNode": "W85",
             "toPort": "consequence"
+        },
+        {
+            "fromNode": "E56",
+            "fromPort": "consequences",
+            "toNode": "O130",
+            "toPort": "event"
+        },
+        {
+            "fromNode": "E56",
+            "fromPort": "consequences",
+            "toNode": "O131",
+            "toPort": "event"
+        },
+        {
+            "fromNode": "E56",
+            "fromPort": "consequences",
+            "toNode": "O132",
+            "toPort": "event"
+        },
+        {
+            "fromNode": "E56",
+            "fromPort": "rules",
+            "toNode": "R78",
+            "toPort": "event"
+        },
+        {
+            "fromNode": "E56",
+            "fromPort": "rules",
+            "toNode": "R79",
+            "toPort": "event"
+        },
+        {
+            "fromNode": "C111",
+            "fromPort": "rules",
+            "toNode": "R78",
+            "toPort": "criteria"
+        },
+        {
+            "fromNode": "C112",
+            "fromPort": "rules",
+            "toNode": "R79",
+            "toPort": "criteria"
+        },
+        {
+            "fromNode": "C113",
+            "fromPort": "rules",
+            "toNode": "R80",
+            "toPort": "criteria"
+        },
+        {
+            "fromNode": "E57",
+            "fromPort": "consequences",
+            "toNode": "O133",
+            "toPort": "event"
+        },
+        {
+            "fromNode": "E57",
+            "fromPort": "consequences",
+            "toNode": "O134",
+            "toPort": "event"
+        },
+        {
+            "fromNode": "E57",
+            "fromPort": "rules",
+            "toNode": "R80",
+            "toPort": "event"
         }
     ]
 }
