@@ -1,0 +1,21 @@
+{
+    "name": "FuzzyGraph2.Tests.EditMode",
+    "rootNamespace": "",
+    "references": [
+    "FuzzyGraph2.Runtime",
+    "FuzzyGraph.Runtime",
+    "UnityEngine.TestRunner",
+    "UnityEditor.TestRunner"
+],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

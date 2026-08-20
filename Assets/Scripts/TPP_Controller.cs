@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 [RequireComponent(typeof(CharacterController))]
 public class TPP_Controller : MonoBehaviour
@@ -44,19 +45,33 @@ public class TPP_Controller : MonoBehaviour
         SetCursorLocked(true);
     }
 
-    private void SetCursorLocked(bool v)
+    public void SetCursorLocked(bool v)
     {
         cursorLocked = v;
         Cursor.lockState = v ? CursorLockMode.Locked : CursorLockMode.None;
         Cursor.visible = !v;
     }
 
+
     private void Update()
     {
+
+        if (Keyboard.current != null && Keyboard.current.f1Key.wasPressedThisFrame)
+        {
+            Time.timeScale = 1f;
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+
+            SceneManager.LoadScene("Menu");
+            return;
+        }
+
         HandleCursor();
 
-        if (DialogueUI.IsDialogueOpen)
+        if (DialogueRunner.IsDialogueOpen)
             return;
+
+        //HandleCursor();
 
         if (cameraTarget == null || Keyboard.current == null)
             return;

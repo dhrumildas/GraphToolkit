@@ -1,0 +1,131 @@
+FUZZYGRAPH2 SCENE BINDING AUDIT
+Scene: Vault
+Generated: 20-08-2026 19:37:45
+
+========================================
+EVENT INVOKERS
+========================================
+
+GameObject: VaultGreybox/Pit Opening/InteractionZone
+Event ID: ExitVault
+Consequence Source: Player (Transform)
+
+GameObject: VaultGreybox/VaultExit
+Event ID: CheckVaultExit
+Consequence Source: Player (Transform)
+
+GameObject: Apple/InteractionZone
+Event ID: StealVaultFruit
+Consequence Source: Player (Transform)
+
+GameObject: sherrif/InteractionZone
+Event ID: PickupGuardDisguise
+Consequence Source: Player (Transform)
+
+GameObject: Guard/ArrestDialogue
+Event ID: Inspect
+Consequence Source: Guard (Transform)
+
+GameObject: Key
+Event ID: NewKeyPicked
+Consequence Source: Key (Transform)
+
+GameObject: VaultGreybox/VaultWall/Door/DoorKnob/InteractionZone
+Event ID: VaultDoorInteract
+Consequence Source: VaultGreybox/VaultWall/Door (Transform)
+
+========================================
+SIGNAL ROUTER BINDINGS
+========================================
+
+Router: GameplaySignalRouter
+
+Signal: Vault.OpenDoor
+  [0] VaultGreybox/VaultWall (VaultDoorSequence) -> OpenDoorAfterDialogue()
+
+Signal: Vault.BeginLock
+  [0] VaultGreybox/VaultWall (VaultDoorSequence) -> BeginLockAfterDialogue()
+
+Signal: Disguise.Picked
+  [0] Player/HatDisguise (GameObject) -> SetActive()
+
+Signal: Vault.GuardAlerted
+  [0] VaultGreybox/VaultGuardSequence (VaultGuardSequence) -> BeginArrival()
+
+Signal: Vault.GuardLeaves
+  [0] VaultGreybox/VaultGuardSequence (VaultGuardSequence) -> BeginGuardLeave()
+
+Signal: Vault.GuardChase
+  [0] VaultGreybox/VaultGuardSequence (VaultGuardSequence) -> BeginGuardChase()
+
+Signal: Vault.Exit
+  [0] SceneTransition (SceneTransition) -> LoadBazaar()
+
+Signal: Vault.GateExit
+  [0] SceneTransition (SceneTransition) -> LoadBazaar()
+
+Signal: Player.Arrested
+  [0] Player (TPP_Controller) -> SetCursorLocked()
+  [1] Player (Arrest) -> ArrestPlayer()
+  [2] GameOverCanvas (GameObject) -> SetActive()
+
+========================================
+INTERACTABLE OBJECTS
+========================================
+
+GameObject: VaultGreybox/VaultExit
+Prompt: Get out of here
+Interact Once: False
+Required True Key: <none>
+Object To Disable: <none>
+On Interact:
+  [0] VaultGreybox/VaultExit (EventInvoker) -> Raise()
+
+GameObject: sherrif/InteractionZone
+Prompt: Wear Disguise
+Interact Once: True
+Required True Key: <none>
+Object To Disable: sherrif (GameObject)
+On Interact:
+  [0] sherrif/InteractionZone (EventInvoker) -> Raise()
+
+GameObject: Key
+Prompt: Pick the Key
+Interact Once: True
+Required True Key: <none>
+Object To Disable: Key (GameObject)
+On Interact:
+  [0] Key (EventInvoker) -> Raise()
+
+GameObject: VaultGreybox/VaultWall/Door/DoorKnob/InteractionZone
+Prompt: Interact
+Interact Once: True
+Required True Key: <none>
+Object To Disable: <none>
+On Interact:
+  [0] VaultGreybox/VaultWall/Door/DoorKnob/InteractionZone (EventInvoker) -> Raise()
+
+GameObject: Apple/InteractionZone
+Prompt: STEAL THE MF
+Interact Once: True
+Required True Key: <none>
+Object To Disable: Apple (GameObject)
+On Interact:
+  [0] Apple/InteractionZone (EventInvoker) -> Raise()
+
+GameObject: VaultGreybox/VaultWall/Door/SecondTry/InteractionZone
+Prompt: Open with Key
+Interact Once: True
+Required True Key: Player.HasTreeKey
+Object To Disable: VaultGreybox/VaultWall/Door (GameObject)
+On Interact:
+  <no persistent calls>
+
+GameObject: VaultGreybox/Pit Opening/InteractionZone
+Prompt: Drop In
+Interact Once: False
+Required True Key: <none>
+Object To Disable: <none>
+On Interact:
+  [0] VaultGreybox/Pit Opening/InteractionZone (EventInvoker) -> Raise()
+
